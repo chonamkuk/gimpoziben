@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" layout:decorator="../layout/default">
+
+<!-- page CSS -->
+<th:block layout:fragment="css">
+    <style>
+        .img-row {
+            display: grid;
+            grid-template-columns: repeat(4,minmax(0,1fr));
+            grid-template-rows: repeat(1,minmax(0,1fr));
+            grid-gap: 2%;
+            height: 100%;
+        }
+
+        .column {
+            background-color: #9e9e9e;
+            position: relative;
+            width: 100%;
+            height: 0;
+            overflow: hidden;
+            padding-bottom: 100%;
+        }
+        .slide-img {
+            position: absolute;
+        }
+                 /* IE10+ */
+        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+            .img-row {
+                display: flex;
+                align-items: stretch;
+                height: 100%;
+            }
+            .column {
+                padding-bottom: 22%;
+                margin-left: 10px;
+                max-width: 25%;
+            }
+        }
+
+        /* IE9,10 */
+        @media screen and (min-width:0\0){
+            .img-row {
+                display: flex;
+                align-items: stretch;
+                height: 100%;
+            }
+            .column {
+                padding-bottom: 22%;
+                margin-left: 10px;
+                max-width: 25%;
+            }
+        }
+
+        p {
+            word-wrap: break-word;
+        }
+    </style>
+</th:block>
+
+<!-- page 스크립트 -->
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+
+        $(document).ready(
+
+            function(){
+            $(".ac1").click(function(){
+                console.log('index : '+$(".ac1").index(this));
+                let btnIndex = $(".ac1").index(this);
+                $(this).siblings("i[class='ac2']").fadeIn(0);
+                $(this).siblings("a[class='ac2']").fadeIn(0);
+                $(this).parent().siblings("div[class='commentUpdate']").fadeIn(0);
+
+                $(this).fadeOut(0);
+                $(this).parent().siblings("div[class='comment']").fadeOut(0);
+                //$(this).siblings("a[id='rpDelete']").fadeOut(0);
+                $(this).siblings("a[class='ac1']").fadeOut(0);
+            });
+
+             $(".ac2").click(function(){
+                //console.log($(this).attr("id"));
+                //console.log('index : '+$(".ac1").index(this));
+                let btnIndex = $(".ac1").index(this);
+                $(this).fadeOut(0);
+                $(this).siblings("i[class='ac2']").fadeOut(0);
+                $(this).siblings("a[class='ac2']").fadeOut(0);
+                $(this).parent().siblings("div[class='commentUpdate']").fadeOut(0);
+                $(this).siblings("i[class='ac1']").fadeIn(0);
+                $(this).parent().siblings("div[class='comment']").fadeIn(0);
+                //$(this).siblings("a[id='rpDelete']").fadeIn(0);
+                $(this).siblings("a[class='ac1']").fadeIn(0);
+            });
+        });
+
+        /*<![CDATA[*/
+        var resultDto = /*[[${resultDto}]]*/ "";
+        /*]]>*/
+
+        function goList(){
+            $('[name="listForm"]').attr('method', 'get');
+            $('[name="listForm"]').attr('action', '/test/ij/list.do');
+            $('[name="listForm"]').submit();
+        }
+        function goUpdate(){
+            $('[name="listForm"]').attr('method', 'get');
+            $('[name="listForm"]').attr('action', '/test/ij/update.do');
+            $('[name="listForm"]').submit();
+        }
+
+           function goTest(){
+             console.log('index : '+$(".ac1").index(this));
+        }
+
+        function goDelete(deleteRpFormId){
+            var index = deleteRpFormId.replace("rpDelete","");
+            var formId = "deleteRpForm"+index;
+            let seqRp = document.getElementById(formId).seqRp.value;
+            var paramData = JSON.stringify({
+                "seqRp": seqRp
+		    });
+
+		    $.ajax({
+                    url: '/test/rp/delete.do',
+                    type: 'POST',
+                    data: paramData,
+                    contentType: 'application/json; charset=utf-8;',
+                    dataType: 'json',
+                    success: function(data) {
+                          console.log("성공 : " + data);
+                          $('#'+seqRp).replaceWith("");
+                          //alert('댓글이 삭제되었습니다.');
+                        },
+                    error: function(error) {
+                        console.log("에러 : " + error);
+                    }
+                });
+        }
+
+        function goUpdateRp(rpUpdateSubmitId){
+            var index = rpUpdateSubmitId.replace("rpUpdateSubmit","");
+            var formId = "updateRpForm"+index;
+
+            //let seqAs = $('[name="updateRpForm"]')[index].seqAs.value;
+            let seqAs = document.getElementById(formId).seqAs.value;
+            console.info(seqAs);
+            let commentRp = document.getElementById(formId).commentRp.value;
+            let passwordAs = document.getElementById(formId).passwordAs.value;
+            let seqRp = document.getElementById(formId).seqRp.value;
+
+            var paramData = JSON.stringify({
+                "seqAs": seqAs
+				, "commentRp": commentRp
+				, "seqRp": seqRp
+				, "passwordAs" : passwordAs
+		    });
+
+            $.ajax({
+                    url: '/test/rp/update.do',
+                    type: 'post',
+                    data: paramData,
+                    contentType: 'application/json; charset=utf-8;',
+                    dataType: 'json',
+                    success: function(data) {
+                          console.log("성공 : " + data);
+                          var commentId = "comment"+index;
+                          var asd='<h6>' + commentRp + '</h6>';
+                          $('#'+commentId).find("h6").replaceWith(asd);
+                          alert('댓글이 수정되었습니다.');
+
+                        },
+                    error: function(error) {
+                        console.log("에러 : " + error);
+                    }
+                });
+        }
+
+        function goWriteRp(){
+
+            //alert('hello');
+            let commentRp = document.getElementById("insertRpForm").commentRp.value;
+            let idRp = document.getElementById("insertRpForm").seqAs.value;
+            let passwordAs = document.getElementById("insertRpForm").passwordAs.value;
+            var paramData = JSON.stringify({
+                "idRp": idRp
+				, "commentRp": commentRp
+				, "passwordAs" : passwordAs
+		    });
+
+            $.ajax({
+                    url: '/test/rp/write.do',
+                    type: 'post',
+                    data: paramData,
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function(data) {
+                          goWrite(data);
+                          document.getElementById("insertRpForm").commentRp.value ="";
+
+                        },
+                    error: function(error) {
+                        console.log("에러 : " + error);
+                    }
+                });
+        }
+
+        function goWrite(data){
+          alert('댓글이 등록되었습니다.');
+          console.log(data);
+          //console.log("경로 : " + window.location.href);
+          //$('#list1').load(window.location.href + '#list1' );
+
+        var html = '<ul>';
+
+        $.each(data, function (index, item) {
+            var user = '';
+
+            var d = new Date();
+            d = new Date(item.regDtRp);
+            var date_format_str = d.getFullYear().toString()+"-"+((d.getMonth()+1).toString().length==2?(d.getMonth()+1).toString():"0"+(d.getMonth()+1).toString())+"-"+(d.getDate().toString().length==2?d.getDate().toString():"0"+d.getDate().toString())+" "+(d.getHours().toString().length==2?d.getHours().toString():"0"+d.getHours().toString())+":"+((parseInt(d.getMinutes()/5)*5).toString().length==2?(parseInt(d.getMinutes()/5)*5).toString():"0"+(parseInt(d.getMinutes()/5)*5).toString());
+
+            html += '<li style="margin-bottom:0;padding:5px 0 0 0;" class="" '
+            html += 'id=' + item.seqRp + '>'
+
+            if ( item.userRp == "U" ) {
+              html += '<div><div style="margin-left; color: #f2f2f2; font-size: 15px;">사용자</div>'
+            } else {
+              html += '<div style="margin-left">담당자</div></div>'
+            }
+
+            html += '<div id = "comment'+ index +'" class="comment" style="margin-left">'
+            html += '<h6>'+item.commentRp+'</h6></div>'
+            html += '<div class="commentUpdate" style="margin-left; display:none;">'
+            html += '<form id="updateRpForm'+ index +'" name="updateRpForm" method="post" action="/test/rp/update.do">'
+            html += '<input type="text" class="validate" name="commentRp" required="" maxlength="100" style="margin-left" value="'+item.commentRp+'">'
+            html += '<label for="commentRp" class="active">댓글을 수정하세요</label>'
+            html += '<input type="hidden" name="seqAs" value="'+ item.idRp +'">'
+            html += '<input type="hidden" name="passwordAs" value="'+ [[${resultDto.passwordAs}]] +'">'
+            html += '<input type="hidden" name="seqRp" value="'+ item.seqRp +'"></form></div>'
+            html += '<div style="margin-right; color: #8d7a67; font-size: 12px;">'
+            html += date_format_str+" "
+            html += '<!--***수정버튼***-->'
+            html += '<i class="ac1" type="button" style="color: rgba(255, 255, 255, 1);" onclick="javascript: goTest()">수정&nbsp;</i>'
+            html += '<!--***취소버튼***-->'
+            html += '<i class="ac2" type="button" style="color: rgba(255, 255, 255, 1); display:none;">취소</i>'
+            html += '<a class="ac1" id="rpDelete'+ index +'" type="button" style="color: rgba(255, 255, 255, 1);" onclick="javascript: goDelete(id);" name="rpDelete"> 삭제</a>'
+            html += '<a class="ac2" type="button" id="rpUpdateSubmit'+ index +'" style="color: rgba(255, 255, 255, 1); display:none;" onclick="javascript: goUpdateRp(id)" name="rpUpdateSubmit"> 등록</a></div></div>'
+            html += '<hr color="grey" size=1>'
+            html += '<form id="deleteRpForm'+ index +'" name="deleteRpForm" method="post" action="/test/rp/delete.do">'
+            html += '<input type="hidden" name="seqAs" value="'+ item.idRp +'">'
+            html += '<input type="hidden" name="passwordAs" value="'+[[${resultDto.passwordAs}]]+'">'
+            html += '<input type="hidden" name="seqRp" value="'+ item.seqRp +'"></form>'
+        })
+          html += '</li></ul>'
+          $('#list1').html(html);
+
+            $(document).ready(
+                function(){
+                $(".ac1").click(function(){
+                    console.log('index : '+$(".ac1").index(this));
+                    let btnIndex = $(".ac1").index(this);
+                    $(this).siblings("i[class='ac2']").fadeIn(0);
+                    $(this).siblings("a[class='ac2']").fadeIn(0);
+                    $(this).parent().siblings("div[class='commentUpdate']").fadeIn(0);
+
+                    $(this).fadeOut(0);
+                    $(this).parent().siblings("div[class='comment']").fadeOut(0);
+                    //$(this).siblings("a[id='rpDelete']").fadeOut(0);
+                    $(this).siblings("a[class='ac1']").fadeOut(0);
+                });
+                 $(".ac2").click(function(){
+                    //console.log($(this).attr("id"));
+                    //console.log('index : '+$(".ac1").index(this));
+                    let btnIndex = $(".ac1").index(this);
+                    $(this).fadeOut(0);
+                    $(this).siblings("i[class='ac2']").fadeOut(0);
+                    $(this).siblings("a[class='ac2']").fadeOut(0);
+                    $(this).parent().siblings("div[class='commentUpdate']").fadeOut(0);
+                    $(this).siblings("i[class='ac1']").fadeIn(0);
+                    $(this).parent().siblings("div[class='comment']").fadeIn(0);
+                    //$(this).siblings("a[id='rpDelete']").fadeIn(0);
+                    $(this).siblings("a[class='ac1']").fadeIn(0);
+                });
+            });
+        }
+
+        //추가
+        $(document).ready(function(){
+
+            // 업로드 추가 버튼 클릭시
+            $("#addItemBtn").click(function(){
+
+                var fileValue = document.getElementsByName("upLoadInput");
+
+                if(!fileValue[0]) {
+                    //alert('ss');
+                    var lastItemNo = 0;
+                }
+                else{
+                    var lastItemNo = $("#upLoadForm div:last").attr("id").replace("upLoadInput", "");
+                }
+                //alert('tt');
+                var html = '<div name="upLoadInput" id="upLoadInput'+(parseInt(lastItemNo)+1)+'" style="">';
+                    html += '<input type="file" name="file" th:id="file'+(parseInt(lastItemNo)+1)+'" />';
+                    html += '<i class="small material-icons" style="cursor:pointer" type="button" name="fileClear" th:id="fileClear" onclick="javascript: fileClear(\'file'+(parseInt(lastItemNo)+1)+'\')">X</i></div>'
+                onclick="javascript: goWriteRp()"
+
+                $("#upLoadForm").append(html);
+            });
+        });
+
+        $(document).ready(function(){
+            $('.slide-img').on('click', function(){
+                $('#imageModal').modal('open');
+            });
+
+            let container = document.getElementById('kakaoMap'); //지도를 담을 영역의 DOM 레퍼런스
+            if(resultDto.latitudeAs) {
+                let options = { //지도를 생성할 때 필요한 기본 옵션
+                  center: new kakao.maps.LatLng(resultDto.latitudeAs, resultDto.longitudeAs), //지도의 중심좌표.
+                  level: 3 //지도의 레벨(확대, 축소 정도)
+                };
+                let kakaoMap = new kakao.maps.Map(container, options);
+
+                let marker = new kakao.maps.Marker({
+                    // 지도 중심좌표에 마커를 생성합니다
+                    position: kakaoMap.getCenter()
+                });
+                marker.setMap(kakaoMap);
+            } else {
+                //todo: 좌표없을 때 예외처리
+            }
+
+            // 삭제처리
+            $('.delete-btn').click(function(e){
+                $('#confirmModal').find('h4').text('알림');
+                $('#confirmModal').find('p').text('삭제 하시겠습니까?');
+                $('#confirmModal').find('.confirm').on('click', function(){
+                    $('#deleteForm').submit();
+                    $('#deleteForm').submit();
+                })
+                $('#confirmModal').modal('open');
+                e.stopPropagation();
+            });
+        });
+
+        function goFileUpload(){
+
+            var fileValue = document.getElementsByName("file");
+
+            //업로드할 파일 갯수 확인 후 업로드
+            var i = 0;
+            for(var value of fileValue){
+                if(!value.value=="" || !value.value == null ){
+                    i++
+                }
+            }
+
+            if(i==0){
+                alert("업로드 할 파일이 없습니다.")
+            }else{
+                $('[name="upLoadForm"]').submit();
+            }
+
+        }
+
+        //파일 다운로드
+        function goFileDown(fileDownId){
+
+            var snFile = fileDownId.replace("fileDown","");
+            //alert(snFile);
+            var html ='<input type="hidden" name="snFile" id="snFile" value="'+snFile+'"/>';
+            //alert(html);
+            //$('#snFile').replaceWith(html);
+            $('[name="downloadForm"]').find('[name="snFile"]').replaceWith(html);
+            $('[name="downloadForm"]').submit();
+        }
+
+        function fileClear(id){
+            //alert(id);
+
+            //var f = document.getElementById(id);
+            //if(f.value){
+            //   f.value = '';
+            //}
+
+            var seq = id.replace("file","");
+            //upLoadInput1
+            //alert('#upLoadInput'+seq);
+            $('#upLoadInput'+seq).replaceWith("");
+
+        }
+
+        function goFileDelDown(fileId, seq, action){
+            if (action == 'delete'){
+                var snFile = fileId.replace("fileDelete","");
+                var inputSnFile ='<input type="hidden" name="snFile" id="snFile" value="'+snFile+'"/>';
+
+                $('[name="fileDelDownForm"]').find('[name="snFile"]').replaceWith(inputSnFile);
+                let idFile = document.getElementById("ListForm").seqAs.value;
+                var html = '<div><input type="file" name="file" id="file'+seq+'"/>';
+                    html += '<i class="small material-icons" style="cursor:pointer" type="button" name="fileClear" id="fileClear" ';
+                    html += 'onclick="javascript: fileClear('+"\'file"+seq+'\')">X</i>';
+
+                var paramData = JSON.stringify({
+                    "idFile": idFile
+                    , "snFile": snFile
+                });
+
+                $.ajax({
+                        url: '/file/delete.do',
+                        type: 'post',
+                        data: paramData,
+                        contentType: 'application/json; charset=utf-8;',
+                        dataType: 'text',
+                        success: function(data) {
+                              console.log("성공 : " + data);
+                              if(data == "success"){
+                                  $('#fileNo'+snFile).replaceWith('');
+                                  alert("파일삭제 성공");
+                              }
+                              else{
+                                    alert(data);
+                              }
+
+                            },
+                        error: function(request,status,error) {
+                           alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                           //alert(request.responseText)
+                        }
+                    });
+            }
+            if (action == 'deleteComplete'){
+
+                var snFile = fileId.replace("fileDelete","");
+                var inputSnFile ='<input type="hidden" name="snFile" id="snFile" value="'+snFile+'"/>';
+
+                $('[name="fileDelDownForm"]').find('[name="snFile"]').replaceWith(inputSnFile);
+                let idFile = document.getElementById("ListForm").seqAs.value;
+                var html = '<div><input type="file" name="file" id="file'+seq+'"/>';
+                    html += '<i class="small material-icons" style="cursor:pointer" type="button" name="fileClear" id="fileClear" ';
+                    html += 'onclick="javascript: fileClear('+"\'file"+seq+'\')">X</i>';
+
+                var paramData = JSON.stringify({
+                    "idFile": idFile
+                    , "snFile": snFile
+                });
+
+                $.ajax({
+                        url: '/file/deleteComplete.do',
+                        type: 'post',
+                        data: paramData,
+                        contentType: 'application/json; charset=utf-8;',
+                        dataType: 'text',
+                        success: function(data) {
+                              console.log("성공 : " + data);
+                              if(data == "success"){
+                                  $('#fileNo'+snFile).replaceWith('');
+                                  alert("파일삭제 성공");
+                              }
+                              else{
+                                    alert(data);
+                              }
+
+                            },
+                        error: function(request,status,error) {
+                           alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                           //alert(request.responseText)
+                        }
+                    });
+            }
+            if(action == 'download'){
+                var snFile = fileId.replace("fileDown","");
+                var html ='<input type="hidden" name="snFile" id="snFile" value="'+snFile+'"/>';
+                //alert(html);
+                //$('#snFile').replaceWith(html);
+                $('[name="fileDelDownForm"]').find('[name="snFile"]').replaceWith(html);
+                $('[name="fileDelDownForm"]').submit();
+            }
+        }
+
+    </script>
+    <script th:inline="javascript" sec:authorize="hasAuthority('ADMIN')">
+        /*관리자기능 노출방지*/
+        function goAdminUpdate(){
+            $('[name="listForm"]').attr('method', 'get');
+            $('[name="listForm"]').attr('action', '/test/admin/ij/update.do');
+            $('[name="listForm"]').submit();
+        }
+    </script>
+</th:block>
+
+<div layout:fragment="content" class="container">
+    <div style="display: inline-flex; align-items: center;">
+        <h4 th:text="${resultDto.titleAs}"></h4>
+        <!--        <i th:if="${resultDto.ynDel == 'Y'}" class="material-icons blue-grey-text lighten-5" style="color: red !important; padding-top: 14px;">delete</i>-->
+    </div>
+    <h6 class="teal-text" th:text="${#temporals.format(resultDto.regdtAs, 'yyyy-MM-dd')}" />
+    <div class="">
+        <i class="material-icons" style="float: left; margin-right: 3px;">account_circle</i>
+        <p style="padding-top: 2px;">[[${resultDto.writerAs}]]</p>
+    </div>
+    <div class="">
+        <i class="material-icons" style="float: left; margin-right: 3px;">phone</i>
+        <p style="padding-top: 2px;">[[${resultDto.noTelAs}]]</p>
+    </div>
+    <div style="margin-bottom: 1rem;">
+        <p><th:block th:utext="${resultDto.contentsAs}"></th:block></p>
+    </div>
+    <div id="kakaoMap" style="width:100%;height:300px;border: 1px solid;"></div>
+    <div class="">
+        <i class="material-icons" style="float: left; margin-right: 3px;">location_on</i>
+        <p style="padding-top: 2px;">[[${resultDto.locationAs}]]&nbsp;[[${resultDto.dtlLocationAs}]]</p>
+    </div>
+    <div class="img-container">
+        <div class="img-row">
+            <div th:each="attachDto : ${attachDtoList}" class="column">
+                <img class="slide-img cursor" th:style="'background-image: url(/attach/resizeImgView.do?idAttach=' + ${attachDto.idAttach} + '&snFileAttach=' + ${attachDto.snFileAttach} + ');'"/>
+            </div>
+        </div>
+    </div>
+    <!-- 문익진 예약시간 추가 -->
+    <div class="">
+        <i class="material-icons" style="float: left; margin-right: 3px;">event_available</i>
+        <p style="padding-top: 2px;">[[${#temporals.format(resultDto.resStartDtAs, 'yyyy-MM-dd hh:mm')}]] ~
+            [[${#temporals.format(resultDto.resEndDtAs, 'yyyy-MM-dd hh:mm')}]] </p>
+    </div>
+    <p class="blue-grey-text lighten-5" th:inline="text" th:text="${'처리단계 : ' + resultDto.statAs.statName}"></p>
+    <p class="blue-grey-text lighten-5" th:if="${not #strings.isEmpty(resultDto.commentAs)}" th:inline="text" th:text="${'처리내용 : ' + resultDto.commentAs}"></p>
+    <hr color="grey" size=1>
+    <!-- 문익진 파일 업/다운로드 추가 -->
+    <!--문익진 11/1 수정-->
+    <div>
+        <ul>
+            <!--<li style="margin-bottom:0;padding:5px 0 0 0;" class=""  th:each="num : ${#numbers.sequence(0,2)}">-->
+            <li style="margin-bottom:0;padding:5px 0 0 0;" class=""  th:each="fileDto, status : ${fileDtoList}" th:id="fileNo+${fileDto.snFile}">
+                <div name="fileList" th:id ="fileList+${status.index}"> <!--파일이 있는 경우-->
+                    <!--질문 : 아이콘 바꾸기-->
+                    <i class="material-icons" style="float: left; margin-right: 3px;">attach_file</i>
+                    [[${fileDto.orgNmFile}]]
+                    <i class="small material-icons" style="cursor:pointer" type="button" name="fileDown" th:id="fileDown+${fileDto.snFile}" th:attr="onclick=|goFileDelDown(id,'${status.index}','download')|">save_alt</i>
+                    <i class="small material-icons" style="cursor:pointer" type="button" name="fileDelete" th:id="fileDelete+${fileDto.snFile}" th:attr="onclick=|goFileDelDown(id,'${status.index}','delete')|">delete</i>
+                    <i class="big material-icons" style="cursor:pointer" type="button" name="fileDelete" th:id="fileDelete+${fileDto.snFile}" th:attr="onclick=|goFileDelDown(id,'${status.index}','deleteComplete')|">delete</i>
+                </div>
+            </li>
+            <input type="hidden" name="seqAs" th:value="${resultDto.seqAs}"/>
+            <input type="hidden" name="passwordAs" th:value="${resultDto.passwordAs}"/>
+
+            <!--업로드 폼-->
+            <form name = "upLoadForm" id = "upLoadForm" method = "post" encType="multipart/form-data" action="/file/upload.do">
+                <!--            <div name="upLoadInput" id="upLoadInput0" style="display: none">
+                               <input type="file" name="file" th:id="file1" />
+                               <i class="small material-icons" style="cursor:pointer" type="button" name="fileClear" th:id="fileClear" th:attr="onclick=|fileClear('file1')|">X</i>
+                            </div>-->
+                <input type="hidden" name="seqAs" th:value="${resultDto.seqAs}"/>
+                <input type="hidden" name="passwordAs" th:value="${resultDto.passwordAs}"/>
+            </form>
+
+            <!--업로드 추가 버튼-->
+            <button name = "addItemBtn" id="addItemBtn">업로드 추가</button>
+            <!--업로드 버튼-->
+            <button name = "upLoadFile" id="upLoadFile" type="submit" onclick="javascript:goFileUpload()">업로드</button>
+            <!--모두 다운로드-->
+            <form name = "allDownFileForm" id="allDownFileForm" method = "get" action="/file/allDownload.do">
+                <input type="hidden" name="idFile" th:value="${resultDto.seqAs}"/>
+                <input type="hidden" name="passwordAs" th:value="${resultDto.passwordAs}"/>
+                <button name = "allDownFile" id="allDownFile" type="submit" onclick="">압축하여 다운로드</button>
+            </form>
+            <!--파일 다운로드 폼-->
+            <!--폼 하나로 합치기-->
+            <form name = "fileDelDownForm" id="fileDelDownForm" method = "get" action="/file/download.do">
+                <input type="hidden" name="idFile" th:value="${resultDto.seqAs}"/>
+                <input type="hidden" name="passwordAs" th:value="${resultDto.passwordAs}"/>
+                <input type="hidden" name="snFile" value="" />
+            </form>
+        </ul>
+    </div>
+    <hr color="grey" size=1>
+    <!-- 문익진 댓글 추가 -->
+    <div style="display: inline-flex; align-items: center;" class = CommentBox>
+        <h6 th:text='--댓글--'></h6>
+    </div>
+    <div id="list1">
+        <ul>
+            <li style="margin-bottom:0;padding:5px 0 0 0;" class=""  th:each="rpDto, status : ${rpDtoList}" th:id="${rpDto.seqRp}">
+                <div th:switch="${rpDto.userRp}">
+                    <div style="margin-left; color: #f2f2f2; font-size: 15px;" th:case="U">사용자</div>
+                    <div style="margin-left" th:case="A">담당자</div>
+                </div>
+                <div>
+                    <!--***코맨트***-->
+                    <div th:id = "comment+${status.index}" class="comment" style="margin-left">
+                        <h6>[[${rpDto.commentRp}]]</h6>
+                    </div>
+                    <!--***코맨트 업데이트 폼***-->
+                    <div class="commentUpdate" style="margin-left; display:none;">
+                        <form th:id="updateRpForm+${status.index}" name="updateRpForm" method="post" th:with="role=${#authentication.getPrincipal() == 'anonymousUser' ? 'anonymousUser' : #authentication.getPrincipal().getRoleAccount()}"
+                              th:action="${role == 'ADMIN' ? '/test/admin/rp/update.do' : '/test/rp/update.do'}">
+                            <input type="text" class="validate" name="commentRp"  required="" maxlength="100" style="margin-left" th:value="${rpDto.commentRp}">
+                            <label for="commentRp">댓글을 수정하세요</label>
+                            <input type="hidden" name="idFile" th:value="${resultDto.seqAs}"/>
+                            <input type="hidden" name="passwordAs" th:value="${resultDto.passwordAs}"/>
+                            <input type="hidden" name="seqRp" th:value="${rpDto.seqRp}"/>
+                        </form>
+                    </div>
+                    <div style="margin-right; color: #8d7a67; font-size: 12px;">[[${#temporals.format(rpDto.regDtRp, 'yyyy-MM-dd HH:mm')}]]
+                        <!--***수정버튼***-->
+                        <i class="ac1"  type="button" style="color: rgba(255, 255, 255, 1);" onclick="javascript: goTest()">수정</i>
+                        <!--***취소버튼***-->
+                        <i class="ac2" type="button" style="color: rgba(255, 255, 255, 1); display:none;">취소</i>
+                        <!--***삭제버튼***-->
+                        <a class="ac1" th:id="rpDelete+${status.index}" type="button" style="color: rgba(255, 255, 255, 1);" onclick="javascript: goDelete(id);" name="rpDelete">삭제</a>
+                        <!--***등록버튼***-->
+                        <a class="ac2" type="button" th:id="rpUpdateSubmit+${status.index}" style="color: rgba(255, 255, 255, 1); display:none;" onclick="javascript: goUpdateRp(id)" name="rpUpdateSubmit">등록</a>
+                    </div>
+                </div>
+                <hr color="grey" size=1>
+
+                <!-- 삭제 폼-->
+                <form th:id="deleteRpForm+${status.index}" name="deleteRpForm" method="post" th:with="role=${#authentication.getPrincipal() == 'anonymousUser' ? 'anonymousUser' : #authentication.getPrincipal().getRoleAccount()}"
+                      th:action="${role == 'ADMIN' ? '/test/admin/rp/delete.do' : '/test/rp/delete.do'}">
+                    <input type="hidden" name="seqAs" th:value="${resultDto.seqAs}"/>
+                    <input type="hidden" name="seqRp" th:value="${rpDto.seqRp}"/>
+                </form>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <!--등록폼-->
+        <form id="insertRpForm" name="insertRpForm" method="post" th:with="role=${#authentication.getPrincipal() == 'anonymousUser' ? 'anonymousUser' : #authentication.getPrincipal().getRoleAccount()}"
+              th:action="${role == 'ADMIN' ? '/test/admin/rp/write.do' : '/test/rp/write.do'}">
+            <div id = "rpReg" class="input-field col s3 left-align">
+                <i class="material-icons prefix">title</i>
+                <input type="text" class="validate" id="commentRp" name="commentRp" required="" maxlength="100">
+
+                <input type="hidden" name="seqAs" th:value="${resultDto.seqAs}"/>
+                <input type="hidden" name="passwordAs" th:value="${resultDto.passwordAs}"/>
+                <label for="commentRp">댓글을 남겨주세요.</label>
+                <i class="small material-icons" onclick="javascript: goWriteRp()" style="color: rgba(255, 255, 255, 1);">save_alt</i>
+
+            </div>
+        </form>
+    </div>
+    <div id="list2">
+    </div>
+    <!-- 수정/삭제 -->
+    <div class="col s12 center-align">
+        <th:block sec:authorize="!hasAuthority('ADMIN')">
+            <a class="update-btn" onclick="javascript: goUpdate();">
+                <i class="medium material-icons" style="color: rgba(255, 255, 255, 1);">settings</i>
+            </a>
+            <a class="delete-btn">
+                <i class="medium material-icons" style="color: rgba(255, 255, 255, 1);">delete</i>
+            </a>
+        </th:block>
+        <th:block sec:authorize="hasAuthority('ADMIN')">
+            <a class="update-btn" onclick="javascript: goAdminUpdate();">
+                <i class="medium material-icons" style="color: rgba(255, 255, 255, 1);">settings</i>
+            </a>
+        </th:block>
+        <!--<a onclick="javascript: goList();">
+            <i class="medium material-icons" style="color: rgba(255, 255, 255, 1);">view_list</i>
+        </a>-->
+        <form name="listForm" id="ListForm" method="get" action="/test/ij/list.do">
+            <input type="hidden" name="page" th:value="${pagingResult.page}"/>
+            <input type="hidden" name="listSize" th:value="${pagingResult.listSize}"/>
+            <input type="hidden" name="pageSize" th:value="${pagingResult.pageSize}"/>
+            <input type="hidden" name="direction" th:value="${pagingResult.direction}"/>
+            <input type="hidden" name="sortProp" th:value="${pagingResult.sortProp}"/>
+            <input type="hidden" name="searchType" th:value="${searchDto.searchType}"/>
+            <input type="hidden" name="searchKeyword" th:value="${searchDto.searchKeyword}"/>
+            <input type="hidden" name="seqAs" th:value="${resultDto.seqAs}"/>
+            <input type="hidden" name="passwordAs" th:value="${resultDto.passwordAs}"/>
+        </form>
+        <form id="deleteForm" name="deleteForm" method="post" action="/test/ij/delete.do">
+            <input type="hidden" name="_method" value="delete"/>
+            <input type="hidden" name="seqAs" th:value="${resultDto.seqAs}"/>
+            <input type="hidden" name="passwordAs" th:value="${resultDto.passwordAs}"/>
+        </form>
+    </div>
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <h5>비밀번호 입력</h5>
+            <p>작성시 입력한 비밀번호</p>
+            <form id="passwordForm" action="/test/ij/passwordChk.do" method="post">
+                <div class="input-field">
+                    <input type="hidden" name="seqAs">
+                    <input id="passwordAs" name="passwordAs" type="password" class="validate" required="" style="color: black;">
+                    <label for="passwordAs">Password</label>
+                    <span class="helper-text"></span>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn waves-effect waves-green btn-flat" type="submit" name="action">확인</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+</html>

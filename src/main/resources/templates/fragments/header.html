@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<header th:fragment="headerFragment">
+    <script type="text/javascript">
+        let modalStack = [];
+        $(document).ready(function() {
+            $('#alertModal').modal({
+                onOpenEnd: function(e){
+                    let modalId = $(this).attr('id');
+                    if(location.href.split('#').pop() != modalId) {
+                        window.history.pushState({}, '', location.href + '#' + $(this).attr('id'));
+                    }
+                    modalStack.push(modalId);
+                },
+                onCloseStart: function(e){
+                    if(location.href.split('#').pop() == $(this).attr('id')) {
+                        window.history.back();
+                    }
+                },
+                 onCloseEnd: function(e) {
+                    $(this).find('h4').text('');
+                    $(this).find('p').text('');
+                    modalStack.pop();
+                 }
+            });
+
+            $('#imageModal').modal({
+                onOpenStart: function(e) {
+                    let modalId = $(this).attr('id');
+                    if(location.href.split('#').pop() != modalId) {
+                        window.history.pushState({}, '', location.href + '#' + $(this).attr('id'));
+                    }
+                    modalStack.push(modalId);
+
+                    // 이미지 업로드 로직
+                    let imgTags = $('.slide-img');
+                    let selectedImg = $('.slide-img:hover');
+                    let imgIndex = imgTags.index(selectedImg);
+                    let imgSrc = selectedImg.css('background-image');
+
+                    // 클릭한 이미지
+                    if(typeof(imgSrc) != "undefined") {
+                        imgSrc = imgSrc.replace('url(','').replace(')','').replace(/\"/gi, "");
+                        $('.modal-slide').eq(0).css({'background-image' : 'url('+ imgSrc +')'});
+                    }
+                    $('#imageModal').find('#numbertext').text((imgIndex+1) + '/' + imgTags.length);
+
+                    // 이미지 슬라이드효과
+                    $('#imageModal').find('.prev').on('click', function(){
+                        if(imgIndex <= 0) { // 맨처음 이미지일 때
+                            imgIndex = imgTags.length-1;
+                        } else {
+                            imgIndex--;
+                        }
+                        imgSrc = imgTags.eq(imgIndex).css('background-image');
+                        imgSrc = imgSrc.replace('url(','').replace(')','').replace(/\"/gi, "");
+                        $('.modal-slide').eq(0).css({'background-image' : 'url('+ imgSrc +')'});
+                        $('#imageModal').find('#numbertext').text((imgIndex+1) + '/' + imgTags.length);
+                    });
+                    $('#imageModal').find('.next').on('click', function(){
+                        if(imgIndex >= imgTags.length-1) { // 마지막 이미지일 때
+                            imgIndex = 0;
+                        } else {
+                            imgIndex++;
+                        }
+                        imgSrc = imgTags.eq(imgIndex).css('background-image');
+                        imgSrc = imgSrc.replace('url(','').replace(')','').replace(/\"/gi, "");
+                        $('.modal-slide').eq(0).css({'background-image' : 'url('+ imgSrc +')'});
+                        $('#imageModal').find('#numbertext').text((imgIndex+1) + '/' + imgTags.length);
+                    });
+                },
+                onCloseStart: function(e){
+                    if(location.href.split('#').pop() == $(this).attr('id')) {
+                        window.history.back();
+                    }
+                },
+                onCloseEnd: function(e) {
+                    $(this).find('#numbertext').text('');
+                    $(this).find('.prev').off('click');
+                    $(this).find('.next').off('click');
+                    modalStack.pop();
+                 }
+            });
+
+            $('#confirmModal').modal({
+                onOpenEnd: function(e){
+                    let modalId = $(this).attr('id');
+                    if(location.href.split('#').pop() != modalId) {
+                        window.history.pushState({}, '', location.href + '#' + $(this).attr('id'));
+                    }
+                    modalStack.push(modalId);
+                },
+                onCloseStart: function(e){
+                    if(location.href.split('#').pop() == $(this).attr('id')) {
+                        window.history.back();
+                    }
+                },
+                 onCloseEnd: function(e) {
+                    $(this).find('h4').text('');
+                    $(this).find('p').text('');
+                    $(this).find('.modal-close').off('click');
+                    modalStack.pop();
+                 }
+            });
+
+            window.onpopstate = history.onpushstate = function(e) {
+                console.info('뒤로가기 감지 : ' + e);
+                if(modalStack.length > 0) {
+                    let currentModal = modalStack[modalStack.length-1];
+                    M.Modal.getInstance($('#'+currentModal)).close();
+                }
+            }
+        });
+    </script>
+
+    <nav class="light-blue lighten-1" role="navigation" >
+        <div class="nav-wrapper container">
+        <a id="logo-container" href="/" class="brand-logo" style="width: 118.800; height: 65px;">
+            로고영역
+        </a>
+
+            <th:block sec:authorize="!hasAuthority('ADMIN')">
+                <!-- 일반 사용자 메뉴 -->
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="/test/ij/list.do">IJ 서비스</a></li>
+                </ul>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="/test/as/list.do">AS 서비스</a></li>
+                    <li><a href="/test/meet/write.do">모임</a></li>
+                </ul>
+
+                <ul id="nav-mobile" class="sidenav">
+                    <li>
+                        <div class="user-view" style="background-color: #4B3949;">
+                            <a href="#user" class="avatar" style="width: 182.775px; height: 100px;">로고영역</a>
+                        </div>
+                    </li>
+                    <li><a href="/test/as/list.do">AS 서비스</a></li>
+                    <li><a href="/test/meet/write.do">모임</a></li>
+                </ul>
+                <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            </th:block>
+        </div>
+    </nav>
+
+    <!-- alert 모달 -->
+    <div id="alertModal" class="modal">
+        <div class="modal-content">
+            <h4></h4>
+            <p></p>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat">확인</a>
+        </div>
+    </div>
+
+    <!-- 이미지뷰 모달 -->
+    <div id="imageModal" class="modal" style="width: 90%;">
+        <div class="img-container">
+            <div class="modal-slide" style="margin-bottom: 0px; background-image: url('/static/image/bike-sunset.jpg'); background-size: contain;">
+                <div id="numbertext" class="numbertext"></div>
+                <i class="material-icons modal-close" style="float: right;">close</i>
+            </div>
+            <a class="prev">❮</a>
+            <a class="next">❯</a>
+        </div>
+    </div>
+
+    <!-- confirm 모달-->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <h4></h4>
+            <p></p>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat cancel">취소</a>
+            <a class="modal-close waves-effect waves-green btn-flat confirm">확인</a>
+        </div>
+    </div>
+
+    <!--  로딩 circle  -->
+    <div class="preloader-wrapper small active loading-circle" id="loading-circle">
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div><div class="gap-patch">
+            <div class="circle"></div>
+        </div><div class="circle-clipper right">
+            <div class="circle"></div>
+        </div>
+        </div>
+    </div>
+
+    <!--  로딩 overlay  -->
+    <div class="loading-overlay" id="loading-overlay"></div>
+</header>
+</html>
