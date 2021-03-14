@@ -134,7 +134,7 @@ public class AsController {
             model.addAttribute("attachDtoList", attachDtoList);
             model.addAttribute("searchDto", searchDto);
             model.addAttribute("pagingResult", pageable);
-            return "as/detail";
+            return "test/as/detail";
         } else {
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter out = response.getWriter();
@@ -166,7 +166,7 @@ public class AsController {
             model.addAttribute("attachDtoList", attachDtoList);
             model.addAttribute("searchDto", searchDto);
             model.addAttribute("pagingResult", pageable);
-            return "as/update";
+            return "test/as/update";
         } else {
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter out = response.getWriter();

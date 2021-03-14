@@ -3,8 +3,8 @@ package kr.co.kimpoziben.test.domain.repository.dsl;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import kr.co.kimpoziben.test.domain.entity.MeetEntity;
-import kr.co.kimpoziben.domain.entity.QMeetEntity;
-import kr.co.kimpoziben.domain.entity.QMeetMemberEntity;
+import kr.co.kimpoziben.test.domain.entity.QMeetEntity;
+import kr.co.kimpoziben.test.domain.entity.QMeetMemberEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

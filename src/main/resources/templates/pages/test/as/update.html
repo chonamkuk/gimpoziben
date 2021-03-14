@@ -401,6 +401,7 @@
         <div sec:authorize="!hasAuthority('ADMIN')" class="row">
             <input type="hidden" name="statAs" th:value="${resultDto.statAs}"/>
             <input type="hidden" name="commentAs" th:value="${resultDto.commentAs}"/>
+            <input type="hidden" name="ynDel" th:value="${resultDto.ynDel}"/>
         </div>
 
         <div class="row">

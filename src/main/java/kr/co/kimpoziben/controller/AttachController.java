@@ -5,12 +5,13 @@ import kr.co.kimpoziben.domain.entity.AttachEntity;
 import kr.co.kimpoziben.dto.AttachDto;
 import kr.co.kimpoziben.service.AttachService;
 import lombok.AllArgsConstructor;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import sun.misc.BASE64Encoder;
+//import sun.misc.BASE64Encoder;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -83,8 +84,9 @@ public class AttachController {
                         byte[] bytes = file.getBytes();
 
                         if(bytes.length <= 2097152) {
-                            BASE64Encoder base64Encoder = new BASE64Encoder();
-                            String[] image = {base64Encoder.encode(file.getBytes())};
+//                            BASE64Encoder base64Encoder = new BASE64Encoder();
+//                            String[] image = {base64Encoder.encode(file.getBytes())};
+                            String[] image = {Base64.encodeBase64String(file.getBytes())};
                             String[] imageName = {file.getOriginalFilename()};
                             String[] imageSize = {String.valueOf(file.getSize())};
                             List<AttachEntity> attachEntities = attachService.saveImage(image, imageName, imageSize, "ckEditor");
