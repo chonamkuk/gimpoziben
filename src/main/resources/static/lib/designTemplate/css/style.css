@@ -1,6 +1,9 @@
+/**
+app-assets/css/themes/horizontal-menu-template/style.css
+**/
+
 /*-------------------------------------------------
 	Style file contain theme components style
-	app-assets/css/themes/horizontal-menu-template/style.css
 -------------------------------------------------*/
 @import url(https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,500,600);
 .materialize-red
@@ -2716,7 +2719,7 @@
 
 .horizontal-menu.app-page .app-todo .content-area .app-wrapper .todo-header
 {
-    padding: 1.2rem 0 .75rem 1.5rem;
+    padding: 1.2rem 1.5rem .75rem 0;
 }
 
 .horizontal-menu.app-page .content-area
@@ -2784,7 +2787,7 @@ body
 #main
 {
     min-height: calc(100% - 116px);
-    padding-right: 0;
+    padding-left: 0;
 
     -webkit-transition: .3s ease all;
             transition: .3s ease all;
@@ -2795,7 +2798,7 @@ body
 
 #main.main-full
 {
-    padding-right: 0;
+    padding-left: 0;
 }
 
 #main .content-wrapper-before
@@ -2803,7 +2806,7 @@ body
     position: absolute;
     z-index: -1;
     top: 64px;
-    right: 0;
+    left: 0;
 
     width: 100%;
     height: 185px;
@@ -2844,7 +2847,7 @@ select
 
 .container .dropdown-settings i.right
 {
-    margin-right: 0;
+    margin-left: 0;
 }
 
 @media only screen and (min-width: 601px)
@@ -2879,19 +2882,19 @@ select
 {
     #main
     {
-        padding-right: 250px;
+        padding-left: 250px;
     }
     #main.main-full
     {
-        padding-right: 64px;
+        padding-left: 64px;
     }
     .nav-lock ~ footer
     {
-        padding-right: 257px;
+        padding-left: 257px;
     }
     footer
     {
-        padding-right: 71px;
+        padding-left: 71px;
     }
 }
 
@@ -3153,113 +3156,113 @@ html [type='button'],
 /* Margin Right */
 .mr-0
 {
-    margin-left: 0 !important;
+    margin-right: 0 !important;
 }
 
 .mr-1
 {
-    margin-left: 1% !important;
+    margin-right: 1% !important;
 }
 
 .mr-2
 {
-    margin-left: 2% !important;
+    margin-right: 2% !important;
 }
 
 .mr-3
 {
-    margin-left: 3% !important;
+    margin-right: 3% !important;
 }
 
 .mr-4
 {
-    margin-left: 4% !important;
+    margin-right: 4% !important;
 }
 
 .mr-5
 {
-    margin-left: 5% !important;
+    margin-right: 5% !important;
 }
 
 .mr-6
 {
-    margin-left: 6% !important;
+    margin-right: 6% !important;
 }
 
 .mr-7
 {
-    margin-left: 7% !important;
+    margin-right: 7% !important;
 }
 
 .mr-8
 {
-    margin-left: 8% !important;
+    margin-right: 8% !important;
 }
 
 .mr-9
 {
-    margin-left: 9% !important;
+    margin-right: 9% !important;
 }
 
 .mr-10
 {
-    margin-left: 10% !important;
+    margin-right: 10% !important;
 }
 
 /* Margin Left */
 .ml-0
 {
-    margin-right: 0 !important;
+    margin-left: 0 !important;
 }
 
 .ml-1
 {
-    margin-right: 1% !important;
+    margin-left: 1% !important;
 }
 
 .ml-2
 {
-    margin-right: 2% !important;
+    margin-left: 2% !important;
 }
 
 .ml-3
 {
-    margin-right: 3% !important;
+    margin-left: 3% !important;
 }
 
 .ml-4
 {
-    margin-right: 4% !important;
+    margin-left: 4% !important;
 }
 
 .ml-5
 {
-    margin-right: 5% !important;
+    margin-left: 5% !important;
 }
 
 .ml-6
 {
-    margin-right: 6% !important;
+    margin-left: 6% !important;
 }
 
 .ml-7
 {
-    margin-right: 7% !important;
+    margin-left: 7% !important;
 }
 
 .ml-8
 {
-    margin-right: 8% !important;
+    margin-left: 8% !important;
 }
 
 .ml-9
 {
-    margin-right: 9% !important;
+    margin-left: 9% !important;
 }
 
 .ml-10
 {
-    margin-right: 10% !important;
+    margin-left: 10% !important;
 }
 
 /* Margin Bottom */
@@ -3433,113 +3436,113 @@ html [type='button'],
 /* Padding Right */
 .pr-0
 {
-    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
 .pr-1
 {
-    padding-left: 1% !important;
+    padding-right: 1% !important;
 }
 
 .pr-2
 {
-    padding-left: 2% !important;
+    padding-right: 2% !important;
 }
 
 .pr-3
 {
-    padding-left: 3% !important;
+    padding-right: 3% !important;
 }
 
 .pr-4
 {
-    padding-left: 4% !important;
+    padding-right: 4% !important;
 }
 
 .pr-5
 {
-    padding-left: 5% !important;
+    padding-right: 5% !important;
 }
 
 .pr-6
 {
-    padding-left: 6% !important;
+    padding-right: 6% !important;
 }
 
 .pr-7
 {
-    padding-left: 7% !important;
+    padding-right: 7% !important;
 }
 
 .pr-8
 {
-    padding-left: 8% !important;
+    padding-right: 8% !important;
 }
 
 .pr-9
 {
-    padding-left: 9% !important;
+    padding-right: 9% !important;
 }
 
 .pr-10
 {
-    padding-left: 10% !important;
+    padding-right: 10% !important;
 }
 
 /* Padding Right */
 .pl-0
 {
-    padding-right: 0 !important;
+    padding-left: 0 !important;
 }
 
 .pl-1
 {
-    padding-right: 1% !important;
+    padding-left: 1% !important;
 }
 
 .pl-2
 {
-    padding-right: 2% !important;
+    padding-left: 2% !important;
 }
 
 .pl-3
 {
-    padding-right: 3% !important;
+    padding-left: 3% !important;
 }
 
 .pl-4
 {
-    padding-right: 4% !important;
+    padding-left: 4% !important;
 }
 
 .pl-5
 {
-    padding-right: 5% !important;
+    padding-left: 5% !important;
 }
 
 .pl-6
 {
-    padding-right: 6% !important;
+    padding-left: 6% !important;
 }
 
 .pl-7
 {
-    padding-right: 7% !important;
+    padding-left: 7% !important;
 }
 
 .pl-8
 {
-    padding-right: 8% !important;
+    padding-left: 8% !important;
 }
 
 .pl-9
 {
-    padding-right: 9% !important;
+    padding-left: 9% !important;
 }
 
 .pl-10
 {
-    padding-right: 10% !important;
+    padding-left: 10% !important;
 }
 
 /* Padding Bottom */
@@ -3628,11 +3631,11 @@ html [type='button'],
 {
     .left-align-sm
     {
-        text-align: right !important;
+        text-align: left !important;
     }
     .right-align-sm
     {
-        text-align: left !important;
+        text-align: right !important;
     }
     .center-align-sm
     {
@@ -3644,11 +3647,11 @@ html [type='button'],
 {
     .left-align-md
     {
-        text-align: right !important;
+        text-align: left !important;
     }
     .right-align-md
     {
-        text-align: left !important;
+        text-align: right !important;
     }
     .center-align-md
     {
@@ -3660,11 +3663,11 @@ html [type='button'],
 {
     .left-align-lg
     {
-        text-align: right !important;
+        text-align: left !important;
     }
     .right-align-lg
     {
-        text-align: left !important;
+        text-align: right !important;
     }
     .center-align-lg
     {
@@ -3676,11 +3679,11 @@ html [type='button'],
 {
     .left-align-xl
     {
-        text-align: right !important;
+        text-align: left !important;
     }
     .right-align-xl
     {
-        text-align: left !important;
+        text-align: right !important;
     }
     .center-align-xl
     {
@@ -3823,7 +3826,7 @@ html [type='button'],
 
 .text-shadow
 {
-    text-shadow: 1px 2px 4px black;
+    text-shadow: -1px 2px 4px black;
 }
 
 .display-none
@@ -3861,12 +3864,12 @@ html [type='button'],
 
 .float-left
 {
-    float: right !important;
+    float: left !important;
 }
 
 .float-right
 {
-    float: left !important;
+    float: right !important;
 }
 
 .float-inherit
@@ -3881,7 +3884,7 @@ html [type='button'],
 
 ul.list-type-bullet
 {
-    padding-right: 40px;
+    padding-left: 40px;
 
     list-style-type: inherit;
 }
@@ -4411,7 +4414,7 @@ li.home:before
 }
 
 /*----------------------------------------
-  Grid 
+  Grid
 ------------------------------------------*/
 .section
 {
@@ -7104,9 +7107,8 @@ li.home:before
 .gradient-45deg-light-blue-teal
 {
     background: #b3e5fc;
-    background: -webkit-linear-gradient(-45deg, #b3e5fc, #64ffda) !important;
-    background: -webkit-linear-gradient(135deg, #b3e5fc, #64ffda) !important;
-    background:         linear-gradient(-45deg, #b3e5fc, #64ffda) !important;
+    background: -webkit-linear-gradient(45deg, #b3e5fc, #64ffda) !important;
+    background:         linear-gradient(45deg, #b3e5fc, #64ffda) !important;
 }
 
 .gradient-45deg-light-blue-teal.gradient-shadow
@@ -7117,9 +7119,8 @@ li.home:before
 .gradient-45deg-indigo-light-blue
 {
     background: #3949ab;
-    background: -webkit-linear-gradient(-45deg, #3949ab, #4fc3f7) !important;
-    background: -webkit-linear-gradient(135deg, #3949ab, #4fc3f7) !important;
-    background:         linear-gradient(-45deg, #3949ab, #4fc3f7) !important;
+    background: -webkit-linear-gradient(45deg, #3949ab, #4fc3f7) !important;
+    background:         linear-gradient(45deg, #3949ab, #4fc3f7) !important;
 }
 
 .gradient-45deg-indigo-light-blue.gradient-shadow
@@ -7130,9 +7131,8 @@ li.home:before
 .gradient-45deg-light-blue-indigo
 {
     background: #b3e5fc;
-    background: -webkit-linear-gradient(-45deg, #b3e5fc, #9fa8da) !important;
-    background: -webkit-linear-gradient(135deg, #b3e5fc, #9fa8da) !important;
-    background:         linear-gradient(-45deg, #b3e5fc, #9fa8da) !important;
+    background: -webkit-linear-gradient(45deg, #b3e5fc, #9fa8da) !important;
+    background:         linear-gradient(45deg, #b3e5fc, #9fa8da) !important;
 }
 
 .gradient-45deg-light-blue-indigo.gradient-shadow
@@ -7143,9 +7143,8 @@ li.home:before
 .gradient-45deg-yellow-green
 {
     background: #ffff8d;
-    background: -webkit-linear-gradient(-45deg, #ffff8d, #b9f6ca) !important;
-    background: -webkit-linear-gradient(135deg, #ffff8d, #b9f6ca) !important;
-    background:         linear-gradient(-45deg, #ffff8d, #b9f6ca) !important;
+    background: -webkit-linear-gradient(45deg, #ffff8d, #b9f6ca) !important;
+    background:         linear-gradient(45deg, #ffff8d, #b9f6ca) !important;
 }
 
 .gradient-45deg-yellow-green.gradient-shadow
@@ -7156,9 +7155,8 @@ li.home:before
 .gradient-45deg-orange-deep-orange
 {
     background: #ffe0b2;
-    background: -webkit-linear-gradient(-45deg, #ffe0b2, #ffccbc) !important;
-    background: -webkit-linear-gradient(135deg, #ffe0b2, #ffccbc) !important;
-    background:         linear-gradient(-45deg, #ffe0b2, #ffccbc) !important;
+    background: -webkit-linear-gradient(45deg, #ffe0b2, #ffccbc) !important;
+    background:         linear-gradient(45deg, #ffe0b2, #ffccbc) !important;
 }
 
 .gradient-45deg-orange-deep-orange.gradient-shadow
@@ -7169,9 +7167,8 @@ li.home:before
 .gradient-45deg-deep-purple-purple
 {
     background: #d1c4e9;
-    background: -webkit-linear-gradient(-45deg, #d1c4e9, #f3e5f5) !important;
-    background: -webkit-linear-gradient(135deg, #d1c4e9, #f3e5f5) !important;
-    background:         linear-gradient(-45deg, #d1c4e9, #f3e5f5) !important;
+    background: -webkit-linear-gradient(45deg, #d1c4e9, #f3e5f5) !important;
+    background:         linear-gradient(45deg, #d1c4e9, #f3e5f5) !important;
 }
 
 .gradient-45deg-deep-purple-purple.gradient-shadow
@@ -7182,9 +7179,8 @@ li.home:before
 .gradient-45deg-red-pink
 {
     background: #ff5252;
-    background: -webkit-linear-gradient(-45deg, #ff5252, #f48fb1) !important;
-    background: -webkit-linear-gradient(135deg, #ff5252, #f48fb1) !important;
-    background:         linear-gradient(-45deg, #ff5252, #f48fb1) !important;
+    background: -webkit-linear-gradient(45deg, #ff5252, #f48fb1) !important;
+    background:         linear-gradient(45deg, #ff5252, #f48fb1) !important;
 }
 
 .gradient-45deg-red-pink.gradient-shadow
@@ -7195,9 +7191,8 @@ li.home:before
 .gradient-45deg-light-green-amber
 {
     background: #c5e1a5;
-    background: -webkit-linear-gradient(-45deg, #c5e1a5, #fff8e1) !important;
-    background: -webkit-linear-gradient(135deg, #c5e1a5, #fff8e1) !important;
-    background:         linear-gradient(-45deg, #c5e1a5, #fff8e1) !important;
+    background: -webkit-linear-gradient(45deg, #c5e1a5, #fff8e1) !important;
+    background:         linear-gradient(45deg, #c5e1a5, #fff8e1) !important;
 }
 
 .gradient-45deg-light-green-amber.gradient-shadow
@@ -7208,9 +7203,8 @@ li.home:before
 .gradient-45deg-amber-amber
 {
     background: #ff6f00;
-    background: -webkit-linear-gradient(-45deg, #ff6f00, #ffca28) !important;
-    background: -webkit-linear-gradient(135deg, #ff6f00, #ffca28) !important;
-    background:         linear-gradient(-45deg, #ff6f00, #ffca28) !important;
+    background: -webkit-linear-gradient(45deg, #ff6f00, #ffca28) !important;
+    background:         linear-gradient(45deg, #ff6f00, #ffca28) !important;
 }
 
 .gradient-45deg-amber-amber.gradient-shadow
@@ -7221,9 +7215,8 @@ li.home:before
 .gradient-45deg-purple-pink
 {
     background: #ea80fc;
-    background: -webkit-linear-gradient(-45deg, #ea80fc, #fce4ec) !important;
-    background: -webkit-linear-gradient(135deg, #ea80fc, #fce4ec) !important;
-    background:         linear-gradient(-45deg, #ea80fc, #fce4ec) !important;
+    background: -webkit-linear-gradient(45deg, #ea80fc, #fce4ec) !important;
+    background:         linear-gradient(45deg, #ea80fc, #fce4ec) !important;
 }
 
 .gradient-45deg-purple-pink.gradient-shadow
@@ -7234,9 +7227,8 @@ li.home:before
 .gradient-45deg-teal-cyan
 {
     background: #e0f2f1;
-    background: -webkit-linear-gradient(-45deg, #e0f2f1, #00e5ff) !important;
-    background: -webkit-linear-gradient(135deg, #e0f2f1, #00e5ff) !important;
-    background:         linear-gradient(-45deg, #e0f2f1, #00e5ff) !important;
+    background: -webkit-linear-gradient(45deg, #e0f2f1, #00e5ff) !important;
+    background:         linear-gradient(45deg, #e0f2f1, #00e5ff) !important;
 }
 
 .gradient-45deg-teal-cyan.gradient-shadow
@@ -7247,9 +7239,8 @@ li.home:before
 .gradient-45deg-blue-grey-blue-grey
 {
     background: #cfd8dc;
-    background: -webkit-linear-gradient(-45deg, #cfd8dc, #546e7a) !important;
-    background: -webkit-linear-gradient(135deg, #cfd8dc, #546e7a) !important;
-    background:         linear-gradient(-45deg, #cfd8dc, #546e7a) !important;
+    background: -webkit-linear-gradient(45deg, #cfd8dc, #546e7a) !important;
+    background:         linear-gradient(45deg, #cfd8dc, #546e7a) !important;
 }
 
 .gradient-45deg-blue-grey-blue-grey.gradient-shadow
@@ -7260,9 +7251,8 @@ li.home:before
 .gradient-45deg-orange-amber
 {
     background: #e65100;
-    background: -webkit-linear-gradient(-45deg, #e65100, #1976d2) !important;
-    background: -webkit-linear-gradient(135deg, #e65100, #1976d2) !important;
-    background:         linear-gradient(-45deg, #e65100, #1976d2) !important;
+    background: -webkit-linear-gradient(45deg, #e65100, #1976d2) !important;
+    background:         linear-gradient(45deg, #e65100, #1976d2) !important;
 }
 
 .gradient-45deg-orange-amber.gradient-shadow
@@ -7273,9 +7263,8 @@ li.home:before
 .gradient-45deg-indigo-blue
 {
     background: #303f9f;
-    background: -webkit-linear-gradient(-45deg, #303f9f, #1976d2) !important;
-    background: -webkit-linear-gradient(135deg, #303f9f, #1976d2) !important;
-    background:         linear-gradient(-45deg, #303f9f, #1976d2) !important;
+    background: -webkit-linear-gradient(45deg, #303f9f, #1976d2) !important;
+    background:         linear-gradient(45deg, #303f9f, #1976d2) !important;
 }
 
 .gradient-45deg-indigo-blue.gradient-shadow
@@ -7286,9 +7275,8 @@ li.home:before
 .gradient-45deg-brown-brown
 {
     background: #6d4c41;
-    background: -webkit-linear-gradient(-45deg, #6d4c41, #bbdefb) !important;
-    background: -webkit-linear-gradient(135deg, #6d4c41, #bbdefb) !important;
-    background:         linear-gradient(-45deg, #6d4c41, #bbdefb) !important;
+    background: -webkit-linear-gradient(45deg, #6d4c41, #bbdefb) !important;
+    background:         linear-gradient(45deg, #6d4c41, #bbdefb) !important;
 }
 
 .gradient-45deg-brown-brown.gradient-shadow
@@ -7299,9 +7287,8 @@ li.home:before
 .gradient-45deg-blue-grey-blue
 {
     background: #263238;
-    background: -webkit-linear-gradient(-45deg, #263238, #2979ff) !important;
-    background: -webkit-linear-gradient(135deg, #263238, #2979ff) !important;
-    background:         linear-gradient(-45deg, #263238, #2979ff) !important;
+    background: -webkit-linear-gradient(45deg, #263238, #2979ff) !important;
+    background:         linear-gradient(45deg, #263238, #2979ff) !important;
 }
 
 .gradient-45deg-blue-grey-blue.gradient-shadow
@@ -7312,9 +7299,8 @@ li.home:before
 .gradient-45deg-purple-deep-orange
 {
     background: #8e24aa;
-    background: -webkit-linear-gradient(-45deg, #8e24aa, #ff6e40) !important;
-    background: -webkit-linear-gradient(135deg, #8e24aa, #ff6e40) !important;
-    background:         linear-gradient(-45deg, #8e24aa, #ff6e40) !important;
+    background: -webkit-linear-gradient(45deg, #8e24aa, #ff6e40) !important;
+    background:         linear-gradient(45deg, #8e24aa, #ff6e40) !important;
 }
 
 .gradient-45deg-purple-deep-orange.gradient-shadow
@@ -7325,9 +7311,8 @@ li.home:before
 .gradient-45deg-green-teal
 {
     background: #43a047;
-    background: -webkit-linear-gradient(-45deg, #43a047, #1de9b6) !important;
-    background: -webkit-linear-gradient(135deg, #43a047, #1de9b6) !important;
-    background:         linear-gradient(-45deg, #43a047, #1de9b6) !important;
+    background: -webkit-linear-gradient(45deg, #43a047, #1de9b6) !important;
+    background:         linear-gradient(45deg, #43a047, #1de9b6) !important;
 }
 
 .gradient-45deg-green-teal.gradient-shadow
@@ -7338,9 +7323,8 @@ li.home:before
 .gradient-45deg-purple-light-blue
 {
     background: #e040fb;
-    background: -webkit-linear-gradient(-45deg, #e040fb, #4fc3f7) !important;
-    background: -webkit-linear-gradient(135deg, #e040fb, #4fc3f7) !important;
-    background:         linear-gradient(-45deg, #e040fb, #4fc3f7) !important;
+    background: -webkit-linear-gradient(45deg, #e040fb, #4fc3f7) !important;
+    background:         linear-gradient(45deg, #e040fb, #4fc3f7) !important;
 }
 
 .gradient-45deg-purple-light-blue.gradient-shadow
@@ -7351,9 +7335,8 @@ li.home:before
 .gradient-45deg-cyan-cyan
 {
     background: #18ffff;
-    background: -webkit-linear-gradient(-45deg, #18ffff, #00e5ff) !important;
-    background: -webkit-linear-gradient(135deg, #18ffff, #00e5ff) !important;
-    background:         linear-gradient(-45deg, #18ffff, #00e5ff) !important;
+    background: -webkit-linear-gradient(45deg, #18ffff, #00e5ff) !important;
+    background:         linear-gradient(45deg, #18ffff, #00e5ff) !important;
 }
 
 .gradient-45deg-cyan-cyan.gradient-shadow
@@ -7364,9 +7347,8 @@ li.home:before
 .gradient-45deg-yellow-teal
 {
     background: #fff9c4;
-    background: -webkit-linear-gradient(-45deg, #fff9c4, #64ffda) !important;
-    background: -webkit-linear-gradient(135deg, #fff9c4, #64ffda) !important;
-    background:         linear-gradient(-45deg, #fff9c4, #64ffda) !important;
+    background: -webkit-linear-gradient(45deg, #fff9c4, #64ffda) !important;
+    background:         linear-gradient(45deg, #fff9c4, #64ffda) !important;
 }
 
 .gradient-45deg-yellow-teal.gradient-shadow
@@ -7377,9 +7359,8 @@ li.home:before
 .gradient-45deg-purple-deep-purple
 {
     background: #7b1fa2;
-    background: -webkit-linear-gradient(-45deg, #7b1fa2, #7c4dff) !important;
-    background: -webkit-linear-gradient(135deg, #7b1fa2, #7c4dff) !important;
-    background:         linear-gradient(-45deg, #7b1fa2, #7c4dff) !important;
+    background: -webkit-linear-gradient(45deg, #7b1fa2, #7c4dff) !important;
+    background:         linear-gradient(45deg, #7b1fa2, #7c4dff) !important;
 }
 
 .gradient-45deg-purple-deep-purple.gradient-shadow
@@ -7390,9 +7371,8 @@ li.home:before
 .gradient-45deg-cyan-light-green
 {
     background: #0097a7;
-    background: -webkit-linear-gradient(-45deg, #0097a7, #b2ff59) !important;
-    background: -webkit-linear-gradient(135deg, #0097a7, #b2ff59) !important;
-    background:         linear-gradient(-45deg, #0097a7, #b2ff59) !important;
+    background: -webkit-linear-gradient(45deg, #0097a7, #b2ff59) !important;
+    background:         linear-gradient(45deg, #0097a7, #b2ff59) !important;
 }
 
 .gradient-45deg-cyan-light-green.gradient-shadow
@@ -7403,9 +7383,8 @@ li.home:before
 .gradient-45deg-purple-amber
 {
     background: #d500f9;
-    background: -webkit-linear-gradient(-45deg, #d500f9, #ffa000) !important;
-    background: -webkit-linear-gradient(135deg, #d500f9, #ffa000) !important;
-    background:         linear-gradient(-45deg, #d500f9, #ffa000) !important;
+    background: -webkit-linear-gradient(45deg, #d500f9, #ffa000) !important;
+    background:         linear-gradient(45deg, #d500f9, #ffa000) !important;
 }
 
 .gradient-45deg-purple-amber.gradient-shadow
@@ -7416,9 +7395,8 @@ li.home:before
 .gradient-45deg-indigo-purple
 {
     background: #303f9f;
-    background: -webkit-linear-gradient(-45deg, #303f9f, #7b1fa2) !important;
-    background: -webkit-linear-gradient(135deg, #303f9f, #7b1fa2) !important;
-    background:         linear-gradient(-45deg, #303f9f, #7b1fa2) !important;
+    background: -webkit-linear-gradient(45deg, #303f9f, #7b1fa2) !important;
+    background:         linear-gradient(45deg, #303f9f, #7b1fa2) !important;
 }
 
 .gradient-45deg-indigo-purple.gradient-shadow
@@ -7429,9 +7407,8 @@ li.home:before
 .gradient-45deg-deep-purple-blue
 {
     background: #6200ea;
-    background: -webkit-linear-gradient(-45deg, #6200ea, #1976d2) !important;
-    background: -webkit-linear-gradient(135deg, #6200ea, #1976d2) !important;
-    background:         linear-gradient(-45deg, #6200ea, #1976d2) !important;
+    background: -webkit-linear-gradient(45deg, #6200ea, #1976d2) !important;
+    background:         linear-gradient(45deg, #6200ea, #1976d2) !important;
 }
 
 .gradient-45deg-deep-purple-blue.gradient-shadow
@@ -7442,9 +7419,8 @@ li.home:before
 .gradient-45deg-deep-orange-orange
 {
     background: #bf360c;
-    background: -webkit-linear-gradient(-45deg, #bf360c, #f57c00) !important;
-    background: -webkit-linear-gradient(135deg, #bf360c, #f57c00) !important;
-    background:         linear-gradient(-45deg, #bf360c, #f57c00) !important;
+    background: -webkit-linear-gradient(45deg, #bf360c, #f57c00) !important;
+    background:         linear-gradient(45deg, #bf360c, #f57c00) !important;
 }
 
 .gradient-45deg-deep-orange-orange.gradient-shadow
@@ -7455,9 +7431,8 @@ li.home:before
 .gradient-45deg-light-blue-cyan
 {
     background: #0288d1;
-    background: -webkit-linear-gradient(-45deg, #0288d1, #26c6da) !important;
-    background: -webkit-linear-gradient(135deg, #0288d1, #26c6da) !important;
-    background:         linear-gradient(-45deg, #0288d1, #26c6da) !important;
+    background: -webkit-linear-gradient(45deg, #0288d1, #26c6da) !important;
+    background:         linear-gradient(45deg, #0288d1, #26c6da) !important;
 }
 
 .gradient-45deg-light-blue-cyan.gradient-shadow
@@ -7468,9 +7443,8 @@ li.home:before
 .gradient-45deg-blue-indigo
 {
     background: #2962ff;
-    background: -webkit-linear-gradient(-45deg, #2962ff, #3949ab) !important;
-    background: -webkit-linear-gradient(135deg, #2962ff, #3949ab) !important;
-    background:         linear-gradient(-45deg, #2962ff, #3949ab) !important;
+    background: -webkit-linear-gradient(45deg, #2962ff, #3949ab) !important;
+    background:         linear-gradient(45deg, #2962ff, #3949ab) !important;
 }
 
 .gradient-45deg-blue-indigo.gradient-shadow
@@ -7481,8 +7455,8 @@ li.home:before
 .gradient-45deg-semi-dark
 {
     background: #00aeff;
-    background: -webkit-linear-gradient(left, #00aeff, #3369e6) !important;
-    background:         linear-gradient(90deg, #00aeff, #3369e6) !important;
+    background: -webkit-linear-gradient(right, #00aeff, #3369e6) !important;
+    background:         linear-gradient(-90deg, #00aeff, #3369e6) !important;
 }
 
 .gradient-45deg-semi-dark.gradient-shadow
@@ -8072,8 +8046,8 @@ li.home:before
 .avatar-status i
 {
     position: absolute;
+    right: -2px;
     bottom: 18px;
-    left: -2px;
 
     width: 9px !important;
     height: 9px !important;
@@ -8158,8 +8132,8 @@ li.home:before
 
 .avatar-status.avatar-50 i
 {
+    right: -1px;
     bottom: 21px;
-    left: -1px;
 
     width: 12px !important;
     height: 12px !important;
@@ -8178,8 +8152,8 @@ li.home:before
 
 .avatar-status.avatar-lg i
 {
+    right: 0;
     bottom: 0;
-    left: 0;
 
     width: 20px;
     height: 20px;
@@ -8198,8 +8172,8 @@ li.home:before
 
 .avatar-status.avatar-md i
 {
+    right: 0;
     bottom: 0;
-    left: 0;
 
     width: 10px;
     height: 10px;
@@ -8270,7 +8244,7 @@ li.home:before
 .dropdown-content li > a > i
 {
     width: 24px;
-    margin: 0 0 0 12px;
+    margin: 0 12px 0 0;
 }
 
 /*----------------------------------------
@@ -8343,7 +8317,7 @@ span.badge.pill
     text-transform: none;
     word-wrap: normal;
 
-    direction: rtl;
+    direction: ltr;
     /* Support for all WebKit browsers. */
     -webkit-font-smoothing: antialiased;
     /* Support for Safari and Chrome. */
@@ -8458,7 +8432,7 @@ span.badge.pill
 
     width: calc(100% - 360px);
     height: 40px;
-    margin: 10px 75px 0 auto;
+    margin: 10px auto 0 75px;
 
     -webkit-transition: .3s ease all;
             transition: .3s ease all;
@@ -8474,7 +8448,7 @@ span.badge.pill
 
     position: absolute;
     top: 6px;
-    right: 24px;
+    left: 24px;
 
     -webkit-transition: color 200ms ease;
             transition: color 200ms ease;
@@ -8483,7 +8457,7 @@ span.badge.pill
 .navbar .sideNav-lock .header-search-wrapper
 {
     width: calc(100% - 560px);
-    margin: 10px 260px 0 auto;
+    margin: 10px auto 0 260px;
 }
 
 .navbar input.header-search-input
@@ -8496,7 +8470,7 @@ span.badge.pill
     box-sizing: border-box;
     width: 100%;
     margin-bottom: 0;
-    padding: 8px 65px 8px 8px;
+    padding: 8px 8px 8px 65px;
 
     -webkit-transition: all 200ms ease;
             transition: all 200ms ease;
@@ -8654,7 +8628,7 @@ span.badge.pill
 
     position: relative;
     top: -20px;
-    left: 5px;
+    right: 5px;
 
     margin: 0 -.8em;
     padding: 2px 5px;
@@ -8702,7 +8676,7 @@ span.badge.pill
 
     display: inline-block;
 
-    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .navbar #notifications-dropdown li > time
@@ -8713,7 +8687,7 @@ span.badge.pill
     position: relative;
     top: -4px;
 
-    margin-right: 38px;
+    margin-left: 38px;
 }
 
 .navbar #notifications-dropdown li.divider
@@ -8733,7 +8707,7 @@ span.badge.pill
 
 .navbar #profile-dropdown li a i
 {
-    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .navbar .navbar-light
@@ -8859,7 +8833,7 @@ span.badge.pill
 
 .navbar .navbar-main
 {
-    padding: 0 15px 0 8px;
+    padding: 0 8px 0 15px;
 }
 
 .search-list
@@ -8915,7 +8889,7 @@ span.badge.pill
 
 .search-list li a .member-info
 {
-    margin-right: .8rem;
+    margin-left: .8rem;
 }
 
 .search-list li a .member-info span:hover
@@ -8997,7 +8971,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 {
     .navbar .nav-wrapper .dropdown-content
     {
-        right: 25px !important;
+        left: 25px !important;
 
         width: calc(100% - 33px) !important;
     }
@@ -9039,7 +9013,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 {
     .navbar .navbar-main
     {
-        padding: 0 0 0 8px;
+        padding: 0 8px 0 0;
     }
 }
 
@@ -9070,7 +9044,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 {
     position: fixed;
     top: 0;
-    right: 0;
+    left: 0;
 
     width: inherit;
     height: 64px;
@@ -9101,7 +9075,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 {
     position: absolute;
     top: 7px;
-    left: 23px;
+    right: 23px;
 }
 
 .brand-sidebar .logo-wrapper a.navbar-toggler i
@@ -9122,7 +9096,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 
     visibility: visible;
 
-    padding-right: 8px;
+    padding-left: 8px;
 
     -webkit-transition: opacity .2s linear;
             transition: opacity .2s linear;
@@ -9140,7 +9114,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     display: inline-block;
 
     margin: 1px 0;
-    padding: 22px 22px 22px 12px;
+    padding: 22px 12px 22px 22px;
 
     color: #333;
 }
@@ -9152,22 +9126,22 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 
 .brand-sidebar .brand-logo.center
 {
-    right: 50%;
+    left: 50%;
 
-    -webkit-transform: translateX(50%);
-        -ms-transform: translateX(50%);
-            transform: translateX(50%);
+    -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
 }
 
 @media only screen and (max-width: 992px)
 {
     .brand-sidebar .brand-logo
     {
-        right: 50%;
+        left: 50%;
 
-        -webkit-transform: translateX(50%);
-            -ms-transform: translateX(50%);
-                transform: translateX(50%);
+        -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
     }
     .brand-sidebar .brand-logo.left,
     .brand-sidebar .brand-logo.right
@@ -9180,18 +9154,18 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     }
     .brand-sidebar .brand-logo.left
     {
-        right: .5rem;
+        left: .5rem;
     }
     .brand-sidebar .brand-logo.right
     {
-        right: auto;
-        left: .5rem;
+        right: .5rem;
+        left: auto;
     }
 }
 
 .brand-sidebar .brand-logo.right
 {
-    left: .5rem;
+    right: .5rem;
 
     padding: 0;
 }
@@ -9201,9 +9175,9 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 .brand-sidebar .brand-logo [class*='mdi-'],
 .brand-sidebar .brand-logo i.material-icons
 {
-    float: right;
+    float: left;
 
-    margin-left: 15px;
+    margin-right: 15px;
 }
 
 .sidenav
@@ -9281,7 +9255,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 
 .sidenav li a
 {
-    margin-left: 1.5rem;
+    margin-right: 1.5rem;
 
     color: rgba(0, 0, 0, .87);
 }
@@ -9292,10 +9266,10 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     line-height: inherit;
 
     display: block;
-    float: right;
+    float: left;
 
     width: 2rem;
-    margin-left: 1rem;
+    margin-right: 1rem;
 
     text-align: center;
 }
@@ -9312,7 +9286,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     font-size: 18px;
 
     position: absolute;
-    left: 0;
+    right: 0;
 
     content: 'keyboard_arrow_right';
     transition: transform .3s ease-in-out, opacity .25s ease-in-out .1s, -webkit-transform .3s ease-in-out;
@@ -9361,9 +9335,9 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 
 .sidenav li.active > .collapsible-header:after
 {
-    -webkit-transform: rotate(-90deg);
-        -ms-transform: rotate(-90deg);
-            transform: rotate(-90deg);
+    -webkit-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+            transform: rotate(90deg);
 }
 
 .sidenav li.open
@@ -9387,7 +9361,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     line-height: 44px;
 
     height: 44px;
-    margin: 0 0 0 20px;
+    margin: 0 20px 0 0;
 }
 
 .sidenav li > a:not(.active):hover
@@ -9448,7 +9422,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 
 .nav-collapsed .brand-sidebar .brand-logo
 {
-    padding: 22px 15px 22px 12px;
+    padding: 22px 12px 22px 15px;
 }
 
 .nav-collapsed .navigation-header-text
@@ -9502,7 +9476,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 .nav-collapsible span.badge.pill
 {
     position: absolute;
-    left: 4px;
+    right: 4px;
 
     visibility: visible;
     float: none;
@@ -9611,10 +9585,10 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 
 .sidenav-active-rounded .sidenav li > a.active
 {
-    margin-left: 1.15rem;
+    margin-right: 1.15rem;
 
     color: #333;
-    border-radius: 25px 0 0 25px;
+    border-radius: 0 25px 25px 0;
 }
 
 .sidenav-active-rounded .sidenav li > a.active > i
@@ -9635,14 +9609,14 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 .sidenav-active-rounded .sidenav li > a:hover,
 .sidenav-active-rounded .sidenav li > li:not(.active) > a:hover
 {
-    border-radius: 25px 0 0 25px;
+    border-radius: 0 25px 25px 0;
 }
 
 .sidenav-active-rounded .sidenav li > a,
 .sidenav-active-rounded .sidenav li a.collapsible-header
 {
-    margin-left: 1.15rem;
-    padding: 0 21px 0 0 !important;
+    margin-right: 1.15rem;
+    padding: 0 0 0 21px !important;
 
     -webkit-transition: none;
             transition: none;
@@ -9650,13 +9624,13 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 
 .sidenav-active-rounded .sidenav .collapsible-header:after
 {
-    left: 4px;
+    right: 4px;
 }
 
 .sidenav-active-rounded.nav-collapsed li > a,
 .sidenav-active-rounded.nav-collapsed li a.collapsible-header
 {
-    margin-left: 10px !important;
+    margin-right: 10px !important;
 }
 
 .sidenav-active-rounded.nav-collapsed li.close
@@ -9666,10 +9640,10 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 
 .sidenav-active-square .sidenav li > a.active
 {
-    margin-left: 1.15rem;
+    margin-right: 1.15rem;
 
     color: #333;
-    border-radius: 5px 0 0 5px;
+    border-radius: 0 5px 5px 0;
 }
 
 .sidenav-active-square .sidenav li > a.active > i
@@ -9690,14 +9664,14 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 .sidenav-active-square .sidenav li > a:hover,
 .sidenav-active-square .sidenav li > li:not(.active) > a:hover
 {
-    border-radius: 5px 0 0 5px;
+    border-radius: 0 5px 5px 0;
 }
 
 .sidenav-active-square .sidenav li > a,
 .sidenav-active-square .sidenav li a.collapsible-header
 {
-    margin-left: 1.15rem;
-    padding: 0 21px 0 0 !important;
+    margin-right: 1.15rem;
+    padding: 0 0 0 21px !important;
 
     -webkit-transition: none;
             transition: none;
@@ -9705,13 +9679,13 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 
 .sidenav-active-square .sidenav .collapsible-header:after
 {
-    left: 4px;
+    right: 4px;
 }
 
 .sidenav-active-square.nav-collapsed li > a,
 .sidenav-active-square.nav-collapsed li a.collapsible-header
 {
-    margin-left: 10px !important;
+    margin-right: 10px !important;
 }
 
 .sidenav-active-square.nav-collapsed li.close
@@ -9728,7 +9702,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     }
     .sidenav-main .brand-sidebar
     {
-        right: 80px;
+        left: 80px;
 
         background: transparent;
         box-shadow: none;
@@ -9755,7 +9729,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     {
         position: relative;
         top: 10px;
-        right: 10px;
+        left: 10px;
     }
     .sidenav-dark.sidenav-main .sidenav
     {
@@ -9773,7 +9747,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     {
         position: relative;
         top: 6px;
-        right: 6px;
+        left: 6px;
     }
 }
 
@@ -9807,14 +9781,14 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     }
     .sidenav li.active > .collapsible-header:after
     {
-        left: 0;
+        right: 0;
 
         width: 0;
 
         content: '-';
-        -webkit-transform: rotate(-180deg);
-            -ms-transform: rotate(-180deg);
-                transform: rotate(-180deg);
+        -webkit-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+                transform: rotate(180deg);
     }
 }
 
@@ -9893,7 +9867,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     width: 86%;
     height: 2.8rem;
     margin: 1rem;
-    padding-right: 1rem;
+    padding-left: 1rem;
 
     border: none;
     border-radius: 2rem;
@@ -9925,7 +9899,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 #slide-out-right.sidenav #messages .collection ul.collection li .user-content
 {
     margin-top: .4em;
-    margin-right: 1rem;
+    margin-left: 1rem;
 }
 
 #slide-out-right.sidenav #messages .collection ul.collection li .secondary-content
@@ -9973,7 +9947,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 
 .chat-close-collapse
 {
-    padding: 5px 0 0 15px;
+    padding: 5px 15px 0 0;
 }
 
 .icon-bg-color
@@ -10003,7 +9977,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 #activity .widget-timeline
 {
     margin: .5rem 5%;
-    padding-right: 40px !important;
+    padding-left: 40px !important;
 }
 
 #activity .widget-timeline li
@@ -10020,7 +9994,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     position: absolute;
     z-index: 2;
     top: 22px;
-    right: -37px;
+    left: -37px;
 
     width: 13px;
     height: 13px;
@@ -10030,7 +10004,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     border: 3px solid #fff;
     border-radius: 50%;
     background: #3f51b5;
-    box-shadow: -1px 2px 6px 0 rgba(25, 42, 70, .3);
+    box-shadow: 1px 2px 6px 0 rgba(25, 42, 70, .3);
 }
 
 #activity .widget-timeline li.timeline-items.active:not(:last-child):after
@@ -10038,7 +10012,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     position: absolute;
     z-index: 1;
     top: 22px;
-    right: -31px;
+    left: -31px;
 
     width: 1px;
     height: 100%;
@@ -10076,7 +10050,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     font-size: .75rem;
     line-height: 1.7;
 
-    float: left;
+    float: right;
 }
 
 #activity .widget-timeline li .timeline-title
@@ -10152,8 +10126,8 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 #slide-out-chat .chat-footer input
 {
     width: 80%;
-    margin-right: -2rem;
-    padding-right: 1rem;
+    margin-left: -2rem;
+    padding-left: 1rem;
 
     border: none;
     border-radius: 3rem;
@@ -10163,7 +10137,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 #slide-out-chat .chat-footer label
 {
     margin-top: -.7rem;
-    margin-right: 2rem;
+    margin-left: 2rem;
 }
 
 #slide-out-chat .chat-footer label:not(.label-icon).active
@@ -10192,7 +10166,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 {
     position: relative;
 
-    margin-right: 1rem;
+    margin-left: 1rem;
 
     border-radius: .3rem;
     background: #eceff1;
@@ -10202,7 +10176,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 {
     position: absolute;
     top: 50%;
-    right: -9px;
+    left: -9px;
 
     width: 0;
     height: 0;
@@ -10211,15 +10185,15 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     content: '';
 
     border: 10px solid transparent;
-    border-right: 0;
-    border-left-color: #eceff1;
+    border-right-color: #eceff1;
+    border-left: 0;
 }
 
 #slide-out-chat .speech-bubble-right
 {
     position: relative;
 
-    margin-right: 1rem;
+    margin-left: 1rem;
 
     color: #fff;
     border-radius: .3rem;
@@ -10230,18 +10204,18 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 {
     position: absolute;
     top: 50%;
-    left: 0;
+    right: 0;
 
     width: 0;
     height: 0;
     margin-top: -16px;
-    margin-left: -8px;
+    margin-right: -8px;
 
     content: '';
 
     border: 10px solid transparent;
-    border-right-color: #2196f3;
-    border-left: 0;
+    border-right: 0;
+    border-left-color: #2196f3;
 }
 
 #slide-out-chat .chat-body ul.collection
@@ -10323,7 +10297,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     position: relative;
     top: 3px;
 
-    padding: 0 4px 0 5px;
+    padding: 0 5px 0 4px;
 
     content: 'keyboard_arrow_right';
 
@@ -10412,14 +10386,14 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 
 #breadcrumbs-wrapper.breadcrumbs-inline .breadcrumbs-title
 {
-    padding-left: 20px;
+    padding-right: 20px;
 
-    border-left: 1px solid #bdbdbd;
+    border-right: 1px solid #bdbdbd;
 }
 
 #breadcrumbs-wrapper.breadcrumbs-inline .breadcrumbs
 {
-    padding-right: 20px;
+    padding-left: 20px;
 }
 
 #breadcrumbs-wrapper.breadcrumbs-inline .breadcrumbs-btn
@@ -10429,7 +10403,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 
 #breadcrumbs-wrapper .breadcrumbs-right .breadcrumbs
 {
-    float: left;
+    float: right;
 
     margin-top: 0;
 }
@@ -10455,7 +10429,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 
     position: relative;
     top: 0rem;
-    right: 0rem;
+    left: 0rem;
 
     -webkit-transform: translateY(0%);
         -ms-transform: translateY(0%);
@@ -10481,7 +10455,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 .left-alert input[type=search] + label:after,
 .left-alert textarea.materialize-textarea + label:after
 {
-    right: 0;
+    left: 0;
 }
 
 .right-alert input[type=text] + label:after,
@@ -10496,7 +10470,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 .right-alert input[type=search] + label:after,
 .right-alert textarea.materialize-textarea + label:after
 {
-    left: 70px;
+    right: 70px;
 }
 
 .select2-icons + .select2-container--default .select2-selection__rendered,
@@ -10518,7 +10492,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 .select2-icons + .select2-container--default .select2-selection__rendered i,
 .select2-icons + .select2-container--default .select2-selection__choice i
 {
-    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 .select2-results .select2-results__option i
@@ -10526,7 +10500,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     position: relative;
     top: 7px;
 
-    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 .btn-toolbar
@@ -10556,7 +10530,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     line-height: 0;
 
     height: 28px;
-    margin-left: 1rem;
+    margin-right: 1rem;
     padding: 0 1rem;
 }
 
@@ -10726,7 +10700,7 @@ Cards
 {
     position: relative;
     top: 0;
-    right: -2px;
+    left: -2px;
 
     display: inline-block;
 
@@ -10749,7 +10723,7 @@ Cards
 
     position: absolute;
     top: 5px;
-    left: 10px;
+    right: 10px;
 
     color: #fff;
     border: none;
@@ -10758,7 +10732,7 @@ Cards
 
 .card-alert .card .card-content
 {
-    padding: 20px 20px 20px 40px;
+    padding: 20px 40px 20px 20px;
 }
 
 .card-alert .card-action i
@@ -10825,7 +10799,7 @@ Cards
 
 #flight-card .flight-state-two
 {
-    border-right: 1px dashed #bdbdbd;
+    border-left: 1px dashed #bdbdbd;
 }
 
 #flight-card .flight-icon
@@ -10834,10 +10808,10 @@ Cards
 
     display: block;
 
-    -webkit-transform: rotate(-90deg);
-       -moz-transform: rotate(-90deg);
-        -ms-transform: rotate(-90deg);
-         -o-transform: rotate(-90deg);
+    -webkit-transform: rotate(90deg);
+       -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+         -o-transform: rotate(90deg);
 }
 
 #flight-card .card-content-bg
@@ -10898,7 +10872,7 @@ Cards
 {
     position: absolute;
     top: 76px;
-    left: 10px;
+    right: 10px;
 }
 
 #task-card .task-cat
@@ -10906,7 +10880,7 @@ Cards
     font-size: .8rem;
     font-weight: 300;
 
-    margin-right: 37px;
+    margin-left: 37px;
     padding: 2px 4px;
 
     color: #fff;
@@ -10952,9 +10926,9 @@ Cards
 {
     position: relative;
     top: -40px;
-    left: -18px;
+    right: -18px;
 
-    margin-left: 10px !important;
+    margin-right: 10px !important;
 }
 
 #profile-card .card-content .profile-card-i
@@ -10962,7 +10936,7 @@ Cards
     position: relative;
     top: 6px;
 
-    margin-left: 10px;
+    margin-right: 10px;
 }
 
 #profile-card .card-content p
@@ -11032,7 +11006,7 @@ Cards
         width: 3.125rem;
         height: 3.125rem;
         margin: 1.25rem;
-        margin-right: 2rem;
+        margin-left: 2rem;
         padding-top: .6875rem;
     }
 }
@@ -11041,7 +11015,7 @@ Cards
 {
     .icon-background
     {
-        margin-right: 1.25rem;
+        margin-left: 1.25rem;
     }
 }
 
@@ -11049,7 +11023,7 @@ Cards
 {
     .icon-background
     {
-        margin-right: 2rem;
+        margin-left: 2rem;
     }
 }
 
@@ -11057,7 +11031,7 @@ Cards
 {
     .icon-background
     {
-        margin-right: 2.6875rem;
+        margin-left: 2.6875rem;
     }
 }
 
@@ -11065,7 +11039,7 @@ Cards
 {
     .icon-background
     {
-        margin-right: .25rem;
+        margin-left: .25rem;
     }
 }
 
@@ -11073,7 +11047,7 @@ Cards
 {
     .icon-background
     {
-        margin-right: 1.875rem;
+        margin-left: 1.875rem;
     }
 }
 
@@ -11081,7 +11055,7 @@ Cards
 {
     .icon-background
     {
-        margin-right: .9375rem;
+        margin-left: .9375rem;
     }
 }
 
@@ -11089,7 +11063,7 @@ Cards
 {
     .icon-background
     {
-        margin-right: .625rem;
+        margin-left: .625rem;
     }
 }
 
@@ -11151,7 +11125,7 @@ Cards
 /* Revenue Chart */
 .chart-revenue
 {
-    float: left;
+    float: right;
 
     padding: 8px;
 
@@ -11183,9 +11157,9 @@ Cards
 .chart-revenue-switch
 {
     padding-top: 28px;
-    padding-left: 10px;
+    padding-right: 10px;
 
-    text-align: left;
+    text-align: right;
 
     color: #fff;
 }
@@ -11206,7 +11180,7 @@ Cards
 
     position: relative;
     top: -75px;
-    right: 0;
+    left: 0;
 
     height: 0;
 
@@ -11228,12 +11202,12 @@ Cards
 .doughnut-chart-legend li:before
 {
     display: block;
-    float: right;
+    float: left;
 
     width: 8px;
     height: 8px;
     margin-top: 6px;
-    margin-left: 4px;
+    margin-right: 4px;
 
     content: '';
 }
@@ -11245,11 +11219,11 @@ a.button-collapse.top-nav
     position: absolute;
     z-index: 2;
     top: 0;
-    right: 7.5%;
+    left: 7.5%;
 
     float: none;
 
-    margin-right: 1.5rem;
+    margin-left: 1.5rem;
 
     color: #fff;
 }
@@ -11264,9 +11238,9 @@ a.button-collapse.top-nav
 {
     position: relative;
     top: -28px;
-    left: -18px;
+    right: -18px;
 
-    margin-left: 10px !important;
+    margin-right: 10px !important;
 }
 
 /*Sparkline*/
@@ -11308,8 +11282,8 @@ a.button-collapse.top-nav
     font-size: 28px;
 
     position: absolute;
-    right: 20px;
     bottom: 20px;
+    left: 20px;
 
     color: #fff;
 }
@@ -11319,8 +11293,8 @@ a.button-collapse.top-nav
     font-size: 15px;
 
     position: absolute;
+    right: 20px;
     bottom: 20px;
-    left: 20px;
 
     margin: 0;
     padding: 0;
@@ -11476,8 +11450,8 @@ a.button-collapse.top-nav
 {
     0%
     {
-        -webkit-transform: translateX(30px);
-                transform: translateX(30px);
+        -webkit-transform: translateX(-30px);
+                transform: translateX(-30px);
 
         opacity: 0;
     }
@@ -11494,8 +11468,8 @@ a.button-collapse.top-nav
 {
     0%
     {
-        -webkit-transform: translateX(30px);
-                transform: translateX(30px);
+        -webkit-transform: translateX(-30px);
+                transform: translateX(-30px);
 
         opacity: 0;
     }
@@ -11523,8 +11497,8 @@ a.button-collapse.top-nav
 {
     0%
     {
-        -webkit-transform: translateX(-30px);
-                transform: translateX(-30px);
+        -webkit-transform: translateX(30px);
+                transform: translateX(30px);
 
         opacity: 0;
     }
@@ -11541,8 +11515,8 @@ a.button-collapse.top-nav
 {
     0%
     {
-        -webkit-transform: translateX(-30px);
-                transform: translateX(-30px);
+        -webkit-transform: translateX(30px);
+                transform: translateX(30px);
 
         opacity: 0;
     }
@@ -11770,7 +11744,7 @@ tr.group:hover
     height: auto;
     margin: 20px 0;
 
-    text-align: right;
+    text-align: left;
 
     border-radius: 5px 5px 2px 2px;
     background-color: transparent;
@@ -11795,7 +11769,7 @@ tr.group:hover
 
     width: 10px;
     height: 10px;
-    margin-left: 1px;
+    margin-right: 1px;
 
     border-radius: 50%;
 }
@@ -11963,8 +11937,8 @@ tr.group:hover
     }
     100%
     {
-        -webkit-transform: rotate(-359deg);
-                transform: rotate(-359deg);
+        -webkit-transform: rotate(359deg);
+                transform: rotate(359deg);
     }
 }
 
@@ -11977,8 +11951,8 @@ tr.group:hover
     }
     100%
     {
-        -webkit-transform: rotate(-359deg);
-                transform: rotate(-359deg);
+        -webkit-transform: rotate(359deg);
+                transform: rotate(359deg);
     }
 }
 
@@ -11994,7 +11968,7 @@ tr.group:hover
 {
     position: absolute;
     top: 5px;
-    left: 10px;
+    right: 10px;
 }
 
 .theme-cutomizer .customize-devider
@@ -12013,8 +11987,8 @@ tr.group:hover
 
     width: 24px;
     height: 24px;
+    margin-right: 8px;
     margin-bottom: 10px;
-    margin-left: 8px;
 
     cursor: pointer;
 
@@ -12037,7 +12011,7 @@ tr.group:hover
     position: fixed;
     z-index: 99;
     top: 50%;
-    left: -2px;
+    right: -2px;
 
     padding: 0 1rem;
 }
@@ -12063,23 +12037,23 @@ tr.group:hover
     10%,
     20%
     {
-        -webkit-transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, 3deg);
-                transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, 3deg);
+        -webkit-transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+                transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
     }
     30%,
     50%,
     70%,
     90%
     {
-        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
-                transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+                transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
     }
     40%,
     60%,
     80%
     {
-        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
-                transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+                transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
     }
     100%
     {
@@ -12098,23 +12072,23 @@ tr.group:hover
     10%,
     20%
     {
-        -webkit-transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, 3deg);
-                transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, 3deg);
+        -webkit-transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+                transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
     }
     30%,
     50%,
     70%,
     90%
     {
-        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
-                transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+                transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
     }
     40%,
     60%,
     80%
     {
-        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
-                transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+        -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+                transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
     }
     100%
     {
@@ -12134,5 +12108,5 @@ tr.group:hover
     position: fixed;
     z-index: 99;
     top: 40%;
-    left: -2px;
+    right: -2px;
 }

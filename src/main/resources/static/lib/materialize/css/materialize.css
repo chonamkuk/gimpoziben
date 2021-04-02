@@ -1,3 +1,7 @@
+/**
+app-assets/css/themes/horizontal-menu-template/materialize.css
+**/
+
 /*--------------------------------------------------------------
 	Materialize file contain extended material ui based on theme
 ---------------------------------------------------------------*/
@@ -2715,7 +2719,7 @@
 
 .horizontal-menu.app-page .app-todo .content-area .app-wrapper .todo-header
 {
-    padding: 1.2rem 0 .75rem 1.5rem;
+    padding: 1.2rem 1.5rem .75rem 0;
 }
 
 .horizontal-menu.app-page .content-area
@@ -3270,7 +3274,7 @@ textarea
 
 ul:not(.browser-default)
 {
-    padding-right: 0;
+    padding-left: 0;
 
     list-style-type: none;
 }
@@ -3391,9 +3395,9 @@ nav,
 blockquote
 {
     margin: 20px 0;
-    padding-right: 1.5rem;
+    padding-left: 1.5rem;
 
-    border-right: 5px solid #2196f3;
+    border-left: 5px solid #2196f3;
 }
 
 i
@@ -3403,16 +3407,16 @@ i
 
 i.left
 {
-    float: right;
+    float: left;
 
-    margin-left: 15px;
+    margin-right: 15px;
 }
 
 i.right
 {
-    float: left;
+    float: right;
 
-    margin-right: 15px;
+    margin-left: 15px;
 }
 
 i.tiny
@@ -3530,7 +3534,7 @@ video.responsive-video
     font-size: 24px;
 
     display: inline-block;
-    float: right;
+    float: left;
 }
 
 .breadcrumb:before
@@ -3542,7 +3546,7 @@ video.responsive-video
 
     display: inline-block;
 
-    margin: 0 8px 0 10px;
+    margin: 0 10px 0 8px;
 
     content: '\E5CC';
     vertical-align: top;
@@ -3584,17 +3588,17 @@ video.responsive-video
 .parallax-container .parallax img
 {
     position: absolute;
-    right: 50%;
     bottom: 0;
+    left: 50%;
 
     min-width: 100%;
     min-height: 100%;
 
     -webkit-transform: translate3d(0, 0, 0);
-    -webkit-transform: translateX(50%);
-        -ms-transform: translateX(50%);
+    -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
             transform: translate3d(0, 0, 0);
-            transform: translateX(50%);
+            transform: translateX(-50%);
 
     opacity: 0;
 }
@@ -3620,9 +3624,9 @@ ul.staggered-list li
 
 .fade-in
 {
-    -webkit-transform-origin: 100% 50%;
-        -ms-transform-origin: 100% 50%;
-            transform-origin: 100% 50%;
+    -webkit-transform-origin: 0 50%;
+        -ms-transform-origin: 0 50%;
+            transform-origin: 0 50%;
 
     opacity: 0;
 }
@@ -3828,7 +3832,7 @@ th
 
     padding: 15px 5px;
 
-    text-align: right;
+    text-align: left;
     vertical-align: middle;
 
     border-radius: 2px;
@@ -3861,18 +3865,18 @@ th
     }
     table.responsive-table th
     {
-        text-align: right;
+        text-align: left;
     }
     table.responsive-table thead
     {
         display: block;
-        float: right;
+        float: left;
     }
     table.responsive-table thead tr
     {
         display: block;
 
-        padding: 0 0 0 10px;
+        padding: 0 10px 0 0;
     }
     table.responsive-table thead tr th::before
     {
@@ -3899,7 +3903,7 @@ th
     {
         display: block;
 
-        text-align: left;
+        text-align: right;
     }
     table.responsive-table td
     {
@@ -3907,7 +3911,7 @@ th
 
         min-height: 1.25em;
 
-        text-align: right;
+        text-align: left;
     }
     table.responsive-table tr
     {
@@ -3918,7 +3922,7 @@ th
     table.responsive-table thead
     {
         border: 0;
-        border-left: 1px solid rgba(0, 0, 0, .12);
+        border-right: 1px solid rgba(0, 0, 0, .12);
     }
 }
 
@@ -3950,14 +3954,14 @@ th
     position: relative;
 
     min-height: 84px;
-    padding-right: 72px;
+    padding-left: 72px;
 }
 
 .collection .collection-item.avatar:not(.circle-clipper) > .circle,
 .collection .collection-item.avatar :not(.circle-clipper) > .circle
 {
     position: absolute;
-    right: 15px;
+    left: 15px;
 
     display: inline-block;
     overflow: hidden;
@@ -3993,7 +3997,7 @@ th
 {
     position: absolute;
     top: 16px;
-    left: 16px;
+    right: 16px;
 }
 
 .collection .collection-item:last-child
@@ -4037,17 +4041,17 @@ th
 
 .collection.with-header .collection-item
 {
-    padding-right: 30px;
+    padding-left: 30px;
 }
 
 .collection.with-header .collection-item.avatar
 {
-    padding-right: 72px;
+    padding-left: 72px;
 }
 
 .secondary-content
 {
-    float: left;
+    float: right;
 
     color: #ff9100;
 }
@@ -4075,7 +4079,7 @@ th
 {
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
 
     width: 100%;
     height: 100%;
@@ -4100,8 +4104,8 @@ th
 {
     position: absolute;
     top: 0;
-    right: 0;
     bottom: 0;
+    left: 0;
 
     -webkit-transition: width .3s linear;
             transition: width .3s linear;
@@ -4118,8 +4122,8 @@ th
 {
     position: absolute;
     top: 0;
-    right: 0;
     bottom: 0;
+    left: 0;
 
     content: '';
     -webkit-animation: indeterminate 2.1s cubic-bezier(.65, .815, .735, .395) infinite;
@@ -4134,8 +4138,8 @@ th
 {
     position: absolute;
     top: 0;
-    right: 0;
     bottom: 0;
+    left: 0;
 
     content: '';
     -webkit-animation: indeterminate-short 2.1s cubic-bezier(.165, .84, .44, 1) infinite;
@@ -4152,18 +4156,18 @@ th
 {
     0%
     {
-        right: -35%;
-        left: 100%;
+        right: 100%;
+        left: -35%;
     }
     60%
     {
-        right: 100%;
-        left: -90%;
+        right: -90%;
+        left: 100%;
     }
     100%
     {
-        right: 100%;
-        left: -90%;
+        right: -90%;
+        left: 100%;
     }
 }
 
@@ -4171,18 +4175,18 @@ th
 {
     0%
     {
-        right: -35%;
-        left: 100%;
+        right: 100%;
+        left: -35%;
     }
     60%
     {
-        right: 100%;
-        left: -90%;
+        right: -90%;
+        left: 100%;
     }
     100%
     {
-        right: 100%;
-        left: -90%;
+        right: -90%;
+        left: 100%;
     }
 }
 
@@ -4190,18 +4194,18 @@ th
 {
     0%
     {
-        right: -200%;
-        left: 100%;
+        right: 100%;
+        left: -200%;
     }
     60%
     {
-        right: 107%;
-        left: -8%;
+        right: -8%;
+        left: 107%;
     }
     100%
     {
-        right: 107%;
-        left: -8%;
+        right: -8%;
+        left: 107%;
     }
 }
 
@@ -4209,18 +4213,18 @@ th
 {
     0%
     {
-        right: -200%;
-        left: 100%;
+        right: 100%;
+        left: -200%;
     }
     60%
     {
-        right: 107%;
-        left: -8%;
+        right: -8%;
+        left: 107%;
     }
     100%
     {
-        right: 107%;
-        left: -8%;
+        right: -8%;
+        left: 107%;
     }
 }
 
@@ -4234,12 +4238,12 @@ th
 
 .left-align
 {
-    text-align: right;
+    text-align: left;
 }
 
 .right-align
 {
-    text-align: left;
+    text-align: right;
 }
 
 .center,
@@ -4250,12 +4254,12 @@ th
 
 .left
 {
-    float: right !important;
+    float: left !important;
 }
 
 .right
 {
-    float: left !important;
+    float: right !important;
 }
 
 .no-select,
@@ -4300,12 +4304,12 @@ span.badge
     font-size: 1rem;
     line-height: 22px;
 
-    float: left;
+    float: right;
 
     box-sizing: border-box;
     min-width: 3rem;
     height: 22px;
-    margin-right: 14px;
+    margin-left: 14px;
     padding: 0 6px;
 
     text-align: center;
@@ -4341,7 +4345,7 @@ nav ul a span.badge
     float: none;
 
     height: 22px;
-    margin-right: 4px;
+    margin-left: 4px;
 
     -webkit-font-smoothing: auto;
 }
@@ -4353,7 +4357,7 @@ nav ul a span.badge
 
 .collapsible span.badge
 {
-    margin-right: auto;
+    margin-left: auto;
 }
 
 .sidenav span.badge
@@ -4366,7 +4370,7 @@ table span.badge
     display: inline-block;
     float: none;
 
-    margin-right: auto;
+    margin-left: auto;
 }
 
 /* This is needed for some mobile phones to display the Google Icon font properly */
@@ -4444,7 +4448,7 @@ table span.badge
 
 .row .col
 {
-    float: right;
+    float: left;
 
     box-sizing: border-box;
     min-height: 1px;
@@ -4463,7 +4467,7 @@ table span.badge
     left: auto;
 
     width: 8.33333%;
-    margin-right: auto;
+    margin-left: auto;
 }
 
 .row .col.s2
@@ -4472,7 +4476,7 @@ table span.badge
     left: auto;
 
     width: 16.66667%;
-    margin-right: auto;
+    margin-left: auto;
 }
 
 .row .col.s3
@@ -4481,7 +4485,7 @@ table span.badge
     left: auto;
 
     width: 25%;
-    margin-right: auto;
+    margin-left: auto;
 }
 
 .row .col.s4
@@ -4490,7 +4494,7 @@ table span.badge
     left: auto;
 
     width: 33.33333%;
-    margin-right: auto;
+    margin-left: auto;
 }
 
 .row .col.s5
@@ -4499,7 +4503,7 @@ table span.badge
     left: auto;
 
     width: 41.66667%;
-    margin-right: auto;
+    margin-left: auto;
 }
 
 .row .col.s6
@@ -4508,7 +4512,7 @@ table span.badge
     left: auto;
 
     width: 50%;
-    margin-right: auto;
+    margin-left: auto;
 }
 
 .row .col.s7
@@ -4517,7 +4521,7 @@ table span.badge
     left: auto;
 
     width: 58.33333%;
-    margin-right: auto;
+    margin-left: auto;
 }
 
 .row .col.s8
@@ -4526,7 +4530,7 @@ table span.badge
     left: auto;
 
     width: 66.66667%;
-    margin-right: auto;
+    margin-left: auto;
 }
 
 .row .col.s9
@@ -4535,7 +4539,7 @@ table span.badge
     left: auto;
 
     width: 75%;
-    margin-right: auto;
+    margin-left: auto;
 }
 
 .row .col.s10
@@ -4544,7 +4548,7 @@ table span.badge
     left: auto;
 
     width: 83.33333%;
-    margin-right: auto;
+    margin-left: auto;
 }
 
 .row .col.s11
@@ -4553,7 +4557,7 @@ table span.badge
     left: auto;
 
     width: 91.66667%;
-    margin-right: auto;
+    margin-left: auto;
 }
 
 .row .col.s12
@@ -4562,187 +4566,187 @@ table span.badge
     left: auto;
 
     width: 100%;
-    margin-right: auto;
+    margin-left: auto;
 }
 
 .row .col.offset-s1
 {
-    margin-right: 8.33333%;
+    margin-left: 8.33333%;
 }
 
 .row .col.pull-s1
 {
-    left: 8.33333%;
+    right: 8.33333%;
 }
 
 .row .col.push-s1
 {
-    right: 8.33333%;
+    left: 8.33333%;
 }
 
 .row .col.offset-s2
 {
-    margin-right: 16.66667%;
+    margin-left: 16.66667%;
 }
 
 .row .col.pull-s2
 {
-    left: 16.66667%;
+    right: 16.66667%;
 }
 
 .row .col.push-s2
 {
-    right: 16.66667%;
+    left: 16.66667%;
 }
 
 .row .col.offset-s3
 {
-    margin-right: 25%;
+    margin-left: 25%;
 }
 
 .row .col.pull-s3
 {
-    left: 25%;
+    right: 25%;
 }
 
 .row .col.push-s3
 {
-    right: 25%;
+    left: 25%;
 }
 
 .row .col.offset-s4
 {
-    margin-right: 33.33333%;
+    margin-left: 33.33333%;
 }
 
 .row .col.pull-s4
 {
-    left: 33.33333%;
+    right: 33.33333%;
 }
 
 .row .col.push-s4
 {
-    right: 33.33333%;
+    left: 33.33333%;
 }
 
 .row .col.offset-s5
 {
-    margin-right: 41.66667%;
+    margin-left: 41.66667%;
 }
 
 .row .col.pull-s5
 {
-    left: 41.66667%;
+    right: 41.66667%;
 }
 
 .row .col.push-s5
 {
-    right: 41.66667%;
+    left: 41.66667%;
 }
 
 .row .col.offset-s6
 {
-    margin-right: 50%;
+    margin-left: 50%;
 }
 
 .row .col.pull-s6
 {
-    left: 50%;
+    right: 50%;
 }
 
 .row .col.push-s6
 {
-    right: 50%;
+    left: 50%;
 }
 
 .row .col.offset-s7
 {
-    margin-right: 58.33333%;
+    margin-left: 58.33333%;
 }
 
 .row .col.pull-s7
 {
-    left: 58.33333%;
+    right: 58.33333%;
 }
 
 .row .col.push-s7
 {
-    right: 58.33333%;
+    left: 58.33333%;
 }
 
 .row .col.offset-s8
 {
-    margin-right: 66.66667%;
+    margin-left: 66.66667%;
 }
 
 .row .col.pull-s8
 {
-    left: 66.66667%;
+    right: 66.66667%;
 }
 
 .row .col.push-s8
 {
-    right: 66.66667%;
+    left: 66.66667%;
 }
 
 .row .col.offset-s9
 {
-    margin-right: 75%;
+    margin-left: 75%;
 }
 
 .row .col.pull-s9
 {
-    left: 75%;
+    right: 75%;
 }
 
 .row .col.push-s9
 {
-    right: 75%;
+    left: 75%;
 }
 
 .row .col.offset-s10
 {
-    margin-right: 83.33333%;
+    margin-left: 83.33333%;
 }
 
 .row .col.pull-s10
 {
-    left: 83.33333%;
+    right: 83.33333%;
 }
 
 .row .col.push-s10
 {
-    right: 83.33333%;
+    left: 83.33333%;
 }
 
 .row .col.offset-s11
 {
-    margin-right: 91.66667%;
+    margin-left: 91.66667%;
 }
 
 .row .col.pull-s11
 {
-    left: 91.66667%;
+    right: 91.66667%;
 }
 
 .row .col.push-s11
 {
-    right: 91.66667%;
+    left: 91.66667%;
 }
 
 .row .col.offset-s12
 {
-    margin-right: 100%;
+    margin-left: 100%;
 }
 
 .row .col.pull-s12
 {
-    left: 100%;
+    right: 100%;
 }
 
 .row .col.push-s12
 {
-    right: 100%;
+    left: 100%;
 }
 
 @media only screen and (min-width: 601px)
@@ -4753,7 +4757,7 @@ table span.badge
         left: auto;
 
         width: 8.33333%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.m2
     {
@@ -4761,7 +4765,7 @@ table span.badge
         left: auto;
 
         width: 16.66667%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.m3
     {
@@ -4769,7 +4773,7 @@ table span.badge
         left: auto;
 
         width: 25%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.m4
     {
@@ -4777,7 +4781,7 @@ table span.badge
         left: auto;
 
         width: 33.33333%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.m5
     {
@@ -4785,7 +4789,7 @@ table span.badge
         left: auto;
 
         width: 41.66667%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.m6
     {
@@ -4793,7 +4797,7 @@ table span.badge
         left: auto;
 
         width: 50%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.m7
     {
@@ -4801,7 +4805,7 @@ table span.badge
         left: auto;
 
         width: 58.33333%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.m8
     {
@@ -4809,7 +4813,7 @@ table span.badge
         left: auto;
 
         width: 66.66667%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.m9
     {
@@ -4817,7 +4821,7 @@ table span.badge
         left: auto;
 
         width: 75%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.m10
     {
@@ -4825,7 +4829,7 @@ table span.badge
         left: auto;
 
         width: 83.33333%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.m11
     {
@@ -4833,7 +4837,7 @@ table span.badge
         left: auto;
 
         width: 91.66667%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.m12
     {
@@ -4841,151 +4845,151 @@ table span.badge
         left: auto;
 
         width: 100%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.offset-m1
     {
-        margin-right: 8.33333%;
+        margin-left: 8.33333%;
     }
     .row .col.pull-m1
     {
-        left: 8.33333%;
+        right: 8.33333%;
     }
     .row .col.push-m1
     {
-        right: 8.33333%;
+        left: 8.33333%;
     }
     .row .col.offset-m2
     {
-        margin-right: 16.66667%;
+        margin-left: 16.66667%;
     }
     .row .col.pull-m2
     {
-        left: 16.66667%;
+        right: 16.66667%;
     }
     .row .col.push-m2
     {
-        right: 16.66667%;
+        left: 16.66667%;
     }
     .row .col.offset-m3
     {
-        margin-right: 25%;
+        margin-left: 25%;
     }
     .row .col.pull-m3
     {
-        left: 25%;
+        right: 25%;
     }
     .row .col.push-m3
     {
-        right: 25%;
+        left: 25%;
     }
     .row .col.offset-m4
     {
-        margin-right: 33.33333%;
+        margin-left: 33.33333%;
     }
     .row .col.pull-m4
     {
-        left: 33.33333%;
+        right: 33.33333%;
     }
     .row .col.push-m4
     {
-        right: 33.33333%;
+        left: 33.33333%;
     }
     .row .col.offset-m5
     {
-        margin-right: 41.66667%;
+        margin-left: 41.66667%;
     }
     .row .col.pull-m5
     {
-        left: 41.66667%;
+        right: 41.66667%;
     }
     .row .col.push-m5
     {
-        right: 41.66667%;
+        left: 41.66667%;
     }
     .row .col.offset-m6
     {
-        margin-right: 50%;
+        margin-left: 50%;
     }
     .row .col.pull-m6
     {
-        left: 50%;
+        right: 50%;
     }
     .row .col.push-m6
     {
-        right: 50%;
+        left: 50%;
     }
     .row .col.offset-m7
     {
-        margin-right: 58.33333%;
+        margin-left: 58.33333%;
     }
     .row .col.pull-m7
     {
-        left: 58.33333%;
+        right: 58.33333%;
     }
     .row .col.push-m7
     {
-        right: 58.33333%;
+        left: 58.33333%;
     }
     .row .col.offset-m8
     {
-        margin-right: 66.66667%;
+        margin-left: 66.66667%;
     }
     .row .col.pull-m8
     {
-        left: 66.66667%;
+        right: 66.66667%;
     }
     .row .col.push-m8
     {
-        right: 66.66667%;
+        left: 66.66667%;
     }
     .row .col.offset-m9
     {
-        margin-right: 75%;
+        margin-left: 75%;
     }
     .row .col.pull-m9
     {
-        left: 75%;
+        right: 75%;
     }
     .row .col.push-m9
     {
-        right: 75%;
+        left: 75%;
     }
     .row .col.offset-m10
     {
-        margin-right: 83.33333%;
+        margin-left: 83.33333%;
     }
     .row .col.pull-m10
     {
-        left: 83.33333%;
+        right: 83.33333%;
     }
     .row .col.push-m10
     {
-        right: 83.33333%;
+        left: 83.33333%;
     }
     .row .col.offset-m11
     {
-        margin-right: 91.66667%;
+        margin-left: 91.66667%;
     }
     .row .col.pull-m11
     {
-        left: 91.66667%;
+        right: 91.66667%;
     }
     .row .col.push-m11
     {
-        right: 91.66667%;
+        left: 91.66667%;
     }
     .row .col.offset-m12
     {
-        margin-right: 100%;
+        margin-left: 100%;
     }
     .row .col.pull-m12
     {
-        left: 100%;
+        right: 100%;
     }
     .row .col.push-m12
     {
-        right: 100%;
+        left: 100%;
     }
 }
 
@@ -4997,7 +5001,7 @@ table span.badge
         left: auto;
 
         width: 8.33333%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.l2
     {
@@ -5005,7 +5009,7 @@ table span.badge
         left: auto;
 
         width: 16.66667%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.l3
     {
@@ -5013,7 +5017,7 @@ table span.badge
         left: auto;
 
         width: 25%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.l4
     {
@@ -5021,7 +5025,7 @@ table span.badge
         left: auto;
 
         width: 33.33333%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.l5
     {
@@ -5029,7 +5033,7 @@ table span.badge
         left: auto;
 
         width: 41.66667%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.l6
     {
@@ -5037,7 +5041,7 @@ table span.badge
         left: auto;
 
         width: 50%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.l7
     {
@@ -5045,7 +5049,7 @@ table span.badge
         left: auto;
 
         width: 58.33333%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.l8
     {
@@ -5053,7 +5057,7 @@ table span.badge
         left: auto;
 
         width: 66.66667%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.l9
     {
@@ -5061,7 +5065,7 @@ table span.badge
         left: auto;
 
         width: 75%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.l10
     {
@@ -5069,7 +5073,7 @@ table span.badge
         left: auto;
 
         width: 83.33333%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.l11
     {
@@ -5077,7 +5081,7 @@ table span.badge
         left: auto;
 
         width: 91.66667%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.l12
     {
@@ -5085,151 +5089,151 @@ table span.badge
         left: auto;
 
         width: 100%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.offset-l1
     {
-        margin-right: 8.33333%;
+        margin-left: 8.33333%;
     }
     .row .col.pull-l1
     {
-        left: 8.33333%;
+        right: 8.33333%;
     }
     .row .col.push-l1
     {
-        right: 8.33333%;
+        left: 8.33333%;
     }
     .row .col.offset-l2
     {
-        margin-right: 16.66667%;
+        margin-left: 16.66667%;
     }
     .row .col.pull-l2
     {
-        left: 16.66667%;
+        right: 16.66667%;
     }
     .row .col.push-l2
     {
-        right: 16.66667%;
+        left: 16.66667%;
     }
     .row .col.offset-l3
     {
-        margin-right: 25%;
+        margin-left: 25%;
     }
     .row .col.pull-l3
     {
-        left: 25%;
+        right: 25%;
     }
     .row .col.push-l3
     {
-        right: 25%;
+        left: 25%;
     }
     .row .col.offset-l4
     {
-        margin-right: 33.33333%;
+        margin-left: 33.33333%;
     }
     .row .col.pull-l4
     {
-        left: 33.33333%;
+        right: 33.33333%;
     }
     .row .col.push-l4
     {
-        right: 33.33333%;
+        left: 33.33333%;
     }
     .row .col.offset-l5
     {
-        margin-right: 41.66667%;
+        margin-left: 41.66667%;
     }
     .row .col.pull-l5
     {
-        left: 41.66667%;
+        right: 41.66667%;
     }
     .row .col.push-l5
     {
-        right: 41.66667%;
+        left: 41.66667%;
     }
     .row .col.offset-l6
     {
-        margin-right: 50%;
+        margin-left: 50%;
     }
     .row .col.pull-l6
     {
-        left: 50%;
+        right: 50%;
     }
     .row .col.push-l6
     {
-        right: 50%;
+        left: 50%;
     }
     .row .col.offset-l7
     {
-        margin-right: 58.33333%;
+        margin-left: 58.33333%;
     }
     .row .col.pull-l7
     {
-        left: 58.33333%;
+        right: 58.33333%;
     }
     .row .col.push-l7
     {
-        right: 58.33333%;
+        left: 58.33333%;
     }
     .row .col.offset-l8
     {
-        margin-right: 66.66667%;
+        margin-left: 66.66667%;
     }
     .row .col.pull-l8
     {
-        left: 66.66667%;
+        right: 66.66667%;
     }
     .row .col.push-l8
     {
-        right: 66.66667%;
+        left: 66.66667%;
     }
     .row .col.offset-l9
     {
-        margin-right: 75%;
+        margin-left: 75%;
     }
     .row .col.pull-l9
     {
-        left: 75%;
+        right: 75%;
     }
     .row .col.push-l9
     {
-        right: 75%;
+        left: 75%;
     }
     .row .col.offset-l10
     {
-        margin-right: 83.33333%;
+        margin-left: 83.33333%;
     }
     .row .col.pull-l10
     {
-        left: 83.33333%;
+        right: 83.33333%;
     }
     .row .col.push-l10
     {
-        right: 83.33333%;
+        left: 83.33333%;
     }
     .row .col.offset-l11
     {
-        margin-right: 91.66667%;
+        margin-left: 91.66667%;
     }
     .row .col.pull-l11
     {
-        left: 91.66667%;
+        right: 91.66667%;
     }
     .row .col.push-l11
     {
-        right: 91.66667%;
+        left: 91.66667%;
     }
     .row .col.offset-l12
     {
-        margin-right: 100%;
+        margin-left: 100%;
     }
     .row .col.pull-l12
     {
-        left: 100%;
+        right: 100%;
     }
     .row .col.push-l12
     {
-        right: 100%;
+        left: 100%;
     }
 }
 
@@ -5241,7 +5245,7 @@ table span.badge
         left: auto;
 
         width: 8.33333%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.xl2
     {
@@ -5249,7 +5253,7 @@ table span.badge
         left: auto;
 
         width: 16.66667%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.xl3
     {
@@ -5257,7 +5261,7 @@ table span.badge
         left: auto;
 
         width: 25%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.xl4
     {
@@ -5265,7 +5269,7 @@ table span.badge
         left: auto;
 
         width: 33.33333%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.xl5
     {
@@ -5273,7 +5277,7 @@ table span.badge
         left: auto;
 
         width: 41.66667%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.xl6
     {
@@ -5281,7 +5285,7 @@ table span.badge
         left: auto;
 
         width: 50%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.xl7
     {
@@ -5289,7 +5293,7 @@ table span.badge
         left: auto;
 
         width: 58.33333%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.xl8
     {
@@ -5297,7 +5301,7 @@ table span.badge
         left: auto;
 
         width: 66.66667%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.xl9
     {
@@ -5305,7 +5309,7 @@ table span.badge
         left: auto;
 
         width: 75%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.xl10
     {
@@ -5313,7 +5317,7 @@ table span.badge
         left: auto;
 
         width: 83.33333%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.xl11
     {
@@ -5321,7 +5325,7 @@ table span.badge
         left: auto;
 
         width: 91.66667%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.xl12
     {
@@ -5329,151 +5333,151 @@ table span.badge
         left: auto;
 
         width: 100%;
-        margin-right: auto;
+        margin-left: auto;
     }
     .row .col.offset-xl1
     {
-        margin-right: 8.33333%;
+        margin-left: 8.33333%;
     }
     .row .col.pull-xl1
     {
-        left: 8.33333%;
+        right: 8.33333%;
     }
     .row .col.push-xl1
     {
-        right: 8.33333%;
+        left: 8.33333%;
     }
     .row .col.offset-xl2
     {
-        margin-right: 16.66667%;
+        margin-left: 16.66667%;
     }
     .row .col.pull-xl2
     {
-        left: 16.66667%;
+        right: 16.66667%;
     }
     .row .col.push-xl2
     {
-        right: 16.66667%;
+        left: 16.66667%;
     }
     .row .col.offset-xl3
     {
-        margin-right: 25%;
+        margin-left: 25%;
     }
     .row .col.pull-xl3
     {
-        left: 25%;
+        right: 25%;
     }
     .row .col.push-xl3
     {
-        right: 25%;
+        left: 25%;
     }
     .row .col.offset-xl4
     {
-        margin-right: 33.33333%;
+        margin-left: 33.33333%;
     }
     .row .col.pull-xl4
     {
-        left: 33.33333%;
+        right: 33.33333%;
     }
     .row .col.push-xl4
     {
-        right: 33.33333%;
+        left: 33.33333%;
     }
     .row .col.offset-xl5
     {
-        margin-right: 41.66667%;
+        margin-left: 41.66667%;
     }
     .row .col.pull-xl5
     {
-        left: 41.66667%;
+        right: 41.66667%;
     }
     .row .col.push-xl5
     {
-        right: 41.66667%;
+        left: 41.66667%;
     }
     .row .col.offset-xl6
     {
-        margin-right: 50%;
+        margin-left: 50%;
     }
     .row .col.pull-xl6
     {
-        left: 50%;
+        right: 50%;
     }
     .row .col.push-xl6
     {
-        right: 50%;
+        left: 50%;
     }
     .row .col.offset-xl7
     {
-        margin-right: 58.33333%;
+        margin-left: 58.33333%;
     }
     .row .col.pull-xl7
     {
-        left: 58.33333%;
+        right: 58.33333%;
     }
     .row .col.push-xl7
     {
-        right: 58.33333%;
+        left: 58.33333%;
     }
     .row .col.offset-xl8
     {
-        margin-right: 66.66667%;
+        margin-left: 66.66667%;
     }
     .row .col.pull-xl8
     {
-        left: 66.66667%;
+        right: 66.66667%;
     }
     .row .col.push-xl8
     {
-        right: 66.66667%;
+        left: 66.66667%;
     }
     .row .col.offset-xl9
     {
-        margin-right: 75%;
+        margin-left: 75%;
     }
     .row .col.pull-xl9
     {
-        left: 75%;
+        right: 75%;
     }
     .row .col.push-xl9
     {
-        right: 75%;
+        left: 75%;
     }
     .row .col.offset-xl10
     {
-        margin-right: 83.33333%;
+        margin-left: 83.33333%;
     }
     .row .col.pull-xl10
     {
-        left: 83.33333%;
+        right: 83.33333%;
     }
     .row .col.push-xl10
     {
-        right: 83.33333%;
+        left: 83.33333%;
     }
     .row .col.offset-xl11
     {
-        margin-right: 91.66667%;
+        margin-left: 91.66667%;
     }
     .row .col.pull-xl11
     {
-        left: 91.66667%;
+        right: 91.66667%;
     }
     .row .col.push-xl11
     {
-        right: 91.66667%;
+        left: 91.66667%;
     }
     .row .col.offset-xl12
     {
-        margin-right: 100%;
+        margin-left: 100%;
     }
     .row .col.pull-xl12
     {
-        left: 100%;
+        right: 100%;
     }
     .row .col.push-xl12
     {
-        right: 100%;
+        left: 100%;
     }
 }
 
@@ -5535,7 +5539,7 @@ nav .sidenav-trigger
     position: relative;
     z-index: 1;
 
-    float: right;
+    float: left;
 
     height: 56px;
 }
@@ -5563,7 +5567,7 @@ nav ul
 
 nav ul li
 {
-    float: right;
+    float: left;
 
     padding: 0;
 
@@ -5622,7 +5626,7 @@ nav ul a:hover
 
 nav ul.left
 {
-    float: right;
+    float: left;
 }
 
 nav form
@@ -5641,7 +5645,7 @@ nav .input-field input
     font-size: 1.2rem;
 
     height: 100%;
-    padding-right: 2rem;
+    padding-left: 2rem;
 
     border: none;
 }
@@ -5660,7 +5664,7 @@ nav .input-field input[type='date']:valid
 nav .input-field label
 {
     top: 0;
-    right: 0;
+    left: 0;
 }
 
 nav .input-field label i
@@ -6172,7 +6176,7 @@ small
     width: auto;
     max-width: 100%;
 
-    border-radius: 0 2px 2px 0;
+    border-radius: 2px 0 0 2px;
 }
 
 .card.horizontal .card-stacked
@@ -6238,8 +6242,8 @@ small
 .card .card-image .card-title
 {
     position: absolute;
-    right: 0;
     bottom: 0;
+    left: 0;
 
     max-width: 100%;
     padding: 24px;
@@ -6290,7 +6294,7 @@ small
 
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating)
 {
-    margin-left: 24px;
+    margin-right: 24px;
 
     -webkit-transition: color .3s ease;
             transition: color .3s ease;
@@ -6309,7 +6313,7 @@ small
     position: absolute;
     z-index: 3;
     top: 100%;
-    right: 0;
+    left: 0;
 
     display: none;
     overflow-y: auto;
@@ -6350,8 +6354,8 @@ small
 {
     #toast-container
     {
-        right: 5%;
         bottom: 7%;
+        left: 5%;
 
         max-width: 90%;
     }
@@ -6362,7 +6366,7 @@ small
     #toast-container
     {
         top: 10%;
-        left: 7%;
+        right: 7%;
 
         max-width: 86%;
     }
@@ -6409,8 +6413,8 @@ small
 {
     font-weight: 500;
 
-    margin-right: 3rem;
-    margin-left: -25px;
+    margin-right: -25px;
+    margin-left: 3rem;
 
     color: #eeff41;
 }
@@ -6581,7 +6585,7 @@ small
     position: absolute;
     z-index: 2000;
     top: 0;
-    right: 0;
+    left: 0;
 
     visibility: hidden;
     overflow: hidden;
@@ -6821,14 +6825,14 @@ small
 .btn-floating.halfway-fab
 {
     position: absolute;
+    right: 24px;
     bottom: -20px;
-    left: 24px;
 }
 
 .btn-floating.halfway-fab.left
 {
-    right: 24px;
-    left: auto;
+    right: auto;
+    left: 24px;
 }
 
 .btn-floating i
@@ -6854,8 +6858,8 @@ button.btn-floating
 {
     position: fixed;
     z-index: 997;
+    right: 23px;
     bottom: 23px;
-    left: 23px;
 
     margin-bottom: 0;
     padding-top: 15px;
@@ -6869,15 +6873,15 @@ button.btn-floating
 .fixed-action-btn.direction-left,
 .fixed-action-btn.direction-right
 {
-    padding: 0 15px 0 0;
+    padding: 0 0 0 15px;
 }
 
 .fixed-action-btn.direction-left ul,
 .fixed-action-btn.direction-right ul
 {
     top: 50%;
-    right: auto;
-    left: 64px;
+    right: 64px;
+    left: auto;
     /*width 100% only goes to width of button container */
 
     width: 500px;
@@ -6886,7 +6890,7 @@ button.btn-floating
     -webkit-transform: translateY(-50%);
         -ms-transform: translateY(-50%);
             transform: translateY(-50%);
-    text-align: left;
+    text-align: right;
 }
 
 .fixed-action-btn.direction-left ul li,
@@ -6894,27 +6898,27 @@ button.btn-floating
 {
     display: inline-block;
 
-    margin: 7.5px 0 0 15px;
+    margin: 7.5px 15px 0 0;
 }
 
 .fixed-action-btn.direction-right
 {
-    padding: 0 0 0 15px;
+    padding: 0 15px 0 0;
 }
 
 .fixed-action-btn.direction-right ul
 {
-    right: 64px;
-    left: auto;
+    right: auto;
+    left: 64px;
 
-    text-align: right;
+    text-align: left;
 
-    direction: ltr;
+    direction: rtl;
 }
 
 .fixed-action-btn.direction-right ul li
 {
-    margin: 7.5px 15px 0 0;
+    margin: 7.5px 0 0 15px;
 }
 
 .fixed-action-btn.direction-bottom
@@ -7035,7 +7039,7 @@ button.btn-floating
     position: absolute;
     z-index: -1;
     top: 0;
-    right: 0;
+    left: 0;
 
     width: 40px;
     height: 40px;
@@ -7116,7 +7120,7 @@ button.btn-floating
     position: absolute;
     z-index: 9999;
     top: 0;
-    right: 0;
+    left: 0;
 
     display: none;
     overflow-y: auto;
@@ -7124,9 +7128,9 @@ button.btn-floating
     min-width: 100px;
     margin: 0;
 
-    -webkit-transform-origin: 100% 0;
-        -ms-transform-origin: 100% 0;
-            transform-origin: 100% 0;
+    -webkit-transform-origin: 0 0;
+        -ms-transform-origin: 0 0;
+            transform-origin: 0 0;
 
     opacity: 0;
     background-color: #fff;
@@ -7147,7 +7151,7 @@ button.btn-floating
     min-height: 50px;
 
     cursor: pointer;
-    text-align: right;
+    text-align: left;
 
     color: rgba(0, 0, 0, .87);
 }
@@ -7185,7 +7189,7 @@ button.btn-floating
 .dropdown-content li > span > label
 {
     top: 1px;
-    right: 0;
+    left: 0;
 
     height: 18px;
 }
@@ -7194,11 +7198,11 @@ button.btn-floating
 {
     line-height: inherit;
 
-    float: right;
+    float: left;
 
     width: 24px;
     height: inherit;
-    margin: 0 0 0 24px;
+    margin: 0 24px 0 0;
 }
 
 body.keyboard-focused .dropdown-content li:focus
@@ -7209,7 +7213,7 @@ body.keyboard-focused .dropdown-content li:focus
 .input-field.col .dropdown-content [type='checkbox'] + label
 {
     top: 1px;
-    right: 0;
+    left: 0;
 
     height: 18px;
 
@@ -7258,7 +7262,7 @@ body.keyboard-focused .dropdown-content li:focus
     width: 20px;
     height: 20px;
     margin-top: -10px;
-    margin-right: -10px;
+    margin-left: -10px;
 
     -webkit-transition: all .7s ease-out;
             transition: all .7s ease-out;
@@ -7356,7 +7360,7 @@ body.keyboard-focused .dropdown-content li:focus
     position: relative;
     z-index: 1;
     top: 0;
-    right: 0;
+    left: 0;
 }
 
 .waves-circle
@@ -7441,7 +7445,7 @@ body.keyboard-focused .dropdown-content li:focus
     height: 56px;
     padding: 4px 6px;
 
-    text-align: left;
+    text-align: right;
 
     border-radius: 0 0 2px 2px;
     background-color: #fafafa;
@@ -7553,7 +7557,7 @@ body.keyboard-focused .dropdown-content li:focus
     display: inline-block;
 
     width: 2rem;
-    margin-left: 1rem;
+    margin-right: 1rem;
 
     text-align: center;
 }
@@ -7620,7 +7624,7 @@ body.keyboard-focused .dropdown-content li:focus
 .sidenav .collapsible-body li a,
 .sidenav.fixed .collapsible-body li a
 {
-    padding: 0 31px 0 23.5px;
+    padding: 0 23.5px 0 31px;
 }
 
 .collapsible.popout
@@ -7655,8 +7659,8 @@ body.keyboard-focused .dropdown-content li:focus
     display: inline-block;
 
     height: 32px;
+    margin-right: 5px;
     margin-bottom: 5px;
-    margin-left: 5px;
     padding: 0 12px;
 
     color: rgba(0, 0, 0, .6);
@@ -7673,11 +7677,11 @@ body.keyboard-focused .dropdown-content li:focus
 
 .chip > img
 {
-    float: right;
+    float: left;
 
     width: 32px;
     height: 32px;
-    margin: 0 -12px 0 8px;
+    margin: 0 8px 0 -12px;
 
     border-radius: 50%;
 }
@@ -7687,9 +7691,9 @@ body.keyboard-focused .dropdown-content li:focus
     font-size: 16px;
     line-height: 32px;
 
-    float: left;
+    float: right;
 
-    padding-right: 8px;
+    padding-left: 8px;
 
     cursor: pointer;
 }
@@ -7753,7 +7757,7 @@ body.keyboard-focused .dropdown-content li:focus
 {
     width: 92%;
     width: calc(100% - 3rem);
-    margin-right: 3rem;
+    margin-left: 3rem;
 }
 
 .chips:empty ~ label
@@ -7810,8 +7814,8 @@ body.keyboard-focused .dropdown-content li:focus
 
     position: fixed;
     z-index: 1000;
-    right: 0;
     bottom: 0;
+    left: 0;
 
     display: none;
 
@@ -8262,7 +8266,7 @@ textarea.materialize-textarea + label:after,
 {
     position: absolute;
     top: 100%;
-    right: 0;
+    left: 0;
 
     display: block;
 
@@ -8285,7 +8289,7 @@ textarea.materialize-textarea + label:after,
 {
     display: inline-block;
 
-    margin-right: 5px;
+    margin-left: 5px;
 
     vertical-align: middle;
 }
@@ -8298,7 +8302,7 @@ textarea.materialize-textarea + label:after,
 
 .input-field.col label
 {
-    right: .75rem;
+    left: .75rem;
 }
 
 .input-field.col .prefix ~ label,
@@ -8313,7 +8317,7 @@ textarea.materialize-textarea + label:after,
 
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
 
     cursor: text;
     -webkit-transition: color .2s ease-out, -webkit-transform .2s ease-out;
@@ -8323,9 +8327,9 @@ textarea.materialize-textarea + label:after,
     -webkit-transform: translateY(12px);
         -ms-transform: translateY(12px);
             transform: translateY(12px);
-    -webkit-transform-origin: 100% 100%;
-        -ms-transform-origin: 100% 100%;
-            transform-origin: 100% 100%;
+    -webkit-transform-origin: 0 100%;
+        -ms-transform-origin: 0 100%;
+            transform-origin: 0 100%;
     text-align: initial;
 
     color: #9e9e9e;
@@ -8336,9 +8340,9 @@ textarea.materialize-textarea + label:after,
     -webkit-transform: translateY(-14px) scale(.8);
         -ms-transform: translateY(-14px) scale(.8);
             transform: translateY(-14px) scale(.8);
-    -webkit-transform-origin: 100% 0;
-        -ms-transform-origin: 100% 0;
-            transform-origin: 100% 0;
+    -webkit-transform-origin: 0 0;
+        -ms-transform-origin: 0 0;
+            transform-origin: 0 0;
 }
 
 .input-field > input[type]:-webkit-autofill:not(.browser-default) + label,
@@ -8347,8 +8351,8 @@ textarea.materialize-textarea + label:after,
 {
     -webkit-transform: translateY(-14px) scale(.8);
             transform: translateY(-14px) scale(.8);
-    -webkit-transform-origin: 100% 0;
-            transform-origin: 100% 0;
+    -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
 }
 
 .input-field .helper-text
@@ -8368,7 +8372,7 @@ textarea.materialize-textarea + label:after,
 {
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
 
     opacity: 1;
 }
@@ -8400,12 +8404,12 @@ textarea.materialize-textarea + label:after,
 {
     width: 92%;
     width: calc(100% - 3rem);
-    margin-right: 3rem;
+    margin-left: 3rem;
 }
 
 .input-field .prefix ~ label
 {
-    margin-right: 3rem;
+    margin-left: 3rem;
 }
 
 @media only screen and (max-width: 992px)
@@ -8441,7 +8445,7 @@ textarea.materialize-textarea + label:after,
 {
     width: calc(100% - 4rem);
     height: inherit;
-    padding-right: 4rem;
+    padding-left: 4rem;
 
     border: 0;
     box-shadow: none;
@@ -8464,7 +8468,7 @@ textarea.materialize-textarea + label:after,
 
 .input-field input[type=search] + .label-icon
 {
-    right: 1rem;
+    left: 1rem;
 
     -webkit-transform: none;
         -ms-transform: none;
@@ -8478,7 +8482,7 @@ textarea.materialize-textarea + label:after,
 
     position: absolute;
     top: 0;
-    left: 1rem;
+    right: 1rem;
 
     cursor: pointer;
     -webkit-transition: .3s color;
@@ -8571,7 +8575,7 @@ textarea.materialize-textarea
     display: inline-block;
 
     height: 25px;
-    padding-right: 35px;
+    padding-left: 35px;
 
     cursor: pointer;
     -webkit-user-select: none;
@@ -8588,7 +8592,7 @@ textarea.materialize-textarea
     position: absolute;
     z-index: 0;
     top: 0;
-    right: 0;
+    left: 0;
 
     width: 16px;
     height: 16px;
@@ -8727,7 +8731,7 @@ textarea.materialize-textarea
     display: inline-block;
 
     height: 25px;
-    padding-right: 35px;
+    padding-left: 35px;
 
     cursor: pointer;
     -webkit-user-select: none;
@@ -8742,7 +8746,7 @@ textarea.materialize-textarea
     position: absolute;
     z-index: 0;
     top: 0;
-    right: 0;
+    left: 0;
 
     width: 18px;
     height: 18px;
@@ -8786,22 +8790,22 @@ textarea.materialize-textarea
 [type='checkbox']:checked + span:not(.lever):before
 {
     top: -4px;
-    right: -5px;
+    left: -5px;
 
     width: 12px;
     height: 22px;
 
-    -webkit-transform: rotate(-40deg);
-        -ms-transform: rotate(-40deg);
-            transform: rotate(-40deg);
-    -webkit-transform-origin: 0 100%;
-        -ms-transform-origin: 0 100%;
-            transform-origin: 0 100%;
+    -webkit-transform: rotate(40deg);
+        -ms-transform: rotate(40deg);
+            transform: rotate(40deg);
+    -webkit-transform-origin: 100% 100%;
+        -ms-transform-origin: 100% 100%;
+            transform-origin: 100% 100%;
 
     border-top: 2px solid transparent;
-    border-right: 2px solid transparent;
+    border-right: 2px solid #ff9100;
     border-bottom: 2px solid #ff9100;
-    border-left: 2px solid #ff9100;
+    border-left: 2px solid transparent;
 
     -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
@@ -8809,30 +8813,30 @@ textarea.materialize-textarea
 
 [type='checkbox']:checked:disabled + span:before
 {
+    border-right: 2px solid rgba(0, 0, 0, .42);
     border-bottom: 2px solid rgba(0, 0, 0, .42);
-    border-left: 2px solid rgba(0, 0, 0, .42);
 }
 
 /* Indeterminate checkbox */
 [type='checkbox']:indeterminate + span:not(.lever):before
 {
     top: -11px;
-    right: -12px;
+    left: -12px;
 
     width: 10px;
     height: 22px;
 
-    -webkit-transform: rotate(-90deg);
-        -ms-transform: rotate(-90deg);
-            transform: rotate(-90deg);
-    -webkit-transform-origin: 0 100%;
-        -ms-transform-origin: 0 100%;
-            transform-origin: 0 100%;
+    -webkit-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+            transform: rotate(90deg);
+    -webkit-transform-origin: 100% 100%;
+        -ms-transform-origin: 100% 100%;
+            transform-origin: 100% 100%;
 
     border-top: none;
-    border-right: none;
+    border-right: 2px solid #ff9100;
     border-bottom: none;
-    border-left: 2px solid #ff9100;
+    border-left: none;
 
     -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
@@ -8840,7 +8844,7 @@ textarea.materialize-textarea
 
 [type='checkbox']:indeterminate:disabled + span:not(.lever):before
 {
-    border-left: 2px solid rgba(0, 0, 0, .42);
+    border-right: 2px solid rgba(0, 0, 0, .42);
     background-color: transparent;
 }
 
@@ -8854,28 +8858,28 @@ textarea.materialize-textarea
 {
     position: absolute;
     z-index: 1;
-    right: 0;
+    left: 0;
 
     content: '';
     /* .1s delay is for check animation */
-    -webkit-transition: border .25s, background-color .25s, width .20s .1s, height .20s .1s, top .20s .1s, right .20s .1s;
-            transition: border .25s, background-color .25s, width .20s .1s, height .20s .1s, top .20s .1s, right .20s .1s;
+    -webkit-transition: border .25s, background-color .25s, width .20s .1s, height .20s .1s, top .20s .1s, left .20s .1s;
+            transition: border .25s, background-color .25s, width .20s .1s, height .20s .1s, top .20s .1s, left .20s .1s;
 }
 
 [type='checkbox'].filled-in:not(:checked) + span:not(.lever):before
 {
     top: 10px;
-    right: 6px;
+    left: 6px;
 
     width: 0;
     height: 0;
 
-    -webkit-transform: rotateZ(-37deg);
-        -ms-transform: rotate(-37deg);
-            transform: rotateZ(-37deg);
-    -webkit-transform-origin: 0 100%;
-        -ms-transform-origin: 0 100%;
-            transform-origin: 0 100%;
+    -webkit-transform: rotateZ(37deg);
+        -ms-transform: rotate(37deg);
+            transform: rotateZ(37deg);
+    -webkit-transform-origin: 100% 100%;
+        -ms-transform-origin: 100% 100%;
+            transform-origin: 100% 100%;
 
     border: 3px solid transparent;
 }
@@ -8895,22 +8899,22 @@ textarea.materialize-textarea
 [type='checkbox'].filled-in:checked + span:not(.lever):before
 {
     top: 0;
-    right: 1px;
+    left: 1px;
 
     width: 8px;
     height: 13px;
 
-    -webkit-transform: rotateZ(-37deg);
-        -ms-transform: rotate(-37deg);
-            transform: rotateZ(-37deg);
-    -webkit-transform-origin: 0 100%;
-        -ms-transform-origin: 0 100%;
-            transform-origin: 0 100%;
+    -webkit-transform: rotateZ(37deg);
+        -ms-transform: rotate(37deg);
+            transform: rotateZ(37deg);
+    -webkit-transform-origin: 100% 100%;
+        -ms-transform-origin: 100% 100%;
+            transform-origin: 100% 100%;
 
     border-top: 2px solid transparent;
-    border-right: 2px solid transparent;
+    border-right: 2px solid #fff;
     border-bottom: 2px solid #fff;
-    border-left: 2px solid #fff;
+    border-left: 2px solid transparent;
 }
 
 [type='checkbox'].filled-in:checked + span:not(.lever):after
@@ -8996,7 +9000,7 @@ textarea.materialize-textarea
 .switch label input[type=checkbox]:checked + .lever:before,
 .switch label input[type=checkbox]:checked + .lever:after
 {
-    right: 18px;
+    left: 18px;
 }
 
 .switch label input[type=checkbox]:checked + .lever:after
@@ -9013,7 +9017,7 @@ textarea.materialize-textarea
     width: 36px;
     height: 14px;
     margin: 0 16px;
-    margin-left: 10px;
+    margin-right: 10px;
 
     content: '';
     -webkit-transition: background .3s ease;
@@ -9029,7 +9033,7 @@ textarea.materialize-textarea
 {
     position: absolute;
     top: -3px;
-    right: 0;
+    left: 0;
 
     display: inline-block;
 
@@ -9037,10 +9041,10 @@ textarea.materialize-textarea
     height: 20px;
 
     content: '';
-    -webkit-transition: right .3s ease, background .3s ease, box-shadow .1s ease, -webkit-transform .1s ease;
-            transition: right .3s ease, background .3s ease, box-shadow .1s ease, -webkit-transform .1s ease;
-            transition: right .3s ease, background .3s ease, box-shadow .1s ease, transform .1s ease;
-            transition: right .3s ease, background .3s ease, box-shadow .1s ease, transform .1s ease, -webkit-transform .1s ease;
+    -webkit-transition: left .3s ease, background .3s ease, box-shadow .1s ease, -webkit-transform .1s ease;
+            transition: left .3s ease, background .3s ease, box-shadow .1s ease, -webkit-transform .1s ease;
+            transition: left .3s ease, background .3s ease, box-shadow .1s ease, transform .1s ease;
+            transition: left .3s ease, background .3s ease, box-shadow .1s ease, transform .1s ease, -webkit-transform .1s ease;
 
     border-radius: 50%;
 }
@@ -9167,8 +9171,8 @@ select
     position: absolute;
     z-index: 0;
     top: 0;
+    right: 0;
     bottom: 0;
-    left: 0;
 
     margin: auto 0;
 
@@ -9241,17 +9245,17 @@ body.keyboard-focused .select-dropdown.dropdown-content li:focus
 {
     width: 92%;
     width: calc(100% - 3rem);
-    margin-right: 3rem;
+    margin-left: 3rem;
 }
 
 .prefix ~ label
 {
-    margin-right: 3rem;
+    margin-left: 3rem;
 }
 
 .select-dropdown li img
 {
-    float: left;
+    float: right;
 
     width: 40px;
     height: 40px;
@@ -9275,7 +9279,7 @@ body.keyboard-focused .select-dropdown.dropdown-content li:focus
 
 .select-dropdown li.optgroup ~ li.optgroup-option
 {
-    padding-right: 1rem;
+    padding-left: 1rem;
 }
 
 /* File Input
@@ -9289,7 +9293,7 @@ body.keyboard-focused .select-dropdown.dropdown-content li:focus
 {
     overflow: hidden;
 
-    padding-right: 10px;
+    padding-left: 10px;
 }
 
 .file-field input.file-path
@@ -9303,7 +9307,7 @@ body.keyboard-focused .select-dropdown.dropdown-content li:focus
 {
     line-height: 3rem;
 
-    float: right;
+    float: left;
 
     height: 3rem;
 }
@@ -9374,15 +9378,15 @@ input[type=range] + .thumb
 {
     position: absolute;
     top: 10px;
-    right: 0;
+    left: 0;
 
     width: 0;
     height: 0;
-    margin-right: 7px;
+    margin-left: 7px;
 
-    -webkit-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-            transform: rotate(45deg);
+    -webkit-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+            transform: rotate(-45deg);
     -webkit-transform-origin: 50% 50%;
         -ms-transform-origin: 50% 50%;
             transform-origin: 50% 50%;
@@ -9400,9 +9404,9 @@ input[type=range] + .thumb .value
 
     width: 30px;
 
-    -webkit-transform: rotate(-45deg);
-        -ms-transform: rotate(-45deg);
-            transform: rotate(-45deg);
+    -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
     text-align: center;
 
     color: #ff9100;
@@ -9410,7 +9414,7 @@ input[type=range] + .thumb .value
 
 input[type=range] + .thumb.active
 {
-    border-radius: 50% 50% 0 50%;
+    border-radius: 50% 50% 50% 0;
 }
 
 input[type=range] + .thumb.active .value
@@ -9418,7 +9422,7 @@ input[type=range] + .thumb.active .value
     font-size: 10px;
 
     margin-top: 8px;
-    margin-right: -1px;
+    margin-left: -1px;
 
     color: #fff;
 }
@@ -9566,7 +9570,7 @@ input[type=range]::-ms-thumb
     display: inline-block;
 
     height: 1.5rem;
-    padding-right: 16px;
+    padding-left: 16px;
 
     letter-spacing: .4;
 
@@ -9575,19 +9579,19 @@ input[type=range]::-ms-thumb
 
 .table-of-contents a:hover
 {
-    padding-right: 15px;
+    padding-left: 15px;
 
     color: #a8a8a8;
-    border-right: 1px solid #2196f3;
+    border-left: 1px solid #2196f3;
 }
 
 .table-of-contents a.active
 {
     font-weight: 500;
 
-    padding-right: 14px;
+    padding-left: 14px;
 
-    border-right: 2px solid #2196f3;
+    border-left: 2px solid #2196f3;
 }
 
 .sidenav
@@ -9595,7 +9599,7 @@ input[type=range]::-ms-thumb
     position: fixed;
     z-index: 999;
     top: 0;
-    right: 0;
+    left: 0;
 
     overflow-y: auto;
 
@@ -9606,12 +9610,12 @@ input[type=range]::-ms-thumb
     margin: 0;
     padding-bottom: 60px;
 
-    -webkit-transform: translateX(100%);
-    -webkit-transform: translateX(105%);
-        -ms-transform: translateX(100%);
-        -ms-transform: translateX(105%);
-            transform: translateX(100%);
-            transform: translateX(105%);
+    -webkit-transform: translateX(-100%);
+    -webkit-transform: translateX(-105%);
+        -ms-transform: translateX(-100%);
+        -ms-transform: translateX(-105%);
+            transform: translateX(-100%);
+            transform: translateX(-105%);
 
     background-color: #fff;
 
@@ -9631,15 +9635,15 @@ input[type=range]::-ms-thumb
 
 .sidenav.right-aligned
 {
-    right: auto;
-    left: 0;
+    right: 0;
+    left: auto;
 
-    -webkit-transform: translateX(-105%);
-    -webkit-transform: translateX(-100%);
-        -ms-transform: translateX(-105%);
-        -ms-transform: translateX(-100%);
-            transform: translateX(-105%);
-            transform: translateX(-100%);
+    -webkit-transform: translateX(105%);
+    -webkit-transform: translateX(100%);
+        -ms-transform: translateX(105%);
+        -ms-transform: translateX(100%);
+            transform: translateX(105%);
+            transform: translateX(100%);
 }
 
 .sidenav .collapsible
@@ -9722,11 +9726,11 @@ input[type=range]::-ms-thumb
 {
     line-height: 48px;
 
-    float: right;
+    float: left;
 
     width: 24px;
     height: 48px;
-    margin: 0 0 0 32px;
+    margin: 0 32px 0 0;
 
     color: rgba(0, 0, 0, .54);
 }
@@ -9830,13 +9834,13 @@ input[type=range]::-ms-thumb
 
 .drag-target.right-aligned
 {
-    left: 0;
+    right: 0;
 }
 
 .sidenav.sidenav-fixed
 {
     position: fixed;
-    right: 0;
+    left: 0;
 
     -webkit-transform: translateX(0);
         -ms-transform: translateX(0);
@@ -9845,23 +9849,23 @@ input[type=range]::-ms-thumb
 
 .sidenav.sidenav-fixed.right-aligned
 {
-    right: auto;
-    left: 0;
+    right: 0;
+    left: auto;
 }
 
 @media only screen and (max-width: 992px)
 {
     .sidenav.sidenav-fixed
     {
-        -webkit-transform: translateX(105%);
-            -ms-transform: translateX(105%);
-                transform: translateX(105%);
-    }
-    .sidenav.sidenav-fixed.right-aligned
-    {
         -webkit-transform: translateX(-105%);
             -ms-transform: translateX(-105%);
                 transform: translateX(-105%);
+    }
+    .sidenav.sidenav-fixed.right-aligned
+    {
+        -webkit-transform: translateX(105%);
+            -ms-transform: translateX(105%);
+                transform: translateX(105%);
     }
     .sidenav > a
     {
@@ -9964,7 +9968,7 @@ input[type=range]::-ms-thumb
 {
     to
     {
-        -webkit-transform: rotate(-360deg);
+        -webkit-transform: rotate(360deg);
     }
 }
 
@@ -9972,8 +9976,8 @@ input[type=range]::-ms-thumb
 {
     to
     {
-        -webkit-transform: rotate(-360deg);
-                transform: rotate(-360deg);
+        -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
     }
 }
 
@@ -10070,42 +10074,42 @@ input[type=range]::-ms-thumb
 {
     12.5%
     {
-        -webkit-transform: rotate(-135deg);
+        -webkit-transform: rotate(135deg);
     }
     /* 0.5 * ARCSIZE */
     25%
     {
-        -webkit-transform: rotate(-270deg);
+        -webkit-transform: rotate(270deg);
     }
     /* 1   * ARCSIZE */
     37.5%
     {
-        -webkit-transform: rotate(-405deg);
+        -webkit-transform: rotate(405deg);
     }
     /* 1.5 * ARCSIZE */
     50%
     {
-        -webkit-transform: rotate(-540deg);
+        -webkit-transform: rotate(540deg);
     }
     /* 2   * ARCSIZE */
     62.5%
     {
-        -webkit-transform: rotate(-675deg);
+        -webkit-transform: rotate(675deg);
     }
     /* 2.5 * ARCSIZE */
     75%
     {
-        -webkit-transform: rotate(-810deg);
+        -webkit-transform: rotate(810deg);
     }
     /* 3   * ARCSIZE */
     87.5%
     {
-        -webkit-transform: rotate(-945deg);
+        -webkit-transform: rotate(945deg);
     }
     /* 3.5 * ARCSIZE */
     to
     {
-        -webkit-transform: rotate(-1080deg);
+        -webkit-transform: rotate(1080deg);
     }
     /* 4   * ARCSIZE */
 }
@@ -10114,50 +10118,50 @@ input[type=range]::-ms-thumb
 {
     12.5%
     {
-        -webkit-transform: rotate(-135deg);
-                transform: rotate(-135deg);
+        -webkit-transform: rotate(135deg);
+                transform: rotate(135deg);
     }
     /* 0.5 * ARCSIZE */
     25%
     {
-        -webkit-transform: rotate(-270deg);
-                transform: rotate(-270deg);
+        -webkit-transform: rotate(270deg);
+                transform: rotate(270deg);
     }
     /* 1   * ARCSIZE */
     37.5%
     {
-        -webkit-transform: rotate(-405deg);
-                transform: rotate(-405deg);
+        -webkit-transform: rotate(405deg);
+                transform: rotate(405deg);
     }
     /* 1.5 * ARCSIZE */
     50%
     {
-        -webkit-transform: rotate(-540deg);
-                transform: rotate(-540deg);
+        -webkit-transform: rotate(540deg);
+                transform: rotate(540deg);
     }
     /* 2   * ARCSIZE */
     62.5%
     {
-        -webkit-transform: rotate(-675deg);
-                transform: rotate(-675deg);
+        -webkit-transform: rotate(675deg);
+                transform: rotate(675deg);
     }
     /* 2.5 * ARCSIZE */
     75%
     {
-        -webkit-transform: rotate(-810deg);
-                transform: rotate(-810deg);
+        -webkit-transform: rotate(810deg);
+                transform: rotate(810deg);
     }
     /* 3   * ARCSIZE */
     87.5%
     {
-        -webkit-transform: rotate(-945deg);
-                transform: rotate(-945deg);
+        -webkit-transform: rotate(945deg);
+                transform: rotate(945deg);
     }
     /* 3.5 * ARCSIZE */
     to
     {
-        -webkit-transform: rotate(-1080deg);
-                transform: rotate(-1080deg);
+        -webkit-transform: rotate(1080deg);
+                transform: rotate(1080deg);
     }
     /* 4   * ARCSIZE */
 }
@@ -10370,7 +10374,7 @@ input[type=range]::-ms-thumb
 {
     position: absolute;
     top: 0;
-    right: 45%;
+    left: 45%;
 
     overflow: hidden;
 
@@ -10382,7 +10386,7 @@ input[type=range]::-ms-thumb
 
 .gap-patch .circle
 {
-    right: -450%;
+    left: -450%;
 
     width: 1000%;
 }
@@ -10404,8 +10408,8 @@ input[type=range]::-ms-thumb
 {
     position: absolute;
     top: 0;
+    right: 0;
     bottom: 0;
-    left: 0;
 
     width: 200%;
     height: 100%;
@@ -10423,24 +10427,24 @@ input[type=range]::-ms-thumb
 
 .circle-clipper.left .circle
 {
-    right: 0;
-
-    -webkit-transform: rotate(-129deg);
-        -ms-transform: rotate(-129deg);
-            transform: rotate(-129deg);
-
-    border-left-color: transparent !important;
-}
-
-.circle-clipper.right .circle
-{
-    right: -100%;
+    left: 0;
 
     -webkit-transform: rotate(129deg);
         -ms-transform: rotate(129deg);
             transform: rotate(129deg);
 
     border-right-color: transparent !important;
+}
+
+.circle-clipper.right .circle
+{
+    left: -100%;
+
+    -webkit-transform: rotate(-129deg);
+        -ms-transform: rotate(-129deg);
+            transform: rotate(-129deg);
+
+    border-left-color: transparent !important;
 }
 
 .active .circle-clipper.left .circle
@@ -10461,41 +10465,6 @@ input[type=range]::-ms-thumb
 {
     from
     {
-        -webkit-transform: rotate(-130deg);
-    }
-    50%
-    {
-        -webkit-transform: rotate(5deg);
-    }
-    to
-    {
-        -webkit-transform: rotate(-130deg);
-    }
-}
-
-@keyframes left-spin
-{
-    from
-    {
-        -webkit-transform: rotate(-130deg);
-                transform: rotate(-130deg);
-    }
-    50%
-    {
-        -webkit-transform: rotate(5deg);
-                transform: rotate(5deg);
-    }
-    to
-    {
-        -webkit-transform: rotate(-130deg);
-                transform: rotate(-130deg);
-    }
-}
-
-@-webkit-keyframes right-spin
-{
-    from
-    {
         -webkit-transform: rotate(130deg);
     }
     50%
@@ -10508,7 +10477,7 @@ input[type=range]::-ms-thumb
     }
 }
 
-@keyframes right-spin
+@keyframes left-spin
 {
     from
     {
@@ -10524,6 +10493,41 @@ input[type=range]::-ms-thumb
     {
         -webkit-transform: rotate(130deg);
                 transform: rotate(130deg);
+    }
+}
+
+@-webkit-keyframes right-spin
+{
+    from
+    {
+        -webkit-transform: rotate(-130deg);
+    }
+    50%
+    {
+        -webkit-transform: rotate(5deg);
+    }
+    to
+    {
+        -webkit-transform: rotate(-130deg);
+    }
+}
+
+@keyframes right-spin
+{
+    from
+    {
+        -webkit-transform: rotate(-130deg);
+                transform: rotate(-130deg);
+    }
+    50%
+    {
+        -webkit-transform: rotate(5deg);
+                transform: rotate(5deg);
+    }
+    to
+    {
+        -webkit-transform: rotate(-130deg);
+                transform: rotate(-130deg);
     }
 }
 
@@ -10602,7 +10606,7 @@ input[type=range]::-ms-thumb
     position: absolute;
     z-index: 1;
     top: 0;
-    right: 0;
+    left: 0;
 
     overflow: hidden;
 
@@ -10625,7 +10629,7 @@ input[type=range]::-ms-thumb
 {
     position: absolute;
     top: 15%;
-    right: 15%;
+    left: 15%;
 
     width: 70%;
 
@@ -10687,9 +10691,9 @@ input[type=range]::-ms-thumb
     width: 100%;
     height: 400px;
 
-    -webkit-transform-origin: 100% 50%;
-        -ms-transform-origin: 100% 50%;
-            transform-origin: 100% 50%;
+    -webkit-transform-origin: 0 50%;
+        -ms-transform-origin: 0 50%;
+            transform-origin: 0 50%;
 
     -webkit-perspective: 500px;
             perspective: 500px;
@@ -10700,7 +10704,7 @@ input[type=range]::-ms-thumb
 .carousel.carousel-slider
 {
     top: 0;
-    right: 0;
+    left: 0;
 }
 
 .carousel.carousel-slider .carousel-fixed-item
@@ -10721,7 +10725,7 @@ input[type=range]::-ms-thumb
 {
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
 
     width: 100%;
     height: 100%;
@@ -10744,7 +10748,7 @@ input[type=range]::-ms-thumb
 {
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
 
     visibility: hidden;
 
@@ -10934,11 +10938,11 @@ input[type=range]::-ms-thumb
     position: absolute !important;
     z-index: 10002;
     top: 50%;
-    right: 50%;
+    left: 50%;
 
-    -webkit-transform: translate(50%, -50%);
-        -ms-transform: translate(50%, -50%);
-            transform: translate(50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
 }
 
 .tap-target-origin:not(.btn):not(.btn-large):not(.btn-small),
@@ -10969,7 +10973,7 @@ input[type=range]::-ms-thumb
     position: absolute;
     z-index: -1;
     top: 0;
-    right: 0;
+    left: 0;
 
     display: block;
 
@@ -11387,12 +11391,12 @@ input[type=range]::-ms-thumb
 
 .timepicker-span-hours
 {
-    margin-left: 3px;
+    margin-right: 3px;
 }
 
 .timepicker-span-minutes
 {
-    margin-right: 3px;
+    margin-left: 3px;
 }
 
 .timepicker-display-am-pm
@@ -11401,8 +11405,8 @@ input[type=range]::-ms-thumb
     font-weight: 400;
 
     position: absolute;
+    right: 1rem;
     bottom: 1rem;
-    left: 1rem;
 }
 
 /* Analog Clock Display */
@@ -11586,8 +11590,8 @@ input[type=range]::-ms-thumb
     .timepicker-display-am-pm
     {
         position: relative;
+        right: auto;
         bottom: auto;
-        left: auto;
 
         margin-top: 1.2rem;
 
