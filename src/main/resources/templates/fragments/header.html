@@ -19,11 +19,11 @@
                         window.history.back();
                     }
                 },
-                 onCloseEnd: function(e) {
+                onCloseEnd: function(e) {
                     $(this).find('h4').text('');
                     $(this).find('p').text('');
                     modalStack.pop();
-                 }
+                }
             });
 
             $('#imageModal').modal({
@@ -81,7 +81,7 @@
                     $(this).find('.prev').off('click');
                     $(this).find('.next').off('click');
                     modalStack.pop();
-                 }
+                }
             });
 
             $('#confirmModal').modal({
@@ -97,12 +97,12 @@
                         window.history.back();
                     }
                 },
-                 onCloseEnd: function(e) {
+                onCloseEnd: function(e) {
                     $(this).find('h4').text('');
                     $(this).find('p').text('');
                     $(this).find('.modal-close').off('click');
                     modalStack.pop();
-                 }
+                }
             });
 
             window.onpopstate = history.onpushstate = function(e) {
@@ -120,26 +120,25 @@
             <div class="nav-wrapper">
                 <ul class="left">
                     <li>
-                        <h1 class="logo-wrapper"><a class="brand-logo darken-1" href="index.html"><img src="../../../app-assets/images/logo/materialize-logo.png" alt="materialize logo"><span class="logo-text hide-on-med-and-down">Materialize</span></a></h1>
+                        <h1 class="logo-wrapper">
+                            <a class="brand-logo darken-1" href="#1">
+                                <img src="/static/image/logo/logo-left-top.png">
+                                <span class="logo-text hide-on-med-and-down"></span>
+                            </a>
+                        </h1>
                     </li>
                 </ul>
-                <div class="header-search-wrapper hide-on-med-and-down"><i class="material-icons">search</i>
-                    <input class="header-search-input z-depth-2" type="text" name="Search" placeholder="Explore Materialize" data-search="starter-kit-list">
-                    <ul class="search-list collection display-none"></ul>
-                </div>
                 <ul class="navbar-list right">
-                    <li class="dropdown-language"><a class="waves-effect waves-block waves-light translation-button" href="javascript:void(0);" data-target="translation-dropdown"><span class="flag-icon flag-icon-gb"></span></a></li>
-                    <li class="hide-on-med-and-down"><a class="waves-effect waves-block waves-light toggle-fullscreen" href="javascript:void(0);"><i class="material-icons">settings_overscan </i></a></li>
-                    <li><a class="waves-effect waves-block waves-light notification-button" href="javascript:void(0);" data-target="notifications-dropdown"><i class="material-icons">notifications_none<small class="notification-badge orange accent-3">5</small></i></a></li>
-                    <li><a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="profile-dropdown"><span class="avatar-status avatar-online"><img src="../../../app-assets/images/avatar/avatar-7.png" alt="avatar"><i></i></span></a></li>
-                    <li><a class="waves-effect waves-block waves-light sidenav-trigger" href="#" data-target="slide-out-right"><i class="material-icons">format_indent_increase</i></a></li>
-                </ul>
-                <!-- translation-button-->
-                <ul class="dropdown-content" id="translation-dropdown">
-                    <li class="dropdown-item"><a class="grey-text text-darken-1" href="#!" data-language="en"><i class="flag-icon flag-icon-gb"></i> English</a></li>
-                    <li class="dropdown-item"><a class="grey-text text-darken-1" href="#!" data-language="fr"><i class="flag-icon flag-icon-fr"></i> French</a></li>
-                    <li class="dropdown-item"><a class="grey-text text-darken-1" href="#!" data-language="pt"><i class="flag-icon flag-icon-pt"></i> Portuguese</a></li>
-                    <li class="dropdown-item"><a class="grey-text text-darken-1" href="#!" data-language="de"><i class="flag-icon flag-icon-de"></i> German</a></li>
+                    <li>
+                        <a class="waves-effect waves-block waves-light notification-button" href="javascript:void(0);" data-target="notifications-dropdown">
+                            <i class="material-icons">shopping_cart<small class="notification-badge orange accent-3">5</small></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="profile-dropdown">
+                            <i class="material-icons">account_circle</i>
+                        </a>
+                    </li>
                 </ul>
                 <!-- notifications-dropdown-->
                 <ul class="dropdown-content" id="notifications-dropdown">
@@ -149,18 +148,6 @@
                     <li class="divider"></li>
                     <li><a class="black-text" href="#!"><span class="material-icons icon-bg-circle cyan small">add_shopping_cart</span> A new order has been placed!</a>
                         <time class="media-meta grey-text text-darken-2" datetime="2015-06-12T20:50:48+08:00">2 hours ago</time>
-                    </li>
-                    <li><a class="black-text" href="#!"><span class="material-icons icon-bg-circle red small">stars</span> Completed the task</a>
-                        <time class="media-meta grey-text text-darken-2" datetime="2015-06-12T20:50:48+08:00">3 days ago</time>
-                    </li>
-                    <li><a class="black-text" href="#!"><span class="material-icons icon-bg-circle teal small">settings</span> Settings updated</a>
-                        <time class="media-meta grey-text text-darken-2" datetime="2015-06-12T20:50:48+08:00">4 days ago</time>
-                    </li>
-                    <li><a class="black-text" href="#!"><span class="material-icons icon-bg-circle deep-orange small">today</span> Director meeting started</a>
-                        <time class="media-meta grey-text text-darken-2" datetime="2015-06-12T20:50:48+08:00">6 days ago</time>
-                    </li>
-                    <li><a class="black-text" href="#!"><span class="material-icons icon-bg-circle amber small">trending_up</span> Generate monthly report</a>
-                        <time class="media-meta grey-text text-darken-2" datetime="2015-06-12T20:50:48+08:00">1 week ago</time>
                     </li>
                 </ul>
                 <!-- profile-dropdown-->
@@ -178,115 +165,120 @@
         <nav class="white hide-on-med-and-down" id="horizontal-nav">
             <div class="nav-wrapper">
                 <ul class="left hide-on-med-and-down" id="ul-horizontal-nav" data-menu="menu-navigation">
-                    <li class="active"><a href="page-blank.html"><i class="material-icons">pages</i><span data-i18n="Blank Page">Blank Page</span></a></li>
-                    <li><a class="dropdown-menu" href="#" data-target="formsTables"><i class="material-icons">photo_filter</i><span><span class="dropdown-title" data-i18n="Menu levels">Menu levels</span><i class="material-icons right">keyboard_arrow_down</i></span></a>
+                    <li>
+                        <a class="dropdown-menu" href="#" data-target="formsTables">
+                            <i class="material-icons">business</i>
+                            <span><span class="dropdown-title" data-i18n="Menu levels">회사소개</span><i class="material-icons right">keyboard_arrow_down</i></span>
+                        </a>
                         <ul class="dropdown-content dropdown-horizontal-list" id="formsTables">
-                            <li data-menu=""><a href="#"><span data-i18n="Second level 1">Second level 1</span></a>
+                            <li data-menu=""><a href="#"><span data-i18n="Second level 1">매장소개</span></a>
                             </li>
-                            <li data-menu=""><a href="#"><span data-i18n="Second level 2">Second level 2</span></a>
+                            <li data-menu=""><a href="#"><span data-i18n="Second level 2">연혁</span></a>
                             </li>
-                            <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdownSub-menu" href="#" data-target="thirdDropdown"><span data-i18n="Second level 3">Second level 3</span><i class="material-icons right">chevron_right</i></a>
-                                <ul class="dropdown-content dropdown-horizontal-list" id="thirdDropdown">
-                                    <li data-menu=""><a href="#"><span data-i18n="Child 1">Child 1</span></a>
-                                    </li>
-                                    <li data-menu=""><a href="#"><span data-i18n="Child 2">Child 2</span></a>
-                                    </li>
-                                </ul>
+                            <li data-menu=""><a href="#"><span data-i18n="Second level 4">회사위치</span></a>
                             </li>
                         </ul>
                     </li>
-                    <li><a href="https://pixinvent.com/materialize-material-design-admin-template/documentation/" target="_blank"><i class="material-icons">import_contacts</i><span data-i18n="Documentation">Documentation</span></a></li>
-                    <li><a href="https://pixinvent.ticksy.com/" target="_blank"><i class="material-icons">help_outline</i><span data-i18n="Support">Support</span></a></li>
+                    <li class="">
+                        <a class="dropdown-menu" href="#" data-target="formsTables2">
+                            <i class="material-icons">store</i>
+                            <span><span class="dropdown-title" data-i18n="Menu levels">제품소개</span><i class="material-icons right">keyboard_arrow_down</i></span>
+                        </a>
+                        <ul class="dropdown-content dropdown-horizontal-list" id="formsTables2">
+                            <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu">
+                                <a class="dropdownSub-menu" href="#" data-target="thirdDropdown">
+                                    <span data-i18n="Second level 3">제품리스트</span><i class="material-icons right">chevron_right</i>
+                                </a>
+                                <ul class="dropdown-content dropdown-horizontal-list" id="thirdDropdown">
+                                    <li data-menu=""><a href="#"><span data-i18n="Child 1">전체</span></a>
+                                    </li>
+                                    <li data-menu=""><a href="#"><span data-i18n="Child 2">상의</span></a>
+                                    </li>
+                                    <li data-menu=""><a href="#"><span data-i18n="Child 3">하의</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li data-menu=""><a href="#"><span data-i18n="Second level 2">주문현황</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-menu" href="#" data-target="formsTables3">
+                            <i class="material-icons">support_agent</i>
+                            <span><span class="dropdown-title" data-i18n="Menu levels">고객센터</span><i class="material-icons right">keyboard_arrow_down</i></span>
+                        </a>
+                        <ul class="dropdown-content dropdown-horizontal-list" id="formsTables3">
+                            <li data-menu=""><a href="#"><span data-i18n="Second level 1">공지사항</span></a>
+                            </li>
+                            <li data-menu=""><a href="#"><span data-i18n="Second level 2">FAQ</span></a>
+                            </li>
+                            <li data-menu=""><a href="#"><span data-i18n="Second level3">Q&A</span></a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
                 <!-- END: Horizontal nav start-->
             </div>
         </nav>
     </div>
-<!--    <ul class="display-none" id="default-search-main">
-        <li class="auto-suggestion-title"><a class="collection-item" href="#">
-            <h6 class="search-title">FILES</h6>
-        </a></li>
-        <li class="auto-suggestion"><a class="collection-item" href="#">
-            <div class="display-flex">
-                <div class="display-flex align-item-center flex-grow-1">
-                    <div class="avatar"><img src="../../../app-assets/images/icon/pdf-image.png" width="24" height="30" alt="sample image"></div>
-                    <div class="member-info display-flex flex-column"><span class="black-text">Two new item submitted</span><small class="grey-text">Marketing Manager</small></div>
-                </div>
-                <div class="status"><small class="grey-text">17kb</small></div>
-            </div>
-        </a></li>
-        <li class="auto-suggestion"><a class="collection-item" href="#">
-            <div class="display-flex">
-                <div class="display-flex align-item-center flex-grow-1">
-                    <div class="avatar"><img src="../../../app-assets/images/icon/doc-image.png" width="24" height="30" alt="sample image"></div>
-                    <div class="member-info display-flex flex-column"><span class="black-text">52 Doc file Generator</span><small class="grey-text">FontEnd Developer</small></div>
-                </div>
-                <div class="status"><small class="grey-text">550kb</small></div>
-            </div>
-        </a></li>
-        <li class="auto-suggestion"><a class="collection-item" href="#">
-            <div class="display-flex">
-                <div class="display-flex align-item-center flex-grow-1">
-                    <div class="avatar"><img src="../../../app-assets/images/icon/xls-image.png" width="24" height="30" alt="sample image"></div>
-                    <div class="member-info display-flex flex-column"><span class="black-text">25 Xls File Uploaded</span><small class="grey-text">Digital Marketing Manager</small></div>
-                </div>
-                <div class="status"><small class="grey-text">20kb</small></div>
-            </div>
-        </a></li>
-        <li class="auto-suggestion"><a class="collection-item" href="#">
-            <div class="display-flex">
-                <div class="display-flex align-item-center flex-grow-1">
-                    <div class="avatar"><img src="../../../app-assets/images/icon/jpg-image.png" width="24" height="30" alt="sample image"></div>
-                    <div class="member-info display-flex flex-column"><span class="black-text">Anna Strong</span><small class="grey-text">Web Designer</small></div>
-                </div>
-                <div class="status"><small class="grey-text">37kb</small></div>
-            </div>
-        </a></li>
-        <li class="auto-suggestion-title"><a class="collection-item" href="#">
-            <h6 class="search-title">MEMBERS</h6>
-        </a></li>
-        <li class="auto-suggestion"><a class="collection-item" href="#">
-            <div class="display-flex">
-                <div class="display-flex align-item-center flex-grow-1">
-                    <div class="avatar"><img class="circle" src="../../../app-assets/images/avatar/avatar-7.png" width="30" alt="sample image"></div>
-                    <div class="member-info display-flex flex-column"><span class="black-text">John Doe</span><small class="grey-text">UI designer</small></div>
-                </div>
-            </div>
-        </a></li>
-        <li class="auto-suggestion"><a class="collection-item" href="#">
-            <div class="display-flex">
-                <div class="display-flex align-item-center flex-grow-1">
-                    <div class="avatar"><img class="circle" src="../../../app-assets/images/avatar/avatar-8.png" width="30" alt="sample image"></div>
-                    <div class="member-info display-flex flex-column"><span class="black-text">Michal Clark</span><small class="grey-text">FontEnd Developer</small></div>
-                </div>
-            </div>
-        </a></li>
-        <li class="auto-suggestion"><a class="collection-item" href="#">
-            <div class="display-flex">
-                <div class="display-flex align-item-center flex-grow-1">
-                    <div class="avatar"><img class="circle" src="../../../app-assets/images/avatar/avatar-10.png" width="30" alt="sample image"></div>
-                    <div class="member-info display-flex flex-column"><span class="black-text">Milena Gibson</span><small class="grey-text">Digital Marketing</small></div>
-                </div>
-            </div>
-        </a></li>
-        <li class="auto-suggestion"><a class="collection-item" href="#">
-            <div class="display-flex">
-                <div class="display-flex align-item-center flex-grow-1">
-                    <div class="avatar"><img class="circle" src="../../../app-assets/images/avatar/avatar-12.png" width="30" alt="sample image"></div>
-                    <div class="member-info display-flex flex-column"><span class="black-text">Anna Strong</span><small class="grey-text">Web Designer</small></div>
-                </div>
-            </div>
-        </a></li>
-    </ul>
-    <ul class="display-none" id="page-search-title">
-        <li class="auto-suggestion-title"><a class="collection-item" href="#">
-            <h6 class="search-title">PAGES</h6>
-        </a></li>
-    </ul>
-    <ul class="display-none" id="search-not-found">
-        <li class="auto-suggestion"><a class="collection-item display-flex align-items-center" href="#"><span class="material-icons">error_outline</span><span class="member-info">No results found.</span></a></li>
-    </ul>-->
 
+    <!-- BEGIN: SideNav-->
+    <aside class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-fixed hide-on-large-only">
+        <div class="brand-sidebar sidenav-light"></div>
+        <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed hide-on-large-only menu-shadow" id="slide-out" data-menu="menu-navigation" data-collapsible="menu-accordion">
+<!--            <li class="navigation-header"><a class="navigation-header-text">Misc </a><i class="navigation-header-icon material-icons">more_horiz</i>-->
+<!--            </li>-->
+            <li class="bold">
+                <a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">business</i><span class="menu-title" data-i18n="Menu levels">회사소개</span></a>
+                <div class="collapsible-body">
+                    <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                        <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level">매장소개</span></a>
+                        </li>
+                        <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level">연혁</span></a>
+                        </li>
+                        <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level">회사위치</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="bold">
+                <a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">store</i><span class="menu-title" data-i18n="Menu levels">제품소개</span></a>
+                <div class="collapsible-body">
+                    <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                        <li><a class="collapsible-header waves-effect waves-cyan" href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level child">제품리스트</span></a>
+                            <div class="collapsible-body">
+                                <ul class="collapsible" data-collapsible="accordion">
+                                    <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Third level">전체</span></a>
+                                    </li>
+                                    <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Third level">상의</span></a>
+                                    </li>
+                                    <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Third level">하의</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level">주문현황</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="bold">
+                <a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">support_agent</i><span class="menu-title" data-i18n="Menu levels">고객센터</span></a>
+                <div class="collapsible-body">
+                    <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                        <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level">공지사항</span></a>
+                        </li>
+                        <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level">FAQ</span></a>
+                        </li>
+                        <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level">Q&A</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <div class="navigation-background"></div><a class="sidenav-trigger btn-floating btn-medium waves-effect waves-light hide-on-large-only" href="#" data-target="slide-out"><i class="material-icons">menu</i></a>
+    </aside>
+    <!-- END: SideNav-->
 
     <!-- alert 모달 -->
     <div id="alertModal" class="modal">

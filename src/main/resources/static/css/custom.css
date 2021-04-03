@@ -1,0 +1,11 @@
+/* Custom Stylesheet */
+@media only screen and (min-width: 993px) {
+    .container {
+        width: 74%;
+    }
+
+    nav .nav-wrapper {
+        max-width: 1377px;
+        margin-left: 13%;
+    }
+}

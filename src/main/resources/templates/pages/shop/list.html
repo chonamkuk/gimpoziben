@@ -9,6 +9,12 @@
           ecommerce product page
           app-assets/css/pages/eCommerce-products-page.css
         ------------------------------------------*/
+        @media only screen and (min-width: 993px) {
+            .row .col.l9 {
+                margin-left: 12% !important;
+            }
+        }
+
         #ecommerce-products .card
         {
             overflow: hidden;
@@ -256,19 +262,20 @@
 <div layout:fragment="content" id="main">
     <div class="row">
         <div class="pt-1 pb-0" id="breadcrumbs-wrapper">
-            <!-- Search for small screen-->
             <div class="container">
                 <div class="row">
                     <div class="col s12 m6 l6">
-                        <h5 class="breadcrumbs-title"><span>eCommerce Products Page</span></h5>
+                        <h5 class="breadcrumbs-title"><span>제품리스트</span></h5>
                     </div>
                     <div class="col s12 m6 l6 right-align-md">
                         <ol class="breadcrumbs mb-0">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a>
+                            <li class="breadcrumb-item"><a href="#1">Home</a>
                             </li>
-                            <li class="breadcrumb-item"><a href="#">Apps</a>
+                            <li class="breadcrumb-item"><a href="#">제품소개</a>
                             </li>
-                            <li class="breadcrumb-item active">eCommerce Products Page
+                            <li class="breadcrumb-item"><a href="#">제품리스트</a>
+                            </li>
+                            <li class="breadcrumb-item active">전체
                             </li>
                         </ol>
                     </div>
@@ -279,206 +286,16 @@
             <div class="container">
                 <div class="section">
                     <div class="row" id="ecommerce-products">
-                        <!--<div class="col s12 m3 l3 pr-0 hide-on-med-and-down animate fadeLeft">
-                            <div class="card">
-                                <div class="card-content">
-                                    <span class="card-title">Categories</span>
-                                    <hr class="p-0 mb-10">
-                                    <ul class="collapsible categories-collapsible">
-                                        <li>
-                                            <div class="collapsible-header">Watches <i class="material-icons"> keyboard_arrow_right </i></div>
-                                            <div class="collapsible-body">
-                                                <p>Apple</p>
-                                                <p>Fitbit</p>
-                                                <p>Samsung</p>
-                                                <p>Fastrack</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="collapsible-header">Tablets <i class="material-icons"> keyboard_arrow_right </i></div>
-                                            <div class="collapsible-body">
-                                                <p>Apple</p>
-                                                <p>Samsung</p>
-                                                <p>Lenovo</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="collapsible-header">Laptops <i class="material-icons"> keyboard_arrow_right </i></div>
-                                            <div class="collapsible-body">
-                                                <p>Apple</p>
-                                                <p>Samsung</p>
-                                                <p>Lenovo</p>
-                                                <p>HP</p>
-                                                <p>Dell</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="collapsible-header">Phone <i class="material-icons"> keyboard_arrow_right </i></div>
-                                            <div class="collapsible-body">
-                                                <p>Apple</p>
-                                                <p>Samsung</p>
-                                                <p>Lenovo</p>
-                                                <p>Mi</p>
-                                                <p>Nokia</p>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <span class="card-title mt-10">Price</span>
-                                    <hr class="p-0 mb-10">
-                                    <div id="price-slider"></div>
-                                    <span class="card-title mt-10">Size</span>
-                                    <hr class="p-0 mb-10">
-                                    <div class="size-filter">
-                                        <ul>
-                                            <li><a href="#">XL</a></li>
-                                            <li><a href="#">L</a></li>
-                                            <li class="active"><a href="#">M</a></li>
-                                            <li><a href="#">S</a></li>
-                                            <li><a href="#">XS</a></li>
-                                        </ul>
-                                    </div>
-                                    <span class="card-title mt-10">Color</span>
-                                    <hr class="p-0 mb-10">
-                                    <form action="#" class="display-grid">
-                                        <label class="mt-3">
-                                            <input type="checkbox" />
-                                            <span><i class="material-icons vertical-align-bottom blue-grey-text text-lighten-5"> lens </i>
-                                                    White</span>
-                                        </label>
-                                        <label class="mt-3">
-                                            <input type="checkbox" />
-                                            <span><i class="material-icons vertical-align-bottom black-text"> lens </i> Black</span>
-                                        </label>
-                                        <label class="mt-3">
-                                            <input type="checkbox" />
-                                            <span><i class="material-icons vertical-align-bottom amber-text"> lens </i> Amber</span>
-                                        </label>
-                                        <label class="mt-3">
-                                            <input type="checkbox" />
-                                            <span><i class="material-icons vertical-align-bottom blue-text"> lens </i> Blue</span>
-                                        </label>
-                                        <label class="mt-3">
-                                            <input type="checkbox" />
-                                            <span><i class="material-icons vertical-align-bottom green-text"> lens </i> Green</span>
-                                        </label>
-                                        <label class="mt-3">
-                                            <input type="checkbox" />
-                                            <span><i class="material-icons vertical-align-bottom link-text"> lens </i> Pink</span>
-                                        </label>
-                                        <label class="mt-3">
-                                            <input type="checkbox" />
-                                            <span><i class="material-icons vertical-align-bottom yellow-text"> lens </i> Yellow</span>
-                                        </label>
-                                    </form>
-                                    <span class="card-title mt-10">Brand</span>
-                                    <hr class="p-0 mb-10">
-                                    <form action="#" class="display-grid">
-                                        <label>
-                                            <input type="checkbox" />
-                                            <span>Apple</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" />
-                                            <span>Samsung</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" />
-                                            <span>Dell</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" />
-                                            <span>Sony</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" />
-                                            <span>Nokia</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" />
-                                            <span>JBL</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" />
-                                            <span>Philips</span>
-                                        </label>
-                                    </form>
-                                    <span class="card-title mt-10">Offers</span>
-                                    <hr class="p-0 mb-10">
-                                    <form action="#" class="display-grid">
-                                        <label>
-                                            <input type="checkbox" />
-                                            <span>Offer</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" />
-                                            <span>No Cost EMI</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" />
-                                            <span>Special Price</span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" />
-                                            <span>Bank Offer</span>
-                                        </label>
-                                    </form>
-                                    <span class="card-title mt-10">Customer Ratings</span>
-                                    <hr class="p-0 mb-10">
-                                    <form action="#" class="display-grid">
-                                        <label>
-                                            <input type="checkbox" />
-                                            <span>
-                                                    <i class="material-icons amber-text"> star </i>
-                                                    <i class="material-icons amber-text"> star </i>
-                                                    <i class="material-icons amber-text"> star </i>
-                                                    <i class="material-icons amber-text"> star </i>
-                                                    <i class="material-icons amber-text"> star </i>
-                                                </span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" />
-                                            <span>
-                                                    <i class="material-icons amber-text"> star </i>
-                                                    <i class="material-icons amber-text"> star </i>
-                                                    <i class="material-icons amber-text"> star </i>
-                                                    <i class="material-icons amber-text"> star </i>
-                                                </span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" />
-                                            <span>
-                                                    <i class="material-icons amber-text"> star </i>
-                                                    <i class="material-icons amber-text"> star </i>
-                                                    <i class="material-icons amber-text"> star </i>
-                                                </span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" />
-                                            <span>
-                                                    <i class="material-icons amber-text"> star </i>
-                                                    <i class="material-icons amber-text"> star </i>
-                                                </span>
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" />
-                                            <span>
-                                                    <i class="material-icons amber-text"> star </i>
-                                                </span>
-                                        </label>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>-->
-                        <div class="col s12 m12 l9 pr-0">
+                        <div class="col s12 m12 l12 pr-0">
                             <div class="col s12 m4 l4">
                                 <div class="card animate fadeLeft">
-                                    <div class="card-badge"><a class="white-text"> <b>On Offer</b> </a></div>
+<!--                                    <div class="card-badge"><a class="white-text"><b>NEW</b></a></div>-->
                                     <div class="card-content">
-                                        <p>Smartwatches</p>
-                                        <span class="card-title text-ellipsis">Smartwatch 2.0 LTE Wifi</span>
-                                        <img src="../../../app-assets/images/cards/watch-2.png" class="responsive-img" alt="">
+                                        <p>오피스용 경량 스트레치 점퍼</p>
+                                        <span class="card-title text-ellipsis">ZB-J2101</span>
+                                        <img src="https://zibengimpo.com/web/product/medium/ZB-J2101.jpg" class="responsive-img" alt="">
                                         <div class="display-flex flex-wrap justify-content-center">
-                                            <h5 class="mt-3">$399.00</h5>
+                                            <h5 class="mt-3">41,800원</h5>
                                             <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="#modal1">View</a>
                                         </div>
                                     </div>
@@ -491,24 +308,25 @@
                                                 <a class="modal-close right"><i class="material-icons">close</i></a>
                                             </div>
                                             <div class="col m6 s12">
-                                                <img src="../../../app-assets/images/cards/watch-2.png" class="responsive-img" alt="">
+                                                <img src="https://zibengimpo.com/web/product/big/ZB-J2101.jpg" class="responsive-img" alt="">
                                             </div>
                                             <div class="col m6 s12">
-                                                <p>Smartwatches</p>
-                                                <h5>Smartwatch 2.0 LTE Wifi</h5>
-                                                <span class="new badge left ml-0 mr-2" data-badge-caption="">4.2 Star</span>
-                                                <p>Availability: <span class="green-text">36 Item Available</span></p>
+                                                <p>오피스용 경량 스트레치 점퍼</p>
+                                                <h5>ZB-J2101</h5>
+<!--                                                <span class="new badge left ml-0 mr-2" data-badge-caption="">NEW</span>-->
+                                                <p>사이즈 선택<!--<span class="green-text">선택</span>--></p>
+                                                <p>수량 선택<!--<span class="green-text">선택</span>--></p>
                                                 <hr class="mb-5">
-                                                <span class="vertical-align-top mr-4"><i class="material-icons mr-3">favorite_border</i>Wishlist</span>
+<!--                                                <span class="vertical-align-top mr-4"><i class="material-icons mr-3">favorite_border</i>Wishlist</span>-->
                                                 <ul class="list-bullet">
-                                                    <li class="list-item-bullet">Accept SIM card and call</li>
-                                                    <li class="list-item-bullet">Make calling instead of mobile phone</li>
-                                                    <li class="list-item-bullet">Sync music play and sync control music</li>
-                                                    <li class="list-item-bullet">Sync Facebook,Twiter,emailand calendar</li>
+                                                    <li class="list-item-bullet">가볍고 부드러운 터치감으로 하절기까지 착장하기 좋은 오피스룩 점퍼.</li>
+                                                    <li class="list-item-bullet">신축성이 좋은 소재로 착장감이 좋으며 투톤 미니체크로 멜란지 느낌이 남.</li>
+                                                    <li class="list-item-bullet">어깨와 사이드에 타공을 한 원단을 패치해 통기성이 우수함.</li>
+                                                    <li class="list-item-bullet">사이드와 가슴의 지퍼포켓으로 수납성을 더해줌.</li>
                                                 </ul>
-                                                <h5>$399.00 <span class="prise-text-style ml-2">$459.00</span></h5>
-                                                <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">ADD TO CART</a>
-                                                <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">BUY NOW</a>
+                                                <h5>41,800원<!--<span class="prise-text-style ml-2">41,800원</span>--></h5>
+                                                <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">카트에 담기</a>
+                                                <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">바로구매</a>
                                             </div>
                                         </div>
                                     </div>
@@ -516,12 +334,13 @@
                             </div>
                             <div class="col s12 m4 l4">
                                 <div class="card animate fadeUp">
+                                    <div class="card-badge"><a class="white-text"><b>품절</b></a></div>
                                     <div class="card-content">
-                                        <p>Headphone</p>
-                                        <span class="card-title text-ellipsis">Purple Solo 2 Wireless</span>
-                                        <img src="../../../app-assets/images/cards/headphone.png" class="responsive-img" alt="">
+                                        <p>오피스용 경량 스트레치 점퍼</p>
+                                        <span class="card-title text-ellipsis">ZB-J2001</span>
+                                        <img src="https://zibengimpo.com/web/product/medium/ZB-J2001.jpg" class="responsive-img" alt="">
                                         <div class="display-flex flex-wrap justify-content-center">
-                                            <h5 class="mt-3">$249.00</h5>
+                                            <h5 class="mt-3">41,800원</h5>
                                             <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="#modal2">View</a>
                                         </div>
                                     </div>
@@ -533,24 +352,24 @@
                                         <a class="modal-close right"><i class="material-icons">close</i></a>
                                         <div class="row" id="product-two">
                                             <div class="col m6 s12">
-                                                <img src="../../../app-assets/images/cards/headphone.png" class="responsive-img" alt="">
+                                                <img src="https://zibengimpo.com/web/product/big/9d4fc57fb391d8ee9afb4a475f84e7e3.jpg" class="responsive-img" alt="">
                                             </div>
                                             <div class="col m6 s12">
-                                                <p>Headphone</p>
-                                                <h5>Purple Solo 2 Wireless</h5>
-                                                <span class="new badge left ml-0 mr-2" data-badge-caption="">4.2 Star</span>
-                                                <p>Availability: <span class="red-text">Out of stock</span></p>
+                                                <p>오피스용 경량 스트레치 점퍼</p>
+                                                <h5>ZB-J2001</h5>
+<!--                                                <span class="new badge left ml-0 mr-2" data-badge-caption="">4.2 Star</span>-->
+                                                <p><span class="red-text">품절</span></p>
                                                 <hr class="mb-5">
-                                                <span class="vertical-align-top mr-4"><i class="material-icons mr-3">favorite_border</i>Wishlist</span>
+<!--                                                <span class="vertical-align-top mr-4"><i class="material-icons mr-3">favorite_border</i>Wishlist</span>-->
                                                 <ul class="list-bullet">
-                                                    <li class="list-item-bullet">Fine-tuned acoustics for clarity</li>
-                                                    <li class="list-item-bullet">Streamlined design for a custom-fit</li>
-                                                    <li class="list-item-bullet">Durable and foldable so you can take them on-the-go</li>
-                                                    <li class="list-item-bullet">ake calls and control music with RemoteTalk cable</li>
+                                                    <li class="list-item-bullet">나일론 스트레치 소재로 스트레치성이 우수하여 착용감이 편안하고 투톤 느낌의 외관이 고급스러운 오피스용 점퍼.</li>
+                                                    <li class="list-item-bullet">주름이 잘 가지 않고 딱 떨어지는 외관으로 실루엣이 좋음.</li>
+                                                    <li class="list-item-bullet">몸판 사이드에 타공을 한 원단을 패치해 통기성이 우수하며 디자인 포인트를 줌.</li>
+                                                    <li class="list-item-bullet">사이드포켓과 가슴포켓으로 수납성을 더해줌.</li>
                                                 </ul>
-                                                <h5>$249.00 <span class="prise-text-style ml-2">$559.00</span></h5>
-                                                <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">ADD TO CART</a>
-                                                <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">BUY NOW</a>
+                                                <h5>41,800원<span class="prise-text-style ml-2">45,000원</span></h5>
+                                                <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">카트에 담기</a>
+                                                <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">바로구매</a>
                                             </div>
                                         </div>
                                     </div>
@@ -559,11 +378,11 @@
                             <div class="col s12 m4 l4">
                                 <div class="card animate fadeRight">
                                     <div class="card-content">
-                                        <p>Smartphone</p>
-                                        <span class="card-title">iPhone x</span>
-                                        <img src="../../../app-assets/images/cards/iphone-x.png" class="responsive-img" alt="">
+                                        <p>타공 스타일의 스트레치 점퍼</p>
+                                        <span class="card-title">ZB-J2003</span>
+                                        <img src="https://zibengimpo.com/web/product/medium/ZB-J2003.jpg" class="responsive-img" alt="">
                                         <div class="display-flex flex-wrap justify-content-center">
-                                            <h5 class="mt-3">$899.00</h5>
+                                            <h5 class="mt-3">40,700원</h5>
                                             <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="#modal3">View</a>
                                         </div>
                                     </div>
@@ -574,808 +393,286 @@
                                         <a class="modal-close right"><i class="material-icons">close</i></a>
                                         <div class="row" id="product-three">
                                             <div class="col m6 s12">
-                                                <img src="../../../app-assets/images/cards/iphone-x.png" class="responsive-img" alt="">
+                                                <img src="https://zibengimpo.com/web/product/big/ZB-J2003.jpg" class="responsive-img" alt="">
                                             </div>
                                             <div class="col m6 s12">
-                                                <p>Smartphone</p>
-                                                <h5>iPhone x</h5>
-                                                <span class="new badge left ml-0 mr-2" data-badge-caption="">4.2 Star</span>
-                                                <p>Availability: <span class="green-text">Available</span></p>
+                                                <p>타공 스타일의 스트레치 점퍼</p>
+                                                <h5>ZB-J2003</h5>
+                                                <p>사이즈 선택</p>
+                                                <p>수량 선택</p>
                                                 <hr class="mb-5">
-                                                <span class="vertical-align-top mr-4"><i class="material-icons mr-3">favorite_border</i>Wishlist</span>
                                                 <ul class="list-bullet">
-                                                    <li class="list-item-bullet">Accept SIM card and call</li>
-                                                    <li class="list-item-bullet">Take photos</li>
-                                                    <li class="list-item-bullet">Make calling instead of mobile phone</li>
-                                                    <li class="list-item-bullet">Sync music play and sync control music</li>
-                                                    <li class="list-item-bullet">Sync Facebook,Twiter,emailand calendar</li>
+                                                    <li class="list-item-bullet">가볍고 청량감 있는 터치감으로 하절기까지 착장하기 좋은 오피스룩 점퍼.</li>
+                                                    <li class="list-item-bullet">신축성이 좋은 소재로 착장감이 좋으며 밝은 컬러감으로 시즌 포인트 점퍼로 제안. </li>
+                                                    <li class="list-item-bullet">뒤 몸판에 타공을 한 원단을 패치해 통기성이 우수하며 스트라이프 패턴의 타공으로 디자인 포인트를 줌.</li>
+                                                    <li class="list-item-bullet">사이드와 가슴의 지퍼포켓으로 수납성을 더해줌.</li>
+                                                    <li class="list-item-bullet">안감이 없는 홑겹 스타일.</li>
                                                 </ul>
-                                                <h5>$899.00</h5>
-                                                <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">ADD TO CART</a>
-                                                <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">BUY NOW</a>
+                                                <h5>40,700원</h5>
+                                                <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">카트에 담기</a>
+                                                <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">바로구매</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="electronic-products">
-                                <div class="col s12 m4 l4">
-                                    <div class="card animate fadeLeft">
-                                        <div class="card-content">
-                                            <p>Powerbank</p>
-                                            <span class="card-title text-ellipsis">Powerbank 11300 MAH</span>
-                                            <img src="../../../app-assets/images/cards/powerbank.png" class="responsive-img" alt="">
-                                            <div class="display-flex flex-wrap justify-content-center">
-                                                <h5 class="mt-3">$1,300.00</h5>
-                                                <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="#modal4">View</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Modal Structure -->
-                                    <div id="modal4" class="modal">
-                                        <div class="modal-content">
-                                            <a class="modal-close right"><i class="material-icons">close</i></a>
-                                            <div class="row" id="product-five">
-                                                <div class="col m6 s12">
-                                                    <img src="../../../app-assets/images/cards/powerbank.png" class="responsive-img" alt="">
-                                                </div>
-                                                <div class="col m6 s12">
-                                                    <p>Powerbank</p>
-                                                    <h5>Powerbank 11300 mAh</h5>
-                                                    <span class="new badge left ml-0 mr-2" data-badge-caption="">4.2 Star</span>
-                                                    <p>Availability: <span class="green-text">Available</span></p>
-                                                    <hr class="mb-5">
-                                                    <span class="vertical-align-top mr-4">
-                                                            <i class="material-icons mr-3">favorite_border</i>Wishlist</span>
-                                                    <ul class="list-bullet">
-                                                        <li class="list-item-bullet">Dual output USB interfaces</li>
-                                                        <li class="list-item-bullet">Compatible with all smartphones</li>
-                                                        <li class="list-item-bullet">Portable design and light weight</li>
-                                                        <li class="list-item-bullet">Battery type: Lithium-ion</li>
-                                                    </ul>
-                                                    <h5>$1,300.00</h5>
-                                                    <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">ADD TO CART</a>
-                                                    <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">BUY NOW</a>
-                                                </div>
-                                            </div>
+                            <div class="col s12 m4 l4">
+                                <div class="card animate fadeLeft">
+                                    <div class="card-content">
+                                        <p>작업복 바지</p>
+                                        <span class="card-title text-ellipsis">ZB-P2103</span>
+                                        <img src="https://zibengimpo.com/web/product/medium/1689429b3f9c3068521bc83a19863e5e.jpg" class="responsive-img" alt="">
+                                        <div class="display-flex flex-wrap justify-content-center">
+                                            <h5 class="mt-3">30,800원</h5>
+                                            <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="#modal4">View</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col s12 m4 l4">
-                                    <div class="card animate fadeUp">
-                                        <div class="card-badge"><a class="white-text"> <b>On Offer</b> </a></div>
-                                        <div class="card-content">
-                                            <p>Speakers</p>
-                                            <span class="card-title text-ellipsis">Wireless Audio System</span>
-                                            <img src="../../../app-assets/images/cards/speakers.png" class="responsive-img" alt="">
-                                            <div class="display-flex flex-wrap justify-content-center">
-                                                <h5 class="mt-3">$2,299.00</h5>
-                                                <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="#modal5">View</a>
+                                <!-- Modal Structure -->
+                                <div id="modal4" class="modal">
+                                    <div class="modal-content">
+                                        <a class="modal-close right"><i class="material-icons">close</i></a>
+                                        <div class="row" id="product-five">
+                                            <div class="col m6 s12">
+                                                <img src="https://zibengimpo.com/web/product/big/0d556b6d5dc18321c44638c04e57122a.jpg" class="responsive-img" alt="">
                                             </div>
-                                        </div>
-                                    </div>
-                                    <!-- Modal Structure -->
-                                    <div id="modal5" class="modal">
-                                        <div class="modal-content">
-                                            <a class="modal-close right"><i class="material-icons">close</i></a>
-                                            <div class="row" id="product-six">
-                                                <div class="col m6 s12">
-                                                    <img src="../../../app-assets/images/cards/speakers.png" class="responsive-img" alt="">
-                                                </div>
-                                                <div class="col m6 s12">
-                                                    <p>Audio Speakers</p>
-                                                    <h5>Wireless Audio System</h5>
-                                                    <span class="new badge left ml-0 mr-2" data-badge-caption="">4.2 Star</span>
-                                                    <p>Availability: <span class="red-text">Out of stock</span></p>
-                                                    <hr class="mb-5">
-                                                    <span class="vertical-align-top mr-4"><i class="material-icons mr-3">favorite_border</i>Wishlist</span>
-                                                    <ul class="list-bullet">
-                                                        <li class="list-item-bullet">360 Omnidirectional Sound</li>
-                                                        <li class="list-item-bullet">Compatible with all smartphones</li>
-                                                        <li class="list-item-bullet">Easy Intuitive Control</li>
-                                                        <li class="list-item-bullet">Multiroom App</li>
-                                                    </ul>
-                                                    <h5>$2,299.00</h5>
-                                                    <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">ADD TO CART</a>
-                                                    <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">BUY NOW</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col s12 m4 l4">
-                                    <div class="card animate fadeRight">
-                                        <div class="card-content">
-                                            <p>Cameras</p>
-                                            <span class="card-title text-ellipsis">White NX Mini F1</span>
-                                            <img src="../../../app-assets/images/cards/cameras.png" class="responsive-img" alt="">
-                                            <div class="display-flex flex-wrap justify-content-center">
-                                                <h5 class="mt-3">$559.00</h5>
-                                                <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="#modal6">View</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Modal Structure -->
-                                    <div id="modal6" class="modal">
-                                        <div class="modal-content">
-                                            <a class="modal-close right"><i class="material-icons">close</i></a>
-                                            <div class="row" id="product-seven">
-                                                <div class="col m6 s12">
-                                                    <img src="../../../app-assets/images/cards/cameras.png" class="responsive-img" alt="">
-                                                </div>
-                                                <div class="col m6 s12">
-                                                    <p>Cameras</p>
-                                                    <h5>White NX Mini F1 SMART NX</h5>
-                                                    <span class="new badge left ml-0 mr-2" data-badge-caption="">4.2 Star</span>
-                                                    <p>Availability: <span class="green-text">Available</span></p>
-                                                    <hr class="mb-5">
-                                                    <span class="vertical-align-top mr-4"><i class="material-icons mr-3">favorite_border</i>Wishlist</span>
-                                                    <ul class="list-bullet">
-                                                        <li class="list-item-bullet">Ultra Slim & Stylish</li>
-                                                        <li class="list-item-bullet">Perfect for Selfies</li>
-                                                        <li class="list-item-bullet">Capture & Share on the Go</li>
-                                                        <li class="list-item-bullet">Outstanding Optics</li>
-                                                    </ul>
-                                                    <h5>$559.00</h5>
-                                                    <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">ADD TO CART</a>
-                                                    <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">BUY NOW</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col s12 m4 l4">
-                                    <div class="card animate fadeLeft">
-                                        <div class="card-content">
-                                            <p>Phone</p>
-                                            <span class="card-title text-ellipsis">OnePlus 6T</span>
-                                            <img src="../../../app-assets/images/cards/oneplus-6t.png" class="responsive-img" alt="">
-                                            <div class="display-flex flex-wrap justify-content-center">
-                                                <h5 class="mt-3">$499.00</h5>
-                                                <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="#modal7">View</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Modal Structure -->
-                                    <div id="modal7" class="modal">
-                                        <div class="modal-content">
-                                            <a class="modal-close right"><i class="material-icons">close</i></a>
-                                            <div class="row" id="product-eight">
-                                                <div class="col m6 s12">
-                                                    <img src="../../../app-assets/images/cards/oneplus-6t.png" class="responsive-img" alt="">
-                                                </div>
-                                                <div class="col m6 s12">
-                                                    <p>Phone</p>
-                                                    <h5>OnePlus 6T</h5>
-                                                    <span class="new badge left ml-0 mr-2" data-badge-caption="">5 Star</span>
-                                                    <p>Availability: <span class="green-text">Available</span></p>
-                                                    <hr class="mb-5">
-                                                    <span class="vertical-align-top mr-4"><i class="material-icons mr-3">favorite_border</i>Wishlist</span>
-                                                    <ul class="list-bullet">
-                                                        <li class="list-item-bullet">Ultra Slim & Stylish</li>
-                                                        <li class="list-item-bullet">Smoother than Stock.</li>
-                                                        <li class="list-item-bullet">OxygenOS</li>
-                                                        <li class="list-item-bullet">Outstanding Optics</li>
-                                                    </ul>
-                                                    <h5>$499.00</h5>
-                                                    <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">ADD TO CART</a>
-                                                    <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">BUY NOW</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col s12 m4 l4">
-                                    <div class="card animate fadeUp">
-                                        <div class="card-content">
-                                            <p>Smart Speakers</p>
-                                            <span class="card-title text-ellipsis">Amazon Alexa</span>
-                                            <img src="../../../app-assets/images/cards/smartspeakers.png" class="responsive-img" alt="">
-                                            <div class="display-flex justify-content-center flex-wrap">
-                                                <h5 class="mt-3">$799.00</h5>
-                                                <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="#modal8">View</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Modal Structure -->
-                                    <div id="modal8" class="modal">
-                                        <div class="modal-content">
-                                            <a class="modal-close right"><i class="material-icons">close</i></a>
-                                            <div class="row" id="product-nine">
-                                                <div class="col m6 s12">
-                                                    <img src="../../../app-assets/images/cards/smartspeakers.png" class="responsive-img" alt="">
-                                                </div>
-                                                <div class="col m6 s12">
-                                                    <p>Smart Speakers</p>
-                                                    <h5>Amazon Alexa</h5>
-                                                    <span class="new badge left ml-0 mr-2" data-badge-caption="">4.9 Star</span>
-                                                    <p>Availability: <span class="green-text">Available</span></p>
-                                                    <hr class="mb-5">
-                                                    <span class="vertical-align-top mr-4"><i class="material-icons mr-3">favorite_border</i>Wishlist</span>
-                                                    <ul class="list-bullet">
-                                                        <li class="list-item-bullet">Ultra Slim & Stylish</li>
-                                                        <li class="list-item-bullet">Controls smart home devices</li>
-                                                        <li class="list-item-bullet">Dual speakers powered by Dolby</li>
-                                                        <li class="list-item-bullet">Alexa Calling</li>
-                                                    </ul>
-                                                    <h5>$559.00</h5>
-                                                    <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">ADD TO CART</a>
-                                                    <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">BUY NOW</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col s12 m4 l4">
-                                    <div class="card animate fadeRight">
-                                        <div class="card-content">
-                                            <p>Mouse</p>
-                                            <span class="card-title text-ellipsis">Apple Magic Mouse</span>
-                                            <img src="../../../app-assets/images/cards/magic-mouse.png" class="responsive-img" alt="">
-                                            <div class="display-flex flex-wrap justify-content-center">
-                                                <h5 class="mt-3">$359.00</h5>
-                                                <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="#modal9">View</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Modal Structure -->
-                                    <div id="modal9" class="modal">
-                                        <div class="modal-content">
-                                            <a class="modal-close right"><i class="material-icons">close</i></a>
-                                            <div class="row" id="product-ten">
-                                                <div class="col m6 s12">
-                                                    <img src="../../../app-assets/images/cards/magic-mouse.png" class="responsive-img" alt="">
-                                                </div>
-                                                <div class="col m6 s12">
-                                                    <p>Mouse</p>
-                                                    <h5>Apple Magic Mouse</h5>
-                                                    <span class="new badge left ml-0 mr-2" data-badge-caption="">5 Star</span>
-                                                    <p>Availability: <span class="green-text">Available</span></p>
-                                                    <hr class="mb-5">
-                                                    <span class="vertical-align-top mr-4"><i class="material-icons mr-3">favorite_border</i>Wishlist</span>
-                                                    <ul class="list-bullet">
-                                                        <li class="list-item-bullet">Ultra Slim & Stylish</li>
-                                                        <li class="list-item-bullet">Bluetooth</li>
-                                                        <li class="list-item-bullet">multi-touch capabilities</li>
-                                                        <li class="list-item-bullet">Outstanding Optics</li>
-                                                    </ul>
-                                                    <h5>$359.00</h5>
-                                                    <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">ADD TO CART</a>
-                                                    <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">BUY NOW</a>
-                                                </div>
+                                            <div class="col m6 s12">
+                                                <p>작업복 바지</p>
+                                                <h5>ZB-P2103</h5>
+                                                <p>사이즈 선택</p>
+                                                <p>수량 선택</p>
+                                                <hr class="mb-5">
+                                                <span class="vertical-align-top mr-4">
+                                                <ul class="list-bullet">
+                                                    <li class="list-item-bullet">건빵 포켓으로 수납성을 더해줌.</li>
+                                                    <li class="list-item-bullet">허리 매직밴드 작업으로 사이즈 조절이 용이함.</li>
+                                                </ul>
+                                                <h5>30,800원</h5>
+                                                <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">카트에 담기</a>
+                                                <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">바로구매</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="col s12 m4 l4">
+                                <div class="card animate fadeUp">
+<!--                                    <div class="card-badge"><a class="white-text"> <b>NEW</b> </a></div>-->
+                                    <div class="card-content">
+                                        <p>작업복 바지 (방염복)</p>
+                                        <span class="card-title text-ellipsis">ZB-P2104</span>
+                                        <img src="https://zibengimpo.com/web/product/medium/0c198046b090309162a53160aae1b9a4.jpg" class="responsive-img" alt="">
+                                        <div class="display-flex flex-wrap justify-content-center">
+                                            <h5 class="mt-3">42,900원</h5>
+                                            <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="#modal5">View</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Modal Structure -->
+                                <div id="modal5" class="modal">
+                                    <div class="modal-content">
+                                        <a class="modal-close right"><i class="material-icons">close</i></a>
+                                        <div class="row" id="product-six">
+                                            <div class="col m6 s12">
+                                                <img src="https://zibengimpo.com/web/product/big/ee9ad088d671f8dda960d2d892303be8.jpg" class="responsive-img" alt="">
+                                            </div>
+                                            <div class="col m6 s12">
+                                                <p>작업복 바지 (방염복)</p>
+                                                <h5>ZB-P2104</h5>
+                                                <p>사이즈 선택</p>
+                                                <p>수량 선택</p>
+                                                <hr class="mb-5">
+                                                <ul class="list-bullet">
+                                                    <li class="list-item-bullet">건빵 포켓으로 수납성을 더해줌.</li>
+                                                    <li class="list-item-bullet">허리 E-BAND 작업으로 사이즈 조절이 용이함.</li>
+                                                </ul>
+                                                <h5>42,900원</h5>
+                                                <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">카트에 담기</a>
+                                                <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">바로구매</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m4 l4">
+                                <div class="card animate fadeRight">
+                                    <div class="card-content">
+                                        <p>작업복 바지</p>
+                                        <span class="card-title text-ellipsis">ZB-P2105</span>
+                                        <img src="https://zibengimpo.com/web/product/medium/96b2c5ab6527857efa35b3e65fdc4af1.jpg" class="responsive-img" alt="">
+                                        <div class="display-flex flex-wrap justify-content-center">
+                                            <h5 class="mt-3">27,500원</h5>
+                                            <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="#modal6">View</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Modal Structure -->
+                                <div id="modal6" class="modal">
+                                    <div class="modal-content">
+                                        <a class="modal-close right"><i class="material-icons">close</i></a>
+                                        <div class="row" id="product-seven">
+                                            <div class="col m6 s12">
+                                                <img src="https://zibengimpo.com/web/product/big/ZB-JP2105.jpg" class="responsive-img" alt="">
+                                            </div>
+                                            <div class="col m6 s12">
+                                                <p>작업복 바지</p>
+                                                <h5>ZB-P2105</h5>
+                                                <p>사이즈 선택</p>
+                                                <p>수량 선택</p>
+                                                <hr class="mb-5">
+                                                <ul class="list-bullet">
+                                                    <li class="list-item-bullet">허리 매직밴드 작업으로 사이즈 조절이 용이함.</li>
+                                                </ul>
+                                                <h5>27,500원</h5>
+                                                <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">카트에 담기</a>
+                                                <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">바로구매</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m4 l4">
+                                <div class="card animate fadeLeft">
+                                    <div class="card-content">
+                                        <p>일상화로도 활용이 가능한 캐쥬얼 타입의 디자인과 가벼운 무게감</p>
+                                        <span class="card-title text-ellipsis">ZB-213</span>
+                                        <img src="https://zibengimpo.com/web/product/medium/c39fd4d61b04f681ab92afa2e72bd479.jpg" class="responsive-img" alt="">
+                                        <div class="display-flex flex-wrap justify-content-center">
+                                            <h5 class="mt-3">80,300원</h5>
+                                            <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="#modal7">View</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Modal Structure -->
+                                <div id="modal7" class="modal">
+                                    <div class="modal-content">
+                                        <a class="modal-close right"><i class="material-icons">close</i></a>
+                                        <div class="row" id="product-eight">
+                                            <div class="col m6 s12">
+                                                <img src="https://zibengimpo.com/web/product/big/f3e5070709db5746d9af361468289d43.jpg" class="responsive-img" alt="">
+                                            </div>
+                                            <div class="col m6 s12">
+                                                <p>일상화로도 활용이 가능한 캐쥬얼 타입의 디자인과 가벼운 무게감</p>
+                                                <h5>ZB-213</h5>
+                                                <p>사이즈 선택</p>
+                                                <p>수량 선택</p>
+                                                <hr class="mb-5">
+                                                <ul class="list-bullet">
+                                                    <li class="list-item-bullet">여러 현장에서 다양하게 활용할 수 있는 캐주얼 타입의 디자인으로 작업 현장뿐만 아니라 일상생활에서도 착용이 가능한 스타일입니다.</li>
+                                                    <li class="list-item-bullet">또한 신축성이 좋은 네오프렌 소재를 사용하여 더욱 정교한 피팅이 가능하며 네오프렌 앞뒤 웨빙 고리를 사용하여 신발을 신고 벗기가 간편합니다.</li>
+                                                </ul>
+                                                <h5>80,300원</h5>
+                                                <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">카트에 담기</a>
+                                                <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">바로구매</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m4 l4">
+                                <div class="card animate fadeUp">
+                                    <div class="card-content">
+                                        <p>경쾌한 브라운 색상과 편안하고 캐쥬얼한 디자인과 함께 천연소가죽 누벅 가공 외피와 친환경소재 방수 내피를 적용한 최고급 라인업</p>
+                                        <span class="card-title text-ellipsis">ZB-202</span>
+                                        <img src="https://zibengimpo.com/web/product/medium/f506b9c743f0a28fee8e9f2ba97f2ae3.jpg" class="responsive-img" alt="">
+                                        <div class="display-flex justify-content-center flex-wrap">
+                                            <h5 class="mt-3">80,300원</h5>
+                                            <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="#modal8">View</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Modal Structure -->
+                                <div id="modal8" class="modal">
+                                    <div class="modal-content">
+                                        <a class="modal-close right"><i class="material-icons">close</i></a>
+                                        <div class="row" id="product-nine">
+                                            <div class="col m6 s12">
+                                                <img src="https://zibengimpo.com/web/product/big/ZB-202.png" class="responsive-img" alt="">
+                                            </div>
+                                            <div class="col m6 s12">
+                                                <p>경쾌한 브라운 색상과 편안하고 캐쥬얼한 디자인과 함께 천연소가죽 누벅 가공 외피와 친환경소재 방수 내피를 적용한 최고급 라인업</p>
+                                                <h5>ZB-202</h5>
+                                                <p>사이즈 선택</p>
+                                                <p>수량 선택</p>
+                                                <hr class="mb-5">
+                                                <ul class="list-bullet">
+                                                    <li class="list-item-bullet">천연소가죽 누벅의 새로운 가공 기술로 오래 신을수록 더욱 고급스럽고 부드러워지는 최고급 외피 소재를 적용하여 기존의 안전화에서는 느껴보지 못했던 편안하고 부드러운 착화감을 실현합니다. </li>
+                                                    <li class="list-item-bullet">독일의 심파텍스 방수 내피와 함께 제품 전체를 통가죽으로 설계하고 발목을 부드럽게 감싸는 발목 패딩을 적용해 더욱 편안하고 안정적인 보행이 가능합니다.</li>
+                                                </ul>
+                                                <h5>80,300원</h5>
+                                                <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">카트에 담기</a>
+                                                <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">바로구매</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m4 l4">
+                                <div class="card animate fadeRight">
+                                    <div class="card-content">
+                                        <p>원색 포인트의 테크니컬한 느낌의 디자인으로쉽고 간편하게 끈조임 조절이 가능한 프리락 다이얼 시스템</p>
+                                        <span class="card-title text-ellipsis">ZB-142</span>
+                                        <img src="https://zibengimpo.com/web/product/medium/1dc8114d3d34bee1aef1b0985ab826fe.jpeg" class="responsive-img" alt="">
+                                        <div class="display-flex flex-wrap justify-content-center">
+                                            <h5 class="mt-3">74,800원</h5>
+                                            <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="#modal9">View</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Modal Structure -->
+                                <div id="modal9" class="modal">
+                                    <div class="modal-content">
+                                        <a class="modal-close right"><i class="material-icons">close</i></a>
+                                        <div class="row" id="product-ten">
+                                            <div class="col m6 s12">
+                                                <img src="https://zibengimpo.com/web/product/big/28d6e32c521b6426b30d1e397c001707.jpg" class="responsive-img" alt="">
+                                            </div>
+                                            <div class="col m6 s12">
+                                                <p>원색 포인트의 테크니컬한 느낌의 디자인으로쉽고 간편하게 끈조임 조절이 가능한 프리락 다이얼 시스템</p>
+                                                <h5>ZB-142</h5>
+                                                <p>사이즈 선택</p>
+                                                <p>수량 선택</p>
+                                                <hr class="mb-5">
+                                                <ul class="list-bullet">
+                                                    <li class="list-item-bullet">프리락 다이얼 시스템의 간편함과 내피의 방수, 투습, 방풍의 기능으로 착화시 쾌적한 상태를 유지해주며 이중구조의 겉창은 현장에 적합한 바닥 그립감 및 경량성을 실현했습니다. </li>
+                                                    <li class="list-item-bullet">또한 방탄중창의 안전성 및 인체공학적인 설계로 새롭게 개발된 다중 구조의 안창은 우수한 착화감과 함께 강력한 피팅력을 제공합니다. </li>
+                                                </ul>
+                                                <h5>74,800원</h5>
+                                                <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">카트에 담기</a>
+                                                <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">바로구매</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                             <!-- Pagination -->
-                            <div class="col s12 center">
-                                <ul class="pagination">
-                                    <li class="disabled">
-                                        <a href="#!">
-                                            <i class="material-icons">chevron_left</i>
-                                        </a>
-                                    </li>
-                                    <li class="active"><a href="#!">1</a>
-                                    </li>
-                                    <li class="waves-effect"><a href="#!">2</a>
-                                    </li>
-                                    <li class="waves-effect"><a href="#!">3</a>
-                                    </li>
-                                    <li class="waves-effect"><a href="#!">4</a>
-                                    </li>
-                                    <li class="waves-effect"><a href="#!">5</a>
-                                    </li>
-                                    <li class="waves-effect">
-                                        <a href="#!">
-                                            <i class="material-icons">chevron_right</i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                        <div class="col s12 center">
+                            <ul class="pagination">
+                                <li class="disabled">
+                                    <a href="#!">
+                                        <i class="material-icons">chevron_left</i>
+                                    </a>
+                                </li>
+                                <li class="active"><a href="#!">1</a>
+                                </li>
+                                <li class="waves-effect"><a href="#!">2</a>
+                                </li>
+                                <li class="waves-effect"><a href="#!">3</a>
+                                </li>
+                                <li class="waves-effect"><a href="#!">4</a>
+                                </li>
+                                <li class="waves-effect"><a href="#!">5</a>
+                                </li>
+                                <li class="waves-effect">
+                                    <a href="#!">
+                                        <i class="material-icons">chevron_right</i>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <!-- START RIGHT SIDEBAR NAV -->
-                <!--<aside id="right-sidebar-nav">
-                    <div id="slide-out-right" class="slide-out-right-sidenav sidenav rightside-navigation">
-                        <div class="row">
-                            <div class="slide-out-right-title">
-                                <div class="col s12 border-bottom-1 pb-0 pt-1">
-                                    <div class="row">
-                                        <div class="col s2 pr-0 center">
-                                            <i class="material-icons vertical-text-middle"><a href="#" class="sidenav-close">clear</a></i>
-                                        </div>
-                                        <div class="col s10 pl-0">
-                                            <ul class="tabs">
-                                                <li class="tab col s4 p-0">
-                                                    <a href="#messages" class="active">
-                                                        <span>Messages</span>
-                                                    </a>
-                                                </li>
-                                                <li class="tab col s4 p-0">
-                                                    <a href="#settings">
-                                                        <span>Settings</span>
-                                                    </a>
-                                                </li>
-                                                <li class="tab col s4 p-0">
-                                                    <a href="#activity">
-                                                        <span>Activity</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="slide-out-right-body row pl-3">
-                                <div id="messages" class="col s12 pb-0">
-                                    <div class="collection border-none mb-0">
-                                        <input class="header-search-input mt-4 mb-2" type="text" name="Search" placeholder="Search Messages" />
-                                        <ul class="collection right-sidebar-chat p-0 mb-0">
-                                            <li class="collection-item right-sidebar-chat-item sidenav-trigger display-flex avatar pl-5 pb-0" data-target="slide-out-chat">
-                                                    <span class="avatar-status avatar-online avatar-50"><img src="../../../app-assets/images/avatar/avatar-7.png" alt="avatar" />
-                                                        <i></i>
-                                                    </span>
-                                                <div class="user-content">
-                                                    <h6 class="line-height-0">Elizabeth Elliott</h6>
-                                                    <p class="medium-small blue-grey-text text-lighten-3 pt-3">Thank you</p>
-                                                </div>
-                                                <span class="secondary-content medium-small">5.00 AM</span>
-                                            </li>
-                                            <li class="collection-item right-sidebar-chat-item sidenav-trigger display-flex avatar pl-5 pb-0" data-target="slide-out-chat">
-                                                    <span class="avatar-status avatar-online avatar-50"><img src="../../../app-assets/images/avatar/avatar-1.png" alt="avatar" />
-                                                        <i></i>
-                                                    </span>
-                                                <div class="user-content">
-                                                    <h6 class="line-height-0">Mary Adams</h6>
-                                                    <p class="medium-small blue-grey-text text-lighten-3 pt-3">Hello Boo</p>
-                                                </div>
-                                                <span class="secondary-content medium-small">4.14 AM</span>
-                                            </li>
-                                            <li class="collection-item right-sidebar-chat-item sidenav-trigger display-flex avatar pl-5 pb-0" data-target="slide-out-chat">
-                                                    <span class="avatar-status avatar-off avatar-50"><img src="../../../app-assets/images/avatar/avatar-2.png" alt="avatar" />
-                                                        <i></i>
-                                                    </span>
-                                                <div class="user-content">
-                                                    <h6 class="line-height-0">Caleb Richards</h6>
-                                                    <p class="medium-small blue-grey-text text-lighten-3 pt-3">Hello Boo</p>
-                                                </div>
-                                                <span class="secondary-content medium-small">4.14 AM</span>
-                                            </li>
-                                            <li class="collection-item right-sidebar-chat-item sidenav-trigger display-flex avatar pl-5 pb-0" data-target="slide-out-chat">
-                                                    <span class="avatar-status avatar-online avatar-50"><img src="../../../app-assets/images/avatar/avatar-3.png" alt="avatar" />
-                                                        <i></i>
-                                                    </span>
-                                                <div class="user-content">
-                                                    <h6 class="line-height-0">Caleb Richards</h6>
-                                                    <p class="medium-small blue-grey-text text-lighten-3 pt-3">Keny !</p>
-                                                </div>
-                                                <span class="secondary-content medium-small">9.00 PM</span>
-                                            </li>
-                                            <li class="collection-item right-sidebar-chat-item sidenav-trigger display-flex avatar pl-5 pb-0" data-target="slide-out-chat">
-                                                    <span class="avatar-status avatar-online avatar-50"><img src="../../../app-assets/images/avatar/avatar-4.png" alt="avatar" />
-                                                        <i></i>
-                                                    </span>
-                                                <div class="user-content">
-                                                    <h6 class="line-height-0">June Lane</h6>
-                                                    <p class="medium-small blue-grey-text text-lighten-3 pt-3">Ohh God</p>
-                                                </div>
-                                                <span class="secondary-content medium-small">4.14 AM</span>
-                                            </li>
-                                            <li class="collection-item right-sidebar-chat-item sidenav-trigger display-flex avatar pl-5 pb-0" data-target="slide-out-chat">
-                                                    <span class="avatar-status avatar-off avatar-50"><img src="../../../app-assets/images/avatar/avatar-5.png" alt="avatar" />
-                                                        <i></i>
-                                                    </span>
-                                                <div class="user-content">
-                                                    <h6 class="line-height-0">Edward Fletcher</h6>
-                                                    <p class="medium-small blue-grey-text text-lighten-3 pt-3">Love you</p>
-                                                </div>
-                                                <span class="secondary-content medium-small">5.15 PM</span>
-                                            </li>
-                                            <li class="collection-item right-sidebar-chat-item sidenav-trigger display-flex avatar pl-5 pb-0" data-target="slide-out-chat">
-                                                    <span class="avatar-status avatar-online avatar-50"><img src="../../../app-assets/images/avatar/avatar-6.png" alt="avatar" />
-                                                        <i></i>
-                                                    </span>
-                                                <div class="user-content">
-                                                    <h6 class="line-height-0">Crystal Bates</h6>
-                                                    <p class="medium-small blue-grey-text text-lighten-3 pt-3">Can we</p>
-                                                </div>
-                                                <span class="secondary-content medium-small">8.00 AM</span>
-                                            </li>
-                                            <li class="collection-item right-sidebar-chat-item sidenav-trigger display-flex avatar pl-5 pb-0" data-target="slide-out-chat">
-                                                    <span class="avatar-status avatar-off avatar-50"><img src="../../../app-assets/images/avatar/avatar-7.png" alt="avatar" />
-                                                        <i></i>
-                                                    </span>
-                                                <div class="user-content">
-                                                    <h6 class="line-height-0">Nathan Watts</h6>
-                                                    <p class="medium-small blue-grey-text text-lighten-3 pt-3">Great!</p>
-                                                </div>
-                                                <span class="secondary-content medium-small">9.53 PM</span>
-                                            </li>
-                                            <li class="collection-item right-sidebar-chat-item sidenav-trigger display-flex avatar pl-5 pb-0" data-target="slide-out-chat">
-                                                    <span class="avatar-status avatar-off avatar-50"><img src="../../../app-assets/images/avatar/avatar-8.png" alt="avatar" />
-                                                        <i></i>
-                                                    </span>
-                                                <div class="user-content">
-                                                    <h6 class="line-height-0">Willard Wood</h6>
-                                                    <p class="medium-small blue-grey-text text-lighten-3 pt-3">Do it</p>
-                                                </div>
-                                                <span class="secondary-content medium-small">4.20 AM</span>
-                                            </li>
-                                            <li class="collection-item right-sidebar-chat-item sidenav-trigger display-flex avatar pl-5 pb-0" data-target="slide-out-chat">
-                                                    <span class="avatar-status avatar-online avatar-50"><img src="../../../app-assets/images/avatar/avatar-1.png" alt="avatar" />
-                                                        <i></i>
-                                                    </span>
-                                                <div class="user-content">
-                                                    <h6 class="line-height-0">Ronnie Ellis</h6>
-                                                    <p class="medium-small blue-grey-text text-lighten-3 pt-3">Got that</p>
-                                                </div>
-                                                <span class="secondary-content medium-small">5.20 AM</span>
-                                            </li>
-                                            <li class="collection-item right-sidebar-chat-item sidenav-trigger display-flex avatar pl-5 pb-0" data-target="slide-out-chat">
-                                                    <span class="avatar-status avatar-online avatar-50"><img src="../../../app-assets/images/avatar/avatar-9.png" alt="avatar" />
-                                                        <i></i>
-                                                    </span>
-                                                <div class="user-content">
-                                                    <h6 class="line-height-0">Daniel Russell</h6>
-                                                    <p class="medium-small blue-grey-text text-lighten-3 pt-3">Thank you</p>
-                                                </div>
-                                                <span class="secondary-content medium-small">12.00 AM</span>
-                                            </li>
-                                            <li class="collection-item right-sidebar-chat-item sidenav-trigger display-flex avatar pl-5 pb-0" data-target="slide-out-chat">
-                                                    <span class="avatar-status avatar-off avatar-50"><img src="../../../app-assets/images/avatar/avatar-10.png" alt="avatar" />
-                                                        <i></i>
-                                                    </span>
-                                                <div class="user-content">
-                                                    <h6 class="line-height-0">Sarah Graves</h6>
-                                                    <p class="medium-small blue-grey-text text-lighten-3 pt-3">Okay you</p>
-                                                </div>
-                                                <span class="secondary-content medium-small">11.14 PM</span>
-                                            </li>
-                                            <li class="collection-item right-sidebar-chat-item sidenav-trigger display-flex avatar pl-5 pb-0" data-target="slide-out-chat">
-                                                    <span class="avatar-status avatar-off avatar-50"><img src="../../../app-assets/images/avatar/avatar-11.png" alt="avatar" />
-                                                        <i></i>
-                                                    </span>
-                                                <div class="user-content">
-                                                    <h6 class="line-height-0">Andrew Hoffman</h6>
-                                                    <p class="medium-small blue-grey-text text-lighten-3 pt-3">Can do</p>
-                                                </div>
-                                                <span class="secondary-content medium-small">7.30 PM</span>
-                                            </li>
-                                            <li class="collection-item right-sidebar-chat-item sidenav-trigger display-flex avatar pl-5 pb-0" data-target="slide-out-chat">
-                                                    <span class="avatar-status avatar-online avatar-50"><img src="../../../app-assets/images/avatar/avatar-12.png" alt="avatar" />
-                                                        <i></i>
-                                                    </span>
-                                                <div class="user-content">
-                                                    <h6 class="line-height-0">Camila Lynch</h6>
-                                                    <p class="medium-small blue-grey-text text-lighten-3 pt-3">Leave it</p>
-                                                </div>
-                                                <span class="secondary-content medium-small">2.00 PM</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div id="settings" class="col s12">
-                                    <p class="setting-header mt-8 mb-3 ml-5 font-weight-900">GENERAL SETTINGS</p>
-                                    <ul class="collection border-none">
-                                        <li class="collection-item border-none">
-                                            <div class="m-0">
-                                                <span>Notifications</span>
-                                                <div class="switch right">
-                                                    <label>
-                                                        <input checked type="checkbox" />
-                                                        <span class="lever"></span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="collection-item border-none">
-                                            <div class="m-0">
-                                                <span>Show recent activity</span>
-                                                <div class="switch right">
-                                                    <label>
-                                                        <input type="checkbox" />
-                                                        <span class="lever"></span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="collection-item border-none">
-                                            <div class="m-0">
-                                                <span>Show recent activity</span>
-                                                <div class="switch right">
-                                                    <label>
-                                                        <input type="checkbox" />
-                                                        <span class="lever"></span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="collection-item border-none">
-                                            <div class="m-0">
-                                                <span>Show Task statistics</span>
-                                                <div class="switch right">
-                                                    <label>
-                                                        <input type="checkbox" />
-                                                        <span class="lever"></span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="collection-item border-none">
-                                            <div class="m-0">
-                                                <span>Show your emails</span>
-                                                <div class="switch right">
-                                                    <label>
-                                                        <input type="checkbox" />
-                                                        <span class="lever"></span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="collection-item border-none">
-                                            <div class="m-0">
-                                                <span>Email Notifications</span>
-                                                <div class="switch right">
-                                                    <label>
-                                                        <input checked type="checkbox" />
-                                                        <span class="lever"></span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <p class="setting-header mt-7 mb-3 ml-5 font-weight-900">SYSTEM SETTINGS</p>
-                                    <ul class="collection border-none">
-                                        <li class="collection-item border-none">
-                                            <div class="m-0">
-                                                <span>System Logs</span>
-                                                <div class="switch right">
-                                                    <label>
-                                                        <input type="checkbox" />
-                                                        <span class="lever"></span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="collection-item border-none">
-                                            <div class="m-0">
-                                                <span>Error Reporting</span>
-                                                <div class="switch right">
-                                                    <label>
-                                                        <input type="checkbox" />
-                                                        <span class="lever"></span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="collection-item border-none">
-                                            <div class="m-0">
-                                                <span>Applications Logs</span>
-                                                <div class="switch right">
-                                                    <label>
-                                                        <input checked type="checkbox" />
-                                                        <span class="lever"></span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="collection-item border-none">
-                                            <div class="m-0">
-                                                <span>Backup Servers</span>
-                                                <div class="switch right">
-                                                    <label>
-                                                        <input type="checkbox" />
-                                                        <span class="lever"></span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="collection-item border-none">
-                                            <div class="m-0">
-                                                <span>Audit Logs</span>
-                                                <div class="switch right">
-                                                    <label>
-                                                        <input type="checkbox" />
-                                                        <span class="lever"></span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div id="activity" class="col s12">
-                                    <div class="activity">
-                                        <p class="mt-5 mb-0 ml-5 font-weight-900">SYSTEM LOGS</p>
-                                        <ul class="widget-timeline mb-0">
-                                            <li class="timeline-items timeline-icon-green active">
-                                                <div class="timeline-time">Today</div>
-                                                <h6 class="timeline-title">Homepage mockup design</h6>
-                                                <p class="timeline-text">Melissa liked your activity.</p>
-                                                <div class="timeline-content orange-text">Important</div>
-                                            </li>
-                                            <li class="timeline-items timeline-icon-cyan active">
-                                                <div class="timeline-time">10 min</div>
-                                                <h6 class="timeline-title">Melissa liked your activity Drinks.</h6>
-                                                <p class="timeline-text">Here are some news feed interactions concepts.</p>
-                                                <div class="timeline-content green-text">Resolved</div>
-                                            </li>
-                                            <li class="timeline-items timeline-icon-red active">
-                                                <div class="timeline-time">30 mins</div>
-                                                <h6 class="timeline-title">12 new users registered</h6>
-                                                <p class="timeline-text">Here are some news feed interactions concepts.</p>
-                                                <div class="timeline-content">
-                                                    <img src="../../../app-assets/images/icon/pdf.png" alt="document" height="30" width="25" class="mr-1">Registration.doc
-                                                </div>
-                                            </li>
-                                            <li class="timeline-items timeline-icon-indigo active">
-                                                <div class="timeline-time">2 Hrs</div>
-                                                <h6 class="timeline-title">Tina is attending your activity</h6>
-                                                <p class="timeline-text">Here are some news feed interactions concepts.</p>
-                                                <div class="timeline-content">
-                                                    <img src="../../../app-assets/images/icon/pdf.png" alt="document" height="30" width="25" class="mr-1">Activity.doc
-                                                </div>
-                                            </li>
-                                            <li class="timeline-items timeline-icon-orange">
-                                                <div class="timeline-time">5 hrs</div>
-                                                <h6 class="timeline-title">Josh is now following you</h6>
-                                                <p class="timeline-text">Here are some news feed interactions concepts.</p>
-                                                <div class="timeline-content red-text">Pending</div>
-                                            </li>
-                                        </ul>
-                                        <p class="mt-5 mb-0 ml-5 font-weight-900">APPLICATIONS LOGS</p>
-                                        <ul class="widget-timeline mb-0">
-                                            <li class="timeline-items timeline-icon-green active">
-                                                <div class="timeline-time">Just now</div>
-                                                <h6 class="timeline-title">New order received urgent</h6>
-                                                <p class="timeline-text">Melissa liked your activity.</p>
-                                                <div class="timeline-content orange-text">Important</div>
-                                            </li>
-                                            <li class="timeline-items timeline-icon-cyan active">
-                                                <div class="timeline-time">05 min</div>
-                                                <h6 class="timeline-title">System shutdown.</h6>
-                                                <p class="timeline-text">Here are some news feed interactions concepts.</p>
-                                                <div class="timeline-content blue-text">Urgent</div>
-                                            </li>
-                                            <li class="timeline-items timeline-icon-red">
-                                                <div class="timeline-time">20 mins</div>
-                                                <h6 class="timeline-title">Database overloaded 89%</h6>
-                                                <p class="timeline-text">Here are some news feed interactions concepts.</p>
-                                                <div class="timeline-content">
-                                                    <img src="../../../app-assets/images/icon/pdf.png" alt="document" height="30" width="25" class="mr-1">Database-log.doc
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <p class="mt-5 mb-0 ml-5 font-weight-900">SERVER LOGS</p>
-                                        <ul class="widget-timeline mb-0">
-                                            <li class="timeline-items timeline-icon-green active">
-                                                <div class="timeline-time">10 min</div>
-                                                <h6 class="timeline-title">System error</h6>
-                                                <p class="timeline-text">Melissa liked your activity.</p>
-                                                <div class="timeline-content red-text">Error</div>
-                                            </li>
-                                            <li class="timeline-items timeline-icon-cyan">
-                                                <div class="timeline-time">1 min</div>
-                                                <h6 class="timeline-title">Production server down.</h6>
-                                                <p class="timeline-text">Here are some news feed interactions concepts.</p>
-                                                <div class="timeline-content blue-text">Urgent</div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    &lt;!&ndash; Slide Out Chat &ndash;&gt;
-                    <ul id="slide-out-chat" class="sidenav slide-out-right-sidenav-chat">
-                        <li class="center-align pt-2 pb-2 sidenav-close chat-head">
-                            <a href="#!"><i class="material-icons mr-0">chevron_left</i>Elizabeth Elliott</a>
-                        </li>
-                        <li class="chat-body">
-                            <ul class="collection">
-                                <li class="collection-item display-flex avatar pl-5 pb-0" data-target="slide-out-chat">
-                                        <span class="avatar-status avatar-online avatar-50"><img src="../../../app-assets/images/avatar/avatar-7.png" alt="avatar" />
-                                        </span>
-                                    <div class="user-content speech-bubble">
-                                        <p class="medium-small">hello!</p>
-                                    </div>
-                                </li>
-                                <li class="collection-item display-flex avatar justify-content-end pl-5 pb-0" data-target="slide-out-chat">
-                                    <div class="user-content speech-bubble-right">
-                                        <p class="medium-small">How can we help? We're here for you!</p>
-                                    </div>
-                                </li>
-                                <li class="collection-item display-flex avatar pl-5 pb-0" data-target="slide-out-chat">
-                                        <span class="avatar-status avatar-online avatar-50"><img src="../../../app-assets/images/avatar/avatar-7.png" alt="avatar" />
-                                        </span>
-                                    <div class="user-content speech-bubble">
-                                        <p class="medium-small">I am looking for the best admin template.?</p>
-                                    </div>
-                                </li>
-                                <li class="collection-item display-flex avatar justify-content-end pl-5 pb-0" data-target="slide-out-chat">
-                                    <div class="user-content speech-bubble-right">
-                                        <p class="medium-small">Materialize admin is the responsive materializecss admin template.</p>
-                                    </div>
-                                </li>
-
-                                <li class="collection-item display-grid width-100 center-align">
-                                    <p>8:20 a.m.</p>
-                                </li>
-
-                                <li class="collection-item display-flex avatar pl-5 pb-0" data-target="slide-out-chat">
-                                        <span class="avatar-status avatar-online avatar-50"><img src="../../../app-assets/images/avatar/avatar-7.png" alt="avatar" />
-                                        </span>
-                                    <div class="user-content speech-bubble">
-                                        <p class="medium-small">Ohh! very nice</p>
-                                    </div>
-                                </li>
-                                <li class="collection-item display-flex avatar justify-content-end pl-5 pb-0" data-target="slide-out-chat">
-                                    <div class="user-content speech-bubble-right">
-                                        <p class="medium-small">Thank you.</p>
-                                    </div>
-                                </li>
-                                <li class="collection-item display-flex avatar pl-5 pb-0" data-target="slide-out-chat">
-                                        <span class="avatar-status avatar-online avatar-50"><img src="../../../app-assets/images/avatar/avatar-7.png" alt="avatar" />
-                                        </span>
-                                    <div class="user-content speech-bubble">
-                                        <p class="medium-small">How can I purchase it?</p>
-                                    </div>
-                                </li>
-
-                                <li class="collection-item display-grid width-100 center-align">
-                                    <p>9:00 a.m.</p>
-                                </li>
-
-                                <li class="collection-item display-flex avatar justify-content-end pl-5 pb-0" data-target="slide-out-chat">
-                                    <div class="user-content speech-bubble-right">
-                                        <p class="medium-small">From ThemeForest.</p>
-                                    </div>
-                                </li>
-                                <li class="collection-item display-flex avatar justify-content-end pl-5 pb-0" data-target="slide-out-chat">
-                                    <div class="user-content speech-bubble-right">
-                                        <p class="medium-small">Only $24</p>
-                                    </div>
-                                </li>
-                                <li class="collection-item display-flex avatar pl-5 pb-0" data-target="slide-out-chat">
-                                        <span class="avatar-status avatar-online avatar-50"><img src="../../../app-assets/images/avatar/avatar-7.png" alt="avatar" />
-                                        </span>
-                                    <div class="user-content speech-bubble">
-                                        <p class="medium-small">Ohh! Thank you.</p>
-                                    </div>
-                                </li>
-                                <li class="collection-item display-flex avatar pl-5 pb-0" data-target="slide-out-chat">
-                                        <span class="avatar-status avatar-online avatar-50"><img src="../../../app-assets/images/avatar/avatar-7.png" alt="avatar" />
-                                        </span>
-                                    <div class="user-content speech-bubble">
-                                        <p class="medium-small">I will purchase it for sure.</p>
-                                    </div>
-                                </li>
-                                <li class="collection-item display-flex avatar justify-content-end pl-5 pb-0" data-target="slide-out-chat">
-                                    <div class="user-content speech-bubble-right">
-                                        <p class="medium-small">Great, Feel free to get in touch on</p>
-                                    </div>
-                                </li>
-                                <li class="collection-item display-flex avatar justify-content-end pl-5 pb-0" data-target="slide-out-chat">
-                                    <div class="user-content speech-bubble-right">
-                                        <p class="medium-small">https://pixinvent.ticksy.com/</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="center-align chat-footer">
-                            <form class="col s12" onsubmit="slideOutChat()" action="javascript:void(0);">
-                                <div class="input-field">
-                                    <input id="icon_prefix" type="text" class="search" />
-                                    <label for="icon_prefix">Type here..</label>
-                                    <a onclick="slideOutChat()"><i class="material-icons prefix">send</i></a>
-                                </div>
-                            </form>
-                        </li>
-                    </ul>
-                </aside>-->
-                <!-- END RIGHT SIDEBAR NAV -->
                 <div style="bottom: 50px; right: 19px;" class="fixed-action-btn direction-top"><a class="btn-floating btn-large gradient-45deg-light-blue-cyan gradient-shadow"><i class="material-icons">add</i></a>
                     <ul>
                         <li><a href="css-helpers.html" class="btn-floating blue"><i class="material-icons">help_outline</i></a></li>
