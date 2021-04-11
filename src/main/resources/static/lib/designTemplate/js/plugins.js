@@ -528,7 +528,7 @@ $(function () {
          debug: false,
          fallbackLng: "en",
          backend: {
-            loadPath: "../../../app-assets/data/locales/{{lng}}.json"
+            loadPath: "/static/lib/designTemplate/data/locales/{{lng}}.json"
          },
          returnObjects: true
       },
