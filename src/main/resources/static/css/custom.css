@@ -9,3 +9,7 @@
         margin-left: 13%;
     }
 }
+
+.gradient-45deg-light-blue-cyan {
+    background: linear-gradient(45deg, #0c3666, #0288d1) !important;
+}

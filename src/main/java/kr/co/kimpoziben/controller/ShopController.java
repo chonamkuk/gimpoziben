@@ -15,6 +15,6 @@ public class ShopController {
 
     @GetMapping("/list.do")
     public String list(Model model, final PageRequest pageable, SearchDto searchDto) throws Exception {
-        return "/shop/list";
+        return "shop/list";
     }
 }
