@@ -7,13 +7,15 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
 @DynamicUpdate
 @Table(name = "gps_product")
-public class ProductEntity {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,9 +43,6 @@ public class ProductEntity {
     @Column(length = 30, name = "desc_img_id")
     private String idDescImg;
 
-    @Column(length = 20, name = "manufac_nm")
-    private String nmManufac;
-
     @Column(length = 20, name = "register", updatable = false)
     private String register;
 
@@ -55,4 +54,11 @@ public class ProductEntity {
 
     @Column(name = "moddt")
     private LocalDateTime modDt;
+
+    @ManyToOne
+    @JoinColumn(name = "vendor_seq")
+        private Vendor vendor;
+
+    @OneToMany(mappedBy = "product")
+    private List<ProdCateMapp> mappList = new ArrayList<ProdCateMapp>();
 }
