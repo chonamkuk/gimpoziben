@@ -15,14 +15,6 @@ import javax.persistence.*;
 @Table(name = "gps_prod_cate_mapp")
 public class ProdCateMapp {
 
-//    @Id
-//    @JoinColumn(name = "product_seq")
-//    private Long seqProduct;
-//
-//    @Id
-//    @JoinColumn(name = "category_seq")
-//    private Long seqCategory;
-
     @Id
     @ManyToOne
     @JoinColumn(name = "product_seq")
