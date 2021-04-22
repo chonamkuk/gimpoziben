@@ -15,7 +15,6 @@ public class SearchSpec {
     public static Specification<?> searchLike(SearchDto searchDto) {
         return (Specification<?>) ((root, query, builder) ->
                 builder.like(root.get(searchDto.getSearchType()), "%" + searchDto.getSearchKeyword() + "%")
-
         );
     }
 
@@ -29,6 +28,13 @@ public class SearchSpec {
     public static Specification<?> searchLike3(SearchDto searchDto) {
         return (Specification<?>) ((root, query, builder) -> {
             List<Predicate> predicates = getPredicates(root, searchDto, builder);
+            return builder.and(predicates.toArray(new Predicate[0]));
+        });
+    }
+
+    public static Specification<?> searchLike4(HashMap searchCondition) {
+        return (Specification<?>) ((root, query, builder) -> {
+            List<Predicate> predicates = getPredicates(root, searchCondition, builder);
             return builder.and(predicates.toArray(new Predicate[0]));
         });
     }
@@ -72,6 +78,15 @@ public class SearchSpec {
      */
     public static List<Predicate> getPredicates(Root root, HashMap searchCondition, CriteriaBuilder builder) {
         List<Predicate> predicates = new ArrayList<Predicate>();
+
+        // like
+        // equal
+        if(Optional.ofNullable(searchCondition.get("mappList")).isPresent()) {
+//            predicates.add(builder.equal(root.get("ynDel"), searchDto.getYnDel()));
+            predicates.add(
+                    builder.in(root.get("mappList")).value(searchCondition.get("mappList"))
+            );
+        }
 
         return predicates;
     }

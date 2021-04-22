@@ -24,4 +24,6 @@ public class ProdCateMapp {
     @ManyToOne
     @JoinColumn(name = "category_seq")
     private Category category;
+
+
 }
