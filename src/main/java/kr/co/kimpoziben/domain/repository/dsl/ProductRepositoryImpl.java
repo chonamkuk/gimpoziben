@@ -7,6 +7,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import kr.co.kimpoziben.domain.entity.Product;
 import kr.co.kimpoziben.domain.entity.QProdCateMapp;
 import kr.co.kimpoziben.domain.entity.QProduct;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +20,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
     private QProduct product = QProduct.product;
     private QProdCateMapp prodCateMapp = QProdCateMapp.prodCateMapp;
 
-    public ProductRepositoryImpl(JPAQueryFactory queryFactory) {
+    public ProductRepositoryImpl(@Qualifier("jpaQueryFactory") JPAQueryFactory queryFactory) {
         this.queryFactory = queryFactory;
     }
 

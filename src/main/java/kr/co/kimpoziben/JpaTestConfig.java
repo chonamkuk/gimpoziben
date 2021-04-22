@@ -14,7 +14,7 @@ public class JpaTestConfig {
     private EntityManager entityManager;
 
     @Bean
-    public JPAQueryFactory jpaQueryFactory() {
+    public JPAQueryFactory jpaQueryFactoryTest() {
         return new JPAQueryFactory(entityManager);
     }
 }

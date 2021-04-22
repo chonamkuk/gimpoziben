@@ -5,6 +5,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import kr.co.kimpoziben.test.domain.entity.MeetEntity;
 import kr.co.kimpoziben.test.domain.entity.QMeetEntity;
 import kr.co.kimpoziben.test.domain.entity.QMeetMemberEntity;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public class MeetRepositoryImpl implements MeetRepositoryCustom {
     private QMeetEntity meet = QMeetEntity.meetEntity;
     private QMeetMemberEntity meetMember = QMeetMemberEntity.meetMemberEntity;
 
-    public MeetRepositoryImpl(JPAQueryFactory queryFactory) {
+    public MeetRepositoryImpl(@Qualifier("jpaQueryFactory") JPAQueryFactory queryFactory) {
         this.queryFactory = queryFactory;
     }
 
