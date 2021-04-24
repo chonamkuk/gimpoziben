@@ -7,20 +7,18 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import kr.co.kimpoziben.domain.entity.Product;
 import kr.co.kimpoziben.domain.entity.QProdCateMapp;
 import kr.co.kimpoziben.domain.entity.QProduct;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class ProductRepositoryImpl implements ProductRepositoryCustom {
     private final JPAQueryFactory queryFactory;
     private QProduct product = QProduct.product;
     private QProdCateMapp prodCateMapp = QProdCateMapp.prodCateMapp;
 
-    public ProductRepositoryImpl(@Qualifier("jpaQueryFactory") JPAQueryFactory queryFactory) {
+    public ProductRepositoryImpl(JPAQueryFactory queryFactory) {
         this.queryFactory = queryFactory;
     }
 
@@ -40,7 +38,6 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
     }
 
     private BooleanExpression seqCategoryIn(HashMap<String,Object> searchMap) {
-
         if(searchMap.getOrDefault("seqCategory",null) == null) {
             return null;
         }
@@ -48,11 +45,9 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
     }
 
     private BooleanExpression ynDisplayEq(HashMap<String,Object> searchMap) {
-
         if(searchMap.getOrDefault("ynDisplay",null) == null) {
             return null;
         }
-
         return product.ynDisplay.eq((String) searchMap.get("ynDisplay"));
     }
 }

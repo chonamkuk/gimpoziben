@@ -30,7 +30,7 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @ActiveProfiles("test")
-@Import(JpaTestConfig.class)
+@Import(ApplicationConfig.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class JpaTest {
 
