@@ -1,6 +1,6 @@
 package kr.co.kimpoziben.dto;
 
-import kr.co.kimpoziben.domain.entity.Product;
+import kr.co.kimpoziben.domain.entity.ProdCateMapp;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,14 +14,13 @@ import java.util.List;
 @Setter
 @ToString
 @NoArgsConstructor
-public class VendorDto {
-    private Long seqVendor;
-    private String nmVendor;
-    private String noTelVendor;
+public class CategoryDto {
+    private Long seqCategory;
+    private String nmCategory;
+    private Long seqUpper;
     private String register;
     private LocalDateTime regDt;
     private String modifier;
     private LocalDateTime modDt;
-
-    private List<Product> productList = new ArrayList<Product>();
+    private List<ProdCateMapp> prodList = new ArrayList<ProdCateMapp>();
 }

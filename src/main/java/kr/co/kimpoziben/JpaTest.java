@@ -1,8 +1,11 @@
 package kr.co.kimpoziben;
 
 import kr.co.kimpoziben.domain.entity.ProdCateMapp;
+import kr.co.kimpoziben.domain.entity.ProdSizeMapp;
 import kr.co.kimpoziben.domain.entity.Product;
+import kr.co.kimpoziben.domain.entity.Size;
 import kr.co.kimpoziben.domain.repository.ProductRepository;
+import kr.co.kimpoziben.domain.repository.SizeRepository;
 import kr.co.kimpoziben.dto.SearchDto;
 import kr.co.kimpoziben.test.domain.entity.AsEntity;
 import kr.co.kimpoziben.util.PageRequest;
@@ -37,14 +40,13 @@ public class JpaTest {
         @Autowired
         private ProductRepository productRepository;
 
+        @Autowired
+        private SizeRepository sizeRepository;
+
         @Test
-        public  void search() {
-            SearchDto searchDto = new SearchDto();
+        public void product_search() {
             PageRequest pageRequest = new PageRequest();
             pageRequest.setSortProp("seqProduct");
-
-//            Page<Product> productPage = productRepository.findAll((Specification<Product>) SearchSpec.searchLike3(searchDto), pageRequest.of()); // searchspec 전체검색
-//            Page<Product> productPage = productRepository.findByYnDisplayEquals("Y", pageRequest.of()); // yndisplay 검색
 
             HashMap<String,Object> searchMap = new HashMap<String,Object> ();
             searchMap.put("seqCategory", 6L);
@@ -58,10 +60,28 @@ public class JpaTest {
 
             for(Product product : productList) {
                 System.out.println("getNmVendor :: " + product.getVendor().getNmVendor());
-                List<ProdCateMapp> prodCateMappList = product.getMappList();
+                List<ProdCateMapp> prodCateMappList = product.getCateList();
                 for(ProdCateMapp prodCateMapp : prodCateMappList) {
                     System.out.println("prodCateMapp :: " + prodCateMapp.getCategory().getNmCategory());
                 }
+
+                for(ProdSizeMapp prodSizeMapp : product.getSizeList()) {
+                    System.out.println("prodSizeMapp :: " + prodSizeMapp.getSize().getNmSize());
+                }
+            }
+        }
+
+        @Test
+        public void size_search() {
+            PageRequest pageRequest = new PageRequest();
+            pageRequest.setSortProp("seqSize");
+
+//            Page<Size> sizePage = sizeRepository.findAll(pageRequest.of());
+//            List<Size> sizeList = sizePage.getContent();
+            List<Size> sizeList = sizeRepository.findAll();
+
+            for(Size size : sizeList) {
+                System.out.println("size :: " + size.getNmSize());
             }
         }
 }

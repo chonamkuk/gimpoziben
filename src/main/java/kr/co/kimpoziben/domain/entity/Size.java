@@ -3,28 +3,23 @@ package kr.co.kimpoziben.domain.entity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Setter
 @Entity
-@Table(name = "gps_product_category")
-public class Category {
+@Table(name = "gps_size")
+public class Size {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_seq")
-    private Long seqCategory;
+    @Column(name = "size_seq")
+    private Long seqSize;
 
-    @Column(length = 20, nullable = false, name = "category_nm")
-    private String nmCategory;
+    @Column(length = 20, nullable = false, name = "size_nm")
+    private String nmSize;
 
     @Column(name = "upper_seq")
     private Long seqUpper;
@@ -41,6 +36,4 @@ public class Category {
     @Column(name = "moddt")
     private LocalDateTime modDt;
 
-    @OneToMany(mappedBy = "category")
-    private List<ProdCateMapp> prodList = new ArrayList<ProdCateMapp>();
 }

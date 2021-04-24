@@ -3,6 +3,7 @@ package kr.co.kimpoziben.domain.entity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
@@ -12,8 +13,8 @@ import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Setter
 @Entity
-@DynamicUpdate
 @Table(name = "gps_product")
 public class Product {
 
@@ -57,8 +58,11 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "vendor_seq")
-        private Vendor vendor;
+    private Vendor vendor;
 
     @OneToMany(mappedBy = "product")
-    private List<ProdCateMapp> mappList = new ArrayList<ProdCateMapp>();
+    private List<ProdCateMapp> cateList = new ArrayList<ProdCateMapp>();
+
+    @OneToMany(mappedBy = "product")
+    private List<ProdSizeMapp> sizeList = new ArrayList<ProdSizeMapp>();
 }

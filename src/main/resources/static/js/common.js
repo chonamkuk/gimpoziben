@@ -52,7 +52,7 @@ function imageCommon() {
         // atob()는 Base64를 디코딩하는 메서드
         let rawLength = raw.length;
         // 부호 없는 1byte 정수 배열을 생성
-        let = new Uint8Array(rawLength); // 길이만 지정된 배열
+        let uInt8Array = new Uint8Array(rawLength); // 길이만 지정된 배열
         let i = 0;
         while (i < rawLength) {
             uInt8Array[i] = raw.charCodeAt(i);

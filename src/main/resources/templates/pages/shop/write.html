@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="../layout/default">
+
+<!-- page CSS -->
+<th:block layout:fragment="css">
+</th:block>
+
+<!-- page 스크립트 -->
+<th:block layout:fragment="script">
+    <script>
+        $(document).ready(function(){
+            // CKEDITOR.replace('descProduct');
+
+            let processed = false;
+            $('#saveForm').submit(function(e){
+                if(!processed) {
+                    if(e.preventDefault) {
+                        e.preventDefault();
+                    }
+                } else {
+                    e.returnValue = false;
+                }
+
+                $('#confirmModal').find('h4').text('알림');
+                $('#confirmModal').find('p').text('저장 하시겠습니까?');
+                $('#confirmModal').find('.confirm').on('click', function(){
+                    processed = true;
+                    $('#saveForm').submit();
+                })
+                $('#confirmModal').modal('open');
+            });
+        });
+    </script>
+<!--    <script th:inline="javascript" th:src="@{/static/js/crud.js}"></script>-->
+</th:block>
+
+<div layout:fragment="content" >
+    <!--
+    <form id="saveForm" action="/shop/write.do" method="post">
+        <div class="input-field col s12">
+            <input type="text" id="nmProduct" name="nmProduct" required="" maxlength="20">
+            <label for="nmProduct">제품명</label>
+        </div>
+        <div class="input-field col s12">
+            <input type="text" id="sizeProduct" name="sizeProduct" maxlength="100">
+            <label for="sizeProduct">제품색상</label>
+        </div>
+        <div class="row">
+            <div class="input-field col m6 s12">
+                <input type="number" id="buyPrice" name="buyPrice">
+                <label for="buyPrice">매입가격</label>
+            </div>
+            <div class="input-field col m6 s12">
+                <input type="number" id="sellPrice" name="sellPrice">
+                <label for="sellPrice">판매가격</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col m6 s12">
+                <div class="switch">
+                    <label>
+                        숨김
+                        <input type="checkbox" name="ynDisplay" id="ynDisplay" checked>
+                        <span class="lever"></span>
+                        게시
+                    </label>
+                </div>
+            </div>
+            <div class="input-field col m6 s12">
+                <div class="switch">
+                    <label>
+                        품절
+                        <input type="checkbox" name="ynSoldout" id="ynSoldout" checked>
+                        <span class="lever"></span>
+                        재고있음
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div>
+            <textarea name="descProduct"></textarea><br>
+        </div>
+        <div class="img-container">
+            <div class="large-slide">
+                <div id="numbertext" class="numbertext"></div>
+            </div>
+
+            <div class="img-row">
+                <div class="column">
+                </div>
+                <div class="column">
+                </div>
+                <div class="column">
+                </div>
+                <div class="column">
+                </div>
+                <div class="column">
+                </div>
+                <div class="column">
+                </div>
+            </div>
+        </div>
+            <input type="file" id="img-input" class="img-input" multiple accept="image/*" style="display: none;"/>
+
+        <a class="waves-effect waves-light btn-small" id="submitBtn">등록</a>
+    </form>
+    -->
+</div>
+</html>
