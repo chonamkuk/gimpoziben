@@ -7,8 +7,11 @@ import kr.co.kimpoziben.dto.ProductDto;
 import kr.co.kimpoziben.dto.SizeDto;
 import kr.co.kimpoziben.dto.VendorDto;
 import lombok.AllArgsConstructor;
+import org.hibernate.collection.spi.PersistentCollection;
+import org.modelmapper.Condition;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.modelmapper.spi.MappingContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +24,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Service
+@org.springframework.transaction.annotation.Transactional
 public class ProductService {
     private AttachService attachService;
 
@@ -31,13 +35,19 @@ public class ProductService {
 
     private ProductService() {
         modelMapper = new ModelMapper();
-        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT).setPropertyCondition(new Condition<Object, Object>() {
+            @Override
+            public boolean applies(MappingContext<Object, Object> mappingContext) {
+                return !(mappingContext.getSource() instanceof PersistentCollection);
+            }
+        });
         modelMapper.typeMap(ProductDto.class, Product.class)
-                .addMapping(ProductDto::getCateList, Product::setCateList)
-                .addMapping(ProductDto::getSizeList, Product::setSizeList);
-        modelMapper.typeMap(CategoryDto.class, Category.class);
-        modelMapper.typeMap(VendorDto.class, Vendor.class);
-        modelMapper.typeMap(SizeDto.class, Size.class);
+//                .addMapping(ProductDto::getCateList, Product::setCateList)
+//                .addMapping(ProductDto::getSizeList, Product::setSizeList)
+        ;
+//        modelMapper.typeMap(CategoryDto.class, Category.class);
+//        modelMapper.typeMap(VendorDto.class, Vendor.class);
+//        modelMapper.typeMap(SizeDto.class, Size.class);
     }
 
     public HashMap getList(Pageable pageble, HashMap<String,Object> searchMap) throws Exception {
@@ -52,7 +62,6 @@ public class ProductService {
         return result;
     }
 
-    @Transactional
     public Long save(ProductDto productDto, String[] image, String[] imageName, String[] imageSize) {
         if(image != null) {
             List<AttachEntity> attachEntities = attachService.saveImage(image, imageName, imageSize, "product");

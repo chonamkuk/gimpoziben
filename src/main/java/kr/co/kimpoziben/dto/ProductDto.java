@@ -1,8 +1,5 @@
 package kr.co.kimpoziben.dto;
 
-import kr.co.kimpoziben.domain.entity.ProdCateMapp;
-import kr.co.kimpoziben.domain.entity.ProdSizeMapp;
-import kr.co.kimpoziben.domain.entity.Vendor;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -28,7 +25,7 @@ public class ProductDto {
     private String modifier;
     private LocalDateTime modDt;
 
-    private Vendor vendor;
-    private List<ProdCateMapp> cateList = new ArrayList<ProdCateMapp>();
-    private List<ProdSizeMapp> sizeList = new ArrayList<ProdSizeMapp>();
+    private VendorDto vendor;
+    private List<ProdCateDto> cateList = new ArrayList<ProdCateDto>();
+    private List<ProdSizeDto> sizeList = new ArrayList<ProdSizeDto>();
 }

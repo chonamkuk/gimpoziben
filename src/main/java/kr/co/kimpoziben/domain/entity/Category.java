@@ -4,7 +4,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -42,5 +41,5 @@ public class Category {
     private LocalDateTime modDt;
 
     @OneToMany(mappedBy = "category")
-    private List<ProdCateMapp> prodList = new ArrayList<ProdCateMapp>();
+    private List<ProdCate> prodList = new ArrayList<ProdCate>();
 }

@@ -27,6 +27,7 @@ public class ShopController {
     @GetMapping("/list.do")
     public String list(Model model, final PageRequest pageable, HashMap<String,Object> searchMap) throws Exception {
         pageable.setSortProp("nmProduct");
+        searchMap.put("ynDisplay", "Y");
         HashMap result = productService.getList(pageable.of(), searchMap);
 
 //        pageable.pagination((Page) result.get("resultPage"));

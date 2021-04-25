@@ -1,32 +1,22 @@
 package kr.co.kimpoziben;
 
-import kr.co.kimpoziben.domain.entity.ProdCateMapp;
-import kr.co.kimpoziben.domain.entity.ProdSizeMapp;
+import kr.co.kimpoziben.domain.entity.ProdCate;
+import kr.co.kimpoziben.domain.entity.ProdSize;
 import kr.co.kimpoziben.domain.entity.Product;
 import kr.co.kimpoziben.domain.entity.Size;
 import kr.co.kimpoziben.domain.repository.ProductRepository;
 import kr.co.kimpoziben.domain.repository.SizeRepository;
-import kr.co.kimpoziben.dto.SearchDto;
-import kr.co.kimpoziben.test.domain.entity.AsEntity;
 import kr.co.kimpoziben.util.PageRequest;
-import kr.co.kimpoziben.util.SearchSpec;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.Predicate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -60,13 +50,13 @@ public class JpaTest {
 
             for(Product product : productList) {
                 System.out.println("getNmVendor :: " + product.getVendor().getNmVendor());
-                List<ProdCateMapp> prodCateMappList = product.getCateList();
-                for(ProdCateMapp prodCateMapp : prodCateMappList) {
-                    System.out.println("prodCateMapp :: " + prodCateMapp.getCategory().getNmCategory());
+                List<ProdCate> prodCateList = product.getCateList();
+                for(ProdCate prodCate : prodCateList) {
+                    System.out.println("prodCateMapp :: " + prodCate.getCategory().getNmCategory());
                 }
 
-                for(ProdSizeMapp prodSizeMapp : product.getSizeList()) {
-                    System.out.println("prodSizeMapp :: " + prodSizeMapp.getSize().getNmSize());
+                for(ProdSize prodSize : product.getSizeList()) {
+                    System.out.println("prodSizeMapp :: " + prodSize.getSize().getNmSize());
                 }
             }
         }

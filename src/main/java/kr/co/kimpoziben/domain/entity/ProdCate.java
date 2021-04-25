@@ -3,15 +3,18 @@ package kr.co.kimpoziben.domain.entity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@IdClass(ProdSizeId.class)
+@Setter
 @Entity
-@Table(name = "gps_prod_size_mapp")
-public class ProdSizeMapp {
+@IdClass(ProdCateId.class)
+@Table(name = "gps_prod_cate_mapp")
+public class ProdCate {
 
     @Id
     @ManyToOne
@@ -20,6 +23,6 @@ public class ProdSizeMapp {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "size_seq")
-    private Size size;
+    @JoinColumn(name = "category_seq")
+    private Category category;
 }

@@ -1,6 +1,5 @@
 package kr.co.kimpoziben.dto;
 
-import kr.co.kimpoziben.domain.entity.Product;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,5 +22,5 @@ public class VendorDto {
     private String modifier;
     private LocalDateTime modDt;
 
-    private List<Product> productList = new ArrayList<Product>();
+    private List<ProductDto> productList = new ArrayList<ProductDto>();
 }

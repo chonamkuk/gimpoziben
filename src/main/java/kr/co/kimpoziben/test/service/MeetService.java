@@ -34,7 +34,7 @@ public class MeetService {
 
     private MeetService(){
         modelMapper = new ModelMapper();
-        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         modelMapper.typeMap(MeetDto.class, MeetEntity.class)
                 .addMapping(MeetDto::getMeetMembers, MeetEntity::setMeetMembers);
         modelMapper.typeMap(MeetMemberDto.class, MeetMemberEntity.class)

@@ -1,6 +1,5 @@
 package kr.co.kimpoziben.dto;
 
-import kr.co.kimpoziben.domain.entity.ProdCateMapp;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,5 +21,5 @@ public class CategoryDto {
     private LocalDateTime regDt;
     private String modifier;
     private LocalDateTime modDt;
-    private List<ProdCateMapp> prodList = new ArrayList<ProdCateMapp>();
+    private List<ProdCateDto> prodList = new ArrayList<ProdCateDto>();
 }

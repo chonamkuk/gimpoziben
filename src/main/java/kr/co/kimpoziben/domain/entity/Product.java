@@ -4,7 +4,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -60,9 +59,42 @@ public class Product {
     @JoinColumn(name = "vendor_seq")
     private Vendor vendor;
 
-    @OneToMany(mappedBy = "product")
-    private List<ProdCateMapp> cateList = new ArrayList<ProdCateMapp>();
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProdCate> cateList = new ArrayList<ProdCate>();
 
-    @OneToMany(mappedBy = "product")
-    private List<ProdSizeMapp> sizeList = new ArrayList<ProdSizeMapp>();
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProdSize> sizeList = new ArrayList<ProdSize>();
+
+    public void setCateList(List<ProdCate> cateList) {
+        for(ProdCate prodCate : cateList) {
+            this.addCategory(prodCate);
+        }
+    }
+
+    public void addCategory(ProdCate prodCate) {
+        prodCate.setProduct(this);
+
+        if(cateList == null) {
+            cateList = new ArrayList<>();
+        } else {
+            cateList.add(prodCate);
+        }
+    }
+
+    public void setSizeList(List<ProdSize> sizeList) {
+        for(ProdSize prodSize : sizeList) {
+            this.addSize(prodSize);
+        }
+    }
+
+    public void addSize(ProdSize prodSize) {
+        prodSize.setProduct(this);
+
+        if(sizeList == null) {
+            sizeList = new ArrayList<>();
+        } else {
+            sizeList.add(prodSize);
+        }
+    }
+
 }
