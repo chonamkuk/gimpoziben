@@ -114,7 +114,14 @@
             }
 
             // Basic
-            $('.dropify').dropify();
+            $('.dropify').dropify({
+                messages: {
+                    'default': 'drag or click',
+                    'replace': 'drag or click',
+                    'remove':  'remove',
+                    'error':   'error'
+                }
+            });
 
             // Used events
             var drEvent = $('.dropify-event').dropify();

@@ -5,7 +5,7 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import kr.co.kimpoziben.domain.entity.Product;
-import kr.co.kimpoziben.domain.entity.QProdCateMapp;
+import kr.co.kimpoziben.domain.entity.QProdCate;
 import kr.co.kimpoziben.domain.entity.QProduct;
 import kr.co.kimpoziben.domain.entity.QVendor;
 import org.springframework.data.domain.Page;
@@ -17,7 +17,7 @@ import java.util.HashMap;
 public class ProductRepositoryImpl implements ProductRepositoryCustom {
     private final JPAQueryFactory queryFactory;
     private QProduct product = QProduct.product;
-    private QProdCateMapp prodCateMapp = QProdCateMapp.prodCateMapp;
+    private QProdCate prodCate = QProdCate.prodCate;
     private QVendor vendor = QVendor.vendor;
 
     public ProductRepositoryImpl(JPAQueryFactory queryFactory) {
@@ -44,7 +44,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
         if(searchMap.getOrDefault("seqCategory",null) == null) {
             return null;
         }
-        return product.seqProduct.in(JPAExpressions.select(prodCateMapp.product.seqProduct).from(prodCateMapp).where(prodCateMapp.category.seqCategory.eq((Long) searchMap.get("seqCategory"))));
+        return product.seqProduct.in(JPAExpressions.select(prodCate.product.seqProduct).from(prodCate).where(prodCate.category.seqCategory.eq((Long) searchMap.get("seqCategory"))));
     }
 
     private BooleanExpression ynDisplayEq(HashMap<String,Object> searchMap) {
