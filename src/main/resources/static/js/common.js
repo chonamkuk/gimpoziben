@@ -1,8 +1,135 @@
 $(document).ready(function(){
-    comn = new common();
-    imgComn = new imageCommon();
+    // comn = new common();
+    // imgComn = new imageCommon();
+
+    $('#alertModal').modal({
+        // onOpenEnd: function(e){
+        //     let modalId = $(this).attr('id');
+        //     if(location.href.split('#').pop() != modalId) {
+        //         window.history.pushState({}, '', location.href + '#' + $(this).attr('id'));
+        //     }
+        //     modalStack.push(modalId);
+        // },
+        // onCloseStart: function(e){
+        //     if(location.href.split('#').pop() == $(this).attr('id')) {
+        //         window.history.back();
+        //     }
+        // },
+        onCloseEnd: function(e) {
+            $(this).find('h4').text('');
+            $(this).find('p').text('');
+            // modalStack.pop();
+        }
+    });
+
+    $('#imageModal').modal({
+        onOpenStart: function(e) {
+            // let modalId = $(this).attr('id');
+            // if(location.href.split('#').pop() != modalId) {
+            //     window.history.pushState({}, '', location.href + '#' + $(this).attr('id'));
+            // }
+            // modalStack.push(modalId);
+
+            // 이미지 업로드 로직
+            let imgTags = $('.slide-img');
+            let selectedImg = $('.slide-img:hover');
+            let imgIndex = imgTags.index(selectedImg);
+            let imgSrc = selectedImg.css('background-image');
+
+            // 클릭한 이미지
+            if(typeof(imgSrc) != "undefined") {
+                imgSrc = imgSrc.replace('url(','').replace(')','').replace(/\"/gi, "");
+                $('.modal-slide').eq(0).css({'background-image' : 'url('+ imgSrc +')'});
+            }
+            $('#imageModal').find('#numbertext').text((imgIndex+1) + '/' + imgTags.length);
+
+            // 이미지 슬라이드효과
+            $('#imageModal').find('.prev').on('click', function(){
+                if(imgIndex <= 0) { // 맨처음 이미지일 때
+                    imgIndex = imgTags.length-1;
+                } else {
+                    imgIndex--;
+                }
+                imgSrc = imgTags.eq(imgIndex).css('background-image');
+                imgSrc = imgSrc.replace('url(','').replace(')','').replace(/\"/gi, "");
+                $('.modal-slide').eq(0).css({'background-image' : 'url('+ imgSrc +')'});
+                $('#imageModal').find('#numbertext').text((imgIndex+1) + '/' + imgTags.length);
+            });
+            $('#imageModal').find('.next').on('click', function(){
+                if(imgIndex >= imgTags.length-1) { // 마지막 이미지일 때
+                    imgIndex = 0;
+                } else {
+                    imgIndex++;
+                }
+                imgSrc = imgTags.eq(imgIndex).css('background-image');
+                imgSrc = imgSrc.replace('url(','').replace(')','').replace(/\"/gi, "");
+                $('.modal-slide').eq(0).css({'background-image' : 'url('+ imgSrc +')'});
+                $('#imageModal').find('#numbertext').text((imgIndex+1) + '/' + imgTags.length);
+            });
+        },
+        // onCloseStart: function(e){
+        //     if(location.href.split('#').pop() == $(this).attr('id')) {
+        //         window.history.back();
+        //     }
+        // },
+        onCloseEnd: function(e) {
+            $(this).find('#numbertext').text('');
+            $(this).find('.prev').off('click');
+            $(this).find('.next').off('click');
+            // modalStack.pop();
+        }
+    });
+
+    $('#confirmModal').modal({
+        // onOpenEnd: function(e){
+        //     let modalId = $(this).attr('id');
+        //     if(location.href.split('#').pop() != modalId) {
+        //         window.history.pushState({}, '', location.href + '#' + $(this).attr('id'));
+        //     }
+        //     modalStack.push(modalId);
+        // },
+        // onCloseStart: function(e){
+        //     if(location.href.split('#').pop() == $(this).attr('id')) {
+        //         window.history.back();
+        //     }
+        // },
+        onCloseEnd: function(e) {
+            $(this).find('h4').text('');
+            $(this).find('p').text('');
+            $(this).find('.modal-close').off('click');
+            // modalStack.pop();
+        }
+    });
+
+    //  모달 공통기능, 모바일기기에서 뒤로가기 동작을 위해
+    $('.modal').modal({
+        onOpenEnd: function(e){
+            let modalId = $(this).attr('id');
+            if(location.href.split('#').pop() != modalId) {
+                window.history.pushState({}, '', location.href + '#' + $(this).attr('id'));
+            }
+            modalStack.push(modalId);
+        },
+        onCloseStart: function(e){
+            if(location.href.split('#').pop() == $(this).attr('id')) {
+                window.history.back();
+            }
+        },
+        onCloseEnd: function(e) {
+            modalStack.pop();
+        }
+    });
+
+    window.onpopstate = history.onpushstate = function(e) {
+        console.log('뒤로가기 감지 : ' + e);
+        if(modalStack.length > 0) {
+            let currentModal = modalStack[modalStack.length-1];
+            M.Modal.getInstance($('#'+currentModal)).close();
+        }
+    }
 });
 
+let modalStack = [];
 function imageCommon() {
     // 이미지 리사이즈(축소)
     this.resizeImage = function(imageObj) {

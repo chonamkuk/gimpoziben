@@ -12,13 +12,15 @@ import java.util.List;
 @NoArgsConstructor
 public class ProductDto {
     private Long seqProduct;
+    private String titleProduct;
     private String nmProduct;
     private String descProduct;
-    private String sizeProduct;
+    private String colorProduct;
+    private int buyPrice;
+    private int sellPrice;
     private String ynDisplay;
     private String ynSoldout;
     private String idMainImg;
-    private String idDescImg;
     private String nmManufac;
     private String register;
     private LocalDateTime regDt;

@@ -22,14 +22,23 @@ public class Product {
     @Column(name = "product_seq")
     private Long seqProduct;
 
+    @Column(length = 100, nullable = false, name = "product_title")
+    private String titleProduct;
+
     @Column(length = 20, nullable = false, name = "product_nm")
     private String nmProduct;
 
-    @Column(columnDefinition = "TEXT", nullable = false, name = "product_desc")
+    @Column(columnDefinition = "TEXT", name = "product_desc")
     private String descProduct;
 
-    @Column(length = 50, name = "product_size")
-    private String sizeProduct;
+    @Column(length = 100, name = "product_color")
+    private String colorProduct;
+
+    @Column(name = "price_buy")
+    private int buyPrice;
+
+    @Column(name = "price_sell")
+    private int sellPrice;
 
     @Column(length = 1, nullable = false, name = "display_yn")
     private String ynDisplay;
@@ -39,9 +48,6 @@ public class Product {
 
     @Column(length = 30, name = "main_img_id")
     private String idMainImg;
-
-    @Column(length = 30, name = "desc_img_id")
-    private String idDescImg;
 
     @Column(length = 20, name = "register", updatable = false)
     private String register;
