@@ -22,85 +22,85 @@ public class Product {
     @Column(name = "product_seq")
     private Long seqProduct;
 
-    @Column(length = 100, nullable = false, name = "product_title")
+    @Column(name = "product_title", length = 100, nullable = false)
     private String titleProduct;
 
-    @Column(length = 20, nullable = false, name = "product_nm")
+    @Column(name = "product_nm", length = 20, nullable = false)
     private String nmProduct;
 
     @Column(columnDefinition = "TEXT", name = "product_desc")
     private String descProduct;
 
-    @Column(length = 100, name = "product_color")
+    @Column(name = "product_color", length = 100)
     private String colorProduct;
 
     @Column(name = "price_buy")
-    private int buyPrice;
+    private Integer buyPrice;
 
     @Column(name = "price_sell")
-    private int sellPrice;
+    private Integer sellPrice;
 
-    @Column(length = 1, nullable = false, name = "display_yn")
+    @Column(name = "display_yn", length = 1)
     private String ynDisplay;
 
-    @Column(length = 1, nullable = false, name = "soldout_yn")
-    private String ynSoldout;
+    @Column(name = "soldout_yn", length = 1)
+    private String ynSoldOut;
 
-    @Column(length = 30, name = "main_img_id")
+    @Column(name = "main_img_id", length = 30)
     private String idMainImg;
 
-    @Column(length = 20, name = "register", updatable = false)
+    @Column(name = "register", length = 20, updatable = false)
     private String register;
 
     @Column(name = "regdt", updatable = false)
     private LocalDateTime regDt;
 
-    @Column(length = 20, name = "modifier")
+    @Column(name = "modifier", length = 20)
     private String modifier;
 
     @Column(name = "moddt")
     private LocalDateTime modDt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vendor_seq")
     private Vendor vendor;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "seqProduct")
     private List<ProdCate> cateList = new ArrayList<ProdCate>();
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "seqSize")
     private List<ProdSize> sizeList = new ArrayList<ProdSize>();
 
-    public void setCateList(List<ProdCate> cateList) {
-        for(ProdCate prodCate : cateList) {
-            this.addCategory(prodCate);
-        }
-    }
-
-    public void addCategory(ProdCate prodCate) {
-        prodCate.setProduct(this);
-
-        if(cateList == null) {
-            cateList = new ArrayList<>();
-        } else {
-            cateList.add(prodCate);
-        }
-    }
-
-    public void setSizeList(List<ProdSize> sizeList) {
-        for(ProdSize prodSize : sizeList) {
-            this.addSize(prodSize);
-        }
-    }
-
-    public void addSize(ProdSize prodSize) {
-        prodSize.setProduct(this);
-
-        if(sizeList == null) {
-            sizeList = new ArrayList<>();
-        } else {
-            sizeList.add(prodSize);
-        }
-    }
+//    public void setCateList(List<ProdCate> cateList) {
+//        for(ProdCate prodCate : cateList) {
+//            this.addCategory(prodCate);
+//        }
+//    }
+//
+//    public void addCategory(ProdCate prodCate) {
+//        prodCate.setProduct(this);
+//
+//        if(cateList == null) {
+//            cateList = new ArrayList<>();
+//        } else {
+//            cateList.add(prodCate);
+//        }
+//    }
+//
+//    public void setSizeList(List<ProdSize> sizeList) {
+//        for(ProdSize prodSize : sizeList) {
+//            this.addSize(prodSize);
+//        }
+//    }
+//
+//    public void addSize(ProdSize prodSize) {
+//        prodSize.setProduct(this);
+//
+//        if(sizeList == null) {
+//            sizeList = new ArrayList<>();
+//        } else {
+//            sizeList.add(prodSize);
+//        }
+//    }
 
 }

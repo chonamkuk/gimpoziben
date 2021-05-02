@@ -3,6 +3,7 @@ package kr.co.kimpoziben.controller;
 import com.google.gson.JsonObject;
 import kr.co.kimpoziben.domain.entity.AttachEntity;
 import kr.co.kimpoziben.dto.AttachDto;
+import kr.co.kimpoziben.dto.ImageUploadDto;
 import kr.co.kimpoziben.service.AttachService;
 import lombok.AllArgsConstructor;
 import org.apache.commons.codec.binary.Base64;
@@ -17,10 +18,12 @@ import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.awt.*;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -29,7 +32,7 @@ import java.util.List;
 public class AttachController {
     private AttachService attachService;
 
-    @GetMapping(value = "/resizeImgView.do") //todo: 이미지사이즈 메소드 분리
+    @GetMapping(value = "/resizeImgView.do")
     public @ResponseBody
     byte[] resizeImgView(@RequestParam("idAttach") String idAttach, @RequestParam("snFileAttach") int snFileAttach) throws Exception {
         try {
@@ -77,19 +80,25 @@ public class AttachController {
         MultipartFile file = multiFile.getFile("upload");
 
         if(file != null){
-            if(file.getSize() > 0 && !StringUtils.isEmpty(file.getName())){
+            if(file.getSize() > 0 && StringUtils.hasLength(file.getName())){
                 if(file.getContentType().toLowerCase().startsWith("image/")){
                     try{
                         String fileName = file.getName();
                         byte[] bytes = file.getBytes();
 
                         if(bytes.length <= 2097152) {
-//                            BASE64Encoder base64Encoder = new BASE64Encoder();
-//                            String[] image = {base64Encoder.encode(file.getBytes())};
-                            String[] image = {Base64.encodeBase64String(file.getBytes())};
-                            String[] imageName = {file.getOriginalFilename()};
-                            String[] imageSize = {String.valueOf(file.getSize())};
-                            List<AttachEntity> attachEntities = attachService.saveImage(image, imageName, imageSize, "ckEditor");
+//                            String[] image = {Base64.encodeBase64String(file.getBytes())};
+////                            String[] imageName = {file.getOriginalFilename()};
+////                            String[] imageSize = {String.valueOf(file.getSize())};
+////                            List<AttachEntity> attachEntities = attachService.saveImage(image, imageName, imageSize, "ckEditor");
+
+                            List<ImageUploadDto> imageUploadList = new ArrayList<ImageUploadDto>();
+                            ImageUploadDto imageUploadDto = new ImageUploadDto();
+                            imageUploadDto.setImage(Base64.encodeBase64String(file.getBytes()));
+                            imageUploadDto.setImageName(file.getOriginalFilename());
+                            imageUploadDto.setImageSize(file.getSize());
+                            imageUploadList.add(imageUploadDto);
+                            List<AttachEntity> attachEntities = attachService.saveImage(imageUploadList, "ckEditor");
 
                             json.addProperty("uploaded", 1);
                             json.addProperty("fileName", file.getOriginalFilename());

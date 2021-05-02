@@ -52,11 +52,11 @@ public class JpaTest {
                 System.out.println("getNmVendor :: " + product.getVendor().getNmVendor());
                 List<ProdCate> prodCateList = product.getCateList();
                 for(ProdCate prodCate : prodCateList) {
-                    System.out.println("prodCateMapp :: " + prodCate.getCategory().getNmCategory());
+//                    System.out.println("prodCateMapp :: " + prodCate.getCategory().getNmCategory());
                 }
 
                 for(ProdSize prodSize : product.getSizeList()) {
-                    System.out.println("prodSizeMapp :: " + prodSize.getSize().getNmSize());
+//                    System.out.println("prodSizeMapp :: " + prodSize.getSize().getNmSize());
                 }
             }
         }

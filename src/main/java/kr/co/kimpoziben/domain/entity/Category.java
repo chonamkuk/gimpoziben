@@ -40,6 +40,6 @@ public class Category {
     @Column(name = "moddt")
     private LocalDateTime modDt;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "seqCategory")
     private List<ProdCate> prodList = new ArrayList<ProdCate>();
 }

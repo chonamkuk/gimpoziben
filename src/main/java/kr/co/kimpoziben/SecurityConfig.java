@@ -32,22 +32,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 .frameOptions().disable();
 
         // admin
-        http.authorizeRequests()
-                .antMatchers("/login.do").permitAll()
-                .antMatchers("/admin/**").hasAuthority("SUPER_ADMIN")
-                .anyRequest().permitAll();
-
-        http.formLogin()
-                .loginPage("/login.do")
-                .loginProcessingUrl("/loginProc.do")
-                .usernameParameter("idAccount")
-                .passwordParameter("passwordAccount")
-                .defaultSuccessUrl("/main.do");
-        http.logout()
-                .logoutUrl("/logout.do")
-                .logoutSuccessUrl("/main.do")
-                .invalidateHttpSession(true);
-        http.exceptionHandling().accessDeniedPage("/accessDenied.do");
+//        http.authorizeRequests()
+//                .antMatchers("/login.do").permitAll()
+//                .antMatchers("/admin/**").hasAuthority("SUPER_ADMIN")
+//                .anyRequest().permitAll();
+//
+//        http.formLogin()
+//                .loginPage("/login.do")
+//                .loginProcessingUrl("/loginProc.do")
+//                .usernameParameter("idAccount")
+//                .passwordParameter("passwordAccount")
+//                .defaultSuccessUrl("/main.do");
+//        http.logout()
+//                .logoutUrl("/logout.do")
+//                .logoutSuccessUrl("/main.do")
+//                .invalidateHttpSession(true);
+//        http.exceptionHandling().accessDeniedPage("/accessDenied.do");
     }
 
 //    @Autowired

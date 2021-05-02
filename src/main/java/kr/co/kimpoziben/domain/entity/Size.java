@@ -3,12 +3,15 @@ package kr.co.kimpoziben.domain.entity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Setter
 @Entity
 @Table(name = "gps_size")
 public class Size {
@@ -21,8 +24,16 @@ public class Size {
     @Column(length = 20, nullable = false, name = "size_nm")
     private String nmSize;
 
-    @Column(name = "upper_seq")
-    private Long seqUpper;
+    @Column(name = "size_ordr")
+    private Integer ordrSize;
+
+    @OneToMany(mappedBy = "upperSize", fetch = FetchType.LAZY)
+    @OrderBy("ordrSize asc")
+    private List<Size> subSizeList;
+
+    @ManyToOne
+    @JoinColumn(name = "upper_seq")
+    private Size upperSize;
 
     @Column(length = 20, name = "register", updatable = false)
     private String register;

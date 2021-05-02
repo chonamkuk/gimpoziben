@@ -37,16 +37,4 @@ public class ShopController {
 
         return "shop/list";
     }
-
-    @PostMapping("/admin/write.do")
-    public String write(ProductDto productDto, String[] image, String[] imageName, String[] imageSize) throws Exception {
-        productDto.setRegister("admin");
-        productService.save(productDto, image, imageName, imageSize);
-        return "redirect:/shop/list.do";
-    }
-
-    @GetMapping("/admin/write.do")
-    public String write() {
-        return "/shop/write";
-    }
 }

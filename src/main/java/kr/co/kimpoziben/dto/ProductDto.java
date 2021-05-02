@@ -1,5 +1,6 @@
 package kr.co.kimpoziben.dto;
 
+import kr.co.kimpoziben.domain.entity.Product;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -16,12 +17,11 @@ public class ProductDto {
     private String nmProduct;
     private String descProduct;
     private String colorProduct;
-    private int buyPrice;
-    private int sellPrice;
+    private Integer buyPrice;
+    private Integer sellPrice;
     private String ynDisplay;
-    private String ynSoldout;
+    private String ynSoldOut;
     private String idMainImg;
-    private String nmManufac;
     private String register;
     private LocalDateTime regDt;
     private String modifier;
@@ -29,5 +29,6 @@ public class ProductDto {
 
     private VendorDto vendor;
     private List<ProdCateDto> cateList = new ArrayList<ProdCateDto>();
-    private List<ProdSizeDto> sizeList = new ArrayList<ProdSizeDto>();
+    private List<ProdSizeDto> sizeList = new ArrayList<ProdSizeDto>(); //todo:: size로 리스트구성해도 됨
+    private List<ImageUploadDto> imageList = new ArrayList<ImageUploadDto>();
 }
