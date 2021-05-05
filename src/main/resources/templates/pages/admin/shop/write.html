@@ -180,7 +180,7 @@
                     } else {
                         $('#childCategory').append('<option>없음</option>');
                     }
-                    let instance = M.FormSelect.init($('#childCategory'));
+                    let instance = M.FormSelect.init($('#childCategory')); // 셀렉트 컴포넌트 초기화
                 },
                 error: function(request, status, error){
                     console.log('code : ' + request.status);
@@ -356,6 +356,5 @@
             <!-- section edit ends -->
         </div>
     </div>
-
 </div>
 </html>

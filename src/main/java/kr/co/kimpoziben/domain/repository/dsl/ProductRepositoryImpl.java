@@ -44,7 +44,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
         if(searchMap.getOrDefault("seqCategory",null) == null) {
             return null;
         }
-        return product.seqProduct.in(JPAExpressions.select(prodCate.product.seqProduct).from(prodCate).where(prodCate.category.seqCategory.eq((Long) searchMap.get("seqCategory"))));
+        return product.seqProduct.in(JPAExpressions.select(prodCate.seqProduct).from(prodCate).where(prodCate.seqCategory.eq((Long) searchMap.get("seqCategory"))));
     }
 
     private BooleanExpression ynDisplayEq(HashMap<String,Object> searchMap) {

@@ -3,6 +3,11 @@
 
 <!-- page CSS -->
 <th:block layout:fragment="css">
+    <style>
+        .slider {
+            z-index: 10;
+        }
+    </style>
 </th:block>
 
 
@@ -10,6 +15,7 @@
 
 <!-- page 스크립트 -->
 <th:block layout:fragment="script">
+
 </th:block>
 
 <div layout:fragment="content" >
@@ -38,16 +44,18 @@
 
         -->
         <script>
-            $(document).ready(function(){$('.slider').bxSlider({
-                auto: true,speed: 500,
-                pause: 4000,
-                responsive: true,
-                mode:'fade',
-                autoControls: false,
-                controls:false,
-                captions: true, //캡션사용
-                touchEnabled : (navigator.maxTouchPoints > 0),
-                pager:true,});
+            $(document).ready(function(){
+                $('.slider').bxSlider({
+                    auto: true,speed: 500,
+                    pause: 4000,
+                    responsive: true,
+                    mode:'fade',
+                    autoControls: false,
+                    controls:false,
+                    captions: true, //캡션사용
+                    touchEnabled : (navigator.maxTouchPoints > 0),
+                    pager:true
+                 });
             });
 
 

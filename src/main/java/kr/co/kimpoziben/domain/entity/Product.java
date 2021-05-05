@@ -65,7 +65,7 @@ public class Product {
     @JoinColumn(name = "vendor_seq")
     private Vendor vendor;
 
-    @OneToMany(mappedBy = "seqProduct")
+    @OneToMany(mappedBy = "seqProduct") //todo: casacade All 로 설정후 insert 되는지 확인
     private List<ProdCate> cateList = new ArrayList<ProdCate>();
 
     @OneToMany(mappedBy = "seqSize")
