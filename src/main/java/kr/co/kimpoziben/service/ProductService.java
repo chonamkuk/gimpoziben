@@ -68,10 +68,12 @@ public class ProductService {
                 productDto.setSellPrice(product.getSellPrice());
                 productDto.setYnSoldOut(product.getYnSoldOut());
                 productDto.setIdMainImg(product.getIdMainImg());
+
+                productList.add(productDto);
             }
         }
 
-        result.put("resultPage", productPage);
+        result.put("pagingResult", productPage);
         result.put("resultList", productList);
         return result;
     }
@@ -103,13 +105,15 @@ public class ProductService {
         }
 
         for(ProdSizeDto prodSizeDto : productDto.getSizeList()) {
-            ProdSize prodSize = ProdSize.builder()
-                    .seqSize(prodSizeDto.getSize().getSeqSize())
-                    .seqProduct(newProduct.getSeqProduct())
-                    .build();
-            System.out.println("prodSizeDto :: " + prodSizeDto.getSize().getSeqSize());
-            System.out.println("prodSize :: " + prodSize.getSeqSize());
-            prodSizeRepository.save(prodSize);
+            if(prodSizeDto.getSize() != null) {
+                ProdSize prodSize = ProdSize.builder()
+                        .seqSize(prodSizeDto.getSize().getSeqSize())
+                        .seqProduct(newProduct.getSeqProduct())
+                        .build();
+                System.out.println("prodSizeDto :: " + prodSizeDto.getSize().getSeqSize());
+                System.out.println("prodSize :: " + prodSize.getSeqSize());
+                prodSizeRepository.save(prodSize);
+            }
         }
         return newProduct.getSeqProduct();
     }

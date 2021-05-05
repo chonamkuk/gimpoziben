@@ -35,14 +35,17 @@ public class AttachController {
     @GetMapping(value = "/resizeImgView.do")
     public @ResponseBody
     byte[] resizeImgView(@RequestParam("idAttach") String idAttach, @RequestParam("snFileAttach") int snFileAttach) throws Exception {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try {
             AttachDto attachDto = attachService.getAttachInfo(idAttach, snFileAttach);
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            ImageIO.write( attachService.getResizeImg(attachDto.getPathFileAttach(), 0)  , "JPEG", byteArrayOutputStream);
+            ImageIO.write(attachService.getResizeImg(attachDto.getPathFileAttach(), 0), "JPEG", byteArrayOutputStream);
             return byteArrayOutputStream.toByteArray();
-
+        } catch (NullPointerException e) {
+            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        } finally {
+            byteArrayOutputStream.close();
         }
     }
 
@@ -86,7 +89,7 @@ public class AttachController {
                         String fileName = file.getName();
                         byte[] bytes = file.getBytes();
 
-                        if(bytes.length <= 2097152) {
+                        if(bytes.length <= 10485760) {
 //                            String[] image = {Base64.encodeBase64String(file.getBytes())};
 ////                            String[] imageName = {file.getOriginalFilename()};
 ////                            String[] imageSize = {String.valueOf(file.getSize())};
@@ -106,7 +109,7 @@ public class AttachController {
                         } else {
                             json.addProperty("uploaded", 0);
                             JsonObject errorMessage = new JsonObject();
-                            errorMessage.addProperty("message", "2MB 이하의 파일을 올려주세요.");
+                            errorMessage.addProperty("message", "10MB 이하의 파일을 올려주세요.");
                             json.add("error", errorMessage);
                         }
                         printWriter = resp.getWriter();

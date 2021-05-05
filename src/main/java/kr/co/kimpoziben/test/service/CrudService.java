@@ -22,12 +22,12 @@ public class CrudService {
     @Transactional
     public Long savePost(CrudDto crudDto, String[] image, String[] imageName, String[] imageSize) {
         // 파일업로드가 필요할 때 Transactional 어노테이션 선언된 서비스 메소드에서
-        if(image != null) {
-            List<AttachEntity> attachEntities = attachService.saveImage(image, imageName, imageSize, "crud");
-            if (attachEntities != null) {
-                crudDto.setIdAttach(attachEntities.get(0).getIdAttach()); //첨부파일 아이디 셋팅
-            }
-        }
+//        if(image != null) {
+//            List<AttachEntity> attachEntities = attachService.saveImage(image, imageName, imageSize, "crud");
+//            if (attachEntities != null) {
+//                crudDto.setIdAttach(attachEntities.get(0).getIdAttach()); //첨부파일 아이디 셋팅
+//            }
+//        }
         Long crudId = crudRepository.save(crudDto.toEntity()).getId();
         return crudId;
     }

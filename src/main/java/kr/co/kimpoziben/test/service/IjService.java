@@ -37,12 +37,12 @@ public class IjService {
 
     @Transactional
     public Long saveAs(IjDto ijDto, String[] image, String[] imageName, String[] imageSize) {
-        if(image != null) {
-            List<AttachEntity> attachEntities = attachService.saveImage(image, imageName, imageSize, "as");
-            if (attachEntities != null) {
-                ijDto.setIdAttach(attachEntities.get(0).getIdAttach()); //첨부파일 아이디 셋팅
-            }
-        }
+//        if(image != null) {
+//            List<AttachEntity> attachEntities = attachService.saveImage(image, imageName, imageSize, "as");
+//            if (attachEntities != null) {
+//                ijDto.setIdAttach(attachEntities.get(0).getIdAttach()); //첨부파일 아이디 셋팅
+//            }
+//        }
         Long seqAs = ijRepository.save(ijDto.toEntity()).getSeqAs();
         return seqAs;
 
@@ -122,12 +122,12 @@ public class IjService {
     }
     @Transactional
     public Long updateAs(IjDto ijDto, String[] image, String[] imageName, String[] imageSize) throws Exception {
-        if(image != null) {
-            List<AttachEntity> attachEntities = attachService.saveImage(image, imageName, imageSize, "as", ijDto.getIdAttach());
-            if (attachEntities != null) {
-                ijDto.setIdAttach(attachEntities.get(0).getIdAttach()); //첨부파일 아이디 셋팅
-            }
-        }
+//        if(image != null) {
+//            List<AttachEntity> attachEntities = attachService.saveImage(image, imageName, imageSize, "as", ijDto.getIdAttach());
+//            if (attachEntities != null) {
+//                ijDto.setIdAttach(attachEntities.get(0).getIdAttach()); //첨부파일 아이디 셋팅
+//            }
+//        }
         IjDto oldData = this.getAsDetail(ijDto.getSeqAs());
         ijDto.setStatAs(oldData.getStatAs());
         ijDto.setCommentAs(oldData.getCommentAs());

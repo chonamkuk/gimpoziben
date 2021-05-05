@@ -15,218 +15,208 @@
             }
         }
 
-        #ecommerce-products .card
-        {
+        #ecommerce-products .card {
             overflow: hidden;
         }
 
-        #ecommerce-products .card .card-content i.material-icons
-        {
+        #ecommerce-products .card .card-content i.material-icons {
             cursor: pointer;
         }
 
-        #ecommerce-products .modal .modal-content i.material-icons
-        {
+        #ecommerce-products .modal .modal-content i.material-icons         {
             cursor: pointer;
             vertical-align: middle;
         }
 
-        #ecommerce-products .card-badge
-        {
+        #ecommerce-products .card-badge {
             line-height: 2em;
-
             position: absolute;
             top: 1rem;
             right: -10rem;
-
             display: block;
-
             width: 25rem;
             height: 2em;
-
             -webkit-transform: rotate(45deg);
             -ms-transform: rotate(45deg);
             transform: rotate(45deg);
             text-indent: .8em;
-
             background: #8e24aa;
             background: -webkit-linear-gradient(45deg, #8e24aa 0%, #ff6e40 100%);
             background:         linear-gradient(45deg, #8e24aa 0%, #ff6e40 100%);
         }
 
-        #ecommerce-products .card-badge a
-        {
+        #ecommerce-products .card-badge a {
             position: relative;
-
             display: block;
-
             width: 100%;
             height: 100%;
-
             text-align: center;
             text-decoration: none;
-
             color: #dedede;
         }
 
-        #ecommerce-products .card-badge a:hover
-        {
+        #ecommerce-products .card-badge a:hover {
             text-decoration: underline;
         }
 
         #ecommerce-products .card-badge a:before,
-        #ecommerce-products .card-badge a:after
-        {
+        #ecommerce-products .card-badge a:after {
             position: absolute;
             top: 0;
             left: 0;
-
             display: block;
-
             width: 100%;
             height: 3px;
-
             content: '';
         }
 
-        #ecommerce-products .card-badge a:after
-        {
+        #ecommerce-products .card-badge a:after {
             top: auto;
             bottom: 0;
-
             border-bottom-width: 0;
         }
 
-        #ecommerce-products .prise-text-style
-        {
+        #ecommerce-products .prise-text-style {
             font-size: 20px;
-
             vertical-align: bottom;
             text-decoration: line-through;
-
             color: #c1c1c1 !important;
         }
 
         #ecommerce-products .card-content hr,
-        #ecommerce-products .modal-content hr
-        {
+        #ecommerce-products .modal-content hr {
             opacity: .3;
         }
 
         #ecommerce-products .card-content .list-bullet,
-        #ecommerce-products .modal-content .list-bullet
-        {
+        #ecommerce-products .modal-content .list-bullet {
             padding-left: 1.65rem;
-
             list-style-type: disc;
         }
 
         #ecommerce-products .card-content .list-bullet .list-item-bullet,
-        #ecommerce-products .modal-content .list-bullet .list-item-bullet
-        {
+        #ecommerce-products .modal-content .list-bullet .list-item-bullet {
             padding: .2rem 0;
-
             list-style-type: disc;
         }
 
-        #ecommerce-products .categories-collapsible
-        {
+        #ecommerce-products .categories-collapsible {
             border: none;
             box-shadow: none;
         }
 
-        #ecommerce-products .categories-collapsible li.active i
-        {
+        #ecommerce-products .categories-collapsible li.active i {
             -webkit-transform: rotate(90deg);
             -ms-transform: rotate(90deg);
             transform: rotate(90deg);
         }
 
-        #ecommerce-products .categories-collapsible li .collapsible-header
-        {
+        #ecommerce-products .categories-collapsible li .collapsible-header {
             padding-right: 0;
             padding-bottom: 0;
             padding-left: 0;
-
             border: none;
         }
 
-        #ecommerce-products .categories-collapsible li .collapsible-header i
-        {
+        #ecommerce-products .categories-collapsible li .collapsible-header i {
             position: absolute;
             right: 0;
-
             -webkit-transition: all .3s;
             transition: all .3s;
         }
 
-        #ecommerce-products .categories-collapsible .collapsible-body
-        {
+        #ecommerce-products .categories-collapsible .collapsible-body {
             padding: 0;
             padding-top: 5px;
             padding-left: 5px;
-
             border: 0;
         }
 
-        #ecommerce-products .categories-collapsible .collapsible-body p
-        {
+        #ecommerce-products .categories-collapsible .collapsible-body p {
             font-size: .9rem;
-
             margin-top: 5px;
-
             cursor: pointer;
         }
 
-        #ecommerce-products .size-filter ul
-        {
+        #ecommerce-products .size-filter ul {
             margin: 0;
         }
 
-        #ecommerce-products .size-filter ul .active a
-        {
+        #ecommerce-products .size-filter ul .active a {
             color: #fff;
             background: #7e57c2;
         }
 
-        #ecommerce-products .size-filter ul li
-        {
+        #ecommerce-products .size-filter ul li {
             display: inline-block;
-
             margin: .1rem 0;
         }
 
-        #ecommerce-products .size-filter ul li a
-        {
+        #ecommerce-products .size-filter ul li a {
             font-weight: 700;
             line-height: 34px;
-
             display: block;
-
             width: 34px;
             height: 34px;
-
             text-align: center;
-
             border-radius: 3px;
             background: #ede7f6;
         }
 
-        @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px)
-        {
-            #ecommerce-products .card-content .btn
-            {
-                display: inline-table;
+        #ecommerce-products > div.col > div > div.card.animate > div > div {
+            text-align: center;
+        }
 
+        #ecommerce-products > div.col > div > div.card.animate > div > div > img {
+            object-fit: contain;
+            object-position: center;
+        }
+
+        .product-detail-modal {
+            width: 90%;
+            max-height: 90%;
+        }
+
+        @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px){
+            #ecommerce-products .card-content .btn {
+                display: inline-table;
                 width: 100%;
             }
         }
 
-        @media only screen and (width: 1024px)
-        {
-            #ecommerce-products .electronic-products .col.s12.m4.l4
-            {
+        @media only screen and (width: 1024px){
+            #ecommerce-products .electronic-products .col.s12.m4.l4 {
                 width: 49.3333%;
+            }
+        }
+
+        @media only screen and (max-width: 600px) {
+            div.no-image {
+                background-image: url('/static/image/broken_image_24dp.png');
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        }
+
+        @media only screen and (min-width: 600px) and (max-width: 800px){
+            #ecommerce-products > div.col > div > div.card.animate > div > div > img {
+                height: 130px;
+            }
+            div.no-image {
+                background-image: url('/static/image/broken_image_48dp.png');
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        }
+
+        @media only screen and (min-width: 801px) {
+            #ecommerce-products > div.col > div > div.card.animate > div > div > img {
+                height: 267px;
+            }
+            div.no-image {
+                background-image: url('/static/image/broken_image_48dp.png');
+                background-position: center;
+                background-repeat: no-repeat;
             }
         }
     </style>
@@ -240,6 +230,11 @@
             $('#modal3').modal('open');
             $('#modal3').modal('close');
         });
+
+        function goPage(page){
+            $('[name="listForm"]').children('[name="page"]').val(page);
+            $('[name="listForm"]').submit();
+        }
     </script>
 </th:block>
 
@@ -272,23 +267,30 @@
                 <div class="section">
                     <div class="row" id="ecommerce-products">
                         <div class="col s12 m12 l12 pr-0">
-                            <div class="col s12 m4 l4">
-                                <div class="card animate fadeLeft">
-<!--                                    <div class="card-badge"><a class="white-text"><b>NEW</b></a></div>-->
+                            <div class="col s12 m4 l4" th:each="resultDto, listStatus: ${resultList}">
+                                <div class="card animate" th:classappend="${listStatus.index%3 == 0 ? 'fadeLeft' : (listStatus.index%3 == 1 ? 'fadeUp' : 'fadeRight')}">
+                                    <div th:if="${resultDto.ynSoldOut == 'Y'}" class="card-badge"><a class="white-text"><b>품절</b></a></div>
                                     <div class="card-content">
-                                        <p>오피스용 경량 스트레치 점퍼</p>
-                                        <span class="card-title text-ellipsis">ZB-J2101</span>
-                                        <img src="https://zibengimpo.com/web/product/medium/ZB-J2101.jpg" class="responsive-img" alt="">
+                                        <p th:text="${resultDto.nmProduct}"></p>
+                                        <span class="card-title text-ellipsis tooltipped" data-position="bottom" th:text="${resultDto.titleProduct}" th:data-tooltip="${resultDto.titleProduct}"></span>
+                                        <div th:class="${#strings.isEmpty(resultDto.idMainImg) ? 'no-image' : ''}">
+                                            <th:block th:if="${not #strings.isEmpty(resultDto.idMainImg)}">
+                                                <img  class="responsive-img" th:src="${'/attach/resizeImgView.do?idAttach=' + resultDto.idMainImg + '&snFileAttach=1'}">
+                                            </th:block>
+                                            <th:block th:if="${#strings.isEmpty(resultDto.idMainImg)}">
+                                                <img class="responsive-img">
+                                            </th:block>
+                                        </div>
                                         <div class="display-flex flex-wrap justify-content-center">
-                                            <h5 class="mt-3">41,800원</h5>
-                                            <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="#modal1">View</a>
+                                            <h5 class="mt-3" th:text="${#numbers.formatDecimal(resultDto.sellPrice, 0, 'COMMA', 0, 'POINT')} + '원'"></h5>
+                                            <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" th:href="${'#modal' + listStatus.index}">View</a>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Modal Structure -->
-                                <div id="modal1" class="modal">
+                                <div th:id="${'modal' + listStatus.index}" class="modal product-detail-modal">
                                     <div class="modal-content pt-2">
-                                        <div class="row" id="product-one">
+                                        <div class="row" th:id="${'product' + listStatus.index}">
                                             <div class="col s12">
                                                 <a class="modal-close right"><i class="material-icons">close</i></a>
                                             </div>
@@ -317,359 +319,51 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col s12 m4 l4">
-                                <div class="card animate fadeUp">
-                                    <div class="card-badge"><a class="white-text"><b>품절</b></a></div>
-                                    <div class="card-content">
-                                        <p>오피스용 경량 스트레치 점퍼</p>
-                                        <span class="card-title text-ellipsis">ZB-J2001</span>
-                                        <img src="https://zibengimpo.com/web/product/medium/ZB-J2001.jpg" class="responsive-img" alt="">
-                                        <div class="display-flex flex-wrap justify-content-center">
-                                            <h5 class="mt-3">41,800원</h5>
-                                            <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="#modal2">View</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Modal Structure -->
-                                <div id="modal2" class="modal">
-                                    <div class="modal-content">
-                                        <a class="modal-close right"><i class="material-icons">close</i></a>
-                                        <div class="row" id="product-two">
-                                            <div class="col m6 s12">
-                                                <img src="https://zibengimpo.com/web/product/big/9d4fc57fb391d8ee9afb4a475f84e7e3.jpg" class="responsive-img" alt="">
-                                            </div>
-                                            <div class="col m6 s12">
-                                                <p>오피스용 경량 스트레치 점퍼</p>
-                                                <h5>ZB-J2001</h5>
-<!--                                                <span class="new badge left ml-0 mr-2" data-badge-caption="">4.2 Star</span>-->
-                                                <p><span class="red-text">품절</span></p>
-                                                <hr class="mb-5">
-<!--                                                <span class="vertical-align-top mr-4"><i class="material-icons mr-3">favorite_border</i>Wishlist</span>-->
-                                                <ul class="list-bullet">
-                                                    <li class="list-item-bullet">나일론 스트레치 소재로 스트레치성이 우수하여 착용감이 편안하고 투톤 느낌의 외관이 고급스러운 오피스용 점퍼.</li>
-                                                    <li class="list-item-bullet">주름이 잘 가지 않고 딱 떨어지는 외관으로 실루엣이 좋음.</li>
-                                                    <li class="list-item-bullet">몸판 사이드에 타공을 한 원단을 패치해 통기성이 우수하며 디자인 포인트를 줌.</li>
-                                                    <li class="list-item-bullet">사이드포켓과 가슴포켓으로 수납성을 더해줌.</li>
-                                                </ul>
-                                                <h5>41,800원<span class="prise-text-style ml-2">45,000원</span></h5>
-                                                <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">카트에 담기</a>
-                                                <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">바로구매</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col s12 m4 l4">
-                                <div class="card animate fadeRight">
-                                    <div class="card-content">
-                                        <p>타공 스타일의 스트레치 점퍼</p>
-                                        <span class="card-title">ZB-J2003</span>
-                                        <img src="https://zibengimpo.com/web/product/medium/ZB-J2003.jpg" class="responsive-img" alt="">
-                                        <div class="display-flex flex-wrap justify-content-center">
-                                            <h5 class="mt-3">40,700원</h5>
-                                            <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="#modal3">View</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Modal Structure -->
-                                <div id="modal3" class="modal">
-                                    <div class="modal-content">
-                                        <a class="modal-close right"><i class="material-icons">close</i></a>
-                                        <div class="row" id="product-three">
-                                            <div class="col m6 s12">
-                                                <img src="https://zibengimpo.com/web/product/big/ZB-J2003.jpg" class="responsive-img" alt="">
-                                            </div>
-                                            <div class="col m6 s12">
-                                                <p>타공 스타일의 스트레치 점퍼</p>
-                                                <h5>ZB-J2003</h5>
-                                                <p>사이즈 선택</p>
-                                                <p>수량 선택</p>
-                                                <hr class="mb-5">
-                                                <ul class="list-bullet">
-                                                    <li class="list-item-bullet">가볍고 청량감 있는 터치감으로 하절기까지 착장하기 좋은 오피스룩 점퍼.</li>
-                                                    <li class="list-item-bullet">신축성이 좋은 소재로 착장감이 좋으며 밝은 컬러감으로 시즌 포인트 점퍼로 제안. </li>
-                                                    <li class="list-item-bullet">뒤 몸판에 타공을 한 원단을 패치해 통기성이 우수하며 스트라이프 패턴의 타공으로 디자인 포인트를 줌.</li>
-                                                    <li class="list-item-bullet">사이드와 가슴의 지퍼포켓으로 수납성을 더해줌.</li>
-                                                    <li class="list-item-bullet">안감이 없는 홑겹 스타일.</li>
-                                                </ul>
-                                                <h5>40,700원</h5>
-                                                <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">카트에 담기</a>
-                                                <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">바로구매</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col s12 m4 l4">
-                                <div class="card animate fadeLeft">
-                                    <div class="card-content">
-                                        <p>작업복 바지</p>
-                                        <span class="card-title text-ellipsis">ZB-P2103</span>
-                                        <img src="https://zibengimpo.com/web/product/medium/1689429b3f9c3068521bc83a19863e5e.jpg" class="responsive-img" alt="">
-                                        <div class="display-flex flex-wrap justify-content-center">
-                                            <h5 class="mt-3">30,800원</h5>
-                                            <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="#modal4">View</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Modal Structure -->
-                                <div id="modal4" class="modal">
-                                    <div class="modal-content">
-                                        <a class="modal-close right"><i class="material-icons">close</i></a>
-                                        <div class="row" id="product-five">
-                                            <div class="col m6 s12">
-                                                <img src="https://zibengimpo.com/web/product/big/0d556b6d5dc18321c44638c04e57122a.jpg" class="responsive-img" alt="">
-                                            </div>
-                                            <div class="col m6 s12">
-                                                <p>작업복 바지</p>
-                                                <h5>ZB-P2103</h5>
-                                                <p>사이즈 선택</p>
-                                                <p>수량 선택</p>
-                                                <hr class="mb-5">
-                                                <span class="vertical-align-top mr-4">
-                                                <ul class="list-bullet">
-                                                    <li class="list-item-bullet">건빵 포켓으로 수납성을 더해줌.</li>
-                                                    <li class="list-item-bullet">허리 매직밴드 작업으로 사이즈 조절이 용이함.</li>
-                                                </ul>
-                                                <h5>30,800원</h5>
-                                                <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">카트에 담기</a>
-                                                <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">바로구매</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col s12 m4 l4">
-                                <div class="card animate fadeUp">
-<!--                                    <div class="card-badge"><a class="white-text"> <b>NEW</b> </a></div>-->
-                                    <div class="card-content">
-                                        <p>작업복 바지 (방염복)</p>
-                                        <span class="card-title text-ellipsis">ZB-P2104</span>
-                                        <img src="https://zibengimpo.com/web/product/medium/0c198046b090309162a53160aae1b9a4.jpg" class="responsive-img" alt="">
-                                        <div class="display-flex flex-wrap justify-content-center">
-                                            <h5 class="mt-3">42,900원</h5>
-                                            <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="#modal5">View</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Modal Structure -->
-                                <div id="modal5" class="modal">
-                                    <div class="modal-content">
-                                        <a class="modal-close right"><i class="material-icons">close</i></a>
-                                        <div class="row" id="product-six">
-                                            <div class="col m6 s12">
-                                                <img src="https://zibengimpo.com/web/product/big/ee9ad088d671f8dda960d2d892303be8.jpg" class="responsive-img" alt="">
-                                            </div>
-                                            <div class="col m6 s12">
-                                                <p>작업복 바지 (방염복)</p>
-                                                <h5>ZB-P2104</h5>
-                                                <p>사이즈 선택</p>
-                                                <p>수량 선택</p>
-                                                <hr class="mb-5">
-                                                <ul class="list-bullet">
-                                                    <li class="list-item-bullet">건빵 포켓으로 수납성을 더해줌.</li>
-                                                    <li class="list-item-bullet">허리 E-BAND 작업으로 사이즈 조절이 용이함.</li>
-                                                </ul>
-                                                <h5>42,900원</h5>
-                                                <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">카트에 담기</a>
-                                                <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">바로구매</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col s12 m4 l4">
-                                <div class="card animate fadeRight">
-                                    <div class="card-content">
-                                        <p>작업복 바지</p>
-                                        <span class="card-title text-ellipsis">ZB-P2105</span>
-                                        <img src="https://zibengimpo.com/web/product/medium/96b2c5ab6527857efa35b3e65fdc4af1.jpg" class="responsive-img" alt="">
-                                        <div class="display-flex flex-wrap justify-content-center">
-                                            <h5 class="mt-3">27,500원</h5>
-                                            <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="#modal6">View</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Modal Structure -->
-                                <div id="modal6" class="modal">
-                                    <div class="modal-content">
-                                        <a class="modal-close right"><i class="material-icons">close</i></a>
-                                        <div class="row" id="product-seven">
-                                            <div class="col m6 s12">
-                                                <img src="https://zibengimpo.com/web/product/big/ZB-JP2105.jpg" class="responsive-img" alt="">
-                                            </div>
-                                            <div class="col m6 s12">
-                                                <p>작업복 바지</p>
-                                                <h5>ZB-P2105</h5>
-                                                <p>사이즈 선택</p>
-                                                <p>수량 선택</p>
-                                                <hr class="mb-5">
-                                                <ul class="list-bullet">
-                                                    <li class="list-item-bullet">허리 매직밴드 작업으로 사이즈 조절이 용이함.</li>
-                                                </ul>
-                                                <h5>27,500원</h5>
-                                                <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">카트에 담기</a>
-                                                <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">바로구매</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col s12 m4 l4">
-                                <div class="card animate fadeLeft">
-                                    <div class="card-content">
-                                        <p>일상화로도 활용이 가능한 캐쥬얼 타입의 디자인과 가벼운 무게감</p>
-                                        <span class="card-title text-ellipsis">ZB-213</span>
-                                        <img src="https://zibengimpo.com/web/product/medium/c39fd4d61b04f681ab92afa2e72bd479.jpg" class="responsive-img" alt="">
-                                        <div class="display-flex flex-wrap justify-content-center">
-                                            <h5 class="mt-3">80,300원</h5>
-                                            <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="#modal7">View</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Modal Structure -->
-                                <div id="modal7" class="modal">
-                                    <div class="modal-content">
-                                        <a class="modal-close right"><i class="material-icons">close</i></a>
-                                        <div class="row" id="product-eight">
-                                            <div class="col m6 s12">
-                                                <img src="https://zibengimpo.com/web/product/big/f3e5070709db5746d9af361468289d43.jpg" class="responsive-img" alt="">
-                                            </div>
-                                            <div class="col m6 s12">
-                                                <p>일상화로도 활용이 가능한 캐쥬얼 타입의 디자인과 가벼운 무게감</p>
-                                                <h5>ZB-213</h5>
-                                                <p>사이즈 선택</p>
-                                                <p>수량 선택</p>
-                                                <hr class="mb-5">
-                                                <ul class="list-bullet">
-                                                    <li class="list-item-bullet">여러 현장에서 다양하게 활용할 수 있는 캐주얼 타입의 디자인으로 작업 현장뿐만 아니라 일상생활에서도 착용이 가능한 스타일입니다.</li>
-                                                    <li class="list-item-bullet">또한 신축성이 좋은 네오프렌 소재를 사용하여 더욱 정교한 피팅이 가능하며 네오프렌 앞뒤 웨빙 고리를 사용하여 신발을 신고 벗기가 간편합니다.</li>
-                                                </ul>
-                                                <h5>80,300원</h5>
-                                                <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">카트에 담기</a>
-                                                <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">바로구매</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col s12 m4 l4">
-                                <div class="card animate fadeUp">
-                                    <div class="card-content">
-                                        <p>경쾌한 브라운 색상과 편안하고 캐쥬얼한 디자인과 함께 천연소가죽 누벅 가공 외피와 친환경소재 방수 내피를 적용한 최고급 라인업</p>
-                                        <span class="card-title text-ellipsis">ZB-202</span>
-                                        <img src="https://zibengimpo.com/web/product/medium/f506b9c743f0a28fee8e9f2ba97f2ae3.jpg" class="responsive-img" alt="">
-                                        <div class="display-flex justify-content-center flex-wrap">
-                                            <h5 class="mt-3">80,300원</h5>
-                                            <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="#modal8">View</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Modal Structure -->
-                                <div id="modal8" class="modal">
-                                    <div class="modal-content">
-                                        <a class="modal-close right"><i class="material-icons">close</i></a>
-                                        <div class="row" id="product-nine">
-                                            <div class="col m6 s12">
-                                                <img src="https://zibengimpo.com/web/product/big/ZB-202.png" class="responsive-img" alt="">
-                                            </div>
-                                            <div class="col m6 s12">
-                                                <p>경쾌한 브라운 색상과 편안하고 캐쥬얼한 디자인과 함께 천연소가죽 누벅 가공 외피와 친환경소재 방수 내피를 적용한 최고급 라인업</p>
-                                                <h5>ZB-202</h5>
-                                                <p>사이즈 선택</p>
-                                                <p>수량 선택</p>
-                                                <hr class="mb-5">
-                                                <ul class="list-bullet">
-                                                    <li class="list-item-bullet">천연소가죽 누벅의 새로운 가공 기술로 오래 신을수록 더욱 고급스럽고 부드러워지는 최고급 외피 소재를 적용하여 기존의 안전화에서는 느껴보지 못했던 편안하고 부드러운 착화감을 실현합니다. </li>
-                                                    <li class="list-item-bullet">독일의 심파텍스 방수 내피와 함께 제품 전체를 통가죽으로 설계하고 발목을 부드럽게 감싸는 발목 패딩을 적용해 더욱 편안하고 안정적인 보행이 가능합니다.</li>
-                                                </ul>
-                                                <h5>80,300원</h5>
-                                                <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">카트에 담기</a>
-                                                <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">바로구매</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col s12 m4 l4">
-                                <div class="card animate fadeRight">
-                                    <div class="card-content">
-                                        <p>원색 포인트의 테크니컬한 느낌의 디자인으로쉽고 간편하게 끈조임 조절이 가능한 프리락 다이얼 시스템</p>
-                                        <span class="card-title text-ellipsis">ZB-142</span>
-                                        <img src="https://zibengimpo.com/web/product/medium/1dc8114d3d34bee1aef1b0985ab826fe.jpeg" class="responsive-img" alt="">
-                                        <div class="display-flex flex-wrap justify-content-center">
-                                            <h5 class="mt-3">74,800원</h5>
-                                            <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="#modal9">View</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Modal Structure -->
-                                <div id="modal9" class="modal">
-                                    <div class="modal-content">
-                                        <a class="modal-close right"><i class="material-icons">close</i></a>
-                                        <div class="row" id="product-ten">
-                                            <div class="col m6 s12">
-                                                <img src="https://zibengimpo.com/web/product/big/28d6e32c521b6426b30d1e397c001707.jpg" class="responsive-img" alt="">
-                                            </div>
-                                            <div class="col m6 s12">
-                                                <p>원색 포인트의 테크니컬한 느낌의 디자인으로쉽고 간편하게 끈조임 조절이 가능한 프리락 다이얼 시스템</p>
-                                                <h5>ZB-142</h5>
-                                                <p>사이즈 선택</p>
-                                                <p>수량 선택</p>
-                                                <hr class="mb-5">
-                                                <ul class="list-bullet">
-                                                    <li class="list-item-bullet">프리락 다이얼 시스템의 간편함과 내피의 방수, 투습, 방풍의 기능으로 착화시 쾌적한 상태를 유지해주며 이중구조의 겉창은 현장에 적합한 바닥 그립감 및 경량성을 실현했습니다. </li>
-                                                    <li class="list-item-bullet">또한 방탄중창의 안전성 및 인체공학적인 설계로 새롭게 개발된 다중 구조의 안창은 우수한 착화감과 함께 강력한 피팅력을 제공합니다. </li>
-                                                </ul>
-                                                <h5>74,800원</h5>
-                                                <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">카트에 담기</a>
-                                                <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">바로구매</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                            <!-- Pagination -->
+                        <!-- Pagination -->
                         <div class="col s12 center">
-                            <ul class="pagination">
-                                <li class="disabled">
-                                    <a href="#!">
-                                        <i class="material-icons">chevron_left</i>
-                                    </a>
-                                </li>
-                                <li class="active"><a href="#!">1</a>
-                                </li>
-                                <li class="waves-effect"><a href="#!">2</a>
-                                </li>
-                                <li class="waves-effect"><a href="#!">3</a>
-                                </li>
-                                <li class="waves-effect"><a href="#!">4</a>
-                                </li>
-                                <li class="waves-effect"><a href="#!">5</a>
-                                </li>
-                                <li class="waves-effect">
-                                    <a href="#!">
-                                        <i class="material-icons">chevron_right</i>
-                                    </a>
-                                </li>
-                            </ul>
+                            <th:block th:if="${not #lists.isEmpty(resultList)}">
+                                <ul class="pagination">
+                                    <li th:class="${pagingResult.hasPrevious ? 'waves-effect' : 'disabled'}">
+                                        <a th:if="${pagingResult.hasPrevious}" th:onclick="|javascript:goPage('${pagingResult.page-1}');|"><i class="material-icons">chevron_left</i></a>
+                                        <a th:unless="${pagingResult.hasPrevious}" th:onclick="|javascript:return false;|"><i class="material-icons">chevron_left</i></a>
+                                    </li>
+
+                                    <li th:each="pageCount : ${#numbers.sequence(pagingResult.startPage, pagingResult.endPage)}" th:class="${pagingResult.page == pageCount ? 'active' : 'waves-effect'}">
+                                        <a th:if="${pagingResult.page == pageCount}" th:text="${pageCount}"></a>
+                                        <a th:unless="${pagingResult.page == pageCount}" th:text="${pageCount}" th:onclick="|javascript:goPage('${pageCount}');|"></a>
+                                    </li>
+
+                                    <li th:class="${pagingResult.hasNext ? 'waves-effect' : 'disabled'}">
+                                        <a th:if="${pagingResult.hasNext}" th:onclick="|javascript:goPage('${pagingResult.page+1}');|"><i class="material-icons">chevron_right</i></a>
+                                        <a th:unless="${pagingResult.hasNext}" th:onclick="|javascript:return false;|"><i class="material-icons">chevron_right</i></a>
+                                    </li>
+                                </ul>
+                            </th:block>
                         </div>
                     </div>
                 </div>
-                <div style="bottom: 50px; right: 19px;" class="fixed-action-btn direction-top"><a class="btn-floating btn-large gradient-45deg-light-blue-cyan gradient-shadow"><i class="material-icons">add</i></a>
+<!--                <div style="bottom: 50px; right: 19px;" class="fixed-action-btn direction-top"><a class="btn-floating btn-large gradient-45deg-light-blue-cyan gradient-shadow"><i class="material-icons">add</i></a>
                     <ul>
                         <li><a href="css-helpers.html" class="btn-floating blue"><i class="material-icons">help_outline</i></a></li>
                         <li><a href="cards-extended.html" class="btn-floating green"><i class="material-icons">widgets</i></a></li>
                         <li><a href="app-calendar.html" class="btn-floating amber"><i class="material-icons">today</i></a></li>
                         <li><a href="app-email.html" class="btn-floating red"><i class="material-icons">mail_outline</i></a></li>
                     </ul>
-                </div>
+                </div>-->
             </div>
             <div class="content-overlay"></div>
+
         </div>
     </div>
+
+    <form name="listForm" method="get" action="/shop/list.do">
+        <input type="hidden" name="page" th:value="${pagingResult.page}"/>
+        <input type="hidden" name="listSize" th:value="${pagingResult.listSize}"/>
+        <input type="hidden" name="pageSize" th:value="${pagingResult.pageSize}"/>
+        <input type="hidden" name="direction" th:value="${pagingResult.direction}"/>
+        <input type="hidden" name="sortProp" th:value="${pagingResult.sortProp}"/>
+    </form>
 </div>
 <!-- END: Page Main-->
 

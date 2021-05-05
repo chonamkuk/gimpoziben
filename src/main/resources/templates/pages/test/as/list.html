@@ -130,7 +130,9 @@
     <th:block th:if="${not #lists.isEmpty(asList)}">
         <ul class="pagination">
             <th:block th:if="${pagingResult.hasPrevious}">
-                <li class="waves-effect"><a th:onclick="|javascript:goPage('${pagingResult.page-1}');|"><i class="material-icons">chevron_left</i></a></li>
+                <li class="waves-effect">
+                    <a th:onclick="|javascript:goPage('${pagingResult.page-1}');|"><i class="material-icons">chevron_left</i></a>
+                </li>
             </th:block>
             <th:block th:unless="${pagingResult.hasPrevious}">
                 <li class="disabled"><a><i class="material-icons">chevron_left</i></a></li>
