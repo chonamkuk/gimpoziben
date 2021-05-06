@@ -96,16 +96,27 @@
                     </li>
                     <li>
                         <a class="dropdown-menu" href="#" data-target="formsTables3">
-                            <i class="material-icons">local_phone</i>
-                            <span><span class="dropdown-title" data-i18n="Menu levels">고객센터</span><i class="material-icons right">keyboard_arrow_down</i></span>
+<!--                            <i class="material-icons">campaign</i>-->
+                            <i class="material-icons">announcement</i>
+                            <span><span class="dropdown-title" data-i18n="Menu levels">공지사항</span></span>
                         </a>
                         <ul class="dropdown-content dropdown-horizontal-list" id="formsTables3">
-                            <li data-menu=""><a href="#"><span data-i18n="Second level 1">공지사항</span></a>
-                            </li>
-                            <li data-menu=""><a href="#"><span data-i18n="Second level 2">FAQ</span></a>
-                            </li>
-                            <li data-menu=""><a href="#"><span data-i18n="Second level3">Q&A</span></a>
-                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-menu" href="#" data-target="formsTables4">
+                            <i class="material-icons">help_outline</i>
+                            <span><span class="dropdown-title" data-i18n="Menu levels">FAQ</span></span>
+                        </a>
+                        <ul class="dropdown-content dropdown-horizontal-list" id="formsTables4">
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-menu" href="#" data-target="formsTables5">
+                            <i class="material-icons">question_answer</i>
+                            <span><span class="dropdown-title" data-i18n="Menu levels">Q&A</span></span>
+                        </a>
+                        <ul class="dropdown-content dropdown-horizontal-list" id="formsTables5">
                         </ul>
                     </li>
                 </ul>
@@ -155,17 +166,13 @@
                 </div>
             </li>
             <li class="bold">
-                <a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">support_agent</i><span class="menu-title" data-i18n="Menu levels">고객센터</span></a>
-                <div class="collapsible-body">
-                    <ul class="collapsible collapsible-sub" data-collapsible="accordion">
-                        <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level">공지사항</span></a>
-                        </li>
-                        <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level">FAQ</span></a>
-                        </li>
-                        <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level">Q&A</span></a>
-                        </li>
-                    </ul>
-                </div>
+                <a class="waves-effect waves-cyan " href="#"><i class="material-icons">announcement</i><span class="menu-title">공지사항</span></a>
+            </li>
+            <li class="bold">
+                <a class="waves-effect waves-cyan " href="#"><i class="material-icons">help_outline</i><span class="menu-title">FAQ</span></a>
+            </li>
+            <li class="bold">
+                <a class="waves-effect waves-cyan " href="#"><i class="material-icons">question_answer</i><span class="menu-title">Q&A</span></a>
             </li>
         </ul>
         <div class="navigation-background"></div><a class="sidenav-trigger btn-floating btn-medium waves-effect waves-light hide-on-large-only" href="#" data-target="slide-out"><i class="material-icons">menu</i></a>
@@ -206,5 +213,21 @@
             <a class="modal-close waves-effect waves-green btn-flat confirm">확인</a>
         </div>
     </div>
+
+    <!--  로딩 circle  -->
+<!--    <div class="preloader-wrapper small active loading-circle" id="loading-circle" style="display: none;">-->
+<!--        <div class="spinner-layer spinner-blue-only">-->
+<!--            <div class="circle-clipper left">-->
+<!--                <div class="circle"></div>-->
+<!--            </div><div class="gap-patch">-->
+<!--            <div class="circle"></div>-->
+<!--        </div><div class="circle-clipper right">-->
+<!--            <div class="circle"></div>-->
+<!--        </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+    <!--  로딩 overlay  -->
+    <div class="loading-overlay" id="loading-overlay"></div>
 </header>
 </html>

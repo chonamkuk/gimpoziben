@@ -23,4 +23,6 @@ public class SizeDto {
     private LocalDateTime regDt;
     private String modifier;
     private LocalDateTime modDt;
+
+
 }

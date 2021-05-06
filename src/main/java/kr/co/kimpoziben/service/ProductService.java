@@ -4,6 +4,7 @@ import kr.co.kimpoziben.domain.entity.*;
 import kr.co.kimpoziben.domain.repository.ProdCateRepository;
 import kr.co.kimpoziben.domain.repository.ProdSizeRepository;
 import kr.co.kimpoziben.domain.repository.ProductRepository;
+import kr.co.kimpoziben.domain.repository.SizeRepository;
 import kr.co.kimpoziben.dto.*;
 import lombok.AllArgsConstructor;
 import org.hibernate.collection.spi.PersistentCollection;
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -32,6 +34,8 @@ public class ProductService {
     private ProdSizeRepository prodSizeRepository;
     @Autowired
     private ProdCateRepository prodCateRepository;
+    @Autowired
+    private SizeService sizeService;
     @Autowired
     private AttachService attachService;
 
@@ -63,11 +67,13 @@ public class ProductService {
         if(productPage.getContent().size() > 0) {
             for(Product product : productPage.getContent()) {
                 ProductDto productDto = new ProductDto();
+                productDto.setSeqProduct(product.getSeqProduct());
                 productDto.setNmProduct(product.getNmProduct());
                 productDto.setTitleProduct(product.getTitleProduct());
                 productDto.setSellPrice(product.getSellPrice());
                 productDto.setYnSoldOut(product.getYnSoldOut());
                 productDto.setIdMainImg(product.getIdMainImg());
+                productDto.setDescProduct(product.getDescProduct());
 
                 productList.add(productDto);
             }
@@ -93,8 +99,8 @@ public class ProductService {
          *         values
          *             (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
          */
-
         Product newProduct = productRepository.save(modelMapper.map(productDto, Product.class));
+
         for(ProdCateDto prodCateDto : productDto.getCateList()) {
             ProdCate prodCate = ProdCate.builder()
                     .seqCategory(prodCateDto.getCategory().getSeqCategory())
@@ -116,5 +122,18 @@ public class ProductService {
             }
         }
         return newProduct.getSeqProduct();
+    }
+
+    public ProductDto getProductDetail(Long seqProduct) throws  Exception {
+        Product product = productRepository.findById(seqProduct).get();
+        ProductDto productDto = modelMapper.map(product, ProductDto.class);
+
+        for(ProdSize prodSize : product.getSizeList()) { // todo: 한번에 가져올 방법 없는지?? ProdSize에는 seq만 있는 것이 문제임
+            ProdSizeDto prodSizeDto = new ProdSizeDto();
+            prodSizeDto.setSize(sizeService.getSizeDetail(prodSize.getSeqSize()));
+            productDto.getSizeList().add(prodSizeDto);
+        }
+
+        return productDto;
     }
 }

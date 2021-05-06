@@ -13,3 +13,21 @@
 .gradient-45deg-light-blue-cyan {
     background: linear-gradient(45deg, #0c3666, #0288d1) !important;
 }
+
+.loading-circle .circle {
+    box-sizing: border-box !important;
+}
+
+.loading-overlay {
+    position: fixed;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+    z-index: 9998;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    right: 0;
+    display: none;
+    pointer-events: none;
+}

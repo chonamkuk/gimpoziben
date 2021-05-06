@@ -102,23 +102,23 @@ $(document).ready(function () {
     });
 
     //  모달 공통기능, 모바일기기에서 뒤로가기 동작을 위해
-    $('.modal').modal({
-        onOpenEnd: function (e) {
-            let modalId = $(this).attr('id');
-            if (location.href.split('#').pop() != modalId) {
-                window.history.pushState({}, '', location.href + '#' + $(this).attr('id'));
-            }
-            modalStack.push(modalId);
-        },
-        onCloseStart: function (e) {
-            if (location.href.split('#').pop() == $(this).attr('id')) {
-                window.history.back();
-            }
-        },
-        onCloseEnd: function (e) {
-            modalStack.pop();
-        }
-    });
+    // $('.modal').modal({
+    //     onOpenEnd: function (e) {
+    //         let modalId = $(this).attr('id');
+    //         if (location.href.split('#').pop() != modalId) {
+    //             window.history.pushState({}, '', location.href + '#' + $(this).attr('id'));
+    //         }
+    //         modalStack.push(modalId);
+    //     },
+    //     onCloseStart: function (e) {
+    //         if (location.href.split('#').pop() == $(this).attr('id')) {
+    //             window.history.back();
+    //         }
+    //     },
+    //     onCloseEnd: function (e) {
+    //         modalStack.pop();
+    //     }
+    // });
 
     window.onpopstate = history.onpushstate = function (e) {
         console.log('뒤로가기 감지 : ' + e);
@@ -371,5 +371,9 @@ function common() {
         $('#loading-circle').hide();
         $('#loading-overlay').hide();
         $('body').css('pointer-events', '');
+    }
+
+    this.numberWithCommas = function (x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 }

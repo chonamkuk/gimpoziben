@@ -15,6 +15,49 @@
             }
         }
 
+        @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px){
+            #ecommerce-products .card-content .btn {
+                display: inline-table;
+                width: 100%;
+            }
+        }
+
+        @media only screen and (width: 1024px){
+            #ecommerce-products .electronic-products .col.s12.m4.l4 {
+                width: 49.3333%;
+            }
+        }
+
+        @media only screen and (max-width: 600px) {
+            div.no-image {
+                background-image: url('/static/image/broken_image_24dp.png');
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        }
+
+        @media only screen and (min-width: 600px) and (max-width: 800px){
+            #ecommerce-products > div.col > div > div.card.animate > div > div > img {
+                height: 130px;
+            }
+            div.no-image {
+                background-image: url('/static/image/broken_image_48dp.png');
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        }
+
+        @media only screen and (min-width: 801px) {
+            #ecommerce-products > div.col > div > div.card.animate > div > div > img {
+                height: 267px;
+            }
+            div.no-image {
+                background-image: url('/static/image/broken_image_48dp.png');
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        }
+
         #ecommerce-products .card {
             overflow: hidden;
         }
@@ -42,7 +85,7 @@
             text-indent: .8em;
             background: #8e24aa;
             background: -webkit-linear-gradient(45deg, #8e24aa 0%, #ff6e40 100%);
-            background:         linear-gradient(45deg, #8e24aa 0%, #ff6e40 100%);
+            background: linear-gradient(45deg, #8e24aa 0%, #ff6e40 100%);
         }
 
         #ecommerce-products .card-badge a {
@@ -177,47 +220,41 @@
             max-height: 90%;
         }
 
-        @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px){
-            #ecommerce-products .card-content .btn {
-                display: inline-table;
-                width: 100%;
-            }
+        .card .card-content .card-title {
+            min-height: 32px;
+            font-size: 12px;
         }
 
-        @media only screen and (width: 1024px){
-            #ecommerce-products .electronic-products .col.s12.m4.l4 {
-                width: 49.3333%;
-            }
+        #ecommerce-products > div.col.s12.m12.l12.pr-0 > div > div.card.animate > div > p {
+            font-size: 20px;
+            font-weight: bold;
         }
 
-        @media only screen and (max-width: 600px) {
-            div.no-image {
-                background-image: url('/static/image/broken_image_24dp.png');
-                background-position: center;
-                background-repeat: no-repeat;
-            }
+        .responsive-img {
+            min-height: 55px;
         }
 
-        @media only screen and (min-width: 600px) and (max-width: 800px){
-            #ecommerce-products > div.col > div > div.card.animate > div > div > img {
-                height: 130px;
-            }
-            div.no-image {
-                background-image: url('/static/image/broken_image_48dp.png');
-                background-position: center;
-                background-repeat: no-repeat;
-            }
+        /************** 상품상세 모달 **************/
+        .carousel {
+            height: 587px;
+            border: 1px solid #ECEFF1;
         }
 
-        @media only screen and (min-width: 801px) {
-            #ecommerce-products > div.col > div > div.card.animate > div > div > img {
-                height: 267px;
-            }
-            div.no-image {
-                background-image: url('/static/image/broken_image_48dp.png');
-                background-position: center;
-                background-repeat: no-repeat;
-            }
+        .carousel .carousel-item > img {
+            top: 50%;
+            -webkit-transform: translate(0,-50%);
+            transform: translate(0,-50%);
+            position: relative;
+            width: auto;
+            max-height: 100%;
+            -webkit-transition: border-color .15s linear;
+            transition: border-color .15s linear;
+        }
+
+        .carousel .indicators .indicator-item {
+            border: 1px solid #bababa;
+            width: 15px;
+            height: 15px;
         }
     </style>
 </th:block>
@@ -226,9 +263,67 @@
 <th:block layout:fragment="script">
     <script type="text/javascript">
         $(document).ready(function () {
-            $('.modal').modal();
-            $('#modal3').modal('open');
-            $('#modal3').modal('close');
+
+            $('.product-detail-modal').modal({
+                onOpenStart: function(e) {
+                    // data-loadee 값 없으면 데이터 불러오기
+                    if(!$(e).data('loaded')) {
+                        comn.preLoading();
+                        console.log('데이터 없음');
+                        let seqProduct = $(e).data('seq-product');
+                        $.ajax({
+                            url: '/shop/detail.do?seqProduct=' + seqProduct,
+                            type: 'GET',
+                            dataType: 'json',
+                            success: function(data) {
+                                console.log(data);
+                                /**이미지 로딩 시작**/
+                                if(data.attachDtoList.length > 0) {
+                                    // todo: 이미지 갯수만큼만 carousel-item 생성해서 넣기
+                                    data.attachDtoList.forEach(function(item, index){
+                                        let imageSrc = '/attach/resizeImgView.do?idAttach=' + item.idAttach + '&snFileAttach=' + item.snFileAttach;
+                                        $(e).find('.carousel-item img').eq(index).attr('src', imageSrc); // 카루셀에 이미지 적용
+                                    });
+                                    $(e).find('.carousel.carousel-slider').carousel({
+                                        fullWidth: true,
+                                        indicators: true
+                                    });
+                                } else {
+
+                                }/**이미지 로딩 끝**/
+                                // $(e).find('.detail-product-title').text(data.productDto.titleProduct);
+                                // $(e).find('.detail-product-nm').text(data.productDto.nmProduct);
+                                // $(e).find('.detail-product-price').text(comn.numberWithCommas(data.productDto.sellPrice) + '원');
+                                $(e).find('.size-filter  > ul').empty();
+                                data.productDto.sizeList.forEach(function(item, index){
+                                    $(e).find('.size-filter  > ul').append('<li style="margin-right: 3px;"><a>'+ item.size.nmSize +'</a></li>');
+                                });
+
+                                // 데이터 로딩 완료 후 data-loaded 값 바꾸기
+                                $(e).data('loaded', true);
+                                comn.afterLoading();
+                            },
+                            error: function(request, status, error){
+                                console.log('code : ' + request.status);
+                                console.log('message : ' + request.responseText);
+                                console.log('error : ' + error);
+                            }
+                        });
+                    } else {
+                        console.log('데이터 있음');
+                    }
+                }
+            });
+
+            $('.modal-content > div > div > div > div > p > img').css('height', '100%');
+            $('.modal-content > div > div > div > div > p > img').css('width', '100%');
+            $('.modal-content > div > div > div > div > p > img').css('object-fit', 'contain');
+            $('.modal-content > div > div > div > div > p > img').css('object-position', 'top');
+        }); // document ready 끝
+
+        $(document).on('click', '.size-filter > ul > li > a', function(e) {
+            $(this).parent().siblings().removeClass('active');
+            $(this).parent().addClass('active');
         });
 
         function goPage(page){
@@ -272,7 +367,7 @@
                                     <div th:if="${resultDto.ynSoldOut == 'Y'}" class="card-badge"><a class="white-text"><b>품절</b></a></div>
                                     <div class="card-content">
                                         <p th:text="${resultDto.nmProduct}"></p>
-                                        <span class="card-title text-ellipsis tooltipped" data-position="bottom" th:text="${resultDto.titleProduct}" th:data-tooltip="${resultDto.titleProduct}"></span>
+                                        <span class="card-title text-ellipsis" data-position="bottom" th:text="${resultDto.titleProduct}" th:data-tooltip="${resultDto.titleProduct}" th:classappend="${#strings.isEmpty(resultDto.titleProduct) ? '' : 'tooltipped'}"></span>
                                         <div th:class="${#strings.isEmpty(resultDto.idMainImg) ? 'no-image' : ''}">
                                             <th:block th:if="${not #strings.isEmpty(resultDto.idMainImg)}">
                                                 <img  class="responsive-img" th:src="${'/attach/resizeImgView.do?idAttach=' + resultDto.idMainImg + '&snFileAttach=1'}">
@@ -288,32 +383,67 @@
                                     </div>
                                 </div>
                                 <!-- Modal Structure -->
-                                <div th:id="${'modal' + listStatus.index}" class="modal product-detail-modal">
+                                <div th:id="${'modal' + listStatus.index}" class="modal product-detail-modal" data-loaded="false" th:data-seq-product="${resultDto.seqProduct}">
                                     <div class="modal-content pt-2">
                                         <div class="row" th:id="${'product' + listStatus.index}">
                                             <div class="col s12">
                                                 <a class="modal-close right"><i class="material-icons">close</i></a>
                                             </div>
+                                            <!-- 이미지 슬라이더 -->
                                             <div class="col m6 s12">
-                                                <img src="https://zibengimpo.com/web/product/big/ZB-J2101.jpg" class="responsive-img" alt="">
+                                                <div class="row">
+                                                    <div class="carousel carousel-slider center" data-indicators="true">
+                                                        <div class="carousel-item white-text">
+                                                            <img src="" class="responsive-img" alt="">
+                                                        </div>
+                                                        <div class="carousel-item white-text">
+                                                            <img src="" class="responsive-img" alt="">
+                                                        </div>
+                                                        <div class="carousel-item white-text">
+                                                            <img src="" class="responsive-img" alt="">
+                                                        </div>
+                                                        <div class="carousel-item white-text">
+                                                            <img src="" class="responsive-img" alt="">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col m6 s12">
-                                                <p>오피스용 경량 스트레치 점퍼</p>
-                                                <h5>ZB-J2101</h5>
-<!--                                                <span class="new badge left ml-0 mr-2" data-badge-caption="">NEW</span>-->
-                                                <p>사이즈 선택<!--<span class="green-text">선택</span>--></p>
-                                                <p>수량 선택<!--<span class="green-text">선택</span>--></p>
-                                                <hr class="mb-5">
-<!--                                                <span class="vertical-align-top mr-4"><i class="material-icons mr-3">favorite_border</i>Wishlist</span>-->
-                                                <ul class="list-bullet">
-                                                    <li class="list-item-bullet">가볍고 부드러운 터치감으로 하절기까지 착장하기 좋은 오피스룩 점퍼.</li>
-                                                    <li class="list-item-bullet">신축성이 좋은 소재로 착장감이 좋으며 투톤 미니체크로 멜란지 느낌이 남.</li>
-                                                    <li class="list-item-bullet">어깨와 사이드에 타공을 한 원단을 패치해 통기성이 우수함.</li>
-                                                    <li class="list-item-bullet">사이드와 가슴의 지퍼포켓으로 수납성을 더해줌.</li>
-                                                </ul>
-                                                <h5>41,800원<!--<span class="prise-text-style ml-2">41,800원</span>--></h5>
-                                                <a class="waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">카트에 담기</a>
-                                                <a class="waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">바로구매</a>
+                                            <!-- 상품 정보 영역 -->
+                                            <div class="col s12 m6">
+<!--                                                <div class="row">-->
+                                                    <h5 class="detail-product-nm" th:text="${resultDto.nmProduct}">품번</h5>
+                                                    <p class="detail-product-title" th:text="${resultDto.titleProduct}">상품 타이틀</p>
+    <!--                                                <span class="new badge left ml-0 mr-2" data-badge-caption="">NEW</span>-->
+                                                    <hr class="mb-5">
+                                                    <p class="col s6">단가</p>
+                                                    <p class="col s6 detail-product-price" th:text="${#numbers.formatDecimal(resultDto.sellPrice, 0, 'COMMA', 0, 'POINT')} + '원'">판매가격</p>
+                                                    <p class="col s6 detail-product-size">사이즈 선택</p>
+                                                    <div class="col s6 size-filter" style="margin-bottom: 17px;">
+                                                        <ul>
+                                                            <li style="margin-right: 3px;"><a>1</a></li>
+                                                            <li style="margin-right: 3px;"><a>2</a></li>
+                                                            <li style="margin-right: 3px;"><a>3</a></li>
+                                                            <li style="margin-right: 3px;"><a>4</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col s6" style="margin-top: 1rem;">수량 선택</div>
+                                                    <div class="col s6 input-field" style="margin-top: 0rem;">
+                                                        <input id="orderCnt" name="orderCnt" type="number" class="validate">
+                                                        <label for="orderCnt">입력</label>
+                                                    </div>
+    <!--                                                <span class="vertical-align-top mr-4"><i class="material-icons mr-3">favorite_border</i>Wishlist</span>-->
+                                                    <h5 class="col s12">0원<!--<span class="prise-text-style ml-2">41,800원</span>--></h5>
+                                                    <a class="col s12 m12 l5 waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">카트에 담기</a>
+                                                    <a class="col s12 m12 l5 waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">바로구매</a>
+<!--                                                </div>-->
+                                            </div>
+                                            <!-- 상품 상세설명 영역 -->
+                                            <div class="col s12">
+                                                <div class="card">
+                                                    <div class="card-content">
+                                                        <th:block th:utext="${resultDto.descProduct}"></th:block>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

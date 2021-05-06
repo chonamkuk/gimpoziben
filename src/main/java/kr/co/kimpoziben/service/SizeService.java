@@ -48,4 +48,14 @@ public class SizeService {
         return sizeList;
     }
 
+    public SizeDto getSizeDetail(Long seqSize) throws  Exception {
+        Size size = sizeRepository.findById(seqSize).get();
+
+        SizeDto sizeDto = new SizeDto();
+        sizeDto.setSeqSize(size.getSeqSize());
+        sizeDto.setNmSize(size.getNmSize());
+
+        return sizeDto;
+    }
+
 }

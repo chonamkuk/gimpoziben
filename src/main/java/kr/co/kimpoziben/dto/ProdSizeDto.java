@@ -12,6 +12,6 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class ProdSizeDto {
-    private Product product;
-    private Size size;
+    private ProductDto product;
+    private SizeDto size;
 }

@@ -48,6 +48,7 @@
     <script>
         $(document).ready(function(){
             CKEDITOR.replace('descProduct');
+            $('.modal').modal(); // todo: 확인 후 삭제
 
             let processed = false;
             $('#saveForm').submit(function(e){
@@ -62,7 +63,7 @@
                 $('#confirmModal').find('h4').text('알림');
                 $('#confirmModal').find('p').text('등록 하시겠습니까?');
                 $('#confirmModal').find('.confirm').on('click', function(){
-                    /**상품 이미지 start**/
+                    /**상품 이미지**/
                     $('.dropify-render').each(function(index, item){
                         let $renderImg = $(item).find('img');
                         if($renderImg.length > 0) {
@@ -126,7 +127,6 @@
             });
             // 첨부파일 로딩 후 동작
             drEvent.on('dropify.fileReady', function(event, element){
-                console.log('dropify.fileReady');
                 setTimeout(function(){
                     let targetIndex = $(event.target).data('index');
                     let imageSrc = $('.dropify-render').eq(targetIndex).find('img').attr('src')
@@ -164,7 +164,7 @@
                 setChildCategory($(this).val());
             });
 
-        });
+        }); // document ready 끝
 
         function setChildCategory(seqUpper){
             $.ajax({
