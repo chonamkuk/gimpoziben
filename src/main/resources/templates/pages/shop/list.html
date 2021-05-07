@@ -263,72 +263,77 @@
 <th:block layout:fragment="script">
     <script type="text/javascript">
         $(document).ready(function () {
-
-            $('.product-detail-modal').modal({
-                onOpenStart: function(e) {
-                    // data-loadee 값 없으면 데이터 불러오기
-                    if(!$(e).data('loaded')) {
-                        comn.preLoading();
-                        console.log('데이터 없음');
-                        let seqProduct = $(e).data('seq-product');
-                        $.ajax({
-                            url: '/shop/detail.do?seqProduct=' + seqProduct,
-                            type: 'GET',
-                            dataType: 'json',
-                            success: function(data) {
-                                console.log(data);
-                                /**이미지 로딩 시작**/
-                                if(data.attachDtoList.length > 0) {
-                                    // todo: 이미지 갯수만큼만 carousel-item 생성해서 넣기
-                                    data.attachDtoList.forEach(function(item, index){
-                                        let imageSrc = '/attach/resizeImgView.do?idAttach=' + item.idAttach + '&snFileAttach=' + item.snFileAttach;
-                                        $(e).find('.carousel-item img').eq(index).attr('src', imageSrc); // 카루셀에 이미지 적용
-                                    });
-                                    $(e).find('.carousel.carousel-slider').carousel({
-                                        fullWidth: true,
-                                        indicators: true
-                                    });
-                                } else {
-
-                                }/**이미지 로딩 끝**/
-                                // $(e).find('.detail-product-title').text(data.productDto.titleProduct);
-                                // $(e).find('.detail-product-nm').text(data.productDto.nmProduct);
-                                // $(e).find('.detail-product-price').text(comn.numberWithCommas(data.productDto.sellPrice) + '원');
-                                $(e).find('.size-filter  > ul').empty();
-                                data.productDto.sizeList.forEach(function(item, index){
-                                    $(e).find('.size-filter  > ul').append('<li style="margin-right: 3px;"><a>'+ item.size.nmSize +'</a></li>');
-                                });
-
-                                // 데이터 로딩 완료 후 data-loaded 값 바꾸기
-                                $(e).data('loaded', true);
-                                comn.afterLoading();
-                            },
-                            error: function(request, status, error){
-                                console.log('code : ' + request.status);
-                                console.log('message : ' + request.responseText);
-                                console.log('error : ' + error);
-                            }
-                        });
-                    } else {
-                        console.log('데이터 있음');
-                    }
-                }
-            });
-
+            // ck이미지 스타일 조정
             $('.modal-content > div > div > div > div > p > img').css('height', '100%');
             $('.modal-content > div > div > div > div > p > img').css('width', '100%');
             $('.modal-content > div > div > div > div > p > img').css('object-fit', 'contain');
             $('.modal-content > div > div > div > div > p > img').css('object-position', 'top');
+
+            // 상세데이터 로딩 바인딩
+            setTimeout(function(){
+                $('.product-detail-modal').each(function(index, item){
+                    M.Modal.getInstance($(item)).options.onOpenStart = function(e){getDetail(e)};
+                });
+            },200);
         }); // document ready 끝
 
+        // 사이즈선택
         $(document).on('click', '.size-filter > ul > li > a', function(e) {
             $(this).parent().siblings().removeClass('active');
             $(this).parent().addClass('active');
         });
 
+        // 리스트 이동
         function goPage(page){
             $('[name="listForm"]').children('[name="page"]').val(page);
             $('[name="listForm"]').submit();
+        }
+
+        // 상세 데이터 로딩
+        function getDetail(e){
+            // data-loaded 값 없으면 데이터 불러오기
+            if(!$(e).data('loaded')) {
+                comn.preLoading();
+                console.log('데이터 없음');
+                let seqProduct = $(e).data('seq-product');
+                $.ajax({
+                    url: '/shop/detail.do?seqProduct=' + seqProduct,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                        /**상품 이미지 시작**/
+                        if(data.attachDtoList.length > 0) {
+                            data.attachDtoList.forEach(function(item, index){
+                                let imageSrc = '/attach/resizeImgView.do?idAttach=' + item.idAttach + '&snFileAttach=' + item.snFileAttach;
+                                let $carouselItem = $('<div class="carousel-item white-text"><img src="'+ imageSrc +'" class="responsive-img"></div>');
+                                $(e).find('.carousel.carousel-slider').append($carouselItem);
+                            });
+                            $(e).find('.carousel.carousel-slider').carousel({
+                                fullWidth: true,
+                                indicators: true
+                            });
+                        }/**상품 이미지 끝**/
+
+                        // 사이즈정보
+                        $(e).find('.size-filter  > ul').empty();
+                        data.productDto.sizeList.forEach(function(item, index){
+                            $(e).find('.size-filter  > ul').append('<li style="margin-right: 3px;"><a>'+ item.size.nmSize +'</a></li>');
+                        });
+
+                        // 데이터 로딩 완료 후 data-loaded 값 바꾸기
+                        $(e).data('loaded', true);
+                        comn.afterLoading();
+                    },
+                    error: function(request, status, error){
+                        console.log('code : ' + request.status);
+                        console.log('message : ' + request.responseText);
+                        console.log('error : ' + error);
+                    }
+                });
+            } else {
+                console.log('데이터 있음');
+            }
         }
     </script>
 </th:block>
@@ -370,7 +375,7 @@
                                         <span class="card-title text-ellipsis" data-position="bottom" th:text="${resultDto.titleProduct}" th:data-tooltip="${resultDto.titleProduct}" th:classappend="${#strings.isEmpty(resultDto.titleProduct) ? '' : 'tooltipped'}"></span>
                                         <div th:class="${#strings.isEmpty(resultDto.idMainImg) ? 'no-image' : ''}">
                                             <th:block th:if="${not #strings.isEmpty(resultDto.idMainImg)}">
-                                                <img  class="responsive-img" th:src="${'/attach/resizeImgView.do?idAttach=' + resultDto.idMainImg + '&snFileAttach=1'}">
+                                                <img  class="responsive-img" th:src="${'/attach/resizeImgView.do?idAttach=' + resultDto.idMainImg + '&snFileAttach=1&resizeWidth=500'}">
                                             </th:block>
                                             <th:block th:if="${#strings.isEmpty(resultDto.idMainImg)}">
                                                 <img class="responsive-img">
@@ -389,53 +394,47 @@
                                             <div class="col s12">
                                                 <a class="modal-close right"><i class="material-icons">close</i></a>
                                             </div>
-                                            <!-- 이미지 슬라이더 -->
-                                            <div class="col m6 s12">
-                                                <div class="row">
-                                                    <div class="carousel carousel-slider center" data-indicators="true">
-                                                        <div class="carousel-item white-text">
-                                                            <img src="" class="responsive-img" alt="">
+                                            <div class="col s12">
+                                                <div class="card" style="padding-bottom: 2%;">
+                                                    <div class="card-content">
+                                                        <!-- 이미지 슬라이더 -->
+                                                        <div class="col m6 s12">
+                                                            <div class="row">
+                                                                <div class="carousel carousel-slider center" data-indicators="true">
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="carousel-item white-text">
-                                                            <img src="" class="responsive-img" alt="">
-                                                        </div>
-                                                        <div class="carousel-item white-text">
-                                                            <img src="" class="responsive-img" alt="">
-                                                        </div>
-                                                        <div class="carousel-item white-text">
-                                                            <img src="" class="responsive-img" alt="">
+                                                        <!-- 상품 정보 영역 -->
+                                                        <div class="col s12 m6">
+                                                            <!--                                                <div class="row">-->
+                                                            <h5 class="detail-product-nm" th:text="${resultDto.nmProduct}">품번</h5>
+                                                            <p class="detail-product-title" th:text="${resultDto.titleProduct}">상품 타이틀</p>
+                                                            <!--                                                <span class="new badge left ml-0 mr-2" data-badge-caption="">NEW</span>-->
+                                                            <hr class="mb-5">
+                                                            <p class="col s6">단가</p>
+                                                            <p class="col s6 detail-product-price" th:text="${#numbers.formatDecimal(resultDto.sellPrice, 0, 'COMMA', 0, 'POINT')} + '원'">판매가격</p>
+                                                            <p class="col s6 detail-product-size" style="margin-top: 2.5rem;">사이즈 선택</p>
+                                                            <div class="col s6 size-filter" style="margin-bottom: 1rem; margin-top: 2rem;min-height: 37px;">
+                                                                <ul>
+                                                                    <li style="margin-right: 3px;"><a>1</a></li>
+                                                                    <li style="margin-right: 3px;"><a>2</a></li>
+                                                                    <li style="margin-right: 3px;"><a>3</a></li>
+                                                                    <li style="margin-right: 3px;"><a>4</a></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="col s6" style="margin-top: 1rem;">수량 선택</div>
+                                                            <div class="col s6 input-field" style="margin-top: 0rem;">
+                                                                <input id="orderCnt" name="orderCnt" type="number" class="validate">
+                                                                <label for="orderCnt">입력</label>
+                                                            </div>
+                                                            <!--                                                <span class="vertical-align-top mr-4"><i class="material-icons mr-3">favorite_border</i>Wishlist</span>-->
+                                                            <h5 class="col s12">0원<!--<span class="prise-text-style ml-2">41,800원</span>--></h5>
+                                                            <a class="col s12 m12 l5 waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">카트에 담기</a>
+                                                            <a class="col s12 m12 l5 waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">바로구매</a>
+                                                            <!--                                                </div>-->
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <!-- 상품 정보 영역 -->
-                                            <div class="col s12 m6">
-<!--                                                <div class="row">-->
-                                                    <h5 class="detail-product-nm" th:text="${resultDto.nmProduct}">품번</h5>
-                                                    <p class="detail-product-title" th:text="${resultDto.titleProduct}">상품 타이틀</p>
-    <!--                                                <span class="new badge left ml-0 mr-2" data-badge-caption="">NEW</span>-->
-                                                    <hr class="mb-5">
-                                                    <p class="col s6">단가</p>
-                                                    <p class="col s6 detail-product-price" th:text="${#numbers.formatDecimal(resultDto.sellPrice, 0, 'COMMA', 0, 'POINT')} + '원'">판매가격</p>
-                                                    <p class="col s6 detail-product-size">사이즈 선택</p>
-                                                    <div class="col s6 size-filter" style="margin-bottom: 17px;">
-                                                        <ul>
-                                                            <li style="margin-right: 3px;"><a>1</a></li>
-                                                            <li style="margin-right: 3px;"><a>2</a></li>
-                                                            <li style="margin-right: 3px;"><a>3</a></li>
-                                                            <li style="margin-right: 3px;"><a>4</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col s6" style="margin-top: 1rem;">수량 선택</div>
-                                                    <div class="col s6 input-field" style="margin-top: 0rem;">
-                                                        <input id="orderCnt" name="orderCnt" type="number" class="validate">
-                                                        <label for="orderCnt">입력</label>
-                                                    </div>
-    <!--                                                <span class="vertical-align-top mr-4"><i class="material-icons mr-3">favorite_border</i>Wishlist</span>-->
-                                                    <h5 class="col s12">0원<!--<span class="prise-text-style ml-2">41,800원</span>--></h5>
-                                                    <a class="col s12 m12 l5 waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">카트에 담기</a>
-                                                    <a class="col s12 m12 l5 waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">바로구매</a>
-<!--                                                </div>-->
                                             </div>
                                             <!-- 상품 상세설명 영역 -->
                                             <div class="col s12">

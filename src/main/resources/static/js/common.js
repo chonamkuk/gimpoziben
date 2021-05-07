@@ -2,25 +2,25 @@ $(document).ready(function () {
     comn = new common();
     imgComn = new imageCommon();
 
-    $('#alertModal').modal({
-        // onOpenEnd: function(e){
-        //     let modalId = $(this).attr('id');
-        //     if(location.href.split('#').pop() != modalId) {
-        //         window.history.pushState({}, '', location.href + '#' + $(this).attr('id'));
-        //     }
-        //     modalStack.push(modalId);
-        // },
-        // onCloseStart: function(e){
-        //     if(location.href.split('#').pop() == $(this).attr('id')) {
-        //         window.history.back();
-        //     }
-        // },
-        onCloseEnd: function (e) {
-            $(this).find('h4').text('');
-            $(this).find('p').text('');
-            // modalStack.pop();
-        }
-    });
+    // $('#alertModal').modal({
+    //     // onOpenEnd: function(e){
+    //     //     let modalId = $(this).attr('id');
+    //     //     if(location.href.split('#').pop() != modalId) {
+    //     //         window.history.pushState({}, '', location.href + '#' + $(this).attr('id'));
+    //     //     }
+    //     //     modalStack.push(modalId);
+    //     // },
+    //     // onCloseStart: function(e){
+    //     //     if(location.href.split('#').pop() == $(this).attr('id')) {
+    //     //         window.history.back();
+    //     //     }
+    //     // },
+    //     onCloseEnd: function (e) {
+    //         $(this).find('h4').text('');
+    //         $(this).find('p').text('');
+    //         // modalStack.pop();
+    //     }
+    // });
 
     $('#imageModal').modal({
         onOpenStart: function (e) {
@@ -80,45 +80,45 @@ $(document).ready(function () {
         }
     });
 
-    $('#confirmModal').modal({
-        // onOpenEnd: function(e){
-        //     let modalId = $(this).attr('id');
-        //     if(location.href.split('#').pop() != modalId) {
-        //         window.history.pushState({}, '', location.href + '#' + $(this).attr('id'));
-        //     }
-        //     modalStack.push(modalId);
-        // },
-        // onCloseStart: function(e){
-        //     if(location.href.split('#').pop() == $(this).attr('id')) {
-        //         window.history.back();
-        //     }
-        // },
-        onCloseEnd: function (e) {
-            $(this).find('h4').text('');
-            $(this).find('p').text('');
-            $(this).find('.modal-close').off('click');
-            // modalStack.pop();
-        }
-    });
-
-    //  모달 공통기능, 모바일기기에서 뒤로가기 동작을 위해
-    // $('.modal').modal({
-    //     onOpenEnd: function (e) {
-    //         let modalId = $(this).attr('id');
-    //         if (location.href.split('#').pop() != modalId) {
-    //             window.history.pushState({}, '', location.href + '#' + $(this).attr('id'));
-    //         }
-    //         modalStack.push(modalId);
-    //     },
-    //     onCloseStart: function (e) {
-    //         if (location.href.split('#').pop() == $(this).attr('id')) {
-    //             window.history.back();
-    //         }
-    //     },
+    // $('#confirmModal').modal({
+    //     // onOpenEnd: function(e){
+    //     //     let modalId = $(this).attr('id');
+    //     //     if(location.href.split('#').pop() != modalId) {
+    //     //         window.history.pushState({}, '', location.href + '#' + $(this).attr('id'));
+    //     //     }
+    //     //     modalStack.push(modalId);
+    //     // },
+    //     // onCloseStart: function(e){
+    //     //     if(location.href.split('#').pop() == $(this).attr('id')) {
+    //     //         window.history.back();
+    //     //     }
+    //     // },
     //     onCloseEnd: function (e) {
-    //         modalStack.pop();
+    //         $(this).find('h4').text('');
+    //         $(this).find('p').text('');
+    //         $(this).find('.modal-close').off('click');
+    //         // modalStack.pop();
     //     }
     // });
+
+    //  모달 공통기능, 모바일기기에서 뒤로가기 동작을 위해
+    $('.modal').modal({
+        onOpenEnd: function (e) {
+            let modalId = $(this).attr('id');
+            if (location.href.split('#').pop() != modalId) {
+                window.history.pushState({}, '', location.href + '#' + $(this).attr('id'));
+            }
+            modalStack.push(modalId);
+        },
+        onCloseStart: function (e) {
+            if (location.href.split('#').pop() == $(this).attr('id')) {
+                window.history.back();
+            }
+        },
+        onCloseEnd: function (e) {
+            modalStack.pop();
+        }
+    });
 
     window.onpopstate = history.onpushstate = function (e) {
         console.log('뒤로가기 감지 : ' + e);
@@ -311,19 +311,6 @@ function imageCommon() {
             $('#numbertext').text((Number(n) + 1) + '/ 6');
         }
     }
-
-
-//    const slideIndex = 0;
-//    plusSlides = function(n) {
-//        slideIndex += n
-//        // 이미지가 존재하는 범위내에 있는지 체크
-//        if(slideIndex > 5) {
-//            slideIndex = 0;
-//        } else if(slideIndex < 0) {
-//            slideIndex = 5;
-//        }
-//        showSlides(slideIndex);
-//    }
 }
 
 function common() {

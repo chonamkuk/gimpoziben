@@ -35,6 +35,6 @@ public class AdminShopController {
     public String write(Model model) throws Exception {
         model.addAttribute("upperSizeList", sizeService.getUpperList());
         model.addAttribute("parentCategoryList", categoryService.getParentList());
-        return "/admin/shop/write";
+        return "admin/shop/write";
     }
 }

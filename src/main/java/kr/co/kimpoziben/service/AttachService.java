@@ -142,25 +142,6 @@ public class AttachService {
         return resizeImg;
     }
 
-    /**
-     * 첨부파일그룹 신규
-     * @param image
-     * @param imageName
-     * @param imageSize
-     * @param type
-     * @return
-     */
-//    @Transactional
-//    public List<AttachEntity> saveImage(String[] image, String[] imageName, String[] imageSize, String type) {
-//        String idAttach = generateIdAttach(type);
-//        return this.saveImage(image, imageName, imageSize, type, idAttach);
-//    }
-
-    /**
-     * 첨부파일 아이디 생성
-     * @param type
-     * @return
-     */
     private String generateIdAttach(String type) {
         LocalDateTime localDateTime = LocalDateTime.now();
         String time = localDateTime.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmSS"));
@@ -168,105 +149,6 @@ public class AttachService {
         return time + "-" + type + "-"  + randomValue;
     }
 
-    /**
-     * 첨부파일그룹 수정 todo: 필요없으면 삭제 test패키지의 As/Crud/Ij 에서 사용중
-     * @param image
-     * @param imageName
-     * @param imageSize
-     * @param type
-     * @return
-     */
-//    @Transactional
-//    public List<AttachEntity> saveImage(String[] image, String[] imageName, String[] imageSize, String type, String idAttach) {
-//        LocalDateTime localDateTime = LocalDateTime.now();
-//        // 첨부파일 DB저장 변수
-//        List<AttachEntity> attachEntities = new ArrayList<>();
-//        AttachDto attachDto = null;
-//        String extension = "", serverFileNm = "", serverFilePath = "";
-//        int lastSn = 0;
-//        if(idAttach.isEmpty()) idAttach = generateIdAttach(type);
-//        AttachEntity lastAttach = attachRepository.findTopByIdAttachOrderBySnFileAttachDesc(idAttach);
-//        if(lastAttach != null) lastSn = lastAttach.getSnFileAttach();
-//
-//        // 이미지 생성관련 변수
-//        String data = "";
-//        byte[] imageBytes = null;
-//        StringBuffer uploadPathBuf = new StringBuffer();
-//        uploadPathBuf.append(propertyConfig.getUploadPath());
-//        uploadPathBuf.append(propertyConfig.getFilePathSeperator() + type);
-//        uploadPathBuf.append(propertyConfig.getFilePathSeperator() + localDateTime.getYear());
-//        uploadPathBuf.append(propertyConfig.getFilePathSeperator() + localDateTime.getMonthValue());
-//        uploadPathBuf.append(propertyConfig.getFilePathSeperator() + localDateTime.getDayOfMonth());
-//        Path uploadPath = Paths.get(uploadPathBuf.toString());
-////        Iterator<ImageWriter> iter = ImageIO.getImageWritersByMIMEType("image/jpeg");
-////        ImageWriter imgWriter = iter.next();
-////        ImageOutputStream imageOutputStream = null;
-//
-//        if (Files.notExists(uploadPath)) {
-//            try {
-//                Files.createDirectories(uploadPath);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                System.out.println(e);
-//            }
-//        }
-//
-//        try{
-//            for(int i=0; i<image.length; i++) {
-//                data = image[i];
-//                imageBytes = DatatypeConverter.parseBase64Binary(data);
-//                BufferedImage originImage = ImageIO.read(new ByteArrayInputStream(imageBytes));
-////                BufferedImage newImage = new BufferedImage(originImage.getWidth(), originImage.getHeight(), BufferedImage.TYPE_INT_RGB);
-////                newImage.createGraphics().drawImage(originImage, 0, 0, Color.WHITE, null);
-//
-////                ImageWriteParam param = null;
-////                if(Integer.valueOf(imageSize[i]) > 4000000) { //todo: 4메가 보다 크면 손실 압축
-////                    param = imgWriter.getDefaultWriteParam();
-////                    param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-////                    param.setCompressionQuality(0.8F);
-////                    param.setDestinationType(new ImageTypeSpecifier(newImage.getColorModel(), newImage.getSampleModel()));
-////                }
-//                // 파일생성
-//                extension = imageName[i].substring(imageName[i].lastIndexOf("."), imageName[i].length()); // 확장자
-//                serverFileNm = UUID.randomUUID().toString() + System.currentTimeMillis() + extension; // 서버저장 파일명
-//                serverFilePath = uploadPathBuf.toString() + propertyConfig.getFilePathSeperator() + serverFileNm; // 서버저장 경로
-//                System.out.println("serverFilePath ;; " + serverFilePath);
-////                imageOutputStream = ImageIO.createImageOutputStream(new FileOutputStream(serverFilePath));
-////                imgWriter.setOutput(imageOutputStream);
-////                imgWriter.write(null, new IIOImage(newImage, null, null), param);
-//
-//                ImageIO.write(originImage, "jpg", new File(serverFilePath));
-//
-//                // 첨부파일 저장 값
-//                attachDto = new AttachDto();
-//                attachDto.setIdAttach(idAttach);
-//                attachDto.setSnFileAttach(i+1+lastSn);
-//                attachDto.setNmOrgFileAttach(imageName[i]);
-//                attachDto.setNmSrvFileAttach(serverFileNm);
-//                attachDto.setPathFileAttach(serverFilePath);
-//                attachDto.setSizeFileAttach(Long.valueOf(imageSize[i]));
-//                attachDto.setExtendsAttach(extension);
-//                attachDto.setYnDel("N");
-//                attachDto.setRegisterAttach("test"); // todo: 사용자정보 저장?
-//                attachDto.setRegdtAttach(LocalDateTime.now());
-//
-//                attachEntities.add(attachDto.toEntity());
-//            }
-//
-//            attachRepository.saveAll(attachEntities);
-//
-////            imgWriter.dispose();
-////            imageOutputStream.close();
-//            return attachEntities;
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            System.out.println(e);
-//            return null;
-//        } finally {
-////            try{imgWriter.dispose();}catch(Exception e) {e.printStackTrace();}
-////            try{imageOutputStream.close();}catch(Exception e) {e.printStackTrace();}
-//        }
-//    }
 
     @Transactional
     public void updateDelYn(AsDto asDto) {
@@ -323,9 +205,6 @@ public class AttachService {
         uploadPathBuf.append(propertyConfig.getFilePathSeperator() + localDateTime.getMonthValue());
         uploadPathBuf.append(propertyConfig.getFilePathSeperator() + localDateTime.getDayOfMonth());
         Path uploadPath = Paths.get(uploadPathBuf.toString());
-//        Iterator<ImageWriter> iter = ImageIO.getImageWritersByMIMEType("image/jpeg");
-//        ImageWriter imgWriter = iter.next();
-//        ImageOutputStream imageOutputStream = null;
 
         if (Files.notExists(uploadPath)) {
             try {
@@ -343,25 +222,12 @@ public class AttachService {
                 data = imageUploadDto.getImage();
                 imageBytes = DatatypeConverter.parseBase64Binary(data);
                 BufferedImage originImage = ImageIO.read(new ByteArrayInputStream(imageBytes));
-//                BufferedImage newImage = new BufferedImage(originImage.getWidth(), originImage.getHeight(), BufferedImage.TYPE_INT_RGB);
-//                newImage.createGraphics().drawImage(originImage, 0, 0, Color.WHITE, null);
-
-//                ImageWriteParam param = null;
-//                if(imageUploadDto.getImageSize() > 4000000) { //todo: 10메가 보다 크면 손실 압축
-//                    param = imgWriter.getDefaultWriteParam();
-//                    param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-//                    param.setCompressionQuality(0.8F);
-//                    param.setDestinationType(new ImageTypeSpecifier(newImage.getColorModel(), newImage.getSampleModel()));
-//                }
 
                 // 파일생성
                 extension = imageUploadDto.getImageName().substring(imageUploadDto.getImageName().lastIndexOf("."), imageUploadDto.getImageName().length()); // 확장자
                 serverFileNm = UUID.randomUUID().toString() + System.currentTimeMillis() + extension; // 서버저장 파일명
                 serverFilePath = uploadPathBuf.toString() + propertyConfig.getFilePathSeperator() + serverFileNm; // 서버저장 경로
                 System.out.println("serverFilePath ;; " + serverFilePath);
-//                imageOutputStream = ImageIO.createImageOutputStream(new FileOutputStream(serverFilePath));
-//                imgWriter.setOutput(imageOutputStream);
-//                imgWriter.write(null, new IIOImage(newImage, null, null), param);
 
                 ImageIO.write(originImage, "jpg", new File(serverFilePath));
 
@@ -382,17 +248,11 @@ public class AttachService {
             }
 
             attachRepository.saveAll(attachEntities);
-
-//            imgWriter.dispose();
-//            imageOutputStream.close();
             return attachEntities;
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println(e);
             return null;
-        } finally {
-//            try{imgWriter.dispose();}catch(Exception e) {e.printStackTrace();}
-//            try{imageOutputStream.close();}catch(Exception e) {e.printStackTrace();}
         }
     }
 }

@@ -48,7 +48,6 @@
     <script>
         $(document).ready(function(){
             CKEDITOR.replace('descProduct');
-            $('.modal').modal(); // todo: 확인 후 삭제
 
             let processed = false;
             $('#saveForm').submit(function(e){
@@ -62,7 +61,9 @@
 
                 $('#confirmModal').find('h4').text('알림');
                 $('#confirmModal').find('p').text('등록 하시겠습니까?');
-                $('#confirmModal').find('.confirm').on('click', function(){
+                $('#confirmModal').modal('open');
+                $('#confirmModal').find('.confirm').unbind('click').on('click', function(){
+                    comn.preLoading();
                     /**상품 이미지**/
                     $('.dropify-render').each(function(index, item){
                         let $renderImg = $(item).find('img');
@@ -81,8 +82,7 @@
 
                     processed = true;
                     $('#saveForm').submit();
-                })
-                $('#confirmModal').modal('open');
+                });
             }); // form submit 끝
 
             $('.carousel.carousel-slider').carousel({
@@ -92,7 +92,7 @@
 
             let carousel = M.Carousel.getInstance($('.carousel.carousel-slider'));
 
-            // 첨부파일 모듈
+            // 첨부파일 모듈 초기화
             let drEvent = $('.dropify').dropify({
                 messages: {
                     'default': '상품사진',
@@ -118,7 +118,14 @@
             });
             // 첨부파일 삭제 전 동작
             drEvent.on('dropify.beforeClear', function(event, element){
-                return confirm("\"" + element.file.name + "\" 파일을 제거하시겠습니까?");
+                $('#confirmModal').find('h4').text('알림');
+                $('#confirmModal').find('p').text('\'' + element.file.name + '\' 파일을 제거하시겠습니까?');
+                $('#confirmModal').modal('open');
+                $('#confirmModal').find('.confirm').unbind('click').on('click', function(){
+                    return true;
+                });
+                return false;
+                // return confirm("\"" + element.file.name + "\" 파일을 제거하시겠습니까?");
             });
             // 첨부파일 삭제 후 동작
             drEvent.on('dropify.afterClear', function(event, element){

@@ -34,11 +34,12 @@ public class AttachController {
 
     @GetMapping(value = "/resizeImgView.do")
     public @ResponseBody
-    byte[] resizeImgView(@RequestParam("idAttach") String idAttach, @RequestParam("snFileAttach") int snFileAttach) throws Exception {
+    byte[] resizeImgView(@RequestParam("idAttach") String idAttach, @RequestParam("snFileAttach") int snFileAttach,
+                         @RequestParam(value = "resizeWidth", required = false, defaultValue = "0") Integer resizeWidth) throws Exception {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try {
             AttachDto attachDto = attachService.getAttachInfo(idAttach, snFileAttach);
-            ImageIO.write(attachService.getResizeImg(attachDto.getPathFileAttach(), 0), "JPEG", byteArrayOutputStream);
+            ImageIO.write(attachService.getResizeImg(attachDto.getPathFileAttach(), resizeWidth), "JPEG", byteArrayOutputStream);
             return byteArrayOutputStream.toByteArray();
         } catch (NullPointerException e) {
             throw new RuntimeException(e);
