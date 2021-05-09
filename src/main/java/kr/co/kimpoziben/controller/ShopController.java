@@ -38,7 +38,6 @@ public class ShopController {
         searchMap.put("seqUpper", seqUpperCategory);
         HashMap result = productService.getList(pageable.of(), searchMap);
 
-//        pageable.pagination((Page) result.get("resultPage"));
         model.addAttribute("resultList", result.get("resultList"));
         model.addAttribute("pagingResult", pageable.pagination((Page) result.get("pagingResult")));
         model.addAttribute("searchMap", searchMap);
