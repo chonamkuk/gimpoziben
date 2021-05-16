@@ -84,7 +84,6 @@ public class SizeService {
                     .collect(Collectors.toList())
             );
             sizeDtoList.add(sizeDto);
-//            sizeDtoList.add(modelMapper.map(size, SizeDto.class));
         }
 
         return sizeDtoList;

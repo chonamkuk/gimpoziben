@@ -120,8 +120,12 @@ public class ProductService {
     }
 
     public ProductDto getProductDetail(Long seqProduct) throws  Exception {
-        Product product = productRepository.findById(seqProduct).get();
-        ProductDto productDto = modelMapper.map(product, ProductDto.class);
-        return productDto;
+        Product product = productRepository.findById(seqProduct).orElse(null);
+        if(product != null) {
+            ProductDto productDto = modelMapper.map(product, ProductDto.class);
+            return productDto;
+        }
+
+        return null;
     }
 }

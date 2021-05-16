@@ -79,7 +79,7 @@
                 }
 
                 $('#confirmModal').find('h4').text('알림');
-                $('#confirmModal').find('p').text('등록 하시겠습니까?');
+                $('#confirmModal').find('p').text('수정 하시겠습니까?');
                 $('#confirmModal').modal('open');
                 $('#confirmModal').find('.confirm').unbind('click').on('click', function(){
                     comn.preLoading();
@@ -252,23 +252,24 @@
                                         <div class="col s12 m6">
                                             <div class="row">
                                                 <div class="col s12 input-field">
-                                                    <input id="titleProduct" name="titleProduct" type="text" class="validate">
+                                                    <input id="titleProduct" name="titleProduct" type="text" class="validate" th:value="${resultDto.titleProduct}">
                                                     <label for="titleProduct">타이틀</label>
                                                     <small class="errorTxt5"></small>
                                                 </div>
                                                 <div class="col s12 input-field">
-                                                    <input id="nmProduct" name="nmProduct" type="text" class="validate" required>
+                                                    <input id="nmProduct" name="nmProduct" type="text" class="validate" required th:value="${resultDto.nmProduct}">
                                                     <label for="nmProduct">모델명</label>
                                                     <small class="errorTxt5"></small>
                                                 </div>
                                                 <div class="col s12 input-field">
-                                                    <input id="colorProduct" name="colorProduct" type="text" class="validate">
+                                                    <input id="colorProduct" name="colorProduct" type="text" class="validate" th:value="${resultDto.colorProduct}">
                                                     <label for="colorProduct">색상</label>
                                                     <small class="errorTxt5"></small>
                                                 </div>
                                                 <div class="col s6 input-field">
                                                     <select id="parentCategory">
-                                                        <option th:each="categoryDto: ${parentCategoryList}" th:value="${categoryDto.seqCategory}" th:text="${categoryDto.nmCategory}"/>
+                                                        <option th:each="categoryDto: ${parentCategoryList}" th:value="${categoryDto.seqCategory}"
+                                                                th:text="${categoryDto.nmCategory}" th:selected="(${resultDto.seq})"/>
                                                     </select>
                                                     <label>상품 카테고리1</label>
                                                 </div>
@@ -278,11 +279,11 @@
                                                     <label>상품 카테고리2</label>
                                                 </div>
                                                 <div class="col s6 input-field">
-                                                    <input id="buyPrice" name="buyPrice" type="number" class="validate" required>
+                                                    <input id="buyPrice" name="buyPrice" type="number" class="validate"  th:value="${resultDto.buyPrice}">
                                                     <label for="buyPrice">매입가격</label>
                                                 </div>
                                                 <div class="col s6 input-field">
-                                                    <input id="sellPrice" name="sellPrice" type="number" class="validate" required>
+                                                    <input id="sellPrice" name="sellPrice" type="number" class="validate"  th:value="${resultDto.sellPrice}">
                                                     <label for="sellPrice">판매가격</label>
                                                 </div>
                                                 <div class="col s6 input-field">

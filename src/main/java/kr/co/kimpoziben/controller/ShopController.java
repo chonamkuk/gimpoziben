@@ -51,17 +51,11 @@ public class ShopController {
     public @ResponseBody Object detail(@RequestParam("seqProduct") Long seqProduct, @RequestParam("idMainImg") String idMainImg) throws  Exception {
         HashMap resultMap = new HashMap();
 
-//        ProductDto productDto = productService.getProductDetail(seqProduct);
         List<AttachDto> attachDtoList = null;
 
-//        if(productDto != null) {
-            attachDtoList = attachService.getAttachInfoList(idMainImg); // todo: file의 실제경로가 노출됨
-            resultMap.put("sizeList", sizeService.findBySeqProduct(seqProduct));
-//            resultMap.put("productDto", productDto);
-            resultMap.put("attachDtoList", attachDtoList);
-            return resultMap;
-//        } else {
-//            return null;
-//        }
+        attachDtoList = attachService.getAttachInfoList(idMainImg); // todo: file의 실제경로가 노출됨
+        resultMap.put("sizeList", sizeService.findBySeqProduct(seqProduct));
+        resultMap.put("attachDtoList", attachDtoList);
+        return resultMap;
     }
 }

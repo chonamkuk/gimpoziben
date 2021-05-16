@@ -30,6 +30,6 @@ public class ProductDto {
 
     private VendorDto vendor;
     private List<ProdCateDto> cateList = new ArrayList<ProdCateDto>();
-    private List<ProdSizeDto> sizeList = new ArrayList<ProdSizeDto>(); //todo:: size로 리스트구성해도 되는지?
+    private List<ProdSizeDto> sizeList = new ArrayList<ProdSizeDto>();
     private List<ImageUploadDto> imageList = new ArrayList<ImageUploadDto>();
 }
