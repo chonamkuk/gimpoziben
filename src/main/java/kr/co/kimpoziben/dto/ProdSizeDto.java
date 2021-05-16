@@ -12,6 +12,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class ProdSizeDto {
-    private ProductDto product;
-    private SizeDto size;
+    private Long seqProduct;
+    private Long seqSize;
+    private ProductDto productDto;
 }

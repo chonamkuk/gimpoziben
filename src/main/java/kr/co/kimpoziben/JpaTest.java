@@ -6,6 +6,7 @@ import kr.co.kimpoziben.domain.entity.Product;
 import kr.co.kimpoziben.domain.entity.Size;
 import kr.co.kimpoziben.domain.repository.ProductRepository;
 import kr.co.kimpoziben.domain.repository.SizeRepository;
+import kr.co.kimpoziben.dto.SizeDto;
 import kr.co.kimpoziben.util.PageRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -68,7 +69,8 @@ public class JpaTest {
 
 //            Page<Size> sizePage = sizeRepository.findAll(pageRequest.of());
 //            List<Size> sizeList = sizePage.getContent();
-            List<Size> sizeList = sizeRepository.findAll();
+//            List<Size> sizeList = sizeRepository.findAll();
+            List<Size> sizeList = sizeRepository.findBySeqProduct(28L);
 
             for(Size size : sizeList) {
                 System.out.println("size :: " + size.getNmSize());

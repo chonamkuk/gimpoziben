@@ -40,6 +40,25 @@
         .img-field {
             padding: 0 0.75rem;
         }
+
+        #sizeModal > div > div > table {
+            white-space: nowrap;
+        }
+
+        @media only screen and (max-width: 600px) {
+            #sizeModal > div > div > table > tbody > tr > td {
+                padding: 5px 5px;
+            }
+
+            #saveForm > div > div > div > div > div > div.dropify-preview > span {
+                height: 70px;
+            }
+
+            .dropify-wrapper.touch-fallback .dropify-preview .dropify-render img {
+                top: 75%;
+                transform: translate(0,-50%);
+            }
+        }
     </style>
 </th:block>
 
@@ -118,19 +137,18 @@
             });
             // 첨부파일 삭제 전 동작
             drEvent.on('dropify.beforeClear', function(event, element){
+                let targetIndex = $(event.target).data('index');
                 $('#confirmModal').find('h4').text('알림');
                 $('#confirmModal').find('p').text('\'' + element.file.name + '\' 파일을 제거하시겠습니까?');
                 $('#confirmModal').modal('open');
-                $('#confirmModal').find('.confirm').unbind('click').on('click', function(){
-                    return true;
+                $('#confirmModal').find('.confirm').unbind('click').on('click', function(object){;
+                    $('.carousel-item img').eq(targetIndex).attr('src', ''); // 카루셀 이미지 삭제
+                    let temp = $(drEvent[targetIndex]).data('dropify'); // 파일업로드 영역
+                    temp.clearElement(); // 파일업로드 영역 초기화
+                    temp.resetPreview(); // 파일정보 초기화
+                    $(drEvent[targetIndex]).val(''); // 파일정보 초기화
                 });
                 return false;
-                // return confirm("\"" + element.file.name + "\" 파일을 제거하시겠습니까?");
-            });
-            // 첨부파일 삭제 후 동작
-            drEvent.on('dropify.afterClear', function(event, element){
-                let targetIndex = $(event.target).data('index');
-                $('.carousel-item img').eq(targetIndex).attr('src', '');
             });
             // 첨부파일 로딩 후 동작
             drEvent.on('dropify.fileReady', function(event, element){
@@ -337,7 +355,7 @@
                                                             </td>
                                                             <td th:each="sizeDto, index : ${upperSizeDto.subSizeList}">
                                                                 <label>
-                                                                    <input type="checkbox" th:name="'sizeList[' + ${index.index} + '].size.seqSize'" th:value="${sizeDto.seqSize}" />
+                                                                    <input type="checkbox" th:name="'sizeList[' + ${index.index} + '].seqSize'" th:value="${sizeDto.seqSize}" />
                                                                     <span th:text="${sizeDto.nmSize}"></span>
                                                                 </label>
                                                             </td>

@@ -1,10 +1,9 @@
 package kr.co.kimpoziben.domain.repository.dsl;
 
-import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import kr.co.kimpoziben.domain.entity.ProdSize;
 import kr.co.kimpoziben.domain.entity.QProdSize;
 import kr.co.kimpoziben.domain.entity.QSize;
+import kr.co.kimpoziben.domain.entity.Size;
 
 import java.util.List;
 
@@ -18,12 +17,12 @@ public class SizeRepositoryImpl implements SizeRepositoryCustom {
     }
 
     @Override
-    public List<ProdSize> findBySeqProduct(Long seqProduct) {
-        QueryResults<ProdSize> result = queryFactory
-                .selectFrom(prodSize)
+    public List<Size> findBySeqProduct(Long seqProduct) {
+        return queryFactory
+                .selectFrom(size)
+                .innerJoin(prodSize).on(size.seqSize.eq(prodSize.seqSize))
                 .where(prodSize.seqProduct.eq(seqProduct))
-                .fetchResults();
-
-        return result.getResults();
+                .orderBy(size.ordrSize.asc())
+                .fetch();
     }
 }

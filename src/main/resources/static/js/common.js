@@ -348,8 +348,10 @@ function common() {
 
     // 데이터 로딩중 사용자조작 방지
     this.preLoading = function () {
+        $('#loading-circle').css("top", ($(window).height()/2)+$(document).scrollTop());
         $('#loading-circle').show();
         $('#loading-overlay').show();
+
         $('body').css('pointer-events', 'none');
     }
 

@@ -5,6 +5,7 @@ import kr.co.kimpoziben.dto.ProductDto;
 import kr.co.kimpoziben.dto.SearchDto;
 import kr.co.kimpoziben.service.AttachService;
 import kr.co.kimpoziben.service.ProductService;
+import kr.co.kimpoziben.service.SizeService;
 import kr.co.kimpoziben.test.domain.code.AsStat;
 import kr.co.kimpoziben.test.dto.AsDto;
 import kr.co.kimpoziben.util.PageRequest;
@@ -24,6 +25,7 @@ import java.util.List;
 @RequestMapping("/shop")
 public class ShopController {
     private ProductService productService;
+    private SizeService sizeService;
     private AttachService attachService;
 
     @GetMapping("/list.do")
@@ -46,19 +48,20 @@ public class ShopController {
     }
 
     @GetMapping("/detail.do")
-    public @ResponseBody Object detail(@RequestParam("seqProduct") Long seqProduct) throws  Exception {
+    public @ResponseBody Object detail(@RequestParam("seqProduct") Long seqProduct, @RequestParam("idMainImg") String idMainImg) throws  Exception {
         HashMap resultMap = new HashMap();
 
-        ProductDto productDto = productService.getProductDetail(seqProduct);
+//        ProductDto productDto = productService.getProductDetail(seqProduct);
         List<AttachDto> attachDtoList = null;
 
-        if(productDto != null) {
-            attachDtoList = attachService.getAttachInfoList(productDto.getIdMainImg()); // todo: file의 실제경로가 노출됨
-            resultMap.put("productDto", productDto);
+//        if(productDto != null) {
+            attachDtoList = attachService.getAttachInfoList(idMainImg); // todo: file의 실제경로가 노출됨
+            resultMap.put("sizeList", sizeService.findBySeqProduct(seqProduct));
+//            resultMap.put("productDto", productDto);
             resultMap.put("attachDtoList", attachDtoList);
             return resultMap;
-        } else {
-            return null;
-        }
+//        } else {
+//            return null;
+//        }
     }
 }

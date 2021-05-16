@@ -29,9 +29,16 @@ public class ProdSize {
 //    }
 
     @Id
+    @Column(name = "product_seq")
     private Long seqProduct;
+
     @Id
+    @Column(name = "size_seq")
     private Long seqSize;
+
+    @ManyToOne
+    @JoinColumn(name = "product_seq", insertable = false, updatable = false)
+    private Product product;
 
     @Builder
     public ProdSize(Long seqProduct, Long seqSize) {

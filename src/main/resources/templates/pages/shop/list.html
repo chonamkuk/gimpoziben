@@ -5,10 +5,6 @@
 <!-- page CSS -->
 <th:block layout:fragment="css">
     <style>
-        /*----------------------------------------
-          ecommerce product page
-          app-assets/css/pages/eCommerce-products-page.css
-        ------------------------------------------*/
         @media only screen and (min-width: 993px) {
             .row .col.l9 {
                 margin-left: 12% !important;
@@ -296,8 +292,9 @@
                 comn.preLoading();
                 console.log('데이터 없음');
                 let seqProduct = $(e).data('seq-product');
+                let idMainImg = $(e).data('id-main-img');
                 $.ajax({
-                    url: '/shop/detail.do?seqProduct=' + seqProduct,
+                    url: '/shop/detail.do?seqProduct=' + seqProduct + '&idMainImg=' + idMainImg,
                     type: 'GET',
                     dataType: 'json',
                     success: function(data) {
@@ -317,8 +314,8 @@
 
                         // 사이즈정보
                         $(e).find('.size-filter  > ul').empty();
-                        data.productDto.sizeList.forEach(function(item, index){
-                            $(e).find('.size-filter  > ul').append('<li style="margin-right: 3px;"><a>'+ item.size.nmSize +'</a></li>');
+                        data.sizeList.forEach(function(item, index){
+                            $(e).find('.size-filter  > ul').append('<li style="margin-right: 3px;" data-seqSize="'+ item.seqSize +'"><a>'+ item.nmSize +'</a></li>');
                         });
 
                         // 데이터 로딩 완료 후 data-loaded 값 바꾸기
@@ -388,7 +385,7 @@
                                     </div>
                                 </div>
                                 <!-- Modal Structure -->
-                                <div th:id="${'modal' + listStatus.index}" class="modal product-detail-modal" data-loaded="false" th:data-seq-product="${resultDto.seqProduct}">
+                                <div th:id="${'modal' + listStatus.index}" class="modal product-detail-modal" data-loaded="false" th:data-seq-product="${resultDto.seqProduct}" th:data-id-main-img="${resultDto.idMainImg}">
                                     <div class="modal-content pt-2">
                                         <div class="row" th:id="${'product' + listStatus.index}">
                                             <div class="col s12">
@@ -423,9 +420,9 @@
                                                                 </ul>
                                                             </div>
                                                             <div class="col s6" style="margin-top: 1rem;">수량 선택</div>
-                                                            <div class="col s6 input-field" style="margin-top: 0rem;">
-                                                                <input id="orderCnt" name="orderCnt" type="number" class="validate">
-                                                                <label for="orderCnt">입력</label>
+                                                            <div class="input-field col s6" style="margin-top: 0rem;">
+                                                                <input th:id="${'orderCnt' + listStatus.index}" name="orderCnt" type="number" class="validate">
+                                                                <label th:for="${'orderCnt' + listStatus.index}">입력</label>
                                                             </div>
                                                             <!--                                                <span class="vertical-align-top mr-4"><i class="material-icons mr-3">favorite_border</i>Wishlist</span>-->
                                                             <h5 class="col s12">0원<!--<span class="prise-text-style ml-2">41,800원</span>--></h5>

@@ -68,7 +68,7 @@ public class Product {
     @OneToMany(mappedBy = "seqProduct") //todo: casacade All 로 설정후 insert 되는지 확인
     private List<ProdCate> cateList = new ArrayList<ProdCate>();
 
-    @OneToMany(mappedBy = "seqProduct")
+    @OneToMany(mappedBy = "product")
     private List<ProdSize> sizeList = new ArrayList<ProdSize>();
 
 //    public void setCateList(List<ProdCate> cateList) {
@@ -92,15 +92,16 @@ public class Product {
 //            this.addSize(prodSize);
 //        }
 //    }
-//
-//    public void addSize(ProdSize prodSize) {
-//        prodSize.setProduct(this);
-//
-//        if(sizeList == null) {
-//            sizeList = new ArrayList<>();
-//        } else {
-//            sizeList.add(prodSize);
-//        }
-//    }
+
+    public void addSize(ProdSize prodSize) {
+        System.out.println("Product.java addSize");
+        prodSize.setSeqProduct(this.getSeqProduct());
+
+        if(sizeList == null) {
+            sizeList = new ArrayList<>();
+        } else {
+            sizeList.add(prodSize);
+        }
+    }
 
 }

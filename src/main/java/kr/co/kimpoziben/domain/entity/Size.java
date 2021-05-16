@@ -1,12 +1,11 @@
 package kr.co.kimpoziben.domain.entity;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import kr.co.kimpoziben.test.domain.entity.MeetMemberEntity;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -46,5 +45,4 @@ public class Size {
 
     @Column(name = "moddt")
     private LocalDateTime modDt;
-
 }

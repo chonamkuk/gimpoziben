@@ -1,14 +1,23 @@
 package kr.co.kimpoziben.domain.entity;
 
-import javax.persistence.Column;
 import java.io.Serializable;
+import java.util.Objects;
 
 public class ProdSizeId implements Serializable {
-//    private Product product;
-//    private Size size;
-
-    @Column(name = "product_seq")
     private Long seqProduct;
-    @Column(name = "size_seq")
     private Long seqSize;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProdSizeId that = (ProdSizeId) o;
+        return Objects.equals(seqProduct, that.seqProduct) &&
+                Objects.equals(seqSize, that.seqSize);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(seqProduct, seqSize);
+    }
 }

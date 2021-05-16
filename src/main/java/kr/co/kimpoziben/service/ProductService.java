@@ -35,9 +35,9 @@ public class ProductService {
     @Autowired
     private ProdCateRepository prodCateRepository;
     @Autowired
-    private SizeService sizeService;
-    @Autowired
     private AttachService attachService;
+    @Autowired
+    private SizeService sizeService;
 
     ModelMapper modelMapper = null;
 
@@ -51,7 +51,7 @@ public class ProductService {
         });
         modelMapper.typeMap(ProductDto.class, Product.class)
 //                .addMapping(ProductDto::getCateList, Product::setCateList)
-//                .addMapping(ProductDto::getSizeList, Product::setSizeList)
+                .addMapping(ProductDto::getSizeList, Product::setSizeList)
         ;
 //        modelMapper.typeMap(CategoryDto.class, Category.class);
 //        modelMapper.typeMap(VendorDto.class, Vendor.class);
@@ -92,6 +92,7 @@ public class ProductService {
                 productDto.setIdMainImg(attachEntities.get(0).getIdAttach()); //첨부파일 아이디 셋팅
             }
         }
+
         /** todo: 비어있는 값들이 null로 입력되는 경우 수정해야 함
          *         into
          *             gps_product
@@ -99,6 +100,7 @@ public class ProductService {
          *         values
          *             (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
          */
+
         Product newProduct = productRepository.save(modelMapper.map(productDto, Product.class));
 
         for(ProdCateDto prodCateDto : productDto.getCateList()) {
@@ -106,34 +108,20 @@ public class ProductService {
                     .seqCategory(prodCateDto.getCategory().getSeqCategory())
                     .seqProduct(newProduct.getSeqProduct())
                     .build();
-            System.out.println("prodcate :: " + prodCate.getSeqCategory());
             prodCateRepository.save(prodCate);
         }
 
         for(ProdSizeDto prodSizeDto : productDto.getSizeList()) {
-            if(prodSizeDto.getSize() != null) {
-                ProdSize prodSize = ProdSize.builder()
-                        .seqSize(prodSizeDto.getSize().getSeqSize())
-                        .seqProduct(newProduct.getSeqProduct())
-                        .build();
-                System.out.println("prodSizeDto :: " + prodSizeDto.getSize().getSeqSize());
-                System.out.println("prodSize :: " + prodSize.getSeqSize());
-                prodSizeRepository.save(prodSize);
-            }
+            prodSizeDto.setSeqProduct(newProduct.getSeqProduct());
+            prodSizeRepository.save(modelMapper.map(prodSizeDto, ProdSize.class));
         }
+
         return newProduct.getSeqProduct();
     }
 
     public ProductDto getProductDetail(Long seqProduct) throws  Exception {
         Product product = productRepository.findById(seqProduct).get();
         ProductDto productDto = modelMapper.map(product, ProductDto.class);
-
-        for(ProdSize prodSize : product.getSizeList()) { // todo: 한번에 가져올 방법 없는지?? ProdSize에는 seq만 있는 것이 문제임
-            ProdSizeDto prodSizeDto = new ProdSizeDto();
-            prodSizeDto.setSize(sizeService.getSizeDetail(prodSize.getSeqSize()));
-            productDto.getSizeList().add(prodSizeDto);
-        }
-
         return productDto;
     }
 }
