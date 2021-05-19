@@ -50,7 +50,7 @@ public class SizeService {
 //            if(size.getUpperSize() != null) {
 //                sizeDto.setUpperSize(size.getUpperSize());
 //            }
-            sizeList.add(sizeDto);
+//            sizeList.add(modelMapper.map(size, SizeDto.class));
         }
 
         return sizeList;

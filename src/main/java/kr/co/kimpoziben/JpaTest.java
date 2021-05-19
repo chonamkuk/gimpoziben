@@ -7,23 +7,26 @@ import kr.co.kimpoziben.domain.entity.Size;
 import kr.co.kimpoziben.domain.repository.ProductRepository;
 import kr.co.kimpoziben.domain.repository.SizeRepository;
 import kr.co.kimpoziben.dto.SizeDto;
+import kr.co.kimpoziben.service.SizeService;
 import kr.co.kimpoziben.util.PageRequest;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.hibernate.collection.spi.PersistentCollection;
+import org.junit.jupiter.api.Test;
+import org.modelmapper.Condition;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
+import org.modelmapper.spi.MappingContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.data.domain.Sort;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-@RunWith(SpringRunner.class)
 @DataJpaTest
-@ActiveProfiles("test")
 @Import(ApplicationConfig.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class JpaTest {
@@ -34,7 +37,11 @@ public class JpaTest {
         @Autowired
         private SizeRepository sizeRepository;
 
-        @Test
+
+        private SizeService sizeService;
+
+
+
         public void product_search() {
             PageRequest pageRequest = new PageRequest();
             pageRequest.setSortProp("seqProduct");
@@ -63,17 +70,43 @@ public class JpaTest {
         }
 
         @Test
-        public void size_search() {
-            PageRequest pageRequest = new PageRequest();
-            pageRequest.setSortProp("seqSize");
+        public void size_search() throws Exception {
+            List<SizeDto> sizeList = new ArrayList<>();
+            ModelMapper modelMapper = new ModelMapper();
+            modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT).setPropertyCondition(new Condition<Object, Object>() {
+                @Override
+                public boolean applies(MappingContext<Object, Object> mappingContext) {
+                    return !(mappingContext.getSource() instanceof PersistentCollection);
+                }
+            });
 
-//            Page<Size> sizePage = sizeRepository.findAll(pageRequest.of());
-//            List<Size> sizeList = sizePage.getContent();
-//            List<Size> sizeList = sizeRepository.findAll();
-            List<Size> sizeList = sizeRepository.findBySeqProduct(28L);
+            for(Size size : sizeRepository.findAll(Sort.by(Sort.Direction.ASC, "ordrSize"))) {
+//                SizeDto sizeDto = new SizeDto();
+//                sizeDto.setSeqSize(size.getSeqSize());
+//                sizeDto.setNmSize(size.getNmSize());
+//            if(size.getUpperSize() != null) {
+//                sizeDto.setUpperSize(size.getUpperSize());
+//            }
+//                sizeList.add(sizeDto);
 
-            for(Size size : sizeList) {
-                System.out.println("size :: " + size.getNmSize());
+                sizeList.add(modelMapper.map(size, SizeDto.class));
+            }
+
+            for(SizeDto sizeDto : sizeList) {
+                if(sizeDto.getUpperSize() != null) {
+                    System.out.println(sizeDto.getNmSize() + " => " + sizeDto.getUpperSize().getNmSize());
+                    sizeDto.getUpperSize().addSubSize(sizeDto);
+                    System.out.println(sizeDto.getUpperSize().getSubSizeList().get(0).getNmSize());
+                }
+            }
+
+            for(SizeDto sizeDto : sizeList) {
+                if(sizeDto.getSubSizeList() != null) {
+                    System.out.println(sizeDto.getNmSize());
+                    for(SizeDto sizeDto1 : sizeDto.getSubSizeList()) {
+                        System.out.println(sizeDto1.getNmSize() + " => " + sizeDto1.getUpperSize().getNmSize());
+                    }
+                }
             }
         }
 }

@@ -1,5 +1,6 @@
 package kr.co.kimpoziben.domain.entity;
 
+import kr.co.kimpoziben.dto.SizeDto;
 import kr.co.kimpoziben.test.domain.entity.MeetMemberEntity;
 import lombok.*;
 
@@ -45,4 +46,12 @@ public class Size {
 
     @Column(name = "moddt")
     private LocalDateTime modDt;
+
+    public void addSubSize(Size subSize) {
+        if(subSizeList == null) {
+            subSizeList = new ArrayList<Size>();
+        }
+
+        subSizeList.add(subSize);
+    }
 }

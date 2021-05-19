@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -23,4 +24,12 @@ public class SizeDto {
     private LocalDateTime regDt;
     private String modifier;
     private LocalDateTime modDt;
+
+    public void addSubSize(SizeDto subSize) {
+        if(subSizeList == null) {
+            subSizeList = new ArrayList<SizeDto>();
+        }
+
+        subSizeList.add(subSize);
+    }
 }
