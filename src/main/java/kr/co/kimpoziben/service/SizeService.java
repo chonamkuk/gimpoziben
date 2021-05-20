@@ -63,9 +63,6 @@ public class SizeService {
             SizeDto sizeDto = new SizeDto();
             sizeDto.setSeqSize(size.getSeqSize());
             sizeDto.setNmSize(size.getNmSize());
-//            if(size.getUpperSize() != null) {
-//                sizeDto.setUpperSize(size.getUpperSize());
-//            }
             sizeList.add(sizeDto);
         }
 

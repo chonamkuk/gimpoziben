@@ -112,8 +112,10 @@ public class ProductService {
         }
 
         for(ProdSizeDto prodSizeDto : productDto.getSizeList()) {
-            prodSizeDto.setSeqProduct(newProduct.getSeqProduct());
-            prodSizeRepository.save(modelMapper.map(prodSizeDto, ProdSize.class));
+            if(prodSizeDto.getSeqSize() != null) {
+                prodSizeDto.setSeqProduct(newProduct.getSeqProduct());
+                prodSizeRepository.save(modelMapper.map(prodSizeDto, ProdSize.class));
+            }
         }
 
         return newProduct.getSeqProduct();
