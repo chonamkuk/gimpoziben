@@ -12,6 +12,6 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class ProdCateDto {
-    private Product product; // todo: dto로 바꿔야함
-    private Category category;
+    private Long seqProduct;
+    private Long seqCategory;
 }

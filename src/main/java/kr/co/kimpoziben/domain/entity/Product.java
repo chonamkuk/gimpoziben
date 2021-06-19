@@ -70,38 +70,4 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     private List<ProdSize> sizeList = new ArrayList<ProdSize>();
-
-//    public void setCateList(List<ProdCate> cateList) {
-//        for(ProdCate prodCate : cateList) {
-//            this.addCategory(prodCate);
-//        }
-//    }
-//
-//    public void addCategory(ProdCate prodCate) {
-//        prodCate.setProduct(this);
-//
-//        if(cateList == null) {
-//            cateList = new ArrayList<>();
-//        } else {
-//            cateList.add(prodCate);
-//        }
-//    }
-//
-//    public void setSizeList(List<ProdSize> sizeList) {
-//        for(ProdSize prodSize : sizeList) {
-//            this.addSize(prodSize);
-//        }
-//    }
-
-    public void addSize(ProdSize prodSize) {
-        System.out.println("Product.java addSize");
-        prodSize.setSeqProduct(this.getSeqProduct());
-
-        if(sizeList == null) {
-            sizeList = new ArrayList<>();
-        } else {
-            sizeList.add(prodSize);
-        }
-    }
-
 }

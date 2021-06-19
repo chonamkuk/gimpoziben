@@ -49,15 +49,7 @@ public class ProductService {
                 return !(mappingContext.getSource() instanceof PersistentCollection);
             }
         });
-        modelMapper.typeMap(ProductDto.class, Product.class)
-//                .addMapping(ProductDto::getCateList, Product::setCateList)
-                .addMapping(ProductDto::getSizeList, Product::setSizeList)
-        ;
-//        modelMapper.typeMap(CategoryDto.class, Category.class);
-//        modelMapper.typeMap(VendorDto.class, Vendor.class);
-//        modelMapper.typeMap(SizeDto.class, Size.class);
-//        modelMapper.typeMap(ProdCateDto.class, ProdCate.class);
-//        modelMapper.typeMap(ProdSizeDto.class, ProdSize.class);
+        modelMapper.typeMap(ProductDto.class, Product.class);
     }
 
     public HashMap getList(Pageable pageble, HashMap<String,Object> searchMap) throws Exception {
@@ -105,7 +97,7 @@ public class ProductService {
 
         for(ProdCateDto prodCateDto : productDto.getCateList()) {
             ProdCate prodCate = ProdCate.builder()
-                    .seqCategory(prodCateDto.getCategory().getSeqCategory())
+                    .seqCategory(prodCateDto.getSeqCategory())
                     .seqProduct(newProduct.getSeqProduct())
                     .build();
             prodCateRepository.save(prodCate);
@@ -125,6 +117,9 @@ public class ProductService {
         Product product = productRepository.findById(seqProduct).orElse(null);
         if(product != null) {
             ProductDto productDto = modelMapper.map(product, ProductDto.class);
+            ProdCateDto prodCateDto = new ProdCateDto();
+            prodCateDto.setSeqCategory(product.getCateList().get(0).getSeqCategory());
+
             return productDto;
         }
 

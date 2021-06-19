@@ -79,32 +79,27 @@ public class JpaTest {
                     return !(mappingContext.getSource() instanceof PersistentCollection);
                 }
             });
+            modelMapper.typeMap(Size.class, SizeDto.class);
 
             for(Size size : sizeRepository.findAll(Sort.by(Sort.Direction.ASC, "ordrSize"))) {
-//                SizeDto sizeDto = new SizeDto();
-//                sizeDto.setSeqSize(size.getSeqSize());
-//                sizeDto.setNmSize(size.getNmSize());
-//            if(size.getUpperSize() != null) {
-//                sizeDto.setUpperSize(size.getUpperSize());
-//            }
-//                sizeList.add(sizeDto);
-
                 sizeList.add(modelMapper.map(size, SizeDto.class));
             }
 
             for(SizeDto sizeDto : sizeList) {
-                if(sizeDto.getUpperSize() != null) {
-                    System.out.println(sizeDto.getNmSize() + " => " + sizeDto.getUpperSize().getNmSize());
-                    sizeDto.getUpperSize().addSubSize(sizeDto);
-                    System.out.println(sizeDto.getUpperSize().getSubSizeList().get(0).getNmSize());
+                if(sizeDto.getUpperSize() == null) {
+                    for(SizeDto subSizeDto : sizeList) {
+                        if(subSizeDto.getUpperSize() != null && sizeDto.getSeqSize() == subSizeDto.getUpperSize().getSeqSize()) {
+                            sizeDto.addSubSize(subSizeDto);
+                        }
+                    }
                 }
             }
 
             for(SizeDto sizeDto : sizeList) {
                 if(sizeDto.getSubSizeList() != null) {
                     System.out.println(sizeDto.getNmSize());
-                    for(SizeDto sizeDto1 : sizeDto.getSubSizeList()) {
-                        System.out.println(sizeDto1.getNmSize() + " => " + sizeDto1.getUpperSize().getNmSize());
+                    for(SizeDto subSizeDto : sizeDto.getSubSizeList()) {
+                        System.out.println(subSizeDto.getNmSize());
                     }
                 }
             }

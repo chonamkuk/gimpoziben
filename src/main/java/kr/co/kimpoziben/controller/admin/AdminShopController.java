@@ -29,7 +29,7 @@ public class AdminShopController {
 
     @GetMapping("/write.do")
     public String write(Model model) throws Exception {
-        model.addAttribute("upperSizeList", sizeService.getUpperList());
+        model.addAttribute("upperSizeList", sizeService.getHierarchyList());
         model.addAttribute("parentCategoryList", categoryService.getParentList());
         return "admin/shop/write";
     }
@@ -41,7 +41,7 @@ public class AdminShopController {
         if(productDto != null) {
             model.addAttribute("resultDto", productDto);
             model.addAttribute("attachDtoList", attachService.getAttachInfoList(productDto.getIdMainImg()));// todo: file의 실제경로가 노출됨
-            model.addAttribute("upperSizeList", sizeService.getUpperList());
+            model.addAttribute("upperSizeList", sizeService.getHierarchyList());
             model.addAttribute("parentCategoryList", categoryService.getParentList());
         }
 

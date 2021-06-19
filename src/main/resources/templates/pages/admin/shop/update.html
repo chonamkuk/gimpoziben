@@ -184,6 +184,10 @@
                 }
             });
 
+            /*<![CDATA[*/
+            var seqCategory = "[[${resultDto.cateList}]]";
+            alert(seqCategory);
+            /*]]>*/
             setChildCategory($('#parentCategory').val());
             $('#parentCategory').on('change', function(e){
                 setChildCategory($(this).val());
@@ -269,7 +273,7 @@
                                                 <div class="col s6 input-field">
                                                     <select id="parentCategory">
                                                         <option th:each="categoryDto: ${parentCategoryList}" th:value="${categoryDto.seqCategory}"
-                                                                th:text="${categoryDto.nmCategory}" th:selected="(${resultDto.seq})"/>
+                                                                th:text="${categoryDto.nmCategory}"/>
                                                     </select>
                                                     <label>상품 카테고리1</label>
                                                 </div>
