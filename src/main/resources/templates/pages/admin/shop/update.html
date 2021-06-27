@@ -327,6 +327,12 @@
 
             return flag;
         }
+
+        function goList(){
+            $('[name="listForm"]').attr('method', 'get');
+            $('[name="listForm"]').attr('action', '/admin/shop/list.do');
+            $('[name="listForm"]').submit();
+        }
     </script>
 </th:block>
 
@@ -484,7 +490,7 @@
                                         <!-- 버튼 영역 -->
                                         <div class="col s12 display-flex justify-content-end mt-1">
                                             <button type="submit" class="btn indigo" style="margin-right: 1rem;">수정</button>
-                                            <button type="button" class="btn btn-light">취소</button>
+                                            <button type="button" class="btn btn-light" onclick="javascript:goList();">목록</button>
                                         </div>
                                     </div>
                                 </form>
@@ -497,5 +503,13 @@
             <!-- section edit ends -->
         </div>
     </div>
+
+    <form name="listForm" method="get">
+        <input type="hidden" name="page" th:value="${pagingResult.page}"/>
+        <input type="hidden" name="listSize" th:value="${pagingResult.listSize}"/>
+        <input type="hidden" name="pageSize" th:value="${pagingResult.pageSize}"/>
+        <input type="hidden" name="direction" th:value="${pagingResult.direction}"/>
+        <input type="hidden" name="sortProp" th:value="${pagingResult.sortProp}"/>
+    </form>
 </div>
 </html>

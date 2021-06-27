@@ -5,7 +5,10 @@ import kr.co.kimpoziben.service.AttachService;
 import kr.co.kimpoziben.service.CategoryService;
 import kr.co.kimpoziben.service.ProductService;
 import kr.co.kimpoziben.service.SizeService;
+import kr.co.kimpoziben.util.PageRequest;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +44,8 @@ public class AdminShopController {
     }
 
     @GetMapping("/update.do")
-    public String update(Model model, @RequestParam("seqProduct") Long seqProduct) throws Exception {
+    public String update(Model model, @RequestParam("seqProduct") Long seqProduct,
+                         HashMap<String,Object> searchMap, final PageRequest pageable) throws Exception {
         ProductDto productDto = productService.getProductDetail(seqProduct);
 
         if(productDto != null) {
@@ -49,6 +53,8 @@ public class AdminShopController {
             model.addAttribute("upperSizeList", sizeService.getHierarchyList());
             model.addAttribute("parentCategoryList", categoryService.getParentList());
             model.addAttribute("productCategoryList", categoryService.findBySeqProduct(seqProduct));
+            model.addAttribute("searchMap", searchMap);
+            model.addAttribute("pagingResult", pageable);
         }
 
         return "admin/shop/update";
@@ -73,5 +79,23 @@ public class AdminShopController {
         resultMap.put("sizeList", sizeService.findBySeqProduct(seqProduct));
         resultMap.put("attachDtoList", attachDtoList);
         return resultMap;
+    }
+
+    @GetMapping("/list.do")
+    public String list(Model model, final PageRequest pageable, HashMap<String,Object> searchMap
+            , @RequestParam(value = "seqCategory", required = false) Long seqCategory
+            , @RequestParam(value = "seqUpperCategory", required = false) Long seqUpperCategory) throws Exception {
+        pageable.setListSize(9);
+        pageable.setDirection(Sort.Direction.DESC);
+        pageable.setSortProp("seqProduct");
+        searchMap.put("seqCategory", seqCategory);
+        searchMap.put("seqUpper", seqUpperCategory);
+        HashMap result = productService.getList(pageable.of(), searchMap);
+
+        model.addAttribute("resultList", result.get("resultList"));
+        model.addAttribute("pagingResult", pageable.pagination((Page) result.get("pagingResult")));
+        model.addAttribute("searchMap", searchMap);
+
+        return "admin/shop/list";
     }
 }

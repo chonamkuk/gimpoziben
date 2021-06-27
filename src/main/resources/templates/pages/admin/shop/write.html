@@ -93,6 +93,7 @@
                             $('#saveForm').append('<input type="hidden" name="imageList['+ index +'].image" value="'+ dataURL.split(',')[1] +'" />'); // 이미지 데이터
                             $('#saveForm').append('<input type="hidden" name="imageList['+ index +'].imageSize" value="'+ imgComn.stringToBytesFaster(dataURL.split(',')[1]).length +'" />'); // 이미지 크기
                             $('#saveForm').append('<input type="hidden" name="imageList['+ index +'].imageName" value="'+ $(item).siblings('.dropify-infos').find('.dropify-filename-inner').text() +'" />'); // 이미지명
+                            $('#saveForm').append('<input type="hidden" name="imageList['+ index +'].ordrAttach" value="'+ index +'" />'); // 이미지 순서
                         }
                     });
                     /**게시여부, 품절여부**/

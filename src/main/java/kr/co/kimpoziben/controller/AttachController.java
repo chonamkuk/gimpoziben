@@ -41,6 +41,7 @@ public class AttachController {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try {
             AttachDto attachDto = attachService.getAttachInfo(idAttach, snFileAttach);
+            String imgPath = "";
             ImageIO.write(attachService.getResizeImg(attachDto.getPathFileAttach(), resizeWidth), "JPEG", byteArrayOutputStream);
             return byteArrayOutputStream.toByteArray();
         } catch (NullPointerException e) {

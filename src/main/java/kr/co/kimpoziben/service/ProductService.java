@@ -63,6 +63,7 @@ public class ProductService {
                 productDto.setTitleProduct(product.getTitleProduct());
                 productDto.setSellPrice(product.getSellPrice());
                 productDto.setYnSoldOut(product.getYnSoldOut());
+                productDto.setYnDisplay(product.getYnDisplay());
                 productDto.setIdMainImg(product.getIdMainImg());
                 productDto.setDescProduct(product.getDescProduct());
 
