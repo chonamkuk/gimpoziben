@@ -4,6 +4,9 @@ import java.time.format.DateTimeFormatter;
 public class Test {
 
     public static void main(String[] args) {
-        System.out.println(DateTimeFormatter.ofPattern("hh:mm a").format(LocalTime.now()));
+        String test = ".jpg";
+
+        test.substring(1);
+        System.out.println(test.substring(1));
     }
 }

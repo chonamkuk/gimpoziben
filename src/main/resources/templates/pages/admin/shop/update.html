@@ -64,7 +64,7 @@
 
 <!-- page 스크립트 -->
 <th:block layout:fragment="script">
-    <script>
+    <script th:inline="javascript">
         $(document).ready(function(){
             CKEDITOR.replace('descProduct');
 
@@ -86,13 +86,16 @@
                     /**상품 이미지**/
                     $('.dropify-render').each(function(index, item){
                         let $renderImg = $(item).find('img');
-                        if($renderImg.length > 0) {
+                        let newImageCount = 0;
+                        if($renderImg.length > 0 && $renderImg.attr('src').startsWith('data:image')) {
                             let ImageObj = new Image();
                             ImageObj.src = $renderImg.attr('src');
                             let dataURL = imgComn.resizeImage(ImageObj);
-                            $('#saveForm').append('<input type="hidden" name="imageList['+ index +'].image" value="'+ dataURL.split(',')[1] +'" />'); // 이미지 데이터
-                            $('#saveForm').append('<input type="hidden" name="imageList['+ index +'].imageSize" value="'+ imgComn.stringToBytesFaster(dataURL.split(',')[1]).length +'" />'); // 이미지 크기
-                            $('#saveForm').append('<input type="hidden" name="imageList['+ index +'].imageName" value="'+ $(item).siblings('.dropify-infos').find('.dropify-filename-inner').text() +'" />'); // 이미지명
+                            $('#saveForm').append('<input type="hidden" name="imageList['+ newImageCount +'].image" value="'+ dataURL.split(',')[1] +'" />'); // 이미지 데이터
+                            $('#saveForm').append('<input type="hidden" name="imageList['+ newImageCount +'].imageSize" value="'+ imgComn.stringToBytesFaster(dataURL.split(',')[1]).length +'" />'); // 이미지 크기
+                            $('#saveForm').append('<input type="hidden" name="imageList['+ newImageCount +'].imageName" value="'+ $(item).siblings('.dropify-infos').find('.dropify-filename-inner').text() +'" />'); // 이미지명
+                            $('#saveForm').append('<input type="hidden" name="imageList['+ newImageCount +'].ordrAttach" value="'+ index +'" />'); // 이미지 순서
+                            newImageCount++;
                         }
                     });
                     /**게시여부, 품절여부**/
@@ -100,6 +103,7 @@
                     if($('#ynSoldOutChk').is(':checked')) $('#saveForm').append('<input type="hidden" id="ynSoldOut" name="ynSoldOut" value="Y"/>');
 
                     processed = true;
+                    console.log($('#saveForm'));
                     $('#saveForm').submit();
                 });
             }); // form submit 끝
@@ -107,57 +111,6 @@
             $('.carousel.carousel-slider').carousel({
                 fullWidth: true,
                 indicators: true
-            });
-
-            let carousel = M.Carousel.getInstance($('.carousel.carousel-slider'));
-
-            // 첨부파일 모듈 초기화
-            let drEvent = $('.dropify').dropify({
-                messages: {
-                    'default': '상품사진',
-                    'replace': '',
-                    'remove':  '삭제',
-                    'error':   'error'
-                },
-                tpl: {
-                    wrap:            '<div class="dropify-wrapper"></div>',
-                    loader:          '<div class="dropify-loader"></div>',
-                    message:         '<div class="dropify-message"><p>{{ default }}</p></div>',
-                    preview:         '<div class="dropify-preview"><span class="dropify-render"></span><div class="dropify-infos"><div class="dropify-infos-inner"></div></div></div>',
-                    filename:        '<p class="dropify-filename"><span class="file-icon"></span><span class="dropify-filename-inner"></span></p>',
-                    clearButton:     '<button type="button" class="dropify-clear">{{ remove }}</button>',
-                    errorLine:       '<p class="dropify-error">{{ error }}</p>',
-                    errorsContainer: ''
-                }
-            });
-
-            // 파일확장자 에러메세지
-            drEvent.on('dropify.error.fileExtension', function(event, element){
-                alert('이미지 파일만 업로드 가능합니다. (' + event.currentTarget.dataset.allowedFileExtensions + ')');
-            });
-            // 첨부파일 삭제 전 동작
-            drEvent.on('dropify.beforeClear', function(event, element){
-                let targetIndex = $(event.target).data('index');
-                $('#confirmModal').find('h4').text('알림');
-                $('#confirmModal').find('p').text('\'' + element.file.name + '\' 파일을 제거하시겠습니까?');
-                $('#confirmModal').modal('open');
-                $('#confirmModal').find('.confirm').unbind('click').on('click', function(object){;
-                    $('.carousel-item img').eq(targetIndex).attr('src', ''); // 카루셀 이미지 삭제
-                    let temp = $(drEvent[targetIndex]).data('dropify'); // 파일업로드 영역
-                    temp.clearElement(); // 파일업로드 영역 초기화
-                    temp.resetPreview(); // 파일정보 초기화
-                    $(drEvent[targetIndex]).val(''); // 파일정보 초기화
-                });
-                return false;
-            });
-            // 첨부파일 로딩 후 동작
-            drEvent.on('dropify.fileReady', function(event, element){
-                setTimeout(function(){
-                    let targetIndex = $(event.target).data('index');
-                    let imageSrc = $('.dropify-render').eq(targetIndex).find('img').attr('src')
-                    $('.carousel-item img').eq(targetIndex).attr('src', imageSrc); // 카루셀에 이미지 적용
-                    carousel.set(targetIndex);
-                }, 200); // 이미지소스 생성시간
             });
 
             $('[name="upper-size"]').on('click', function(e){ // 사이즈 타입 라디오버튼
@@ -184,16 +137,19 @@
                 }
             });
 
-            /*<![CDATA[*/
-            var seqCategory = "[[${resultDto.cateList}]]";
-            alert(seqCategory);
-            /*]]>*/
-            setChildCategory($('#parentCategory').val());
             $('#parentCategory').on('change', function(e){
                 setChildCategory($(this).val());
             });
 
+            getDetail();
         }); // document ready 끝
+
+        /*<![CDATA[*/
+        let resultDto = /*[[${resultDto}]]*/ 'default';
+        /*]]>*/
+        /*<![CDATA[*/
+        let productCategoryList = /*[[${productCategoryList}]]*/ 'default';
+        /*]]>*/
 
         function setChildCategory(seqUpper){
             $.ajax({
@@ -204,7 +160,8 @@
                     $('#childCategory').empty();
                     if(data.length > 0) {
                         data.forEach(function(item, index){
-                            $('#childCategory').append('<option value="'+ item.seqCategory +'">'+ item.nmCategory +'</option>');
+                            let selected = item.seqCategory == productCategoryList[0].seqCategory ? 'selected' : '';
+                            $('#childCategory').append('<option value="'+ item.seqCategory +'" '+ selected +'>'+ item.nmCategory +'</option>');
                         });
                     } else {
                         $('#childCategory').append('<option>없음</option>');
@@ -217,6 +174,158 @@
                     console.log('error : ' + error);
                 }
             });
+        }
+
+        // 첨부파일 모듈 초기화
+        function init_dropify(index, imageSrc, attachInfo) {
+            let carousel = M.Carousel.getInstance($('.carousel.carousel-slider'));
+            let drEvent = $('.dropify').eq(index).dropify({
+                messages: {
+                    'default': '상품사진',
+                    'replace': '',
+                    'remove': '삭제',
+                    'error': 'error'
+                },
+                tpl: {
+                    wrap: '<div class="dropify-wrapper"></div>',
+                    loader: '<div class="dropify-loader"></div>',
+                    message: '<div class="dropify-message"><p>{{ default }}</p></div>',
+                    preview: '<div class="dropify-preview"><span class="dropify-render"></span><div class="dropify-infos"><div class="dropify-infos-inner"></div></div></div>',
+                    filename: '<p class="dropify-filename"><span class="file-icon"></span><span class="dropify-filename-inner"></span></p>',
+                    clearButton: '<button type="button" class="dropify-clear">{{ remove }}</button>',
+                    errorLine: '<p class="dropify-error">{{ error }}</p>',
+                    errorsContainer: ''
+                },
+                defaultFile: imageSrc,
+                defaultFileName: attachInfo.nmOrgFileAttach
+            });
+
+            if(attachInfo) {
+                $('.dropify').eq(index).attr('title', '삭제 후 이미지교체 가능');
+                $('.dropify').eq(index).css('cursor', 'not-allowed');
+                $('.dropify').eq(index).attr('disabled', 'disabled');
+            }
+
+            // 파일확장자 에러메세지
+            drEvent.on('dropify.error.fileExtension', function (event, element) {
+                // alert('이미지 파일만 업로드 가능합니다. (' + event.currentTarget.dataset.allowedFileExtensions + ')');
+                $('#alertModal').find('h4').text('');
+                $('#alertModal').find('p').text('이미지 파일만 업로드 가능합니다. (' + event.currentTarget.dataset.allowedFileExtensions + ')');
+                $('#alertModal').modal('open');
+            });
+            // 첨부파일 삭제 전 동작
+            drEvent.on('dropify.beforeClear', function (event, element) {
+                let targetIndex = $(event.target).data('index');
+                $('#confirmModal').find('h4').text('알림');
+                $('#confirmModal').find('p').text((targetIndex+1) + ' 번째 파일을 삭제하시겠습니까?');
+                $('#confirmModal').modal('open');
+                $('#confirmModal').find('.confirm').unbind('click').on('click', function (object) {
+                    // 첨부파일 데이터 삭제가 필요한 경우
+                    if(attachInfo) {
+                        let flag = deleteAttach(attachInfo);
+                        console.log(flag);
+                        if(!flag) {
+                            $('#alertModal').find('h4').text('');
+                            $('#alertModal').find('p').text('오류가 발생했습니다.');
+                            $('#alertModal').modal('open');
+                            return false;
+                        } else {
+                            $('#alertModal').find('h4').text('');
+                            $('#alertModal').find('p').text('삭제되었습니다.');
+                            $('.dropify').eq(targetIndex).removeAttr('title', '');
+                            $('.dropify').eq(targetIndex).removeAttr('disabled');
+                            $('.dropify').eq(targetIndex).css('cursor', '');
+                            $('#alertModal').modal('open');
+                        }
+                    }
+
+                    $('.carousel-item img').eq(targetIndex).attr('src', ''); // 카루셀 이미지 삭제
+                    let temp = $(drEvent).data('dropify'); // 파일업로드 영역
+                    temp.clearElement(); // 파일업로드 영역 초기화
+                    temp.resetPreview(); // 파일정보 초기화
+                    $(drEvent[targetIndex]).val(''); // 파일정보 초기화
+                });
+                return false;
+            });
+
+            // 첨부파일 로딩 후 동작
+            drEvent.on('dropify.fileReady', function (event, element) {
+                setTimeout(function () {
+                    let targetIndex = $(event.target).data('index');
+                    let imageSrc = $('.dropify-render').eq(targetIndex).find('img').attr('src')
+                    $('.carousel-item img').eq(targetIndex).attr('src', imageSrc); // 카루셀에 이미지 적용
+                    carousel.set(targetIndex);
+                }, 200); // 이미지소스 생성시간
+            });
+        }
+
+        function getDetail(){
+            comn.preLoading();
+            console.log('데이터 로딩');
+            $.ajax({
+                url: '/admin/shop/detail.do?seqProduct=' + resultDto.seqProduct + '&idMainImg=' + resultDto.idMainImg,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    /**상품 이미지 시작**/
+                    if(data.attachDtoList.length > 0) {
+                        data.attachDtoList.forEach(function(item, index){
+                            let imageSrc = '/attach/resizeImgView.do?idAttach=' + item.idAttach + '&snFileAttach=' + item.snFileAttach;
+                            $('.carousel-item img').eq(index).attr('src', imageSrc); // 카루셀에 이미지 적용
+                            init_dropify(index, imageSrc, item);
+                        });
+                    }
+                    // 나머지 첨부파일 영역
+                    let restImageCount = 4 - data.attachDtoList.length;
+                    for (let i = 0; i < restImageCount; i++) {
+                        init_dropify(data.attachDtoList.length+i, '', '');
+                    }
+                    /**상품 이미지 끝**/
+
+                    // 카테고리 정보
+                    $('#parentCategory').trigger('change');
+
+                    comn.afterLoading();
+
+                    // 사이즈정보
+                    data.sizeList.forEach(function(item, index){
+                        $('[name^="sizeList"]:input[value="'+ item.seqSize +'"]').trigger('click');
+                    });
+                },
+                error: function(request, status, error){
+                    console.log('code : ' + request.status);
+                    console.log('message : ' + request.responseText);
+                    console.log('error : ' + error);
+                }
+            });
+        }
+
+        function deleteAttach(attachInfo) {
+            let flag = false
+            $.ajax({
+                url: '/attach/delete.do',
+                type: 'DELETE',
+                dataType: 'json',
+                async: false,
+                data: {
+                    idAttach: attachInfo.idAttach,
+                    snFileAttach: attachInfo.snFileAttach
+                },
+                success: function(data) {
+                    console.log(data);
+                    if(data.result == 'success') {
+                        flag = true;
+                    }
+                },
+                error: function(request, status, error){
+                    console.log('code : ' + request.status);
+                    console.log('message : ' + request.responseText);
+                    console.log('error : ' + error);
+                }
+            });
+
+            return flag;
         }
     </script>
 </th:block>
@@ -231,7 +340,9 @@
                         <div class="row">
                             <div class="col s12">
                                 <!-- form start -->
-                                <form id="saveForm" action="/admin/shop/write.do" method="post" >
+                                <form id="saveForm" action="/admin/shop/update.do" method="post" >
+                                    <input type="hidden" name="seqProduct" th:value="${resultDto.seqProduct}"/>
+                                    <input type="hidden" name="idMainImg" th:value="${resultDto.idMainImg}"/>
                                     <div class="row">
                                         <!-- 이미지 슬라이더 -->
                                         <div class="col s12 m6">
@@ -273,12 +384,12 @@
                                                 <div class="col s6 input-field">
                                                     <select id="parentCategory">
                                                         <option th:each="categoryDto: ${parentCategoryList}" th:value="${categoryDto.seqCategory}"
-                                                                th:text="${categoryDto.nmCategory}"/>
+                                                                th:text="${categoryDto.nmCategory}" th:selected="${categoryDto.seqCategory == productCategoryList[0].seqUpper}"/>
                                                     </select>
                                                     <label>상품 카테고리1</label>
                                                 </div>
                                                 <div class="col s6 input-field">
-                                                    <select id="childCategory" name="cateList[0].category.seqCategory" >
+                                                    <select id="childCategory" name="cateList[0].seqCategory" >
                                                     </select>
                                                     <label>상품 카테고리2</label>
                                                 </div>
@@ -295,7 +406,7 @@
                                                         <span>상품 게시여부</span>
                                                         <div class="switch right">
                                                             <label>
-                                                                <input checked type="checkbox" id="ynDisplayChk"/>
+                                                                <input type="checkbox" id="ynDisplayChk" th:checked="${resultDto.ynDisplay == 'Y'}"/>
                                                                 <span class="lever"></span>
                                                             </label>
                                                         </div>
@@ -303,10 +414,10 @@
                                                 </div>
                                                 <div class="col s6 input-field">
                                                     <div class="m-0">
-                                                        <span>품절여부</span>
+                                                        <span th:textappend="${resultDto.ynSoldOut}">품절여부</span>
                                                         <div class="switch right">
                                                             <label>
-                                                                <input type="checkbox" id="ynSoldOutChk">
+                                                                <input type="checkbox" id="ynSoldOutChk" th:checked="${resultDto.ynSoldOut == 'Y'}">
                                                                 <span class="lever"></span>
                                                             </label>
                                                         </div>
@@ -332,7 +443,7 @@
                                         <!-- 에디터 영역 -->
                                         <div class="col s12">
                                             <div class="input-field">
-                                                <textarea name="descProduct"></textarea>
+                                                <textarea name="descProduct"><th:block th:utext="${resultDto.descProduct}"></th:block></textarea>
                                             </div>
                                         </div>
                                         <!-- 사이즈선택 모달 -->
@@ -372,7 +483,7 @@
                                         </div>
                                         <!-- 버튼 영역 -->
                                         <div class="col s12 display-flex justify-content-end mt-1">
-                                            <button type="submit" class="btn indigo" style="margin-right: 1rem;">등록</button>
+                                            <button type="submit" class="btn indigo" style="margin-right: 1rem;">수정</button>
                                             <button type="button" class="btn btn-light">취소</button>
                                         </div>
                                     </div>

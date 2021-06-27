@@ -40,6 +40,9 @@ public class AttachEntity implements Serializable {
     @Column(length = 20, nullable = false, name = "attach_extends")
     private String extendsAttach;
 
+    @Column(name = "attach_ordr")
+    private Integer ordrAttach;
+
     @Column(length = 1, nullable = false, name = "del_yn")
     private String ynDel;
 
@@ -59,7 +62,7 @@ public class AttachEntity implements Serializable {
 
     @Builder
     public AttachEntity(String idAttach, int snFileAttach, String nmOrgFileAttach, String nmSrvFileAttach
-            , String pathFileAttach, Long sizeFileAttach, String extendsAttach
+            , String pathFileAttach, Long sizeFileAttach, String extendsAttach, Integer ordrAttach
             , String ynDel, String registerAttach, LocalDateTime regdtAttach
             , String modifierAttach, LocalDateTime moddtAttach) {
         this.idAttach = idAttach;
@@ -69,6 +72,7 @@ public class AttachEntity implements Serializable {
         this.pathFileAttach = pathFileAttach;
         this.sizeFileAttach = sizeFileAttach;
         this.extendsAttach = extendsAttach;
+        this.ordrAttach = ordrAttach;
         this.ynDel = ynDel;
         this.registerAttach = registerAttach;
         this.regdtAttach = regdtAttach;

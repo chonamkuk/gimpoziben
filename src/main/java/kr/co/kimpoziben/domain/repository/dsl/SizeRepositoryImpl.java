@@ -25,4 +25,11 @@ public class SizeRepositoryImpl implements SizeRepositoryCustom {
                 .orderBy(size.ordrSize.asc())
                 .fetch();
     }
+
+    @Override
+    public long deleteSizeMappBySeqProduct(Long seqProduct) {
+        return queryFactory.delete(prodSize)
+                .where(prodSize.seqProduct.eq(seqProduct))
+                .execute();
+    }
 }

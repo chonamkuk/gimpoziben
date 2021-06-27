@@ -1,5 +1,6 @@
 package kr.co.kimpoziben.dto;
 
+import kr.co.kimpoziben.domain.entity.ProdCate;
 import kr.co.kimpoziben.domain.entity.ProdSize;
 import kr.co.kimpoziben.domain.entity.Product;
 import lombok.*;

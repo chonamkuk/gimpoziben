@@ -290,7 +290,7 @@
             // data-loaded 값 없으면 데이터 불러오기
             if(!$(e).data('loaded')) {
                 comn.preLoading();
-                console.log('데이터 없음');
+                console.log('데이터 로딩');
                 let seqProduct = $(e).data('seq-product');
                 let idMainImg = $(e).data('id-main-img');
                 $.ajax({

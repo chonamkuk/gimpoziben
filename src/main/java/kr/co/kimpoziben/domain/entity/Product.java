@@ -4,6 +4,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -65,9 +67,11 @@ public class Product {
     @JoinColumn(name = "vendor_seq")
     private Vendor vendor;
 
-    @OneToMany(mappedBy = "seqProduct") //todo: casacade All 로 설정후 insert 되는지 확인
+    @OneToMany(mappedBy = "seqProduct")
+    @NotFound(action = NotFoundAction.IGNORE)
     private List<ProdCate> cateList = new ArrayList<ProdCate>();
 
     @OneToMany(mappedBy = "product")
+    @NotFound(action = NotFoundAction.IGNORE)
     private List<ProdSize> sizeList = new ArrayList<ProdSize>();
 }

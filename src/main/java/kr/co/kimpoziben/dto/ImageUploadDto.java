@@ -13,4 +13,5 @@ public class ImageUploadDto {
     private String image;
     private String imageName;
     private Long imageSize;
+    private Integer ordrAttach;
 }
