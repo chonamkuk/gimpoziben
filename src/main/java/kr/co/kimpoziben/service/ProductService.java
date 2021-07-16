@@ -1,10 +1,7 @@
 package kr.co.kimpoziben.service;
 
 import kr.co.kimpoziben.domain.entity.*;
-import kr.co.kimpoziben.domain.repository.ProdCateRepository;
-import kr.co.kimpoziben.domain.repository.ProdSizeRepository;
-import kr.co.kimpoziben.domain.repository.ProductRepository;
-import kr.co.kimpoziben.domain.repository.SizeRepository;
+import kr.co.kimpoziben.domain.repository.*;
 import kr.co.kimpoziben.dto.*;
 import lombok.AllArgsConstructor;
 import org.hibernate.collection.spi.PersistentCollection;
@@ -35,9 +32,11 @@ public class ProductService {
     @Autowired
     private ProdCateRepository prodCateRepository;
     @Autowired
-    private AttachService attachService;
+    private CategoryRepository categoryRepository;
     @Autowired
-    private SizeService sizeService;
+    private SizeRepository sizeRepository;
+    @Autowired
+    private AttachService attachService;
 
     ModelMapper modelMapper = null;
 
@@ -49,15 +48,7 @@ public class ProductService {
                 return !(mappingContext.getSource() instanceof PersistentCollection);
             }
         });
-        modelMapper.typeMap(ProductDto.class, Product.class)
-//                .addMapping(ProductDto::getCateList, Product::setCateList)
-                .addMapping(ProductDto::getSizeList, Product::setSizeList)
-        ;
-//        modelMapper.typeMap(CategoryDto.class, Category.class);
-//        modelMapper.typeMap(VendorDto.class, Vendor.class);
-//        modelMapper.typeMap(SizeDto.class, Size.class);
-//        modelMapper.typeMap(ProdCateDto.class, ProdCate.class);
-//        modelMapper.typeMap(ProdSizeDto.class, ProdSize.class);
+        modelMapper.typeMap(ProductDto.class, Product.class);
     }
 
     public HashMap getList(Pageable pageble, HashMap<String,Object> searchMap) throws Exception {
@@ -72,6 +63,7 @@ public class ProductService {
                 productDto.setTitleProduct(product.getTitleProduct());
                 productDto.setSellPrice(product.getSellPrice());
                 productDto.setYnSoldOut(product.getYnSoldOut());
+                productDto.setYnDisplay(product.getYnDisplay());
                 productDto.setIdMainImg(product.getIdMainImg());
                 productDto.setDescProduct(product.getDescProduct());
 
@@ -105,12 +97,43 @@ public class ProductService {
 
         for(ProdCateDto prodCateDto : productDto.getCateList()) {
             ProdCate prodCate = ProdCate.builder()
-                    .seqCategory(prodCateDto.getCategory().getSeqCategory())
+                    .seqCategory(prodCateDto.getSeqCategory())
                     .seqProduct(newProduct.getSeqProduct())
                     .build();
             prodCateRepository.save(prodCate);
         }
 
+        for(ProdSizeDto prodSizeDto : productDto.getSizeList()) {
+            if(prodSizeDto.getSeqSize() != null) {
+                prodSizeDto.setSeqProduct(newProduct.getSeqProduct());
+                prodSizeRepository.save(modelMapper.map(prodSizeDto, ProdSize.class));
+            }
+        }
+
+        return newProduct.getSeqProduct();
+    }
+
+    @Transactional
+    public Long update(ProductDto productDto) {
+        if(productDto.getImageList().size() > 0) {
+            List<AttachEntity> attachEntities = attachService.saveImage(productDto.getImageList(), "product", productDto.getIdMainImg());
+            if (attachEntities != null) {
+                productDto.setIdMainImg(attachEntities.get(0).getIdAttach()); //첨부파일 아이디 셋팅
+            }
+        }
+
+        Product newProduct = productRepository.save(modelMapper.map(productDto, Product.class));
+
+        categoryRepository.deleteCateMappBySeqProduct(productDto.getSeqProduct());
+        for(ProdCateDto prodCateDto : productDto.getCateList()) {
+            ProdCate prodCate = ProdCate.builder()
+                    .seqCategory(prodCateDto.getSeqCategory())
+                    .seqProduct(newProduct.getSeqProduct())
+                    .build();
+            prodCateRepository.save(prodCate);
+        }
+
+        sizeRepository.deleteSizeMappBySeqProduct(productDto.getSeqProduct());
         for(ProdSizeDto prodSizeDto : productDto.getSizeList()) {
             if(prodSizeDto.getSeqSize() != null) {
                 prodSizeDto.setSeqProduct(newProduct.getSeqProduct());

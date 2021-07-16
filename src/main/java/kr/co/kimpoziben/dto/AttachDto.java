@@ -17,6 +17,7 @@ public class AttachDto {
     private String pathFileAttach;
     private Long sizeFileAttach;
     private String extendsAttach;
+    private Integer ordrAttach;
     private String ynDel;
     private String registerAttach;
     private LocalDateTime regdtAttach;
@@ -32,6 +33,7 @@ public class AttachDto {
                 .pathFileAttach(pathFileAttach)
                 .sizeFileAttach(sizeFileAttach)
                 .extendsAttach(extendsAttach)
+                .ordrAttach(ordrAttach)
                 .ynDel(ynDel)
                 .registerAttach(registerAttach)
                 .regdtAttach(regdtAttach)
@@ -43,7 +45,7 @@ public class AttachDto {
 
     @Builder
     public AttachDto(String idAttach, int snFileAttach, String nmOrgFileAttach, String nmSrvFileAttach
-            , String pathFileAttach, Long sizeFileAttach, String extendsAttach
+            , String pathFileAttach, Long sizeFileAttach, String extendsAttach, Integer ordrAttach
             , String ynDel, String registerAttach, LocalDateTime regdtAttach
             , String modifierAttach, LocalDateTime moddtAttach) {
         this.idAttach = idAttach;
@@ -53,6 +55,7 @@ public class AttachDto {
         this.pathFileAttach = pathFileAttach;
         this.sizeFileAttach = sizeFileAttach;
         this.extendsAttach = extendsAttach;
+        this.ordrAttach = ordrAttach;
         this.ynDel = ynDel;
         this.registerAttach = registerAttach;
         this.regdtAttach = regdtAttach;

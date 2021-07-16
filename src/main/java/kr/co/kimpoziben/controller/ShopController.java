@@ -53,7 +53,7 @@ public class ShopController {
 
         List<AttachDto> attachDtoList = null;
 
-        attachDtoList = attachService.getAttachInfoList(idMainImg); // todo: file의 실제경로가 노출됨
+        attachDtoList = attachService.getAttachInfoList(idMainImg);
         resultMap.put("sizeList", sizeService.findBySeqProduct(seqProduct));
         resultMap.put("attachDtoList", attachDtoList);
         return resultMap;

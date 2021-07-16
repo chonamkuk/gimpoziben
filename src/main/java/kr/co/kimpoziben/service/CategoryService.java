@@ -58,4 +58,19 @@ public class CategoryService {
 
         return categoryList;
     }
+
+    public List<CategoryDto> findBySeqProduct(Long seqProduct) throws Exception {
+        List<CategoryDto> categoryList = new ArrayList<>();
+
+        for(Category category : categoryRepository.findBySeqProduct(seqProduct)) {
+            CategoryDto categoryDto = new CategoryDto();
+            categoryDto.setSeqCategory(category.getSeqCategory());
+            categoryDto.setNmCategory(category.getNmCategory());
+            categoryDto.setSeqUpper(category.getSeqUpper());
+
+            categoryList.add(categoryDto);
+        }
+
+        return categoryList;
+    }
 }

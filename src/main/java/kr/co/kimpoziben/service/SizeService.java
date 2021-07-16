@@ -37,20 +37,14 @@ public class SizeService {
                 return !(mappingContext.getSource() instanceof PersistentCollection);
             }
         });
-        modelMapper.typeMap(SizeDto.class, Size.class);
+        modelMapper.typeMap(Size.class, SizeDto.class);
     }
 
     public List<SizeDto> getList() throws  Exception {
         List<SizeDto> sizeList = new ArrayList<>();
 
         for(Size size : sizeRepository.findAll(Sort.by(Sort.Direction.ASC, "ordrSize"))) {
-            SizeDto sizeDto = new SizeDto();
-            sizeDto.setSeqSize(size.getSeqSize());
-            sizeDto.setNmSize(size.getNmSize());
-//            if(size.getUpperSize() != null) {
-//                sizeDto.setUpperSize(size.getUpperSize());
-//            }
-//            sizeList.add(modelMapper.map(size, SizeDto.class));
+            sizeList.add(modelMapper.map(size, SizeDto.class));
         }
 
         return sizeList;
@@ -63,27 +57,39 @@ public class SizeService {
             SizeDto sizeDto = new SizeDto();
             sizeDto.setSeqSize(size.getSeqSize());
             sizeDto.setNmSize(size.getNmSize());
+
+            SizeDto upperSizeDto = new SizeDto();
+            upperSizeDto.setSeqSize(size.getUpperSize().getSeqSize());
+            upperSizeDto.setNmSize(size.getUpperSize().getNmSize());
+
+            sizeDto.setUpperSize(upperSizeDto);
+
             sizeList.add(sizeDto);
         }
 
         return sizeList;
     }
 
-    public List<SizeDto> getUpperList() throws Exception {
+    public List<SizeDto> getHierarchyList() throws Exception {
         List<SizeDto> sizeDtoList = new ArrayList<>();
-        List<Size> sizeList = sizeRepository.findAllByUpperSizeIsNull(Sort.by(Sort.Direction.ASC, "ordrSize"));
-        for(Size size : sizeList) {
-            SizeDto sizeDto = new SizeDto();
-            sizeDto.setSeqSize(size.getSeqSize());
-            sizeDto.setNmSize(size.getNmSize());
-            sizeDto.setSubSizeList(size.getSubSizeList().stream()
-                    .map(subSize -> modelMapper.map(subSize, SizeDto.class))
-                    .collect(Collectors.toList())
-            );
-            sizeDtoList.add(sizeDto);
+        for(Size size : sizeRepository.findAll(Sort.by(Sort.Direction.ASC, "ordrSize"))) {
+            sizeDtoList.add(modelMapper.map(size, SizeDto.class));
         }
 
-        return sizeDtoList;
+        List<SizeDto> hierarchyList = new ArrayList<>();
+        for(SizeDto sizeDto : sizeDtoList) {
+            if(sizeDto.getUpperSize() == null) {
+                for(SizeDto subSizeDto : sizeDtoList) {
+                    if(subSizeDto.getUpperSize() != null && sizeDto.getSeqSize() == subSizeDto.getUpperSize().getSeqSize()) {
+                        sizeDto.addSubSize(subSizeDto);
+                    }
+                }
+
+                hierarchyList.add(sizeDto);
+            }
+        }
+
+        return hierarchyList;
     }
 
     public SizeDto getSizeDetail(Long seqSize) throws  Exception {

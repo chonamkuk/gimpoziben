@@ -7,6 +7,7 @@ import kr.co.kimpoziben.dto.ImageUploadDto;
 import kr.co.kimpoziben.service.AttachService;
 import lombok.AllArgsConstructor;
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -32,13 +34,14 @@ import java.util.List;
 public class AttachController {
     private AttachService attachService;
 
-    @GetMapping(value = "/resizeImgView.do")
+    @GetMapping(value = "/resizeImgView.do", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
     public @ResponseBody
     byte[] resizeImgView(@RequestParam("idAttach") String idAttach, @RequestParam("snFileAttach") int snFileAttach,
                          @RequestParam(value = "resizeWidth", required = false, defaultValue = "0") Integer resizeWidth) throws Exception {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try {
             AttachDto attachDto = attachService.getAttachInfo(idAttach, snFileAttach);
+            String imgPath = "";
             ImageIO.write(attachService.getResizeImg(attachDto.getPathFileAttach(), resizeWidth), "JPEG", byteArrayOutputStream);
             return byteArrayOutputStream.toByteArray();
         } catch (NullPointerException e) {
@@ -139,6 +142,19 @@ public class AttachController {
         for(MultipartFile file : files) {
             System.out.println(file.getOriginalFilename());
         }
+    }
 
+    @DeleteMapping(value = "/delete.do")
+    @ResponseBody
+    public Object deleteAttach(AttachDto attachDto) {
+        HashMap<String,Object> resultMap = new HashMap<>();
+        try{
+            attachService.updateDelYn(attachDto.getIdAttach(), attachDto.getSnFileAttach(), "admin"); //todo: 세션아이디 적용
+            resultMap.put("result", "success");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultMap.put("result", "fail");
+        }
+        return resultMap;
     }
 }

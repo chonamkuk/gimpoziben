@@ -241,80 +241,23 @@
 <th:block layout:fragment="script">
     <script type="text/javascript">
         $(document).ready(function () {
-            // ck이미지 스타일 조정
-            $('.modal-content > div > div > div > div > p > img').css('height', '100%');
-            $('.modal-content > div > div > div > div > p > img').css('width', '100%');
-            $('.modal-content > div > div > div > div > p > img').css('object-fit', 'contain');
-            $('.modal-content > div > div > div > div > p > img').css('object-position', 'top');
 
-            // 상세데이터 로딩 바인딩
-            setTimeout(function(){
-                $('.product-detail-modal').each(function(index, item){
-                    M.Modal.getInstance($(item)).options.onOpenStart = function(e){getDetail(e)};
-                });
-            },200);
         }); // document ready 끝
-
-        // 사이즈선택
-        $(document).on('click', '.size-filter > ul > li > a', function(e) {
-            $(this).parent().siblings().removeClass('active');
-            $(this).parent().addClass('active');
-        });
 
         // 리스트 이동
         function goList(page){
             $('[name="listForm"]').children('[name="page"]').val(page);
             $('[name="listForm"]').attr('method', 'get');
-            $('[name="listForm"]').attr('action', '/shop/list.do');
+            $('[name="listForm"]').attr('action', '/admin/shop/list.do');
             $('[name="listForm"]').submit();
         }
 
-        // 상세 데이터 로딩
-        function getDetail(e){
-            // data-loaded 값 없으면 데이터 불러오기
-            if(!$(e).data('loaded')) {
-                comn.preLoading();
-                console.log('데이터 로딩');
-                let seqProduct = $(e).data('seq-product');
-                let idMainImg = $(e).data('id-main-img');
-                $.ajax({
-                    url: '/shop/detail.do?seqProduct=' + seqProduct + '&idMainImg=' + idMainImg,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(data) {
-                        console.log(data);
-                        /**상품 이미지 시작**/
-                        if(data.attachDtoList.length > 0) {
-                            data.attachDtoList.forEach(function(item, index){
-                                let imageSrc = '/attach/resizeImgView.do?idAttach=' + item.idAttach + '&snFileAttach=' + item.snFileAttach;
-                                let $carouselItem = $('<div class="carousel-item white-text"><img src="'+ imageSrc +'" class="responsive-img"></div>');
-                                $(e).find('.carousel.carousel-slider').append($carouselItem);
-                            });
-                            $(e).find('.carousel.carousel-slider').carousel({
-                                fullWidth: true,
-                                indicators: true
-                            });
-                        }/**상품 이미지 끝**/
-
-                        // 사이즈정보
-                        $(e).find('.size-filter  > ul').empty();
-                        data.sizeList.forEach(function(item, index){
-                            $(e).find('.size-filter  > ul').append('<li style="margin-right: 3px;" data-seqSize="'+ item.seqSize +'"><a>'+ item.nmSize +'</a></li>');
-                        });
-
-                        // 데이터 로딩 완료 후 data-loaded 값 바꾸기
-                        $(e).data('loaded', true);
-                        comn.afterLoading();
-                    },
-                    error: function(request, status, error){
-                        console.log('code : ' + request.status);
-                        console.log('message : ' + request.responseText);
-                        console.log('error : ' + error);
-                    }
-                });
-            } else {
-                console.log('데이터 있음');
-            }
+        // 수정화면 이동
+        function goUpdate(seqProduct){
+            $('[name="listForm"]').children('[name="seqProduct"]').val(seqProduct);
+            $('[name="listForm"]').attr('method', 'get');
+            $('[name="listForm"]').attr('action', '/admin/shop/update.do');
+            $('[name="listForm"]').submit();
         }
     </script>
 </th:block>
@@ -355,77 +298,19 @@
                                         <p th:text="${resultDto.nmProduct}"></p>
                                         <span class="card-title text-ellipsis" data-position="bottom" th:text="${resultDto.titleProduct}" th:data-tooltip="${resultDto.titleProduct}" th:classappend="${#strings.isEmpty(resultDto.titleProduct) ? '' : 'tooltipped'}"></span>
                                         <div>
+                                            <span th:if="${resultDto.ynDisplay == 'Y'}" style="display: block; height: 22px;"></span>
+                                            <span th:if="${resultDto.ynDisplay == 'N'}" class="badge blue-grey left">미게시</span>
                                             <th:block th:if="${not #strings.isEmpty(resultDto.idMainImg)}">
                                                 <img class="responsive-img" th:src="${'/attach/resizeImgView.do?idAttach=' + resultDto.idMainImg + '&snFileAttach=1&resizeWidth=500'}"
-                                                     onerror="this.src='/static/image/broken_image_48dp.png';this.style='object-fit:none';">
+                                                     onerror="this.src='/static/image/broken_image_48dp.png';this.style='object-fit:none;width: 84%;';">
                                             </th:block>
                                             <th:block th:if="${#strings.isEmpty(resultDto.idMainImg)}">
-                                                <img class="responsive-img" src="/static/image/broken_image_48dp.png" style="object-fit: none;">
+                                                <img class="responsive-img" src="/static/image/broken_image_48dp.png" style="object-fit: none;width: 84%;">
                                             </th:block>
                                         </div>
                                         <div class="display-flex flex-wrap justify-content-center">
                                             <h5 class="mt-3" th:text="${#numbers.formatDecimal(resultDto.sellPrice, 0, 'COMMA', 0, 'POINT')} + '원'"></h5>
-                                            <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" th:href="${'#modal' + listStatus.index}">View</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Modal Structure -->
-                                <div th:id="${'modal' + listStatus.index}" class="modal product-detail-modal" data-loaded="false" th:data-seq-product="${resultDto.seqProduct}" th:data-id-main-img="${resultDto.idMainImg}">
-                                    <div class="modal-content pt-2">
-                                        <div class="row" th:id="${'product' + listStatus.index}">
-                                            <div class="col s12">
-                                                <a class="modal-close right"><i class="material-icons">close</i></a>
-                                            </div>
-                                            <div class="col s12">
-                                                <div class="card" style="padding-bottom: 2%;">
-                                                    <div class="card-content">
-                                                        <!-- 이미지 슬라이더 -->
-                                                        <div class="col m6 s12">
-                                                            <div class="row">
-                                                                <div class="carousel carousel-slider center" data-indicators="true">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- 상품 정보 영역 -->
-                                                        <div class="col s12 m6">
-                                                            <!--                                                <div class="row">-->
-                                                            <h5 class="detail-product-nm" th:text="${resultDto.nmProduct}">품번</h5>
-                                                            <p class="detail-product-title" th:text="${resultDto.titleProduct}">상품 타이틀</p>
-                                                            <!--                                                <span class="new badge left ml-0 mr-2" data-badge-caption="">NEW</span>-->
-                                                            <hr class="mb-5">
-                                                            <p class="col s6">단가</p>
-                                                            <p class="col s6 detail-product-price" th:text="${#numbers.formatDecimal(resultDto.sellPrice, 0, 'COMMA', 0, 'POINT')} + '원'">판매가격</p>
-                                                            <p class="col s6 detail-product-size" style="margin-top: 2.5rem;">사이즈 선택</p>
-                                                            <div class="col s6 size-filter" style="margin-bottom: 1rem; margin-top: 2rem;min-height: 37px;">
-                                                                <ul>
-                                                                    <li style="margin-right: 3px;"><a>1</a></li>
-                                                                    <li style="margin-right: 3px;"><a>2</a></li>
-                                                                    <li style="margin-right: 3px;"><a>3</a></li>
-                                                                    <li style="margin-right: 3px;"><a>4</a></li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="col s6" style="margin-top: 1rem;">수량 선택</div>
-                                                            <div class="input-field col s6" style="margin-top: 0rem;">
-                                                                <input th:id="${'orderCnt' + listStatus.index}" name="orderCnt" type="number" class="validate">
-                                                                <label th:for="${'orderCnt' + listStatus.index}">입력</label>
-                                                            </div>
-                                                            <!--                                                <span class="vertical-align-top mr-4"><i class="material-icons mr-3">favorite_border</i>Wishlist</span>-->
-                                                            <h5 class="col s12">0원<!--<span class="prise-text-style ml-2">41,800원</span>--></h5>
-                                                            <a class="col s12 m12 l5 waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">카트에 담기</a>
-                                                            <a class="col s12 m12 l5 waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">바로구매</a>
-                                                            <!--                                                </div>-->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- 상품 상세설명 영역 -->
-                                            <div class="col s12">
-                                                <div class="card">
-                                                    <div class="card-content">
-                                                        <th:block th:utext="${resultDto.descProduct}"></th:block>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block z-depth-4" th:onclick="'javascript:goUpdate('+ ${resultDto.seqProduct} +');'">수정</a>
                                         </div>
                                     </div>
                                 </div>
@@ -474,6 +359,7 @@
         <input type="hidden" name="pageSize" th:value="${pagingResult.pageSize}"/>
         <input type="hidden" name="direction" th:value="${pagingResult.direction}"/>
         <input type="hidden" name="sortProp" th:value="${pagingResult.sortProp}"/>
+        <input type="hidden" name="seqProduct" value=""/>
     </form>
 </div>
 <!-- END: Page Main-->

@@ -57,6 +57,8 @@ public class AttachService {
                 .nmSrvFileAttach(attachEntity.getNmSrvFileAttach())
                 .pathFileAttach(attachEntity.getPathFileAttach())
                 .sizeFileAttach(attachEntity.getSizeFileAttach())
+                .extendsAttach(attachEntity.getExtendsAttach())
+                .ordrAttach(attachEntity.getOrdrAttach())
                 .ynDel(attachEntity.getYnDel())
                 .registerAttach(attachEntity.getRegisterAttach())
                 .regdtAttach(attachEntity.getRegdtAttach())
@@ -68,7 +70,7 @@ public class AttachService {
     }
 
     public List<AttachDto> getAttachInfoList(String idAttach) {
-        List<AttachEntity> attachEntities = attachRepository.findByIdAttachAndYnDel(idAttach, "N");
+        List<AttachEntity> attachEntities = attachRepository.findByIdAttachAndYnDelOrderByOrdrAttach(idAttach, "N");
 
         List<AttachDto> attachDtoList = new ArrayList<>();
 
@@ -77,9 +79,10 @@ public class AttachService {
                     .idAttach(attachEntity.getIdAttach())
                     .snFileAttach(attachEntity.getSnFileAttach())
                     .nmOrgFileAttach(attachEntity.getNmOrgFileAttach())
-                    .nmSrvFileAttach(attachEntity.getNmSrvFileAttach())
-                    .pathFileAttach(attachEntity.getPathFileAttach())
+//                    .nmSrvFileAttach(attachEntity.getNmSrvFileAttach())
+//                    .pathFileAttach(attachEntity.getPathFileAttach())
                     .sizeFileAttach(attachEntity.getSizeFileAttach())
+                    .ordrAttach(attachEntity.getOrdrAttach())
                     .ynDel(attachEntity.getYnDel())
                     .registerAttach(attachEntity.getRegisterAttach())
                     .regdtAttach(attachEntity.getRegdtAttach())
@@ -171,10 +174,11 @@ public class AttachService {
     @Transactional
     public void updateDelYn(String idAttach, int snFileAttach, String modifier) {
         AttachDto attachDto = this.getAttachInfo(idAttach, snFileAttach);
+        attachDto.setModdtAttach(LocalDateTime.now());
         attachDto.setYnDel("Y");
         attachDto.setModifierAttach(modifier);
-        attachDto.setModdtAttach(LocalDateTime.now());
-        this.saveAttachInfo(attachDto);
+//        this.saveAttachInfo(attachDto);
+        attachRepository.save(attachDto.toEntity());
     }
 
     @Transactional
@@ -211,7 +215,6 @@ public class AttachService {
                 Files.createDirectories(uploadPath);
             } catch (IOException e) {
                 e.printStackTrace();
-                System.out.println(e);
             }
         }
 
@@ -229,7 +232,8 @@ public class AttachService {
                 serverFilePath = uploadPathBuf.toString() + propertyConfig.getFilePathSeperator() + serverFileNm; // 서버저장 경로
                 System.out.println("serverFilePath ;; " + serverFilePath);
 
-                ImageIO.write(originImage, "jpg", new File(serverFilePath));
+
+                ImageIO.write(originImage, extension.substring(1), new File(serverFilePath));
 
                 // 첨부파일 저장 값
                 attachDto = new AttachDto();
@@ -240,6 +244,7 @@ public class AttachService {
                 attachDto.setPathFileAttach(serverFilePath);
                 attachDto.setSizeFileAttach(Long.valueOf(imageUploadDto.getImageSize()));
                 attachDto.setExtendsAttach(extension);
+                attachDto.setOrdrAttach(imageUploadDto.getOrdrAttach());
                 attachDto.setYnDel("N");
                 attachDto.setRegisterAttach("test"); // todo: 사용자정보 저장?
                 attachDto.setRegdtAttach(LocalDateTime.now());
@@ -251,7 +256,6 @@ public class AttachService {
             return attachEntities;
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println(e);
             return null;
         }
     }
