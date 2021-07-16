@@ -1,14 +1,21 @@
 package kr.co.kimpoziben.controller.admin;
 
 import kr.co.kimpoziben.dto.ProductDto;
+import kr.co.kimpoziben.dto.ProductWorkDto;
 import kr.co.kimpoziben.service.AttachService;
 import kr.co.kimpoziben.service.CategoryService;
 import kr.co.kimpoziben.service.ProductService;
+import kr.co.kimpoziben.service.WorkProductService;
 import kr.co.kimpoziben.service.SizeService;
+import kr.co.kimpoziben.util.PageRequest;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 
 @Controller
 @AllArgsConstructor
@@ -16,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 public class AdminShopController {
 
     private ProductService productService;
+    private WorkProductService workProductService;
     private SizeService sizeService;
     private CategoryService categoryService;
     private AttachService attachService;
@@ -47,4 +55,71 @@ public class AdminShopController {
 
         return "admin/shop/update";
     }
+
+
+
+
+
+    @GetMapping("/jasuWrite.do")
+    public String jasuWrite(Model model) throws Exception {
+       // model.addAttribute("upperSizeList", sizeService.getUpperList());
+       // model.addAttribute("parentCategoryList", categoryService.getParentList());
+        return "admin/shop/jasuWrite";
+    }
+
+    @PostMapping("/jasuWrite.do")
+    public String jasuWrite(@ModelAttribute ProductWorkDto productWorkDto) throws Exception {
+        productWorkDto.setRegister("admin");
+        workProductService.save(productWorkDto);
+        return "redirect:/shop/list.do";
+    }
+
+    @GetMapping("/jasulist2.do")
+    public String list(Model model, final PageRequest pageable, HashMap<String,Object> searchMap
+            , @RequestParam(value = "seqCategory", required = false) Long seqCategory
+            , @RequestParam(value = "seqUpperCategory", required = false) Long seqUpperCategory) throws Exception {
+
+
+        /*pageable.setListSize(9);
+        pageable.setDirection(Sort.Direction.DESC);
+        pageable.setSortProp("seqProduct");
+        searchMap.put("ynDisplay", "Y");
+        searchMap.put("seqCategory", seqCategory);
+        searchMap.put("seqUpper", seqUpperCategory);
+        HashMap result = productService.getList(pageable.of(), searchMap);
+
+        model.addAttribute("resultList", result.get("resultList"));
+        model.addAttribute("pagingResult", pageable.pagination((Page) result.get("pagingResult")));
+        model.addAttribute("searchMap", searchMap);*/
+
+        return "admin/shop/data-table";
+    }
+
+    @GetMapping("/jasulist.do")
+    public String list2(Model model, final PageRequest pageable, HashMap<String,Object> searchMap
+            , @RequestParam(value = "seqCategory", required = false) Long seqCategory
+            , @RequestParam(value = "seqUpperCategory", required = false) Long seqUpperCategory) throws Exception {
+
+        /* 1. 리스트를 만들어 화면에 뿌린다. 페이징은 기본 맵에서 처리할수 있도록
+        *  2. 헤더만 따로 뗄수있는지 여부
+        *  3. 시퀀스 여부 확인할것
+        *
+        * */
+
+
+        /*pageable.setListSize(9);
+        pageable.setDirection(Sort.Direction.DESC);
+        pageable.setSortProp("seqProduct");
+        searchMap.put("ynDisplay", "Y");
+        searchMap.put("seqCategory", seqCategory);
+        searchMap.put("seqUpper", seqUpperCategory);
+        HashMap result = productService.getList(pageable.of(), searchMap);
+
+        model.addAttribute("resultList", result.get("resultList"));
+        model.addAttribute("pagingResult", pageable.pagination((Page) result.get("pagingResult")));
+        model.addAttribute("searchMap", searchMap);*/
+
+        return "admin/shop/table-data-table";
+    }
+
 }

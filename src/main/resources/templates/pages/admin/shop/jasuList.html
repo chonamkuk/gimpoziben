@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" layout:decorator="../layout/default">
+
+<!-- page CSS -->
+<th:block layout:fragment="css">
+    <style>
+        @media only screen and (min-width: 993px) {
+            .row .col.l9 {
+                margin-left: 12% !important;
+            }
+        }
+
+        @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px){
+            #ecommerce-products .card-content .btn {
+                display: inline-table;
+                width: 100%;
+            }
+        }
+
+        @media only screen and (width: 1024px){
+            #ecommerce-products .electronic-products .col.s12.m4.l4 {
+                width: 49.3333%;
+            }
+        }
+
+        @media only screen and (max-width: 600px) {
+            div.no-image {
+                background-image: url('/static/image/broken_image_24dp.png');
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        }
+
+        @media only screen and (min-width: 600px) and (max-width: 800px){
+            #ecommerce-products > div.col > div > div.card.animate > div > div > img {
+                height: 130px;
+            }
+            div.no-image {
+                background-image: url('/static/image/broken_image_48dp.png');
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        }
+
+        @media only screen and (min-width: 801px) {
+            #ecommerce-products > div.col > div > div.card.animate > div > div > img {
+                height: 267px;
+            }
+            div.no-image {
+                background-image: url('/static/image/broken_image_48dp.png');
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        }
+
+        #ecommerce-products .card {
+            overflow: hidden;
+        }
+
+        #ecommerce-products .card .card-content i.material-icons {
+            cursor: pointer;
+        }
+
+        #ecommerce-products .modal .modal-content i.material-icons         {
+            cursor: pointer;
+            vertical-align: middle;
+        }
+
+        #ecommerce-products .card-badge {
+            line-height: 2em;
+            position: absolute;
+            top: 1rem;
+            right: -10rem;
+            display: block;
+            width: 25rem;
+            height: 2em;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+            text-indent: .8em;
+            background: #8e24aa;
+            background: -webkit-linear-gradient(45deg, #8e24aa 0%, #ff6e40 100%);
+            background: linear-gradient(45deg, #8e24aa 0%, #ff6e40 100%);
+        }
+
+        #ecommerce-products .card-badge a {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            text-decoration: none;
+            color: #dedede;
+        }
+
+        #ecommerce-products .card-badge a:hover {
+            text-decoration: underline;
+        }
+
+        #ecommerce-products .card-badge a:before,
+        #ecommerce-products .card-badge a:after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 3px;
+            content: '';
+        }
+
+        #ecommerce-products .card-badge a:after {
+            top: auto;
+            bottom: 0;
+            border-bottom-width: 0;
+        }
+
+        #ecommerce-products .prise-text-style {
+            font-size: 20px;
+            vertical-align: bottom;
+            text-decoration: line-through;
+            color: #c1c1c1 !important;
+        }
+
+        #ecommerce-products .card-content hr,
+        #ecommerce-products .modal-content hr {
+            opacity: .3;
+        }
+
+        #ecommerce-products .card-content .list-bullet,
+        #ecommerce-products .modal-content .list-bullet {
+            padding-left: 1.65rem;
+            list-style-type: disc;
+        }
+
+        #ecommerce-products .card-content .list-bullet .list-item-bullet,
+        #ecommerce-products .modal-content .list-bullet .list-item-bullet {
+            padding: .2rem 0;
+            list-style-type: disc;
+        }
+
+        #ecommerce-products .categories-collapsible {
+            border: none;
+            box-shadow: none;
+        }
+
+        #ecommerce-products .categories-collapsible li.active i {
+            -webkit-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }
+
+        #ecommerce-products .categories-collapsible li .collapsible-header {
+            padding-right: 0;
+            padding-bottom: 0;
+            padding-left: 0;
+            border: none;
+        }
+
+        #ecommerce-products .categories-collapsible li .collapsible-header i {
+            position: absolute;
+            right: 0;
+            -webkit-transition: all .3s;
+            transition: all .3s;
+        }
+
+        #ecommerce-products .categories-collapsible .collapsible-body {
+            padding: 0;
+            padding-top: 5px;
+            padding-left: 5px;
+            border: 0;
+        }
+
+        #ecommerce-products .categories-collapsible .collapsible-body p {
+            font-size: .9rem;
+            margin-top: 5px;
+            cursor: pointer;
+        }
+
+        #ecommerce-products .size-filter ul {
+            margin: 0;
+        }
+
+        #ecommerce-products .size-filter ul .active a {
+            color: #fff;
+            background: #7e57c2;
+        }
+
+        #ecommerce-products .size-filter ul li {
+            display: inline-block;
+            margin: .1rem 0;
+        }
+
+        #ecommerce-products .size-filter ul li a {
+            font-weight: 700;
+            line-height: 34px;
+            display: block;
+            width: 34px;
+            height: 34px;
+            text-align: center;
+            border-radius: 3px;
+            background: #ede7f6;
+        }
+
+        #ecommerce-products > div.col > div > div.card.animate > div > div {
+            text-align: center;
+        }
+
+        #ecommerce-products > div.col > div > div.card.animate > div > div > img {
+            object-fit: contain;
+            object-position: center;
+        }
+
+        .product-detail-modal {
+            width: 90%;
+            max-height: 90%;
+        }
+
+        .card .card-content .card-title {
+            min-height: 32px;
+            font-size: 12px;
+        }
+
+        #ecommerce-products > div.col.s12.m12.l12.pr-0 > div > div.card.animate > div > p {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .responsive-img {
+            min-height: 55px;
+        }
+
+        /************** 상품상세 모달 **************/
+        /*.carousel {*/
+        /*    height: 587px;*/
+        /*    border: 1px solid #ECEFF1;*/
+        /*}*/
+
+        .carousel .carousel-item > img {
+            top: 50%;
+            -webkit-transform: translate(0,-50%);
+            transform: translate(0,-50%);
+            position: relative;
+            width: auto;
+            max-height: 100%;
+            -webkit-transition: border-color .15s linear;
+            transition: border-color .15s linear;
+        }
+
+        .carousel .indicators .indicator-item {
+            border: 1px solid #bababa;
+            width: 15px;
+            height: 15px;
+        }
+    </style>
+</th:block>
+
+<!-- page 스크립트 -->
+<th:block layout:fragment="script">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // ck이미지 스타일 조정
+            $('.modal-content > div > div > div > div > p > img').css('height', '100%');
+            $('.modal-content > div > div > div > div > p > img').css('width', '100%');
+            $('.modal-content > div > div > div > div > p > img').css('object-fit', 'contain');
+            $('.modal-content > div > div > div > div > p > img').css('object-position', 'top');
+
+            // 상세데이터 로딩 바인딩
+            setTimeout(function(){
+                $('.product-detail-modal').each(function(index, item){
+                    M.Modal.getInstance($(item)).options.onOpenStart = function(e){getDetail(e)};
+                });
+            },200);
+        }); // document ready 끝
+
+        // 사이즈선택
+        $(document).on('click', '.size-filter > ul > li > a', function(e) {
+            $(this).parent().siblings().removeClass('active');
+            $(this).parent().addClass('active');
+        });
+
+        // 리스트 이동
+        function goPage(page){
+            $('[name="listForm"]').children('[name="page"]').val(page);
+            $('[name="listForm"]').submit();
+        }
+
+        // 상세 데이터 로딩
+        function getDetail(e){
+            // data-loaded 값 없으면 데이터 불러오기
+            if(!$(e).data('loaded')) {
+                comn.preLoading();
+                console.log('데이터 없음');
+                let seqProduct = $(e).data('seq-product');
+                let idMainImg = $(e).data('id-main-img');
+                $.ajax({
+                    url: '/shop/detail.do?seqProduct=' + seqProduct + '&idMainImg=' + idMainImg,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                        /**상품 이미지 시작**/
+                        if(data.attachDtoList.length > 0) {
+                            data.attachDtoList.forEach(function(item, index){
+                                let imageSrc = '/attach/resizeImgView.do?idAttach=' + item.idAttach + '&snFileAttach=' + item.snFileAttach;
+                                let $carouselItem = $('<div class="carousel-item white-text"><img src="'+ imageSrc +'" class="responsive-img"></div>');
+                                $(e).find('.carousel.carousel-slider').append($carouselItem);
+                            });
+                            $(e).find('.carousel.carousel-slider').carousel({
+                                fullWidth: true,
+                                indicators: true
+                            });
+                        }/**상품 이미지 끝**/
+
+                        // 사이즈정보
+                        $(e).find('.size-filter  > ul').empty();
+                        data.sizeList.forEach(function(item, index){
+                            $(e).find('.size-filter  > ul').append('<li style="margin-right: 3px;" data-seqSize="'+ item.seqSize +'"><a>'+ item.nmSize +'</a></li>');
+                        });
+
+                        // 데이터 로딩 완료 후 data-loaded 값 바꾸기
+                        $(e).data('loaded', true);
+                        comn.afterLoading();
+                    },
+                    error: function(request, status, error){
+                        console.log('code : ' + request.status);
+                        console.log('message : ' + request.responseText);
+                        console.log('error : ' + error);
+                    }
+                });
+            } else {
+                console.log('데이터 있음');
+            }
+        }
+    </script>
+</th:block>
+
+<!-- BEGIN: Page Main-->
+<div layout:fragment="content" id="main">
+    <div class="row">
+        <div class="pt-1 pb-0" id="breadcrumbs-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m6 l6">
+                        <h5 class="breadcrumbs-title"><span>제품리스트</span></h5>
+                    </div>
+                    <div class="col s12 m6 l6 right-align-md">
+                        <ol class="breadcrumbs mb-0">
+                            <li class="breadcrumb-item"><a href="#1">Home</a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="#">제품소개</a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="#">제품리스트</a>
+                            </li>
+                            <li class="breadcrumb-item active">전체
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s12">
+            <div class="container">
+                <div class="section">
+                    <div class="row" id="ecommerce-products">
+                        <div class="col s12 m12 l12 pr-0">
+                            <div class="col s12 m4 l4" th:each="resultDto, listStatus: ${resultList}">
+                                <div class="card animate" th:classappend="${listStatus.index%3 == 0 ? 'fadeLeft' : (listStatus.index%3 == 1 ? 'fadeUp' : 'fadeRight')}">
+                                    <div th:if="${resultDto.ynSoldOut == 'Y'}" class="card-badge"><a class="white-text"><b>품절</b></a></div>
+                                    <div class="card-content">
+                                        <p th:text="${resultDto.nmProduct}"></p>
+                                        <span class="card-title text-ellipsis" data-position="bottom" th:text="${resultDto.titleProduct}" th:data-tooltip="${resultDto.titleProduct}" th:classappend="${#strings.isEmpty(resultDto.titleProduct) ? '' : 'tooltipped'}"></span>
+                                        <div th:class="${#strings.isEmpty(resultDto.idMainImg) ? 'no-image' : ''}">
+                                            <th:block th:if="${not #strings.isEmpty(resultDto.idMainImg)}">
+                                                <img  class="responsive-img" th:src="${'/attach/resizeImgView.do?idAttach=' + resultDto.idMainImg + '&snFileAttach=1&resizeWidth=500'}">
+                                            </th:block>
+                                            <th:block th:if="${#strings.isEmpty(resultDto.idMainImg)}">
+                                                <img class="responsive-img">
+                                            </th:block>
+                                        </div>
+                                        <div class="display-flex flex-wrap justify-content-center">
+                                            <h5 class="mt-3" th:text="${#numbers.formatDecimal(resultDto.sellPrice, 0, 'COMMA', 0, 'POINT')} + '원'"></h5>
+                                            <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" th:href="${'#modal' + listStatus.index}">View</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Modal Structure -->
+                                <div th:id="${'modal' + listStatus.index}" class="modal product-detail-modal" data-loaded="false" th:data-seq-product="${resultDto.seqProduct}" th:data-id-main-img="${resultDto.idMainImg}">
+                                    <div class="modal-content pt-2">
+                                        <div class="row" th:id="${'product' + listStatus.index}">
+                                            <div class="col s12">
+                                                <a class="modal-close right"><i class="material-icons">close</i></a>
+                                            </div>
+                                            <div class="col s12">
+                                                <div class="card" style="padding-bottom: 2%;">
+                                                    <div class="card-content">
+                                                        <!-- 이미지 슬라이더 -->
+                                                        <div class="col m6 s12">
+                                                            <div class="row">
+                                                                <div class="carousel carousel-slider center" data-indicators="true">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- 상품 정보 영역 -->
+                                                        <div class="col s12 m6">
+                                                            <!--                                                <div class="row">-->
+                                                            <h5 class="detail-product-nm" th:text="${resultDto.nmProduct}">품번</h5>
+                                                            <p class="detail-product-title" th:text="${resultDto.titleProduct}">상품 타이틀</p>
+                                                            <!--                                                <span class="new badge left ml-0 mr-2" data-badge-caption="">NEW</span>-->
+                                                            <hr class="mb-5">
+                                                            <p class="col s6">단가</p>
+                                                            <p class="col s6 detail-product-price" th:text="${#numbers.formatDecimal(resultDto.sellPrice, 0, 'COMMA', 0, 'POINT')} + '원'">판매가격</p>
+                                                            <p class="col s6 detail-product-size" style="margin-top: 2.5rem;">사이즈 선택</p>
+                                                            <div class="col s6 size-filter" style="margin-bottom: 1rem; margin-top: 2rem;min-height: 37px;">
+                                                                <ul>
+                                                                    <li style="margin-right: 3px;"><a>1</a></li>
+                                                                    <li style="margin-right: 3px;"><a>2</a></li>
+                                                                    <li style="margin-right: 3px;"><a>3</a></li>
+                                                                    <li style="margin-right: 3px;"><a>4</a></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="col s6" style="margin-top: 1rem;">수량 선택</div>
+                                                            <div class="input-field col s6" style="margin-top: 0rem;">
+                                                                <input th:id="${'orderCnt' + listStatus.index}" name="orderCnt" type="number" class="validate">
+                                                                <label th:for="${'orderCnt' + listStatus.index}">입력</label>
+                                                            </div>
+                                                            <!--                                                <span class="vertical-align-top mr-4"><i class="material-icons mr-3">favorite_border</i>Wishlist</span>-->
+                                                            <h5 class="col s12">0원<!--<span class="prise-text-style ml-2">41,800원</span>--></h5>
+                                                            <a class="col s12 m12 l5 waves-effect waves-light btn gradient-45deg-deep-purple-blue mt-2 mr-2">카트에 담기</a>
+                                                            <a class="col s12 m12 l5 waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">바로구매</a>
+                                                            <!--                                                </div>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- 상품 상세설명 영역 -->
+                                            <div class="col s12">
+                                                <div class="card">
+                                                    <div class="card-content">
+                                                        <th:block th:utext="${resultDto.descProduct}"></th:block>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Pagination -->
+                        <div class="col s12 center">
+                            <th:block th:if="${not #lists.isEmpty(resultList)}">
+                                <ul class="pagination">
+                                    <li th:class="${pagingResult.hasPrevious ? 'waves-effect' : 'disabled'}">
+                                        <a th:if="${pagingResult.hasPrevious}" th:onclick="|javascript:goPage('${pagingResult.page-1}');|"><i class="material-icons">chevron_left</i></a>
+                                        <a th:unless="${pagingResult.hasPrevious}" th:onclick="|javascript:return false;|"><i class="material-icons">chevron_left</i></a>
+                                    </li>
+
+                                    <li th:each="pageCount : ${#numbers.sequence(pagingResult.startPage, pagingResult.endPage)}" th:class="${pagingResult.page == pageCount ? 'active' : 'waves-effect'}">
+                                        <a th:if="${pagingResult.page == pageCount}" th:text="${pageCount}"></a>
+                                        <a th:unless="${pagingResult.page == pageCount}" th:text="${pageCount}" th:onclick="|javascript:goPage('${pageCount}');|"></a>
+                                    </li>
+
+                                    <li th:class="${pagingResult.hasNext ? 'waves-effect' : 'disabled'}">
+                                        <a th:if="${pagingResult.hasNext}" th:onclick="|javascript:goPage('${pagingResult.page+1}');|"><i class="material-icons">chevron_right</i></a>
+                                        <a th:unless="${pagingResult.hasNext}" th:onclick="|javascript:return false;|"><i class="material-icons">chevron_right</i></a>
+                                    </li>
+                                </ul>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+<!--                <div style="bottom: 50px; right: 19px;" class="fixed-action-btn direction-top"><a class="btn-floating btn-large gradient-45deg-light-blue-cyan gradient-shadow"><i class="material-icons">add</i></a>
+                    <ul>
+                        <li><a href="css-helpers.html" class="btn-floating blue"><i class="material-icons">help_outline</i></a></li>
+                        <li><a href="cards-extended.html" class="btn-floating green"><i class="material-icons">widgets</i></a></li>
+                        <li><a href="app-calendar.html" class="btn-floating amber"><i class="material-icons">today</i></a></li>
+                        <li><a href="app-email.html" class="btn-floating red"><i class="material-icons">mail_outline</i></a></li>
+                    </ul>
+                </div>-->
+            </div>
+            <div class="content-overlay"></div>
+
+        </div>
+    </div>
+
+    <form name="listForm" method="get" action="/shop/list.do">
+        <input type="hidden" name="page" th:value="${pagingResult.page}"/>
+        <input type="hidden" name="listSize" th:value="${pagingResult.listSize}"/>
+        <input type="hidden" name="pageSize" th:value="${pagingResult.pageSize}"/>
+        <input type="hidden" name="direction" th:value="${pagingResult.direction}"/>
+        <input type="hidden" name="sortProp" th:value="${pagingResult.sortProp}"/>
+    </form>
+</div>
+<!-- END: Page Main-->
+
+</html>

@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google.">
+    <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template, eCommerce dashboard, analytic dashboard">
+    <meta name="author" content="ThemeSelect">
+    <title>DataTable | Materialize - Material Design Admin Template</title>
+    <link rel="apple-touch-icon" href="/static/images/favicon/apple-touch-icon-152x152.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon/favicon-32x32.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- BEGIN: VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="/static/vendors/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/vendors/flag-icon/css/flag-icon.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/vendors/data-tables/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/vendors/data-tables/css/select.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css-rtl/layouts/style-horizontal.css">
+    <link rel="stylesheet" type="text/css" href="/static/lib/materialize/css/materialize.css">
+    <link rel="stylesheet" type="text/css" href="/static/lib/designTemplate/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/lib/designTemplate/css/style-horizontal.css">
+    <link rel="stylesheet" type="text/css" href="/static/lib/designTemplate/css/dropify.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/pages/data-tables.css">
+    <!-- END: Page Level CSS-->
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="/static/css-rtl/custom/custom.css">
+    <!-- END: Custom CSS-->
+</head>
+
+
+<th:block layout:fragment="css">
+
+
+
+  <!--페이지테스트1-->
+
+    <style>
+        @media only screen and (min-width: 993px) {
+            .row .col.l9 {
+                margin-left: 12% !important;
+            }
+        }
+
+        @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px){
+            #ecommerce-products .card-content .btn {
+                display: inline-table;
+                width: 100%;
+            }
+        }
+
+        @media only screen and (width: 1024px){
+            #ecommerce-products .electronic-products .col.s12.m4.l4 {
+                width: 49.3333%;
+            }
+        }
+
+        @media only screen and (max-width: 600px) {
+            div.no-image {
+                background-image: url('/static/image/broken_image_24dp.png');
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        }
+
+        @media only screen and (min-width: 600px) and (max-width: 800px){
+            #ecommerce-products > div.col > div > div.card.animate > div > div > img {
+                height: 130px;
+            }
+            div.no-image {
+                background-image: url('/static/image/broken_image_48dp.png');
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        }
+
+        @media only screen and (min-width: 801px) {
+            #ecommerce-products > div.col > div > div.card.animate > div > div > img {
+                height: 267px;
+            }
+            div.no-image {
+                background-image: url('/static/image/broken_image_48dp.png');
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        }
+
+        #ecommerce-products .card {
+            overflow: hidden;
+        }
+
+        #ecommerce-products .card .card-content i.material-icons {
+            cursor: pointer;
+        }
+
+        #ecommerce-products .modal .modal-content i.material-icons         {
+            cursor: pointer;
+            vertical-align: middle;
+        }
+
+        #ecommerce-products .card-badge {
+            line-height: 2em;
+            position: absolute;
+            top: 1rem;
+            right: -10rem;
+            display: block;
+            width: 25rem;
+            height: 2em;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+            text-indent: .8em;
+            background: #8e24aa;
+            background: -webkit-linear-gradient(45deg, #8e24aa 0%, #ff6e40 100%);
+            background: linear-gradient(45deg, #8e24aa 0%, #ff6e40 100%);
+        }
+
+        #ecommerce-products .card-badge a {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            text-decoration: none;
+            color: #dedede;
+        }
+
+        #ecommerce-products .card-badge a:hover {
+            text-decoration: underline;
+        }
+
+        #ecommerce-products .card-badge a:before,
+        #ecommerce-products .card-badge a:after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 3px;
+            content: '';
+        }
+
+        #ecommerce-products .card-badge a:after {
+            top: auto;
+            bottom: 0;
+            border-bottom-width: 0;
+        }
+
+        #ecommerce-products .prise-text-style {
+            font-size: 20px;
+            vertical-align: bottom;
+            text-decoration: line-through;
+            color: #c1c1c1 !important;
+        }
+
+        #ecommerce-products .card-content hr,
+        #ecommerce-products .modal-content hr {
+            opacity: .3;
+        }
+
+        #ecommerce-products .card-content .list-bullet,
+        #ecommerce-products .modal-content .list-bullet {
+            padding-left: 1.65rem;
+            list-style-type: disc;
+        }
+
+        #ecommerce-products .card-content .list-bullet .list-item-bullet,
+        #ecommerce-products .modal-content .list-bullet .list-item-bullet {
+            padding: .2rem 0;
+            list-style-type: disc;
+        }
+
+        #ecommerce-products .categories-collapsible {
+            border: none;
+            box-shadow: none;
+        }
+
+        #ecommerce-products .categories-collapsible li.active i {
+            -webkit-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }
+
+        #ecommerce-products .categories-collapsible li .collapsible-header {
+            padding-right: 0;
+            padding-bottom: 0;
+            padding-left: 0;
+            border: none;
+        }
+
+        #ecommerce-products .categories-collapsible li .collapsible-header i {
+            position: absolute;
+            right: 0;
+            -webkit-transition: all .3s;
+            transition: all .3s;
+        }
+
+        #ecommerce-products .categories-collapsible .collapsible-body {
+            padding: 0;
+            padding-top: 5px;
+            padding-left: 5px;
+            border: 0;
+        }
+
+        #ecommerce-products .categories-collapsible .collapsible-body p {
+            font-size: .9rem;
+            margin-top: 5px;
+            cursor: pointer;
+        }
+
+        #ecommerce-products .size-filter ul {
+            margin: 0;
+        }
+
+        #ecommerce-products .size-filter ul .active a {
+            color: #fff;
+            background: #7e57c2;
+        }
+
+        #ecommerce-products .size-filter ul li {
+            display: inline-block;
+            margin: .1rem 0;
+        }
+
+        #ecommerce-products .size-filter ul li a {
+            font-weight: 700;
+            line-height: 34px;
+            display: block;
+            width: 34px;
+            height: 34px;
+            text-align: center;
+            border-radius: 3px;
+            background: #ede7f6;
+        }
+
+        #ecommerce-products > div.col > div > div.card.animate > div > div {
+            text-align: center;
+        }
+
+        #ecommerce-products > div.col > div > div.card.animate > div > div > img {
+            object-fit: contain;
+            object-position: center;
+        }
+
+        .product-detail-modal {
+            width: 90%;
+            max-height: 90%;
+        }
+
+        .card .card-content .card-title {
+            min-height: 32px;
+            font-size: 12px;
+        }
+
+        #ecommerce-products > div.col.s12.m12.l12.pr-0 > div > div.card.animate > div > p {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .responsive-img {
+            min-height: 55px;
+        }
+
+        /************** 상품상세 모달 **************/
+        /*.carousel {*/
+        /*    height: 587px;*/
+        /*    border: 1px solid #ECEFF1;*/
+        /*}*/
+
+        .carousel .carousel-item > img {
+            top: 50%;
+            -webkit-transform: translate(0,-50%);
+            transform: translate(0,-50%);
+            position: relative;
+            width: auto;
+            max-height: 100%;
+            -webkit-transition: border-color .15s linear;
+            transition: border-color .15s linear;
+        }
+
+        .carousel .indicators .indicator-item {
+            border: 1px solid #bababa;
+            width: 15px;
+            height: 15px;
+        }
+    </style>
+</th:block>
+
+<!-- page 스크립트 -->
+<th:block layout:fragment="script">
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            // ck이미지 스타일 조정
+            $('.modal-content > div > div > div > div > p > img').css('height', '100%');
+            $('.modal-content > div > div > div > div > p > img').css('width', '100%');
+            $('.modal-content > div > div > div > div > p > img').css('object-fit', 'contain');
+            $('.modal-content > div > div > div > div > p > img').css('object-position', 'top');
+
+            // 상세데이터 로딩 바인딩
+            setTimeout(function(){
+                $('.product-detail-modal').each(function(index, item){
+                    M.Modal.getInstance($(item)).options.onOpenStart = function(e){getDetail(e)};
+                });
+            },200);
+        }); // document ready 끝
+
+        // 사이즈선택
+        $(document).on('click', '.size-filter > ul > li > a', function(e) {
+            $(this).parent().siblings().removeClass('active');
+            $(this).parent().addClass('active');
+        });
+
+        // 리스트 이동
+        function goPage(page){
+            $('[name="listForm"]').children('[name="page"]').val(page);
+            $('[name="listForm"]').submit();
+        }
+
+        // 상세 데이터 로딩
+        function getDetail(e){
+            // data-loaded 값 없으면 데이터 불러오기
+            if(!$(e).data('loaded')) {
+                comn.preLoading();
+                console.log('데이터 없음');
+                let seqProduct = $(e).data('seq-product');
+                let idMainImg = $(e).data('id-main-img');
+                $.ajax({
+                    url: '/shop/detail.do?seqProduct=' + seqProduct + '&idMainImg=' + idMainImg,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        console.log(data);
+                        /**상품 이미지 시작**/
+                        if(data.attachDtoList.length > 0) {
+                            data.attachDtoList.forEach(function(item, index){
+                                let imageSrc = '/attach/resizeImgView.do?idAttach=' + item.idAttach + '&snFileAttach=' + item.snFileAttach;
+                                let $carouselItem = $('<div class="carousel-item white-text"><img src="'+ imageSrc +'" class="responsive-img"></div>');
+                                $(e).find('.carousel.carousel-slider').append($carouselItem);
+                            });
+                            $(e).find('.carousel.carousel-slider').carousel({
+                                fullWidth: true,
+                                indicators: true
+                            });
+                        }/**상품 이미지 끝**/
+
+                        // 사이즈정보
+                        $(e).find('.size-filter  > ul').empty();
+                        data.sizeList.forEach(function(item, index){
+                            $(e).find('.size-filter  > ul').append('<li style="margin-right: 3px;" data-seqSize="'+ item.seqSize +'"><a>'+ item.nmSize +'</a></li>');
+                        });
+
+                        // 데이터 로딩 완료 후 data-loaded 값 바꾸기
+                        $(e).data('loaded', true);
+                        comn.afterLoading();
+                    },
+                    error: function(request, status, error){
+                        console.log('code : ' + request.status);
+                        console.log('message : ' + request.responseText);
+                        console.log('error : ' + error);
+                    }
+                });
+            } else {
+                console.log('데이터 있음');
+            }
+        }
+    </script>
+</th:block>
+
+
+<body >
+
+<!--헤더 시작 -->
+<header th:fragment="headerFragment" class="page-topbar" id="header">
+    <script type="text/javascript">
+
+    </script>
+
+    <div class="navbar navbar-fixed">
+        <nav class="navbar-main navbar-color nav-collapsible sideNav-lock navbar-dark gradient-45deg-light-blue-cyan">
+            <div class="nav-wrapper">
+                <ul class="left">
+                    <li>
+                        <h1 class="logo-wrapper">
+                            <a class="brand-logo darken-1" href="#1">
+                                <!--                                <img src="/static/image/logo/logo-left-top.png">-->
+                                <span class="logo-text hide-on-med-and-down">GPSafety</span>
+                            </a>
+                        </h1>
+                    </li>
+                </ul>
+                <ul class="navbar-list right">
+                    <li>
+                        <a class="waves-effect waves-block waves-light notification-button" href="javascript:void(0);" data-target="notifications-dropdown">
+                            <i class="material-icons">shopping_cart<small class="notification-badge orange accent-3">5</small></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="profile-dropdown">
+                            <i class="material-icons">account_circle</i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- notifications-dropdown-->
+                <ul class="dropdown-content" id="notifications-dropdown">
+                    <li>
+                        <h6>NOTIFICATIONS<span class="new badge">5</span></h6>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a class="black-text" href="#!"><span class="material-icons icon-bg-circle cyan small">add_shopping_cart</span> A new order has been placed!</a>
+                        <time class="media-meta grey-text text-darken-2" datetime="2015-06-12T20:50:48+08:00">2 hours ago</time>
+                    </li>
+                </ul>
+                <!-- profile-dropdown-->
+                <ul class="dropdown-content" id="profile-dropdown">
+                    <li><a class="grey-text text-darken-1" href="#"><i class="material-icons">face</i> Profile</a></li>
+                    <li><a class="grey-text text-darken-1" href="#"><i class="material-icons">settings</i> Settings</a></li>
+                    <li><a class="grey-text text-darken-1" href="#"><i class="material-icons">live_help</i> Help</a></li>
+                    <li class="divider"></li>
+                    <li><a class="grey-text text-darken-1" href="#"><i class="material-icons">lock_outline</i> Lock</a></li>
+                    <li><a class="grey-text text-darken-1" href="#"><i class="material-icons">keyboard_tab</i> Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- BEGIN: Horizontal nav start-->
+        <nav class="white hide-on-med-and-down" id="horizontal-nav">
+            <div class="nav-wrapper">
+                <ul class="left hide-on-med-and-down" id="ul-horizontal-nav" data-menu="menu-navigation">
+                    <li>
+                        <a class="dropdown-menu" href="#" data-target="formsTables">
+                            <i class="material-icons">business</i>
+                            <span><span class="dropdown-title" data-i18n="Menu levels">회사소개</span><i class="material-icons right">keyboard_arrow_down</i></span>
+                        </a>
+                        <ul class="dropdown-content dropdown-horizontal-list" id="formsTables">
+                            <li data-menu=""><a href="#"><span data-i18n="Second level 1">매장소개</span></a>
+                            </li>
+                            <li data-menu=""><a href="#"><span data-i18n="Second level 2">연혁</span></a>
+                            </li>
+                            <li data-menu=""><a href="/contents/location.do"><span data-i18n="Second level 4">회사위치</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a class="dropdown-menu" href="#" data-target="formsTables2">
+                            <i class="material-icons">store</i>
+                            <span><span class="dropdown-title" data-i18n="Menu levels">제품소개</span><i class="material-icons right">keyboard_arrow_down</i></span>
+                        </a>
+                        <ul class="dropdown-content dropdown-horizontal-list" id="formsTables2">
+                            <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu">
+                                <a class="dropdownSub-menu" href="#" data-target="thirdDropdown">
+                                    <span data-i18n="Second level 3">제품리스트</span><i class="material-icons right">chevron_right</i>
+                                </a>
+                                <ul class="dropdown-content dropdown-horizontal-list" id="thirdDropdown">
+                                    <li data-menu=""><a href="/shop/list.do"><span data-i18n="Child 1">전체</span></a>
+                                    </li>
+                                    <li data-menu=""><a href="#"><span data-i18n="Child 2">상의</span></a>
+                                    </li>
+                                    <li data-menu=""><a href="#"><span data-i18n="Child 3">하의</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li data-menu=""><a href="#"><span data-i18n="Second level 2">주문현황</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-menu" href="#" data-target="formsTables3">
+                            <!--                            <i class="material-icons">campaign</i>-->
+                            <i class="material-icons">announcement</i>
+                            <span><span class="dropdown-title" data-i18n="Menu levels">공지사항</span></span>
+                        </a>
+                        <ul class="dropdown-content dropdown-horizontal-list" id="formsTables3">
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-menu" href="#" data-target="formsTables4">
+                            <i class="material-icons">help_outline</i>
+                            <span><span class="dropdown-title" data-i18n="Menu levels">FAQ</span></span>
+                        </a>
+                        <ul class="dropdown-content dropdown-horizontal-list" id="formsTables4">
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-menu" href="#" data-target="formsTables5">
+                            <i class="material-icons">question_answer</i>
+                            <span><span class="dropdown-title" data-i18n="Menu levels">Q&A</span></span>
+                        </a>
+                        <ul class="dropdown-content dropdown-horizontal-list" id="formsTables5">
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class="dropdown-menu" href="#" data-target="formsTables6">
+                            <i class="material-icons">build</i>
+                            <span><span class="dropdown-title" data-i18n="Menu levels">작업일보</span><i class="material-icons right">keyboard_arrow_down</i></span>
+                        </a>
+                        <ul class="dropdown-content dropdown-horizontal-list" id="formsTables6">
+                            <li data-menu=""><a href="#"><span data-i18n="Second level 1">자수작업</span></a>
+                            </li>
+                            <li data-menu=""><a href="#"><span data-i18n="Second level 2">완장작업</span></a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <!-- END: Horizontal nav start-->
+            </div>
+        </nav>
+    </div>
+
+    <!-- BEGIN: SideNav-->
+    <aside class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-fixed hide-on-large-only">
+        <div class="brand-sidebar sidenav-light"></div>
+        <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed hide-on-large-only menu-shadow" id="slide-out" data-menu="menu-navigation" data-collapsible="menu-accordion">
+            <!--            <li class="navigation-header"><a class="navigation-header-text">Misc </a><i class="navigation-header-icon material-icons">more_horiz</i>-->
+            <!--            </li>-->
+            <li class="bold">
+                <a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">business</i><span class="menu-title" data-i18n="Menu levels">회사소개</span></a>
+                <div class="collapsible-body">
+                    <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                        <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level">매장소개</span></a>
+                        </li>
+                        <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level">연혁</span></a>
+                        </li>
+                        <li><a href="/contents/location.do"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level">회사위치</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="bold">
+                <a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">store</i><span class="menu-title" data-i18n="Menu levels">제품소개</span></a>
+                <div class="collapsible-body">
+                    <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                        <li><a class="collapsible-header waves-effect waves-cyan" href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level child">제품리스트</span></a>
+                            <div class="collapsible-body">
+                                <ul class="collapsible" data-collapsible="accordion">
+                                    <li><a href="/shop/list.do"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Third level">전체</span></a>
+                                    </li>
+                                    <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Third level">상의</span></a>
+                                    </li>
+                                    <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Third level">하의</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level">주문현황</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="bold">
+                <a class="waves-effect waves-cyan " href="#"><i class="material-icons">announcement</i><span class="menu-title">공지사항</span></a>
+            </li>
+            <li class="bold">
+                <a class="waves-effect waves-cyan " href="#"><i class="material-icons">help_outline</i><span class="menu-title">FAQ</span></a>
+            </li>
+            <li class="bold">
+                <a class="waves-effect waves-cyan " href="#"><i class="material-icons">question_answer</i><span class="menu-title">Q&A</span></a>
+            </li>
+        </ul>
+        <div class="navigation-background"></div><a class="sidenav-trigger btn-floating btn-medium waves-effect waves-light hide-on-large-only" href="#" data-target="slide-out"><i class="material-icons">menu</i></a>
+    </aside>
+    <!-- END: SideNav-->
+
+    <!-- alert 모달 -->
+    <div id="alertModal" class="modal">
+        <div class="modal-content">
+            <h4></h4>
+            <p></p>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat">확인</a>
+        </div>
+    </div>
+
+    <!-- 이미지뷰 모달 -->
+    <div id="imageModal" class="modal" style="width: 90%;">
+        <div class="img-container">
+            <div class="modal-slide" style="margin-bottom: 0px; background-image: url('/static/image/bike-sunset.jpg'); background-size: contain;">
+                <div id="numbertext" class="numbertext"></div>
+                <i class="material-icons modal-close" style="float: right;">close</i>
+            </div>
+            <a class="prev">❮</a>
+            <a class="next">❯</a>
+        </div>
+    </div>
+
+    <!-- confirm 모달-->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <h4></h4>
+            <p></p>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat cancel">취소</a>
+            <a class="modal-close waves-effect waves-green btn-flat confirm">확인</a>
+        </div>
+    </div>
+
+    <!--  로딩 circle  -->
+    <div class="preloader-wrapper small active loading-circle" id="loading-circle" style="display: none;">
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div><div class="gap-patch">
+            <div class="circle"></div>
+        </div><div class="circle-clipper right">
+            <div class="circle"></div>
+        </div>
+        </div>
+    </div>
+
+    <!--  로딩 overlay  -->
+    <div class="loading-overlay" id="loading-overlay"></div>
+</header>
+<!--헤더 끝 -->
+
+    <div id="main">
+        <div class="row">
+            <div class="pt-1 pb-0" id="breadcrumbs-wrapper">
+                <!-- Search for small screen-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12 m6 l6">
+                            <h5 class="breadcrumbs-title"><span>작업리스트 - 자수</span></h5>
+                        </div>
+                        <div class="col s12 m6 l6 right-align-md">
+                            <ol class="breadcrumbs mb-0">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="#">작업리스트</a>
+                                </li>
+                                <li class="breadcrumb-item active">자수
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12">
+                <div class="container">
+                    <div class="section section-data-tables">
+
+                        <!-- Page Length Options -->
+                        <div class="row">
+                            <div class="col s12">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <h4 class="card-title">Page Length Options</h4>
+                                        <div class="row">
+                                            <div class="col s12">
+                                                <table id="page-length-option" class="display">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>Position</th>
+                                                            <th>Office</th>
+                                                            <th>Age</th>
+                                                            <th>Start date</th>
+                                                            <th>Salary</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        <tr>
+                                                            <td>Jennifer Acosta</td>
+                                                            <td>Junior Javascript Developer</td>
+                                                            <td>Edinburgh</td>
+                                                            <td>43</td>
+                                                            <td>2013/02/01</td>
+                                                            <td>$75,650</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Cara Stevens</td>
+                                                            <td>Sales Assistant</td>
+                                                            <td>New York</td>
+                                                            <td>46</td>
+                                                            <td>2011/12/06</td>
+                                                            <td>$145,600</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Hermione Butler</td>
+                                                            <td>Regional Director</td>
+                                                            <td>London</td>
+                                                            <td>47</td>
+                                                            <td>2011/03/21</td>
+                                                            <td>$356,250</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Hermione Butler1</td>
+                                                            <td>Regional Director</td>
+                                                            <td>London</td>
+                                                            <td>47</td>
+                                                            <td>2011/03/21</td>
+                                                            <td>$356,250</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Hermione Butler2</td>
+                                                            <td>Regional Director</td>
+                                                            <td>London</td>
+                                                            <td>47</td>
+                                                            <td>2011/03/21</td>
+                                                            <td>$356,250</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Hermione Butler3</td>
+                                                            <td>Regional Director</td>
+                                                            <td>London</td>
+                                                            <td>47</td>
+                                                            <td>2011/03/21</td>
+                                                            <td>$356,250</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Lael Greer</td>
+                                                            <td>Systems Administrator</td>
+                                                            <td>London</td>
+                                                            <td>21</td>
+                                                            <td>2009/02/27</td>
+                                                            <td>$103,500</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Jonas Alexander</td>
+                                                            <td>Developer</td>
+                                                            <td>San Francisco</td>
+                                                            <td>30</td>
+                                                            <td>2010/07/14</td>
+                                                            <td>$86,500</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Shad Decker</td>
+                                                            <td>Regional Director</td>
+                                                            <td>Edinburgh</td>
+                                                            <td>51</td>
+                                                            <td>2008/11/13</td>
+                                                            <td>$183,000</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Michael Bruce</td>
+                                                            <td>Javascript Developer</td>
+                                                            <td>Singapore</td>
+                                                            <td>29</td>
+                                                            <td>2011/06/27</td>
+                                                            <td>$183,000</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Donna Snider</td>
+                                                            <td>Customer Support</td>
+                                                            <td>New York</td>
+                                                            <td>27</td>
+                                                            <td>2011/01/25</td>
+                                                            <td>$112,000</td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>Position</th>
+                                                            <th>Office</th>
+                                                            <th>Age</th>
+                                                            <th>Start date</th>
+                                                            <th>Salary</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div><!-- START RIGHT SIDEBAR NAV -->
+                    <aside id="right-sidebar-nav">
+                        <div id="slide-out-right" class="slide-out-right-sidenav sidenav rightside-navigation">
+                            <div class="row">
+                                <div class="slide-out-right-title">
+                                    <div class="col s12 border-bottom-1 pb-0 pt-1">
+                                        <div class="row">
+                                            <div class="col s2 pr-0 center">
+                                                <i class="material-icons vertical-text-middle"><a href="#" class="sidenav-close">clear</a></i>
+                                            </div>
+                                            <div class="col s10 pl-0">
+                                                <ul class="tabs">
+                                                    <li class="tab col s4 p-0">
+                                                        <a href="#messages" class="active">
+                                                            <span>Messages</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="tab col s4 p-0">
+                                                        <a href="#settings">
+                                                            <span>Settings</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="tab col s4 p-0">
+                                                        <a href="#activity">
+                                                            <span>Activity</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </aside>
+                    <!-- END RIGHT SIDEBAR NAV -->
+                    <div style="bottom: 50px; right: 19px;" class="fixed-action-btn direction-top"><a class="btn-floating btn-large gradient-45deg-light-blue-cyan gradient-shadow"><i class="material-icons">add</i></a>
+                        <ul>
+                            <li><a href="css-helpers.html" class="btn-floating blue"><i class="material-icons">help_outline</i></a></li>
+                            <li><a href="cards-extended.html" class="btn-floating green"><i class="material-icons">widgets</i></a></li>
+                            <li><a href="app-calendar.html" class="btn-floating amber"><i class="material-icons">today</i></a></li>
+                            <li><a href="app-email.html" class="btn-floating red"><i class="material-icons">mail_outline</i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content-overlay"></div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Page Main-->
+
+    <!-- BEGIN: Footer-->
+
+    <footer class="page-footer footer footer-static footer-dark gradient-45deg-light-blue-cyan gradient-shadow navbar-border navbar-shadow">
+        <div class="footer-copyright">
+            <div class="container"><span>&copy; 2021 <a href="http://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank">N&J</a> All rights reserved.</span></div>
+        </div>
+    </footer>
+
+    <!-- END: Footer-->
+    <!-- BEGIN VENDOR JS-->
+    <script src="/static/js/vendors.min.js"></script>
+    <!-- BEGIN VENDOR JS-->
+    <!-- BEGIN PAGE VENDOR JS-->
+    <script src="/static/vendors/data-tables/js/jquery.dataTables.min.js"></script>
+    <script src="/static/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/static/vendors/data-tables/js/dataTables.select.min.js"></script>
+    <!-- END PAGE VENDOR JS-->
+    <!-- BEGIN THEME  JS-->
+    <script src="/static/js/plugins.js"></script>
+    <script src="/static/js/search.js"></script>
+    <script src="/static/js/custom/custom-script.js"></script>
+    <!-- END THEME  JS-->
+    <!-- BEGIN PAGE LEVEL JS-->
+    <script src="/static/js/scripts/data-tables.js"></script>
+    <!-- END PAGE LEVEL JS-->
+</body>
+
+</html>
