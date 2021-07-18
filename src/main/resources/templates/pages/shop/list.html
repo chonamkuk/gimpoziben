@@ -36,6 +36,12 @@
             }
         }
 
+        @media only screen and (max-width: 992px) {
+            .selected-collection {
+                width: 100%;
+            }
+        }
+
         #ecommerce-products .card {
             overflow: hidden;
         }
@@ -442,20 +448,14 @@
                                                                     <li style="margin-right: 3px;"><a>4</a></li>
                                                                 </ul>
                                                             </div>
-                                                            <ul th:id="${'selected-collection' + listStatus.index}" class="collection z-depth-1 selected-collection">
+                                                            <ul th:id="${'selected-collection' + listStatus.index}" class="collection z-depth-1 selected-collection" style="width: 70%;">
                                                                 <li class="collection-item">
-                                                                    <div class="row">
-                                                                        <div class="col s3 size" style="padding: 0px;">
-                                                                            <a>M</a>
-                                                                        </div>
-                                                                        <div class="col s7" style="padding: 0px;">
-                                                                            <a><i class="material-icons">remove</i></a>
-                                                                            <input type="number" value="1"/>
-                                                                            <a><i class="material-icons">add</i></a>
-                                                                        </div>
-                                                                        <div class="col s2" style="padding: 0px;">
-                                                                            <a><i class="material-icons">cancel</i></a>
-                                                                        </div>
+                                                                    <div class="row" style="display: flex; justify-content: center;align-items: center;">
+                                                                        <a style="width: 10%;">M</a>
+                                                                        <a><i class="material-icons">remove</i></a>
+                                                                        <input type="number" value="1" style="height: 2rem; width: 20%; text-align: center;"/>
+                                                                        <a><i class="material-icons">add</i></a>
+                                                                        <a style="padding-left: 8%;"><i class="material-icons" style="padding-left: 100%;">cancel</i></a>
                                                                     </div>
                                                                 </li>
                                                             </ul>
