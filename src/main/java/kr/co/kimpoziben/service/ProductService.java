@@ -54,6 +54,7 @@ public class ProductService {
     public HashMap getList(Pageable pageble, HashMap<String,Object> searchMap) throws Exception {
         HashMap result = new HashMap();
         Page<Product> productPage = productRepository.findBySeqCategory(searchMap, pageble);
+
         List<ProductDto> productList = new ArrayList<>();
         if(productPage.getContent().size() > 0) {
             for(Product product : productPage.getContent()) {

@@ -3,12 +3,14 @@ package kr.co.kimpoziben.service;
 import kr.co.kimpoziben.domain.entity.AttachEntity;
 import kr.co.kimpoziben.domain.entity.Product;
 import kr.co.kimpoziben.domain.entity.ProductWork;
+import kr.co.kimpoziben.domain.entity.Size;
 import kr.co.kimpoziben.domain.repository.ProdCateRepository;
 import kr.co.kimpoziben.domain.repository.ProdSizeRepository;
 import kr.co.kimpoziben.domain.repository.ProductRepository;
 import kr.co.kimpoziben.domain.repository.ProductWorkRepository;
 import kr.co.kimpoziben.dto.ProductDto;
 import kr.co.kimpoziben.dto.ProductWorkDto;
+import kr.co.kimpoziben.dto.SizeDto;
 import lombok.AllArgsConstructor;
 import org.hibernate.collection.spi.PersistentCollection;
 import org.modelmapper.Condition;
@@ -44,6 +46,7 @@ public class WorkProductService {
     private SizeService sizeService;
 
     ModelMapper modelMapper = null;
+    private Object ProductWorkDto;
 
     private WorkProductService() {
         modelMapper = new ModelMapper();
@@ -64,27 +67,28 @@ public class WorkProductService {
 //        modelMapper.typeMap(ProdSizeDto.class, ProdSize.class);
     }
 
-    public HashMap getList(Pageable pageble, HashMap<String,Object> searchMap) throws Exception {
+
+
+
+    public HashMap findWorkList() throws Exception {
+        List<ProductWorkDto> workList = new ArrayList<>();
         HashMap result = new HashMap();
-        Page<Product> productPage = productRepository.findBySeqCategory(searchMap, pageble);
-        List<ProductDto> productList = new ArrayList<>();
-        if(productPage.getContent().size() > 0) {
-            for(Product product : productPage.getContent()) {
-                ProductDto productDto = new ProductDto();
-                productDto.setSeqProduct(product.getSeqProduct());
-                productDto.setNmProduct(product.getNmProduct());
-                productDto.setTitleProduct(product.getTitleProduct());
-                productDto.setSellPrice(product.getSellPrice());
-                productDto.setYnSoldOut(product.getYnSoldOut());
-                productDto.setIdMainImg(product.getIdMainImg());
-                productDto.setDescProduct(product.getDescProduct());
+        for(ProductWork productWork : productWorkRepository.findByTypeWorkProduct("J")) {
+            ProductWorkDto productWorkDto = new ProductWorkDto();
+            productWorkDto.setTitleWorkProduct(productWork.getTitleWorkProduct());
+            productWorkDto.setSeqWorkProduct(productWork.getSeqWorkProduct());
+            productWorkDto.setTitleWorkProduct(productWork.getTitleWorkProduct());
+            productWorkDto.setTypeWorkProduct(productWork.getTypeWorkProduct());
+            productWorkDto.setDescWorkProduct(productWork.getDescWorkProduct());
+            productWorkDto.setCountWorkProduct(productWork.getCountWorkProduct());
+            productWorkDto.setPriceWorkProduct(productWork.getPriceWorkProduct());
+            productWorkDto.setDayWorkProduct(productWork.getDayWorkProduct());
+            productWorkDto.setIdMainImg(productWork.getIdMainImg());
 
-                productList.add(productDto);
-            }
+            workList.add(productWorkDto);
         }
+        result.put("workList", workList);
 
-        result.put("pagingResult", productPage);
-        result.put("resultList", productList);
         return result;
     }
 
@@ -107,29 +111,15 @@ public class WorkProductService {
         productWorkDto.setRegDt(LocalDateTime.now());
         productWorkDto.setTypeWorkProduct("J");
         ProductWork newProduct = productWorkRepository.save(modelMapper.map(productWorkDto, ProductWork.class));
-  /*      for(ProdCateDto prodCateDto : productDto.getCateList()) {
-            ProdCate prodCate = ProdCate.builder()
-                    .seqCategory(prodCateDto.getCategory().getSeqCategory())
-                    .seqProduct(newProduct.getSeqProduct())
-                    .build();
-            prodCateRepository.save(prodCate);
-        }
-
-        for(ProdSizeDto prodSizeDto : productDto.getSizeList()) {
-            if(prodSizeDto.getSeqSize() != null) {
-                prodSizeDto.setSeqProduct(newProduct.getSeqProduct());
-                prodSizeRepository.save(modelMapper.map(prodSizeDto, ProdSize.class));
-            }
-        }*/
 
         return newProduct.getSeqWorkProduct();
     }
 
-    public ProductDto getProductDetail(Long seqProduct) throws  Exception {
-        Product product = productRepository.findById(seqProduct).orElse(null);
-        if(product != null) {
-            ProductDto productDto = modelMapper.map(product, ProductDto.class);
-            return productDto;
+    public ProductWorkDto getProductDetail(Long seqWorkProduct) throws  Exception {
+        ProductWork productWork = productWorkRepository.findById(seqWorkProduct).orElse(null);
+        if(productWork != null) {
+            ProductWorkDto productWorkDto = modelMapper.map(productWork, ProductWorkDto.class);
+            return productWorkDto;
         }
 
         return null;

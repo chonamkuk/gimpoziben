@@ -295,6 +295,8 @@
 <!-- page 스크립트 -->
 <th:block layout:fragment="script">
     <script type="text/javascript">
+
+
         $(document).ready(function () {
 
             // ck이미지 스타일 조정
@@ -369,6 +371,14 @@
             } else {
                 console.log('데이터 있음');
             }
+        }
+
+        // 수정화면 이동
+        function goUpdate(seqWorkProduct){
+            $('[name="listForm"]').children('[name="seqWorkProduct"]').val(seqWorkProduct);
+            $('[name="listForm"]').attr('method', 'get');
+            $('[name="listForm"]').attr('action', '/admin/work/jasuUpdate.do');
+            $('[name="listForm"]').submit();
         }
     </script>
 </th:block>
@@ -658,64 +668,34 @@
                                                 <table id="page-length-option" class="display">
                                                     <thead>
                                                         <tr>
-                                                            <th>Name</th>
-                                                            <th>Position</th>
-                                                            <th>Office</th>
-                                                            <th>Age</th>
-                                                            <th>Start date</th>
-                                                            <th>Salary</th>
+                                                            <th>작업명</th>
+                                                            <th>작업사진</th>
+                                                            <th>작업설명</th>
+                                                            <th>작업수량</th>
+                                                            <th>작업가격</th>
+                                                            <th>등록일</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        <tr th:each="workDto,listStatus : ${workList}">
+                                                            <td><a th:onclick="'javascript:goUpdate('+ ${workDto.seqWorkProduct} +');'"><span th:text="${workDto.titleWorkProduct}"></span></a></td>
+                                                            <td>
+                                                                <div >
+                                                                    <th:block th:if="${not #strings.isEmpty(workDto.idMainImg)}">
+                                                                        <img class="responsive-img" th:src="${'/attach/resizeImgView.do?idAttach=' + workDto.idMainImg + '&snFileAttach=1&resizeWidth=500'}"
+                                                                             onerror="this.src='/static/image/broken_image_48dp.png';this.style='object-fit:none';">
+                                                                    </th:block>
+                                                                    <th:block th:if="${#strings.isEmpty(workDto.idMainImg)}">
+                                                                        <img class="responsive-img" src="/static/image/broken_image_48dp.png" style="object-fit: none;">
+                                                                    </th:block>
+                                                                </div>
+                                                            </td>
+                                                            <td><span><th:block th:utext="${workDto.descWorkProduct}"></th:block></span></td>
+                                                            <td><span th:text="${workDto.countWorkProduct}"></td>
+                                                            <td><span th:text="${workDto.priceWorkProduct}"></td>
+                                                            <td><span th:text="${workDto.dayWorkProduct}"></td>
+                                                        </tr>
 
-                                                        <tr>
-                                                            <td>Jennifer Acosta</td>
-                                                            <td>Junior Javascript Developer</td>
-                                                            <td>Edinburgh</td>
-                                                            <td>43</td>
-                                                            <td>2013/02/01</td>
-                                                            <td>$75,650</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Cara Stevens</td>
-                                                            <td>Sales Assistant</td>
-                                                            <td>New York</td>
-                                                            <td>46</td>
-                                                            <td>2011/12/06</td>
-                                                            <td>$145,600</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Hermione Butler</td>
-                                                            <td>Regional Director</td>
-                                                            <td>London</td>
-                                                            <td>47</td>
-                                                            <td>2011/03/21</td>
-                                                            <td>$356,250</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Hermione Butler1</td>
-                                                            <td>Regional Director</td>
-                                                            <td>London</td>
-                                                            <td>47</td>
-                                                            <td>2011/03/21</td>
-                                                            <td>$356,250</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Hermione Butler2</td>
-                                                            <td>Regional Director</td>
-                                                            <td>London</td>
-                                                            <td>47</td>
-                                                            <td>2011/03/21</td>
-                                                            <td>$356,250</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Hermione Butler3</td>
-                                                            <td>Regional Director</td>
-                                                            <td>London</td>
-                                                            <td>47</td>
-                                                            <td>2011/03/21</td>
-                                                            <td>$356,250</td>
-                                                        </tr>
                                                         <tr>
                                                             <td>Lael Greer</td>
                                                             <td>Systems Administrator</td>
@@ -813,6 +793,9 @@
                         </div>
 
                     </aside>
+                    <form name="listForm">
+                        <input type="hidden" name="seqWorkProduct" value=""/>
+                    </form>
                     <!-- END RIGHT SIDEBAR NAV -->
                     <div style="bottom: 50px; right: 19px;" class="fixed-action-btn direction-top"><a class="btn-floating btn-large gradient-45deg-light-blue-cyan gradient-shadow"><i class="material-icons">add</i></a>
                         <ul>

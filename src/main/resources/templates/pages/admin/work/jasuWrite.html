@@ -229,7 +229,7 @@
                         <div class="row">
                             <div class="col s12">
                                 <!-- form start -->
-                                <form id="saveForm" action="/admin/shop/jasuWrite.do" method="post" >
+                                <form id="saveForm" action="/admin/work/jasuWrite.do" method="post" >
                                     <div class="row">
                                         <!-- 이미지 슬라이더 -->
                                         <div class="col s12 m6">
@@ -277,50 +277,7 @@
                                                     <small class="errorTxt5"></small>
                                                 </div>
 
-                                               <!--
-                                                <div class="col s6 input-field">
-                                                    <select id="parentCategory">
-                                                        <option th:each="categoryDto: ${parentCategoryList}" th:value="${categoryDto.seqCategory}" th:text="${categoryDto.nmCategory}"/>
-                                                    </select>
-                                                    <label>상품 카테고리1</label>
-                                                </div>
-                                                <div class="col s6 input-field">
-                                                    <select id="childCategory" name="cateList[0].category.seqCategory" >
-                                                    </select>
-                                                    <label>상품 카테고리2</label>
-                                                </div>
-                                                <div class="col s6 input-field">
-                                                    <input id="buyPrice" name="buyPrice" type="number" class="validate" required>
-                                                    <label for="buyPrice">매입가격</label>
-                                                </div>
-                                                <div class="col s6 input-field">
-                                                    <input id="sellPrice" name="sellPrice" type="number" class="validate" required>
-                                                    <label for="sellPrice">판매가격</label>
-                                                </div>
-                                                <div class="col s6 input-field">
-                                                    <div class="m-0">
-                                                        <span>상품 게시여부</span>
-                                                        <div class="switch right">
-                                                            <label>
-                                                                <input checked type="checkbox" id="ynDisplayChk"/>
-                                                                <span class="lever"></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col s6 input-field">
-                                                    <div class="m-0">
-                                                        <span>품절여부</span>
-                                                        <div class="switch right">
-                                                            <label>
-                                                                <input type="checkbox" id="ynSoldOutChk">
-                                                                <span class="lever"></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
 
-                                                -->
                                                 <div class="col s3 m3 l3 input-field img-field">
                                                     <input type="file" id="input-file-now1" class="dropify" data-height="100" data-allowed-file-extensions="png jpg jpeg gif bmp" data-index="0" data-max-file-size-preview="10M"/>
                                                 </div>
@@ -395,5 +352,7 @@
             <!-- section edit ends -->
         </div>
     </div>
+
+
 </div>
 </html>

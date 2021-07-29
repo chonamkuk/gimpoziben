@@ -1,11 +1,9 @@
 package kr.co.kimpoziben.controller.admin;
 
-import kr.co.kimpoziben.dto.*;
-import kr.co.kimpoziben.service.AttachService;
-import kr.co.kimpoziben.service.CategoryService;
-import kr.co.kimpoziben.service.ProductService;
-import kr.co.kimpoziben.service.WorkProductService;
-import kr.co.kimpoziben.service.SizeService;
+import kr.co.kimpoziben.dto.AttachDto;
+import kr.co.kimpoziben.dto.ProductDto;
+import kr.co.kimpoziben.dto.ProductWorkDto;
+import kr.co.kimpoziben.service.*;
 import kr.co.kimpoziben.util.PageRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,8 +19,8 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/admin/shop")
-public class AdminShopController {
+@RequestMapping("/admin/work")
+public class AdminWorkController {
 
     private ProductService productService;
     private WorkProductService workProductService;
@@ -72,13 +70,13 @@ public class AdminShopController {
     }
 
     @GetMapping("/detail.do")
-    public @ResponseBody Object detail(@RequestParam("seqProduct") Long seqProduct, @RequestParam("idMainImg") String idMainImg) throws  Exception {
+    public @ResponseBody Object detail(@RequestParam("seqWorkProduct") Long seqWorkProduct, @RequestParam("idMainImg") String idMainImg) throws  Exception {
         HashMap resultMap = new HashMap();
 
         List<AttachDto> attachDtoList = null;
 
         attachDtoList = attachService.getAttachInfoList(idMainImg);
-        resultMap.put("sizeList", sizeService.findBySeqProduct(seqProduct));
+
         resultMap.put("attachDtoList", attachDtoList);
         return resultMap;
     }
@@ -101,5 +99,62 @@ public class AdminShopController {
         return "admin/shop/list";
     }
 
+
+    @GetMapping("/jasuWrite.do")
+    public String jasuWrite(Model model) throws Exception {
+       // model.addAttribute("upperSizeList", sizeService.getUpperList());
+       // model.addAttribute("parentCategoryList", categoryService.getParentList());
+        return "admin/work/jasuWrite";
+    }
+
+    @PostMapping("/jasuWrite.do")
+    public String jasuWrite(@ModelAttribute ProductWorkDto productWorkDto) throws Exception {
+        productWorkDto.setRegister("admin");
+        workProductService.save(productWorkDto);
+        return "redirect:/admin/work/jasulist.do";
+    }
+
+    /*
+    * 1.jasuSeq를 갖고 뿌린다.
+    * 2.update 화면에 이미지 액션명 매핑 수정하여 뿌려준다
+    * 
+    */
+    @GetMapping("/jasuUpdate.do")
+    public String jasuUpdate(Model model, @RequestParam("seqWorkProduct") Long seqWorkProduct,
+                         HashMap<String,Object> searchMap, final PageRequest pageable) throws Exception {
+        ProductWorkDto productWorkDto = workProductService.getProductDetail(seqWorkProduct);
+
+        if(productWorkDto != null) {
+            model.addAttribute("resultDto", productWorkDto);
+            model.addAttribute("upperSizeList", sizeService.getHierarchyList());
+            model.addAttribute("parentCategoryList", categoryService.getParentList());
+            model.addAttribute("productCategoryList", categoryService.findBySeqProduct(seqWorkProduct));
+            model.addAttribute("searchDto", searchMap);
+            model.addAttribute("pagingResult", pageable);
+        }
+
+        return "admin/work/jasuUpdate";
+    }
+
+    @PostMapping("/jasuUpdate.do")
+    public String jasuUpdate(@ModelAttribute ProductDto productDto, RedirectAttributes redirectAttr) throws Exception {
+        productDto.setModifier("admin");
+        productDto.setModDt(LocalDateTime.now());
+        productService.update(productDto);
+        redirectAttr.addAttribute("seqProduct", productDto.getSeqProduct());
+        return "redirect:/admin/shop/update.do";
+    }
+
+    
+
+    @GetMapping("/jasulist.do")
+    public String list2(Model model, final PageRequest pageable, HashMap<String,Object> searchMap
+            , @RequestParam(value = "seqCategory", required = false) Long seqCategory
+            , @RequestParam(value = "seqUpperCategory", required = false) Long seqUpperCategory) throws Exception {
+
+        HashMap result =  workProductService.findWorkList();
+        model.addAttribute("workList", result.get("workList"));
+        return "admin/work/jasuList";
+    }
 
 }
