@@ -69,6 +69,33 @@ public class AttachService {
         return attachDto;
     }
 
+    /**
+     * 첨부파일 단건조회
+     * del_yn = 'N' 인 것중 attach_ordr 이 가장 작은 건 = 메인이미지
+     * @param idAttach
+     * @return
+     */
+    public AttachDto getAttachInfo(String idAttach) {
+        AttachEntity attachEntity = attachRepository.findTopByIdAttachAndYnDelOrderByOrdrAttachAsc(idAttach, "N");
+        AttachDto attachDto = AttachDto.builder()
+                .idAttach(attachEntity.getIdAttach())
+                .snFileAttach(attachEntity.getSnFileAttach())
+                .nmOrgFileAttach(attachEntity.getNmOrgFileAttach())
+                .nmSrvFileAttach(attachEntity.getNmSrvFileAttach())
+                .pathFileAttach(attachEntity.getPathFileAttach())
+                .sizeFileAttach(attachEntity.getSizeFileAttach())
+                .extendsAttach(attachEntity.getExtendsAttach())
+                .ordrAttach(attachEntity.getOrdrAttach())
+                .ynDel(attachEntity.getYnDel())
+                .registerAttach(attachEntity.getRegisterAttach())
+                .regdtAttach(attachEntity.getRegdtAttach())
+                .modifierAttach(attachEntity.getModifierAttach())
+                .moddtAttach(attachEntity.getModdtAttach())
+                .build();
+
+        return attachDto;
+    }
+
     public List<AttachDto> getAttachInfoList(String idAttach) {
         List<AttachEntity> attachEntities = attachRepository.findByIdAttachAndYnDelOrderByOrdrAttach(idAttach, "N");
 

@@ -36,11 +36,16 @@ public class AttachController {
 
     @GetMapping(value = "/resizeImgView.do", produces = {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
     public @ResponseBody
-    byte[] resizeImgView(@RequestParam("idAttach") String idAttach, @RequestParam("snFileAttach") int snFileAttach,
+    byte[] resizeImgView(@RequestParam("idAttach") String idAttach, @RequestParam(value = "snFileAttach", required = false, defaultValue = "0") int snFileAttach,
                          @RequestParam(value = "resizeWidth", required = false, defaultValue = "0") Integer resizeWidth) throws Exception {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try {
-            AttachDto attachDto = attachService.getAttachInfo(idAttach, snFileAttach);
+            AttachDto attachDto = null;
+            if(snFileAttach == 0) {
+                attachDto = attachService.getAttachInfo(idAttach);
+            } else {
+                attachDto = attachService.getAttachInfo(idAttach, snFileAttach);
+            }
             String imgPath = "";
             ImageIO.write(attachService.getResizeImg(attachDto.getPathFileAttach(), resizeWidth), "JPEG", byteArrayOutputStream);
             return byteArrayOutputStream.toByteArray();

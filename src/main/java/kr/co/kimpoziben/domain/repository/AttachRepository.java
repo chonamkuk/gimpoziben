@@ -15,6 +15,8 @@ public interface AttachRepository extends JpaRepository<AttachEntity, AttachId> 
 
     AttachEntity findByIdAttachAndSnFileAttach(String idAttach, int snFileAttach);
 
+    AttachEntity findTopByIdAttachAndYnDelOrderByOrdrAttachAsc(String idAttach, String ynDel);
+
     AttachEntity findTopByIdAttachOrderBySnFileAttachDesc(String idAttach);
 
     List<AttachEntity> findByIdAttachAndYnDelOrderByOrdrAttach(String idAttach, String ynDel);
