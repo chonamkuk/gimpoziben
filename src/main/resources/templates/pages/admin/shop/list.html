@@ -301,7 +301,7 @@
                                             <span th:if="${resultDto.ynDisplay == 'Y'}" style="display: block; height: 22px;"></span>
                                             <span th:if="${resultDto.ynDisplay == 'N'}" class="badge blue-grey left">미게시</span>
                                             <th:block th:if="${not #strings.isEmpty(resultDto.idMainImg)}">
-                                                <img class="responsive-img" th:src="${'/attach/resizeImgView.do?idAttach=' + resultDto.idMainImg + '&snFileAttach=1&resizeWidth=500'}"
+                                                <img class="responsive-img" th:src="${'/attach/resizeImgView.do?idAttach=' + resultDto.idMainImg + '&resizeWidth=500'}"
                                                      onerror="this.src='/static/image/broken_image_48dp.png';this.style='object-fit:none;width: 84%;';">
                                             </th:block>
                                             <th:block th:if="${#strings.isEmpty(resultDto.idMainImg)}">

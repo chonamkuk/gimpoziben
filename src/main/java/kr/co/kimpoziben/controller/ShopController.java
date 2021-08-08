@@ -58,4 +58,9 @@ public class ShopController {
         resultMap.put("attachDtoList", attachDtoList);
         return resultMap;
     }
+
+    @GetMapping("/cartList.do")
+    public String cartList() throws Exception {
+        return "shop/cartList";
+    }
 }

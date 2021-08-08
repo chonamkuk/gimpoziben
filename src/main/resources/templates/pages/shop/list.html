@@ -252,7 +252,7 @@
             align-items: center;
         }
 
-        .selected-collection .row a.size {
+        .selected-collection .row a.nmSize {
             font-weight: 700;
             line-height: 34px;
             display: block;
@@ -315,10 +315,14 @@
                     M.Modal.getInstance($(item)).options.onOpenStart = function(e){
                         getDetail(e); // 상세데이터 로딩 바인딩
                     };
-                    M.Modal.getInstance($(item)).options.onCloseEnd = function(e){
+                    M.Modal.getInstance($(item)).options.onCloseStart = function(e){
                         $(item).find('.size-filter > ul > li').removeClass('active');
                         $(item).find('.selected-collection').hide();
                         $(item).find('.collection-item').remove();
+                        $(item).scrollTop(0);
+                        if (location.href.split('#').pop() == $(this).attr('id')) {
+                            window.history.back();
+                        }
                     };
                 });
             },200);
@@ -329,14 +333,14 @@
             $(this).parent().siblings().removeClass('active');
             $(this).parent().addClass('active');
 
-            let sizeText = $(this).text();
-            let sizeSeq = $(this).parent().attr('data-seqsize');
+            let nmSize = $(this).text();
+            let seqSize = $(this).parent().data('seq-size');
 
-            if($('#sizeSeq'+sizeSeq).length <= 0) {
+            if($('#seqSize'+seqSize).length <= 0) {
                 let selectedItem = '';
-                selectedItem += '<li class="collection-item" id="sizeSeq'+ sizeSeq +'">';
+                selectedItem += '<li class="collection-item" id="seqSize'+ seqSize +'" data-seq-size="'+ seqSize +'">';
                 selectedItem += '<div class="row">';
-                selectedItem += '<div><a class="size waves-effect">'+ sizeText +'</a></div>';
+                selectedItem += '<div><a class="nmSize waves-effect">'+ nmSize +'</a></div>';
                 selectedItem += '<a><i class="material-icons waves-effect btn-amount-less">remove</i></a>';
                 selectedItem += '<input type="number" value="1"/>';
                 selectedItem += '<a><i class="material-icons waves-effect btn-amount-more">add</i></a>';
@@ -345,7 +349,7 @@
                 selectedItem += '</li>';
                 $(this).parent().parent().parent().siblings('.selected-collection').append(selectedItem);
             } else {
-                $('#sizeSeq'+sizeSeq).trigger('mousedown'); //todo: 중복선택 표현
+                $('#seqSize'+seqSize).trigger('mousedown'); //todo: 중복선택 표현
             }
             $(this).parent().parent().parent().siblings('.selected-collection').show();
         });
@@ -372,6 +376,58 @@
             let amount = Number($(this).parent().prev().val());
             amount++;
             $(this).parent().prev().val(amount);
+        });
+
+        // 카트에 담기
+        $(document).on('click', '.add-to-cart', function(e) {
+            let addToCartBtn = $(this);
+
+            if(addToCartBtn.siblings('.selected-collection').children().length > 0) {
+                let cart; // 카트목록
+                if(localStorage.getItem('cart') == null) {
+                    cart = new Array();
+                } else {
+                    cart = JSON.parse(localStorage.getItem('cart'));
+                }
+
+                let cartItem = new Object(); // 카트에 추가될 항목
+                let seqProduct = addToCartBtn.parents('.product-detail-modal').data('seq-product');
+                let nmProduct = addToCartBtn.siblings('.detail-product-nm').text();
+                let idMainImg = addToCartBtn.siblings('.detail-product-nm').data('idmainimg');
+                let addedDate = new Date();
+                cartItem.date = addedDate.format('yyyy-MM-dd HH:mm:ss'); // 카트추가 일시
+                cartItem.cartId = seqProduct + '_' + addedDate.format('yyyyMMddHHmmss'); // 카트항목 아이디
+                cartItem.products = new Array(); // 제품목록
+                addToCartBtn.siblings('.selected-collection').children().each(function(index, item){
+                    cartItem.products[index] = {
+                        seqProduct: seqProduct,
+                        nmProduct: nmProduct,
+                        idMainImg: idMainImg,
+                        seqSize: $(item).data('seq-size'),
+                        nmSize: $(item).find('.nmSize').text(),
+                        amount: $(item).find('input[type="number"]').val()
+                    };
+                });
+
+                cart[cart.length] = cartItem;
+                localStorage.setItem('cart', JSON.stringify(cart));
+                comn.displayCartCount();
+
+                $('#confirmModal').find('h4').text('알림');
+                $('#confirmModal').find('p').text('카트에 추가되었습니다. 확인하시겠습니까?');
+                $('#confirmModal').modal('open');
+                $('#confirmModal').find('.confirm').unbind('click').on('click', function(){
+                    // 예 => 장바구니로 이동
+                    comn.preLoading();
+                });
+                $('#confirmModal').find('.cancel').unbind('click').on('click', function(){
+                    // 아니요 => 초기화
+                    addToCartBtn.parents('.product-detail-modal').modal('close');
+                    location.href.replace(/(#modal\d)/,'');
+                    window.history.back();
+                    comn.afterLoading();
+                });
+            }
         });
 
         // 리스트 이동
@@ -411,7 +467,7 @@
                         // 사이즈정보
                         $(e).find('.size-filter  > ul').empty();
                         data.sizeList.forEach(function(item, index){
-                            $(e).find('.size-filter  > ul').append('<li style="margin-right: 3px;cursor: pointer;" data-seqSize="'+ item.seqSize +'"><a>'+ item.nmSize +'</a></li>');
+                            $(e).find('.size-filter  > ul').append('<li style="margin-right: 3px;cursor: pointer;" data-seq-size="'+ item.seqSize +'"><a>'+ item.nmSize +'</a></li>');
                         });
 
                         // 데이터 로딩 완료 후 data-loaded 값 바꾸기
@@ -468,7 +524,7 @@
                                         <span class="card-title text-ellipsis" data-position="bottom" th:text="${resultDto.titleProduct}" th:data-tooltip="${resultDto.titleProduct}" th:classappend="${#strings.isEmpty(resultDto.titleProduct) ? '' : 'tooltipped'}"></span>
                                         <div>
                                             <th:block th:if="${not #strings.isEmpty(resultDto.idMainImg)}">
-                                                <img class="responsive-img" th:src="${'/attach/resizeImgView.do?idAttach=' + resultDto.idMainImg + '&snFileAttach=1&resizeWidth=500'}"
+                                                <img class="responsive-img" th:src="${'/attach/resizeImgView.do?idAttach=' + resultDto.idMainImg + '&resizeWidth=500'}"
                                                      onerror="this.src='/static/image/broken_image_48dp.png';this.style='object-fit:none';">
                                             </th:block>
                                             <th:block th:if="${#strings.isEmpty(resultDto.idMainImg)}">
@@ -501,7 +557,7 @@
                                                         <!-- 상품 정보 영역 -->
                                                         <div class="col s12 m6">
                                                             <!--                                                <div class="row">-->
-                                                            <h5 class="detail-product-nm" th:text="${resultDto.nmProduct}">품번</h5>
+                                                            <h5 class="detail-product-nm" th:text="${resultDto.nmProduct}" th:data-idmainimg="${resultDto.idMainImg}">품번</h5>
                                                             <p class="detail-product-title" th:text="${resultDto.titleProduct}">상품 타이틀</p>
                                                             <!--                                                <span class="new badge left ml-0 mr-2" data-badge-caption="">NEW</span>-->
                                                             <hr class="mb-5">
@@ -518,7 +574,7 @@
                                                             </div>
                                                             <ul th:id="${'selected-collection' + listStatus.index}" class="collection z-depth-1 selected-collection" style="display: none;">
                                                             </ul>
-                                                            <a class="col s12 m12 l5 waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2">카트에 담기</a>
+                                                            <a class="col s12 m12 l5 waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2 add-to-cart">카트에 담기</a>
                                                         </div>
                                                     </div>
                                                 </div>

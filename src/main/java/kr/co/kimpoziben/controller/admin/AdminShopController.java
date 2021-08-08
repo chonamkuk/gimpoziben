@@ -100,6 +100,4 @@ public class AdminShopController {
 
         return "admin/shop/list";
     }
-
-
 }

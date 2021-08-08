@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google.">
+    <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template, eCommerce dashboard, analytic dashboard">
+    <meta name="author" content="ThemeSelect">
+    <title>DataTable | Materialize - Material Design Admin Template</title>
+    <link rel="apple-touch-icon" href="/static/images/favicon/apple-touch-icon-152x152.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon/favicon-32x32.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- BEGIN: VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="/static/vendors/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/vendors/flag-icon/css/flag-icon.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/vendors/data-tables/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/vendors/data-tables/css/select.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css-rtl/layouts/style-horizontal.css">
+    <link rel="stylesheet" type="text/css" href="/static/lib/materialize/css/materialize.css">
+    <link rel="stylesheet" type="text/css" href="/static/lib/designTemplate/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/lib/designTemplate/css/style-horizontal.css">
+    <link rel="stylesheet" type="text/css" href="/static/lib/designTemplate/css/dropify.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/pages/data-tables.css">
+    <!-- END: Page Level CSS-->
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="/static/css-rtl/custom/custom.css">
+    <!-- END: Custom CSS-->
+</head>
+
+
+<th:block layout:fragment="css">
+    <style>
+        @media only screen and (min-width: 993px) {
+            .row .col.l9 {
+                margin-left: 12% !important;
+            }
+        }
+
+        @media only screen and (min-device-width: 1024px) and (max-device-width: 1366px){
+            #ecommerce-products .card-content .btn {
+                display: inline-table;
+                width: 100%;
+            }
+        }
+
+        @media only screen and (width: 1024px){
+            #ecommerce-products .electronic-products .col.s12.m4.l4 {
+                width: 49.3333%;
+            }
+        }
+
+        @media only screen and (max-width: 600px) {
+            div.no-image {
+                background-image: url('/static/image/broken_image_24dp.png');
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        }
+
+        @media only screen and (min-width: 600px) and (max-width: 800px){
+            #ecommerce-products > div.col > div > div.card.animate > div > div > img {
+                height: 130px;
+            }
+            div.no-image {
+                background-image: url('/static/image/broken_image_48dp.png');
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        }
+
+        @media only screen and (min-width: 801px) {
+            #ecommerce-products > div.col > div > div.card.animate > div > div > img {
+                height: 267px;
+            }
+            div.no-image {
+                background-image: url('/static/image/broken_image_48dp.png');
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        }
+
+        #ecommerce-products .card {
+            overflow: hidden;
+        }
+
+        #ecommerce-products .card .card-content i.material-icons {
+            cursor: pointer;
+        }
+
+        #ecommerce-products .modal .modal-content i.material-icons         {
+            cursor: pointer;
+            vertical-align: middle;
+        }
+
+        #ecommerce-products .card-badge {
+            line-height: 2em;
+            position: absolute;
+            top: 1rem;
+            right: -10rem;
+            display: block;
+            width: 25rem;
+            height: 2em;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+            text-indent: .8em;
+            background: #8e24aa;
+            background: -webkit-linear-gradient(45deg, #8e24aa 0%, #ff6e40 100%);
+            background: linear-gradient(45deg, #8e24aa 0%, #ff6e40 100%);
+        }
+
+        #ecommerce-products .card-badge a {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            text-decoration: none;
+            color: #dedede;
+        }
+
+        #ecommerce-products .card-badge a:hover {
+            text-decoration: underline;
+        }
+
+        #ecommerce-products .card-badge a:before,
+        #ecommerce-products .card-badge a:after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 3px;
+            content: '';
+        }
+
+        #ecommerce-products .card-badge a:after {
+            top: auto;
+            bottom: 0;
+            border-bottom-width: 0;
+        }
+
+        #ecommerce-products .prise-text-style {
+            font-size: 20px;
+            vertical-align: bottom;
+            text-decoration: line-through;
+            color: #c1c1c1 !important;
+        }
+
+        #ecommerce-products .card-content hr,
+        #ecommerce-products .modal-content hr {
+            opacity: .3;
+        }
+
+        #ecommerce-products .card-content .list-bullet,
+        #ecommerce-products .modal-content .list-bullet {
+            padding-left: 1.65rem;
+            list-style-type: disc;
+        }
+
+        #ecommerce-products .card-content .list-bullet .list-item-bullet,
+        #ecommerce-products .modal-content .list-bullet .list-item-bullet {
+            padding: .2rem 0;
+            list-style-type: disc;
+        }
+
+        #ecommerce-products .categories-collapsible {
+            border: none;
+            box-shadow: none;
+        }
+
+        #ecommerce-products .categories-collapsible li.active i {
+            -webkit-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }
+
+        #ecommerce-products .categories-collapsible li .collapsible-header {
+            padding-right: 0;
+            padding-bottom: 0;
+            padding-left: 0;
+            border: none;
+        }
+
+        #ecommerce-products .categories-collapsible li .collapsible-header i {
+            position: absolute;
+            right: 0;
+            -webkit-transition: all .3s;
+            transition: all .3s;
+        }
+
+        #ecommerce-products .categories-collapsible .collapsible-body {
+            padding: 0;
+            padding-top: 5px;
+            padding-left: 5px;
+            border: 0;
+        }
+
+        #ecommerce-products .categories-collapsible .collapsible-body p {
+            font-size: .9rem;
+            margin-top: 5px;
+            cursor: pointer;
+        }
+
+        #ecommerce-products .size-filter ul {
+            margin: 0;
+        }
+
+        #ecommerce-products .size-filter ul .active a {
+            color: #fff;
+            background: #7e57c2;
+        }
+
+        #ecommerce-products .size-filter ul li {
+            display: inline-block;
+            margin: .1rem 0;
+        }
+
+        #ecommerce-products .size-filter ul li a {
+            font-weight: 700;
+            line-height: 34px;
+            display: block;
+            width: 34px;
+            height: 34px;
+            text-align: center;
+            border-radius: 3px;
+            background: #ede7f6;
+        }
+
+        #ecommerce-products > div.col > div > div.card.animate > div > div {
+            text-align: center;
+        }
+
+        #ecommerce-products > div.col > div > div.card.animate > div > div > img {
+            object-fit: contain;
+            object-position: center;
+        }
+
+        .product-detail-modal {
+            width: 90%;
+            max-height: 90%;
+        }
+
+        .card .card-content .card-title {
+            min-height: 32px;
+            font-size: 12px;
+        }
+
+        #ecommerce-products > div.col.s12.m12.l12.pr-0 > div > div.card.animate > div > p {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* 카트 데이터 테이블 */
+        #main .section-data-tables .dataTables_wrapper table.dataTable thead th
+        {
+            min-width: 25px;
+
+            color: #616161;
+        }
+
+        #main .section-data-tables .dataTables_wrapper .dataTables_length#cart-table_length,
+        #main .section-data-tables .dataTables_wrapper .dataTables_filter#cart-table_filter
+        {
+            display: block;
+        }
+
+        #main .section-data-tables .dataTables_wrapper .dataTables_length#cart-table_length label select,
+        #main .section-data-tables .dataTables_wrapper .dataTables_filter#cart-table_filter label select
+        {
+            display: inline-block;
+
+            width: auto;
+            height: auto;
+        }
+
+        #main .section-data-tables .dataTables_wrapper .dataTables_length#cart-table_length label input,
+        #main .section-data-tables .dataTables_wrapper .dataTables_filter#cart-table_filter label input
+        {
+            width: auto;
+            height: auto;
+        }
+
+        #main .section-data-tables .dataTables_wrapper .dataTables_length,
+        #main .section-data-tables .dataTables_wrapper .dataTables_filter
+        {
+            display: none;
+        }
+
+        #main .section-data-tables .dataTables_wrapper .dataTables_info
+        {
+            margin-left: 18px;
+
+            color: #616161;
+        }
+
+        #main .section-data-tables .dataTables_wrapper .dataTables_paginate,
+        #main .section-data-tables .dataTables_wrapper #cart-table_paginate
+        {
+            margin-right: .35rem;
+            margin-bottom: .75rem;
+        }
+
+        #main .section-data-tables .dataTables_wrapper .dataTables_paginate .paginate_button,
+        #main .section-data-tables .dataTables_wrapper #cart-table_paginate .paginate_button
+        {
+            margin-top: .25rem;
+            padding: .25em .65em;
+        }
+
+        #main .section-data-tables .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+        #main .section-data-tables .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover,
+        #main .section-data-tables .dataTables_wrapper #cart-table_paginate .paginate_button.current,
+        #main .section-data-tables .dataTables_wrapper #cart-table_paginate .paginate_button.current:hover
+        {
+            color: #fff !important;
+            border: 1px solid #3f51b5;
+            border-radius: 6px;
+            background: #3f51b5;
+            box-shadow: 0 0 8px 0 #3f51b5;
+        }
+
+        #main .section-data-tables .dataTables_wrapper .dataTables_paginate .paginate_button:hover,
+        #main .section-data-tables .dataTables_wrapper #cart-table_paginate .paginate_button:hover
+        {
+            color: #fff !important;
+            border: 1px solid #3f51b5;
+            border-radius: 6px;
+            background: #3f51b5;
+            box-shadow: 0 0 8px 0 #3f51b5;
+        }
+
+        img.responsive-img {
+            min-height: 55px;
+            max-height: 200px;
+            min-width: 100px;
+            max-width: 60%;
+        }
+
+        #cart-table-body > tr > td > div {
+            text-align: -webkit-center;
+            display: flex;
+        }
+
+        [type='checkbox'] + span:not(.lever):before, [type='checkbox']:not(.filled-in) + span:not(.lever):after {
+            position: absolute;
+            z-index: 0;
+            top: 0;
+            left: 0;
+            width: 15px;
+            height: 15px;
+            margin-top: 0px;
+            content: '';
+            -webkit-transition: .2s;
+            transition: .2s;
+            border: 2px solid #5a5a5a;
+            border-radius: 1px;
+        }
+
+        #cart-detail-table-body > tr.child > td > ul > li > span.dtr-data > div,
+        #cart-detail-table-body > tr > td > div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #cart-detail-table-body > tr > td > div > a > i {
+            line-height: 34px;
+            display: block;
+            width: 34px;
+            height: 34px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        #cart-detail-table-body > tr.child > td > ul > li > span.dtr-data > div > input[type=number],
+        #cart-detail-table-body > tr > td > div > input[type=number] {
+            width: 4rem;
+            height: 2rem;
+            text-align: center;
+        }
+    </style>
+</th:block>
+
+<body >
+
+<!--헤더 시작 -->
+<header th:fragment="headerFragment" class="page-topbar" id="header">
+    <script type="text/javascript">
+
+    </script>
+
+    <div class="navbar navbar-fixed">
+        <nav class="navbar-main navbar-color nav-collapsible sideNav-lock navbar-dark gradient-45deg-light-blue-cyan">
+            <div class="nav-wrapper">
+                <ul class="left">
+                    <li>
+                        <h1 class="logo-wrapper">
+                            <a class="brand-logo darken-1" href="#1">
+                                <span class="logo-text hide-on-med-and-down">GPSafety</span>
+                            </a>
+                        </h1>
+                    </li>
+                </ul>
+                <ul class="navbar-list right">
+                    <li>
+                        <a class="waves-effect waves-block waves-light notification-button" href="javascript:void(0);" data-target="notifications-dropdown">
+                            <i class="material-icons">shopping_cart<small class="notification-badge orange accent-3">5</small></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="profile-dropdown">
+                            <i class="material-icons">account_circle</i>
+                        </a>
+                    </li>
+                </ul>
+                <!-- notifications-dropdown-->
+                <ul class="dropdown-content" id="notifications-dropdown">
+                    <li>
+                        <h6>NOTIFICATIONS<span class="new badge">5</span></h6>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a class="black-text" href="#!"><span class="material-icons icon-bg-circle cyan small">add_shopping_cart</span> A new order has been placed!</a>
+                        <time class="media-meta grey-text text-darken-2" datetime="2015-06-12T20:50:48+08:00">2 hours ago</time>
+                    </li>
+                </ul>
+                <!-- profile-dropdown-->
+                <ul class="dropdown-content" id="profile-dropdown">
+                    <li><a class="grey-text text-darken-1" href="#"><i class="material-icons">face</i> Profile</a></li>
+                    <li><a class="grey-text text-darken-1" href="#"><i class="material-icons">settings</i> Settings</a></li>
+                    <li><a class="grey-text text-darken-1" href="#"><i class="material-icons">live_help</i> Help</a></li>
+                    <li class="divider"></li>
+                    <li><a class="grey-text text-darken-1" href="#"><i class="material-icons">lock_outline</i> Lock</a></li>
+                    <li><a class="grey-text text-darken-1" href="#"><i class="material-icons">keyboard_tab</i> Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- BEGIN: Horizontal nav start-->
+        <nav class="white hide-on-med-and-down" id="horizontal-nav">
+            <div class="nav-wrapper">
+                <ul class="left hide-on-med-and-down" id="ul-horizontal-nav" data-menu="menu-navigation">
+                    <li>
+                        <a class="dropdown-menu" href="#" data-target="formsTables">
+                            <i class="material-icons">business</i>
+                            <span><span class="dropdown-title" data-i18n="Menu levels">회사소개</span><i class="material-icons right">keyboard_arrow_down</i></span>
+                        </a>
+                        <ul class="dropdown-content dropdown-horizontal-list" id="formsTables">
+                            <li data-menu=""><a href="#"><span data-i18n="Second level 1">매장소개</span></a>
+                            </li>
+                            <li data-menu=""><a href="#"><span data-i18n="Second level 2">연혁</span></a>
+                            </li>
+                            <li data-menu=""><a href="/contents/location.do"><span data-i18n="Second level 4">회사위치</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a class="dropdown-menu" href="#" data-target="formsTables2">
+                            <i class="material-icons">store</i>
+                            <span><span class="dropdown-title" data-i18n="Menu levels">제품소개</span><i class="material-icons right">keyboard_arrow_down</i></span>
+                        </a>
+                        <ul class="dropdown-content dropdown-horizontal-list" id="formsTables2">
+                            <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu">
+                                <a class="dropdownSub-menu" href="#" data-target="thirdDropdown">
+                                    <span data-i18n="Second level 3">제품리스트</span><i class="material-icons right">chevron_right</i>
+                                </a>
+                                <ul class="dropdown-content dropdown-horizontal-list" id="thirdDropdown">
+                                    <li data-menu=""><a href="/shop/list.do"><span data-i18n="Child 1">전체</span></a>
+                                    </li>
+                                    <li data-menu=""><a href="#"><span data-i18n="Child 2">상의</span></a>
+                                    </li>
+                                    <li data-menu=""><a href="#"><span data-i18n="Child 3">하의</span></a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li data-menu=""><a href="#"><span data-i18n="Second level 2">주문현황</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-menu" href="#" data-target="formsTables3">
+                            <!--                            <i class="material-icons">campaign</i>-->
+                            <i class="material-icons">announcement</i>
+                            <span><span class="dropdown-title" data-i18n="Menu levels">공지사항</span></span>
+                        </a>
+                        <ul class="dropdown-content dropdown-horizontal-list" id="formsTables3">
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-menu" href="#" data-target="formsTables4">
+                            <i class="material-icons">help_outline</i>
+                            <span><span class="dropdown-title" data-i18n="Menu levels">FAQ</span></span>
+                        </a>
+                        <ul class="dropdown-content dropdown-horizontal-list" id="formsTables4">
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropdown-menu" href="#" data-target="formsTables5">
+                            <i class="material-icons">question_answer</i>
+                            <span><span class="dropdown-title" data-i18n="Menu levels">Q&A</span></span>
+                        </a>
+                        <ul class="dropdown-content dropdown-horizontal-list" id="formsTables5">
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class="dropdown-menu" href="#" data-target="formsTables6">
+                            <i class="material-icons">build</i>
+                            <span><span class="dropdown-title" data-i18n="Menu levels">작업일보</span><i class="material-icons right">keyboard_arrow_down</i></span>
+                        </a>
+                        <ul class="dropdown-content dropdown-horizontal-list" id="formsTables6">
+                            <li data-menu=""><a href="#"><span data-i18n="Second level 1">자수작업</span></a>
+                            </li>
+                            <li data-menu=""><a href="#"><span data-i18n="Second level 2">완장작업</span></a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <!-- END: Horizontal nav start-->
+            </div>
+        </nav>
+    </div>
+
+    <!-- BEGIN: SideNav-->
+    <aside class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-fixed hide-on-large-only">
+        <div class="brand-sidebar sidenav-light"></div>
+        <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed hide-on-large-only menu-shadow" id="slide-out" data-menu="menu-navigation" data-collapsible="menu-accordion">
+            <!--            <li class="navigation-header"><a class="navigation-header-text">Misc </a><i class="navigation-header-icon material-icons">more_horiz</i>-->
+            <!--            </li>-->
+            <li class="bold">
+                <a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">business</i><span class="menu-title" data-i18n="Menu levels">회사소개</span></a>
+                <div class="collapsible-body">
+                    <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                        <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level">매장소개</span></a>
+                        </li>
+                        <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level">연혁</span></a>
+                        </li>
+                        <li><a href="/contents/location.do"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level">회사위치</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="bold">
+                <a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">store</i><span class="menu-title" data-i18n="Menu levels">제품소개</span></a>
+                <div class="collapsible-body">
+                    <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                        <li><a class="collapsible-header waves-effect waves-cyan" href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level child">제품리스트</span></a>
+                            <div class="collapsible-body">
+                                <ul class="collapsible" data-collapsible="accordion">
+                                    <li><a href="/shop/list.do"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Third level">전체</span></a>
+                                    </li>
+                                    <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Third level">상의</span></a>
+                                    </li>
+                                    <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Third level">하의</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level">주문현황</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="bold">
+                <a class="waves-effect waves-cyan " href="#"><i class="material-icons">announcement</i><span class="menu-title">공지사항</span></a>
+            </li>
+            <li class="bold">
+                <a class="waves-effect waves-cyan " href="#"><i class="material-icons">help_outline</i><span class="menu-title">FAQ</span></a>
+            </li>
+            <li class="bold">
+                <a class="waves-effect waves-cyan " href="#"><i class="material-icons">question_answer</i><span class="menu-title">Q&A</span></a>
+            </li>
+        </ul>
+        <div class="navigation-background"></div><a class="sidenav-trigger btn-floating btn-medium waves-effect waves-light hide-on-large-only" href="#" data-target="slide-out"><i class="material-icons">menu</i></a>
+    </aside>
+    <!-- END: SideNav-->
+
+    <!-- alert 모달 -->
+    <div id="alertModal" class="modal">
+        <div class="modal-content">
+            <h4></h4>
+            <p></p>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat">확인</a>
+        </div>
+    </div>
+
+    <!-- 이미지뷰 모달 -->
+    <div id="imageModal" class="modal" style="width: 90%;">
+        <div class="img-container">
+            <div class="modal-slide" style="margin-bottom: 0px; background-image: url('/static/image/bike-sunset.jpg'); background-size: contain;">
+                <div id="numbertext" class="numbertext"></div>
+                <i class="material-icons modal-close" style="float: right;">close</i>
+            </div>
+            <a class="prev">❮</a>
+            <a class="next">❯</a>
+        </div>
+    </div>
+
+    <!-- confirm 모달-->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <h4></h4>
+            <p></p>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat cancel">취소</a>
+            <a class="modal-close waves-effect waves-green btn-flat confirm">확인</a>
+        </div>
+    </div>
+
+    <!--  로딩 circle  -->
+    <div class="preloader-wrapper small active loading-circle" id="loading-circle" style="display: none;">
+        <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div><div class="gap-patch">
+            <div class="circle"></div>
+        </div><div class="circle-clipper right">
+            <div class="circle"></div>
+        </div>
+        </div>
+    </div>
+
+    <!--  로딩 overlay  -->
+    <div class="loading-overlay" id="loading-overlay"></div>
+</header>
+<!--헤더 끝 -->
+
+    <!-- BEGIN: Page Main-->
+    <div id="main">
+        <div class="row">
+            <div class="col s12">
+                <div class="container">
+                    <div class="section section-data-tables">
+                        <!-- Page Length Options -->
+                        <div class="row">
+                            <div class="col s12">
+                                <div class="card">
+                                    <div class="card-content">
+                                        <div class="col s12 display-flex justify-content-end mt-1">
+                                            <button type="submit" class="btn indigo" style="margin-right: 1rem;">주문하기</button>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col s12 mt-4">
+                                                <table id="cart-table" class="display">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="no-sort">
+                                                                <label>
+                                                                    <input type="checkbox" class="select-all" />
+                                                                    <span>상품사진</span>
+                                                                </label>
+                                                            </th>
+                                                            <th>상품명</th>
+                                                            <th>사이즈</th>
+                                                            <th>수량</th>
+                                                            <th>추가일시</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="cart-table-body">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="modal cart-detail-modal" id="cart-detail-modal">
+                        <div class="modal-content">
+                            <table id="cart-detail-table" class="display">
+                                <thead>
+                                <tr>
+                                    <th>상품사진</th>
+                                    <th>상품명</th>
+                                    <th>사이즈</th>
+                                    <th>수량</th>
+                                </tr>
+                                </thead>
+                                <tbody id="cart-detail-table-body">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">닫기</a>
+                        </div>
+                    </div>
+                    <!-- START RIGHT SIDEBAR NAV -->
+                    <aside id="right-sidebar-nav">
+                        <div id="slide-out-right" class="slide-out-right-sidenav sidenav rightside-navigation">
+                            <div class="row">
+                                <div class="slide-out-right-title">
+                                    <div class="col s12 border-bottom-1 pb-0 pt-1">
+                                        <div class="row">
+                                            <div class="col s2 pr-0 center">
+                                                <i class="material-icons vertical-text-middle"><a href="#" class="sidenav-close">clear</a></i>
+                                            </div>
+                                            <div class="col s10 pl-0">
+                                                <ul class="tabs">
+                                                    <li class="tab col s4 p-0">
+                                                        <a href="#messages" class="active">
+                                                            <span>Messages</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="tab col s4 p-0">
+                                                        <a href="#settings">
+                                                            <span>Settings</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="tab col s4 p-0">
+                                                        <a href="#activity">
+                                                            <span>Activity</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </aside>
+                    <form name="listForm">
+                        <input type="hidden" name="seqWorkProduct" value=""/>
+                    </form>
+                    <!-- END RIGHT SIDEBAR NAV -->
+                    <div style="bottom: 50px; right: 19px;" class="fixed-action-btn direction-top"><a class="btn-floating btn-large gradient-45deg-light-blue-cyan gradient-shadow"><i class="material-icons">add</i></a>
+                        <ul>
+                            <li><a href="css-helpers.html" class="btn-floating blue"><i class="material-icons">help_outline</i></a></li>
+                            <li><a href="cards-extended.html" class="btn-floating green"><i class="material-icons">widgets</i></a></li>
+                            <li><a href="app-calendar.html" class="btn-floating amber"><i class="material-icons">today</i></a></li>
+                            <li><a href="app-email.html" class="btn-floating red"><i class="material-icons">mail_outline</i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content-overlay"></div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Page Main-->
+
+    <!-- BEGIN: Footer-->
+
+    <footer class="page-footer footer footer-static footer-dark gradient-45deg-light-blue-cyan gradient-shadow navbar-border navbar-shadow">
+        <div class="footer-copyright">
+            <div class="container"><span>&copy; 2021 <a href="http://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank">N&J</a> All rights reserved.</span></div>
+        </div>
+    </footer>
+
+    <!-- END: Footer-->
+    <!-- BEGIN VENDOR JS-->
+    <script src="/static/js/vendors.min.js"></script>
+    <!-- BEGIN VENDOR JS-->
+    <!-- BEGIN PAGE VENDOR JS-->
+    <script src="/static/vendors/data-tables/js/jquery.dataTables.min.js"></script>
+    <script src="/static/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/static/vendors/data-tables/js/dataTables.select.min.js"></script>
+    <!-- END PAGE VENDOR JS-->
+    <!-- BEGIN THEME  JS-->
+    <script src="/static/js/plugins.js"></script>
+    <script src="/static/js/search.js"></script>
+    <script src="/static/js/custom/custom-script.js"></script>
+    <!-- END THEME  JS-->
+    <!-- BEGIN PAGE LEVEL JS-->
+    <script src="/static/js/scripts/data-tables.js"></script>
+    <!-- END PAGE LEVEL JS-->
+
+    <script type="text/javascript" src="/static/js/common.js"></script>
+    <script type="text/javascript" src="/static/js/calendar.js"></script>
+</body>
+
+<!-- page 스크립트 -->
+<th:block layout:fragment="script">
+    <script type="text/javascript">
+        let detailedCartId = '';
+        $(document).ready(function () {
+            showCartList();
+
+            M.Modal.getInstance($('#cart-detail-modal')).options.onCloseStart = function(e){
+                if (location.href.split('#').pop() == $(this).attr('id')) {
+                    window.history.back();
+                }
+                detailedCartId = '';
+            };
+        }); // document ready 끝
+
+        // 카트상품 선택
+        $(document).on('click', '#cart-table-body > tr > td > div > label > input[type=checkbox]', function(e) {
+            $(this).parents('tr').toggleClass('selected');
+        });
+
+        // 카트상품 전체선택
+        $(document).on('click', '#cart-table .select-all', function(e) {
+            $(this).toggleClass('clicked');
+            if ($(this).hasClass('clicked')) {
+                $('#cart-table tbody tr').addClass('selected');
+            } else {
+                $('#cart-table tbody tr').removeClass('selected');
+            }
+            if ($('#cart-table tbody tr').hasClass('selected')) {
+                $('#cart-table-body > tr > td > div > label > input[type=checkbox]').prop('checked', true);
+            } else {
+                $('#cart-table-body > tr > td > div > label > input[type=checkbox]').prop('checked', false);
+            }
+        });
+
+        // 카트 상세보기
+        $(document).on('click', '.cart-detail-trigger', function(e) {
+            $('#cart-detail-table').DataTable().clear();
+            $('#cart-detail-table').DataTable().destroy();
+            detailedCartId = $(this).parent().prev().find('.cart-id').val();
+            let product;
+            let cart = JSON.parse(localStorage.getItem('cart'));
+            let detailedCartItem = cart.filter(x => x.cartId === detailedCartId)[0];
+            detailedCartItem.products.forEach(function(item, index){
+                let imageSrc = '/attach/resizeImgView.do?idAttach=' + item.idMainImg + '&resizeWidth=200';
+                product =
+                    '<tr>' +
+                    '<td><div><img class="responsive-img" src="'+ imageSrc +'"></div></td>' +
+                    '<td>'+ item.nmProduct +'</a></td>' +
+                    '<td>'+ item.nmSize +'</td>' +
+                    '<td><div>' +
+                    '<a><i class="material-icons waves-effect btn-amount-less">remove</i></a>' +
+                    '<input type="number" value="'+ item.amount +'"/>' +
+                    '<a><i class="material-icons waves-effect btn-amount-more">add</i></a>' +
+                    '<a><i class="material-icons waves-effect btn-remove">cancel</i></a>' +
+                    '</div></td>' +
+                    '</tr>';
+                $('#cart-detail-table-body').append(product);
+            });
+            $('#cart-detail-table').DataTable({
+                responsive: true,
+                destroy: true,
+                paging: false,
+                searching: false,
+                ordering: false,
+                info: false
+            });
+
+        });
+
+        function descendingOrder(a,b) {
+            return b > a;
+        }
+
+        function showCartList(){
+            let cart; // 카트목록
+            if(localStorage.getItem('cart') != null) {
+                let cartItem;
+                cart = JSON.parse(localStorage.getItem('cart'));
+                cart.forEach(function(item, index){
+                    let imageSrc = '/attach/resizeImgView.do?idAttach=' + cart[index].products[0].idMainImg + '&resizeWidth=200';
+                    cartItem =
+                        '<tr>' +
+                        '<td><div><label><input type="checkbox" class="cart-id" name="cart-id" value="'+ cart[index].cartId +'"/><span></span></label><img class="responsive-img" src="'+ imageSrc +'"></div></td>' +
+                        '<td><a class="modal-trigger cart-detail-trigger" href="#cart-detail-modal">'+ cart[index].products[0].nmProduct +'</a></td>' +
+                        '<td>'+ cart[index].products[0].nmSize +'</td>' +
+                        '<td>'+ cart[index].products[0].amount +'</td>' +
+                        '<td>'+ cart[index].date +'</td>' +
+                        '</tr>';
+                    $('#cart-table-body').append(cartItem);
+                });
+                $('#cart-table').DataTable({
+                    'responsive': true,
+                    'lengthMenu': [
+                        [10, 25, 50, -1],
+                        [10, 25, 50, 'All']
+                    ],
+                    'columnDefs': [{
+                        'targets': 'no-sort',
+                        'orderable': false,
+                    }]
+                });
+            }
+        }
+    </script>
+</th:block>
+</html>

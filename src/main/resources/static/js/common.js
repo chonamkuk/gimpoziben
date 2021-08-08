@@ -1,6 +1,7 @@
 $(document).ready(function () {
     comn = new common();
     imgComn = new imageCommon();
+    comn.displayCartCount();
 
     // $('#alertModal').modal({
     //     // onOpenEnd: function(e){
@@ -364,5 +365,15 @@ function common() {
 
     this.numberWithCommas = function (x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    this.displayCartCount = function() {
+        if(localStorage.getItem('cart') != null) {
+            let cart = JSON.parse(localStorage.getItem('cart'));
+            if(cart.length > 0) {
+                $('#cartCount').text(cart.length);
+                $('#cartCount').show();
+            }
+        }
     }
 }
