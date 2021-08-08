@@ -281,7 +281,7 @@
 
         function goList(){
             $('[name="listForm"]').attr('method', 'get');
-            $('[name="listForm"]').attr('action', '/admin/work/jasulist.do');
+            $('[name="listForm"]').attr('action', '/admin/work/wanjanglist.do');
             $('[name="listForm"]').submit();
         }
     </script>
@@ -297,7 +297,7 @@
                         <div class="row">
                             <div class="col s12">
                                 <!-- form start -->
-                                <form id="saveForm" action="/admin/work/jasuUpdate.do" method="post" >
+                                <form id="saveForm" action="/admin/work/wanjangUpdate.do" method="post" >
                                     <input type="hidden" name="seqWorkProduct" th:value="${resultDto.seqWorkProduct}"/>
                                     <input type="hidden" name="typeWorkProduct" th:value="${resultDto.typeWorkProduct}"/>
                                     <input type="hidden" name="idMainImg" th:value="${resultDto.idMainImg}"/>

@@ -377,7 +377,7 @@
         function goUpdate(seqWorkProduct){
             $('[name="listForm"]').children('[name="seqWorkProduct"]').val(seqWorkProduct);
             $('[name="listForm"]').attr('method', 'get');
-            $('[name="listForm"]').attr('action', '/admin/work/jasuUpdate.do');
+            $('[name="listForm"]').attr('action', '/admin/work/wanjangUpdate.do');
             $('[name="listForm"]').submit();
         }
     </script>
@@ -490,9 +490,9 @@
                     </li>
                     <li>
                         <a class="dropdown-menu" href="#" data-target="formsTables4">
-                        <i class="material-icons">help_outline</i>
-                        <a href="/customer/faqList.do"><span class="dropdown-title" data-i18n="Menu levels">FAQ</span></a>
-                    </a>
+                            <i class="material-icons">help_outline</i>
+                            <a href="/customer/faqList.do"><span class="dropdown-title" data-i18n="Menu levels">FAQ</span></a>
+                        </a>
                         <ul class="dropdown-content dropdown-horizontal-list" id="formsTables4">
                         </ul>
                     </li>
@@ -638,17 +638,17 @@
                 <div class="container">
                     <div class="row">
                         <div class="col s12 m6 l6">
-                            <h5 class="breadcrumbs-title"><span>작업리스트 - 자수</span></h5>
-                            <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="/admin/work/jasuWrite.do">등록</a>
-                        </div>
+                            <h5 class="breadcrumbs-title"><span>작업리스트 - 완장</span></h5>
+                            <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="/admin/work/wanjangWrite.do">등록</a>
 
+                        </div>
                         <div class="col s12 m6 l6 right-align-md">
                             <ol class="breadcrumbs mb-0">
                                 <li class="breadcrumb-item"><a href="index.html">Home</a>
                                 </li>
                                 <li class="breadcrumb-item"><a href="#">작업리스트</a>
                                 </li>
-                                <li class="breadcrumb-item active">자수
+                                <li class="breadcrumb-item active">완장
                                 </li>
                             </ol>
                         </div>

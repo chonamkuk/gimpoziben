@@ -1,16 +1,11 @@
 package kr.co.kimpoziben.service;
 
-import kr.co.kimpoziben.domain.entity.AttachEntity;
-import kr.co.kimpoziben.domain.entity.Product;
-import kr.co.kimpoziben.domain.entity.ProductWork;
-import kr.co.kimpoziben.domain.entity.Size;
+import kr.co.kimpoziben.domain.entity.*;
 import kr.co.kimpoziben.domain.repository.ProdCateRepository;
 import kr.co.kimpoziben.domain.repository.ProdSizeRepository;
 import kr.co.kimpoziben.domain.repository.ProductRepository;
 import kr.co.kimpoziben.domain.repository.ProductWorkRepository;
-import kr.co.kimpoziben.dto.ProductDto;
-import kr.co.kimpoziben.dto.ProductWorkDto;
-import kr.co.kimpoziben.dto.SizeDto;
+import kr.co.kimpoziben.dto.*;
 import lombok.AllArgsConstructor;
 import org.hibernate.collection.spi.PersistentCollection;
 import org.modelmapper.Condition;
@@ -70,10 +65,10 @@ public class WorkProductService {
 
 
 
-    public HashMap findWorkList() throws Exception {
+    public HashMap findWorkList(String type) throws Exception {
         List<ProductWorkDto> workList = new ArrayList<>();
         HashMap result = new HashMap();
-        for(ProductWork productWork : productWorkRepository.findByTypeWorkProduct("J")) {
+        for(ProductWork productWork : productWorkRepository.findByTypeWorkProduct(type)) {
             ProductWorkDto productWorkDto = new ProductWorkDto();
             productWorkDto.setTitleWorkProduct(productWork.getTitleWorkProduct());
             productWorkDto.setSeqWorkProduct(productWork.getSeqWorkProduct());
@@ -109,7 +104,6 @@ public class WorkProductService {
          *             (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
          */
         productWorkDto.setRegDt(LocalDateTime.now());
-        productWorkDto.setTypeWorkProduct("J");
         ProductWork newProduct = productWorkRepository.save(modelMapper.map(productWorkDto, ProductWork.class));
 
         return newProduct.getSeqWorkProduct();
@@ -123,5 +117,20 @@ public class WorkProductService {
         }
 
         return null;
+    }
+
+    @Transactional
+    public Long update(ProductWorkDto productWorkDto) {
+        if(productWorkDto.getImageList().size() > 0) {
+            List<AttachEntity> attachEntities = attachService.saveImage(productWorkDto.getImageList(), "product", productWorkDto.getIdMainImg());
+            if (attachEntities != null) {
+                productWorkDto.setIdMainImg(attachEntities.get(0).getIdAttach()); //첨부파일 아이디 셋팅
+            }
+        }
+
+        ProductWork newProduct = productWorkRepository.save(modelMapper.map(productWorkDto, ProductWork.class));
+
+
+        return newProduct.getSeqWorkProduct();
     }
 }
