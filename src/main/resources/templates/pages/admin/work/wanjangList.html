@@ -408,7 +408,7 @@
                 <ul class="navbar-list right">
                     <li>
                         <a class="waves-effect waves-block waves-light notification-button" href="javascript:void(0);" data-target="notifications-dropdown">
-                            <i class="material-icons">shopping_cart<small class="notification-badge orange accent-3">5</small></i>
+                            <i class="material-icons">shopping_cart<small class="notification-badge orange accent-3" style="display: none;" id="cartCount">0</small></i>
                         </a>
                     </li>
                     <li>
@@ -483,7 +483,7 @@
                         <a class="dropdown-menu" href="#" data-target="formsTables3">
                             <!--                            <i class="material-icons">campaign</i>-->
                             <i class="material-icons">announcement</i>
-                            <span><span class="dropdown-title" data-i18n="Menu levels">공지사항</span></span>
+                            <span><a href="/customer/noticeList.do"><span class="dropdown-title" data-i18n="Menu levels">공지사항</span></a></span>
                         </a>
                         <ul class="dropdown-content dropdown-horizontal-list" id="formsTables3">
                         </ul>
@@ -491,7 +491,7 @@
                     <li>
                         <a class="dropdown-menu" href="#" data-target="formsTables4">
                             <i class="material-icons">help_outline</i>
-                            <a href="/customer/faqList.do"><span class="dropdown-title" data-i18n="Menu levels">FAQ</span></a>
+                            <span><a href="/customer/faqList.do"><span class="dropdown-title" data-i18n="Menu levels">FAQ</span></a></span>
                         </a>
                         <ul class="dropdown-content dropdown-horizontal-list" id="formsTables4">
                         </ul>
@@ -513,7 +513,7 @@
                         <ul class="dropdown-content dropdown-horizontal-list" id="formsTables6">
                             <li data-menu=""><a href="/admin/work/jasulist.do"><span data-i18n="Second level 1">자수작업</span></a>
                             </li>
-                            <li data-menu=""><a href="/admin/work/wanjanglist.do"><span data-i18n="Second level 2">완장작업</span></a>
+                            <li data-menu=""><a href="/admin/work/wanjangList.do"><span data-i18n="Second level 2">완장작업</span></a>
                             </li>
                         </ul>
                     </li>
@@ -527,10 +527,11 @@
     <!-- BEGIN: SideNav-->
     <aside class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-fixed hide-on-large-only">
         <div class="brand-sidebar sidenav-light"></div>
-        <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed hide-on-large-only menu-shadow" id="slide-out" data-menu="menu-navigation" data-collapsible="menu-accordion">
-            <!--            <li class="navigation-header"><a class="navigation-header-text">Misc </a><i class="navigation-header-icon material-icons">more_horiz</i>-->
-            <!--            </li>-->
-            <li class="bold">
+        <ul style="background-color: #c7cbe4" class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed hide-on-large-only menu-shadow" id="slide-out" data-menu="menu-navigation" data-collapsible="menu-accordion">
+            <li class="navigation-header"><a style="font-size: 20px; color: #0d47a1" class="navigation-header-text">GPSafety </a>
+
+            </li>
+            <li class="bold" style="color: #fff3e0">
                 <a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">business</i><span class="menu-title" data-i18n="Menu levels">회사소개</span></a>
                 <div class="collapsible-body">
                     <ul class="collapsible collapsible-sub" data-collapsible="accordion">
@@ -568,10 +569,21 @@
                 <a class="waves-effect waves-cyan " href="#"><i class="material-icons">announcement</i><span class="menu-title">공지사항</span></a>
             </li>
             <li class="bold">
-                <a class="waves-effect waves-cyan " href="#"><i class="material-icons">help_outline</i><span class="menu-title">FAQ</span></a>
+                <a class="waves-effect waves-cyan " href="/customer/faqList.do"><i class="material-icons">help_outline</i><span class="menu-title">FAQ</span></a>
             </li>
             <li class="bold">
                 <a class="waves-effect waves-cyan " href="#"><i class="material-icons">question_answer</i><span class="menu-title">Q&A</span></a>
+            </li>
+            <li class="bold">
+                <a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">build</i><span class="menu-title" data-i18n="Menu levels">작업일보</span></a>
+                <div class="collapsible-body">
+                    <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                        <li data-menu=""><a href="/admin/work/jasulist.do"><span data-i18n="Second level 1">자수작업</span></a>
+                        </li>
+                        <li data-menu=""><a href="/admin/work/wanjangList.do"><span data-i18n="Second level 2">완장작업</span></a>
+                        </li>
+                    </ul>
+                </div>
             </li>
         </ul>
         <div class="navigation-background"></div><a class="sidenav-trigger btn-floating btn-medium waves-effect waves-light hide-on-large-only" href="#" data-target="slide-out"><i class="material-icons">menu</i></a>
@@ -741,12 +753,12 @@
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
-                                                            <th>Name</th>
-                                                            <th>Position</th>
-                                                            <th>Office</th>
-                                                            <th>Age</th>
-                                                            <th>Start date</th>
-                                                            <th>Salary</th>
+                                                            <th>작업명</th>
+                                                            <th>작업사진</th>
+                                                            <th>작업설명</th>
+                                                            <th>작업수량</th>
+                                                            <th>작업가격</th>
+                                                            <th>등록일</th>
                                                         </tr>
                                                     </tfoot>
                                                 </table>

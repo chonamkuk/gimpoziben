@@ -51,7 +51,7 @@ public class AdminWorkController {
         productWorkDto.setRegister("admin");
         productWorkDto.setTypeWorkProduct("W");
         workProductService.save(productWorkDto);
-        return "redirect:/admin/work/jasulist.do";
+        return "redirect:/admin/work/jasuList.do";
     }
 
     /*
@@ -84,7 +84,7 @@ public class AdminWorkController {
 
     
 
-    @GetMapping("/jasulist.do")
+    @GetMapping("/jasuList.do")
     public String list2(Model model, final PageRequest pageable, HashMap<String,Object> searchMap
             , @RequestParam(value = "seqCategory", required = false) Long seqCategory
             , @RequestParam(value = "seqUpperCategory", required = false) Long seqUpperCategory) throws Exception {
@@ -108,7 +108,7 @@ public class AdminWorkController {
         productWorkDto.setRegister("admin");
         productWorkDto.setTypeWorkProduct("W");
         workProductService.save(productWorkDto);
-        return "redirect:/admin/work/wanjanglist.do";
+        return "redirect:/admin/work/wanjangList.do";
     }
 
     /*
@@ -142,7 +142,7 @@ public class AdminWorkController {
 
 
 
-    @GetMapping("/wanjanglist.do")
+    @GetMapping("/wanjangList.do")
     public String wanjanglist(Model model, final PageRequest pageable, HashMap<String,Object> searchMap
             , @RequestParam(value = "seqCategory", required = false) Long seqCategory
             , @RequestParam(value = "seqUpperCategory", required = false) Long seqUpperCategory) throws Exception {

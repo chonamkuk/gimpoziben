@@ -1,12 +1,13 @@
 package kr.co.kimpoziben.domain.repository;
 
-import kr.co.kimpoziben.domain.entity.ProductWork;
+import kr.co.kimpoziben.domain.entity.Notice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-public interface NoticeRepository extends JpaRepository<ProductWork, Long>, JpaSpecificationExecutor<ProductWork> {
+public interface NoticeRepository extends JpaRepository<Notice, Long>, JpaSpecificationExecutor<Notice> {
 
 
-    ProductWork[] findByTypeWorkProduct(String Type);
+  /*  Notice[] findByTypeWorkProduct(String Type);*/
+
 
 }

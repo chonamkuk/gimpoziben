@@ -33,7 +33,7 @@ public class Notice {
     private String dayNoticeEnd;
 
     @Column(name = "notice_main_yn", length = 1)
-    private String ynNoticMain;
+    private String ynNoticeMain;
 
     @Column(columnDefinition = "TEXT", name = "notice_desc")
     private String descNotice;

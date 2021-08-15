@@ -1,6 +1,7 @@
 package kr.co.kimpoziben.controller.admin;
 
 import kr.co.kimpoziben.dto.ProductWorkDto;
+import kr.co.kimpoziben.dto.NoticeDto;
 import kr.co.kimpoziben.service.*;
 import kr.co.kimpoziben.util.PageRequest;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.HashMap;
 public class AdminCustomerController {
 
     private ProductService productService;
+    private NoticeService noticeService;
     private WorkProductService workProductService;
 
     private AttachService attachService;
@@ -37,11 +39,22 @@ public class AdminCustomerController {
     }
 
     @PostMapping("/noticeWrite.do")
-    public String noticeWrite(@ModelAttribute ProductWorkDto productWorkDto) throws Exception {
-        productWorkDto.setRegister("admin");
-        workProductService.save(productWorkDto);
-        return "redirect:/customer/noticelist.do";
+    public String noticeWrite(@ModelAttribute NoticeDto noticeDto) throws Exception {
+        noticeDto.setRegister("admin");
+
+        noticeService.save(noticeDto);
+        return "redirect:/customer/noticeList.do";
     }
+
+    @GetMapping("/noticeList.do")
+    public String list2(Model model, final PageRequest pageable, HashMap<String,Object> searchMap
+            ) throws Exception {
+
+        HashMap result =  noticeService.findNoticeList();
+        model.addAttribute("noticeList", result.get("noticeList"));
+        return "admin/customer/noticeList";
+    }
+
 
     /*
     * 1.jasuSeq를 갖고 뿌린다.
@@ -75,15 +88,6 @@ public class AdminCustomerController {
 
     
 
-    @GetMapping("/jasulist.do")
-    public String list2(Model model, final PageRequest pageable, HashMap<String,Object> searchMap
-            , @RequestParam(value = "seqCategory", required = false) Long seqCategory
-            , @RequestParam(value = "seqUpperCategory", required = false) Long seqUpperCategory) throws Exception {
-
-        HashMap result =  workProductService.findWorkList("J");
-        model.addAttribute("workList", result.get("workList"));
-        return "admin/work/jasuList";
-    }
 
 
 
