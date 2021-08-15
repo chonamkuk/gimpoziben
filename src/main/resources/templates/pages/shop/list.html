@@ -419,6 +419,10 @@
                 $('#confirmModal').find('.confirm').unbind('click').on('click', function(){
                     // 예 => 장바구니로 이동
                     comn.preLoading();
+                    location.href.replace(/(#modal\d)/,'');
+                    window.history.back();
+                    window.location.href = '/shop/cartList.do';
+                    return false;
                 });
                 $('#confirmModal').find('.cancel').unbind('click').on('click', function(){
                     // 아니요 => 초기화

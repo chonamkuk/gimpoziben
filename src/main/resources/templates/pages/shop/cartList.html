@@ -386,6 +386,12 @@
             height: 2rem;
             text-align: center;
         }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
     </style>
 </th:block>
 
@@ -647,7 +653,8 @@
                                 <div class="card">
                                     <div class="card-content">
                                         <div class="col s12 display-flex justify-content-end mt-1">
-                                            <button type="submit" class="btn indigo" style="margin-right: 1rem;">주문하기</button>
+                                            <button type="submit" class="btn indigo" id="cart-item-order-btn" style="margin-right: 1rem;">주문하기</button>
+                                            <button type="submit" class="btn materialize-red" id="cart-item-remove-btn" style="margin-right: 1rem;">삭제하기</button>
                                         </div>
                                         <div class="row">
                                             <div class="col s12 mt-4">
@@ -694,7 +701,8 @@
                             </table>
                         </div>
                         <div class="modal-footer">
-                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">닫기</a>
+                            <a class="modal-action update waves-effect waves-green btn-flat">적용</a>
+                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">닫기</a>
                         </div>
                     </div>
                     <!-- START RIGHT SIDEBAR NAV -->
@@ -786,16 +794,86 @@
 <!-- page 스크립트 -->
 <th:block layout:fragment="script">
     <script type="text/javascript">
-        let detailedCartId = '';
         $(document).ready(function () {
+            // 데이터 테이블 새로고침
             showCartList();
 
-            M.Modal.getInstance($('#cart-detail-modal')).options.onCloseStart = function(e){
-                if (location.href.split('#').pop() == $(this).attr('id')) {
-                    window.history.back();
-                }
-                detailedCartId = '';
-            };
+            // 카트수량 수정
+            $('#cart-detail-modal').find('.update').unbind('click').on('click', function(){
+                let cart = JSON.parse(localStorage.getItem('cart')); // 카트목록
+                let detailedCartId = $('#cart-detail-table-body').data('detailed-cart-id'); // 상세조회 카트항목 아이디
+                let detailedCartItem = cart.find(x => x.cartId == detailedCartId); // 조회중인 카트항목
+                // 카트수량 수정내용 적용
+                $('#cart-detail-table-body').find('input[type=number]').each(function(index, item){
+                    detailedCartItem.products.find(x => x.seqSize == $(item).data('seq-size')).amount = $(item).val();
+                });
+                // 로컬 스토리지 저장
+                localStorage.setItem('cart', JSON.stringify(cart));
+                // 카트 상세조회 모달 닫기
+                $('#cart-detail-modal').modal('close');
+                // 데이터 테이블 새로고침
+                showCartList();
+            });
+
+            // 카트 주문
+            $('#cart-item-order-btn').on('click', function(){
+                $('#confirmModal').find('h4').text('알림');
+                $('#confirmModal').find('p').text('선택한 상품을 주문하시겠습니까?');
+                $('#confirmModal').modal('open');
+                $('#confirmModal').find('.confirm').unbind('click').on('click', function(){
+                    comn.preLoading();
+                    let orderItemId = new Array(); // 주문목록 아이디
+                    $('#cart-table-body input[type=checkbox]:checked').each(function(index, item){
+                        orderItemId.push($(item).val());
+                    });
+                    let cart = JSON.parse(localStorage.getItem('cart')); // 카트목록
+                    let orderItems = cart.filter(x => orderItemId.includes(x.cartId)); // 서버에 전달할 주문목록
+                    let restItems = cart.filter(x => !orderItemId.includes(x.cartId)); // 서버 호출 후 카트에 반영할 목록
+                    // 주문 서버기능 ajax 호출
+                    $.ajax({
+                        url: '/order/add.do',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        dataType: 'json',
+                        data: JSON.stringify(orderItems),
+                        success: function(data) {
+                            console.log('data :: ' + JSON.stringify(data));
+                            if(data.result == 0) {
+                                // 서버기능 호출 성공시 주문한 상품 filter 하여 cart에 반영
+                                localStorage.setItem('cart', JSON.stringify(restItems));
+                                // 데이터 테이블 새로고침
+                                showCartList();
+                            } else {
+
+                            }
+                            comn.afterLoading();
+                        },
+                        error: function(request, status, error) {
+                            console.log('code : ' + request.status);
+                            console.log('message : ' + request.responseText);
+                            console.log('error : ' + error);
+                        }
+                    });
+                });
+            });
+
+            // 카트항목 삭제
+            $('#cart-item-remove-btn').on('click', function(){
+                $('#confirmModal').find('h4').text('알림');
+                $('#confirmModal').find('p').text('선택한 상품을 카트에서 삭제하시겠습니까?');
+                $('#confirmModal').modal('open');
+                $('#confirmModal').find('.confirm').unbind('click').on('click', function(){
+                    let cart = JSON.parse(localStorage.getItem('cart')); // 카트목록
+                    $('#cart-table-body input[type=checkbox]:checked').each(function(index, item){
+                        let removeCartId = $(item).val(); // 삭제할 카트항목 아이디
+                        cart = cart.filter(x => x.cartId != removeCartId);
+                    });
+                    // 로컬 스토리지 저장
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    // 데이터 테이블 새로고침
+                    showCartList();
+                });
+            });
         }); // document ready 끝
 
         // 카트상품 선택
@@ -819,13 +897,14 @@
         });
 
         // 카트 상세보기
+        let detailedCartItem;
         $(document).on('click', '.cart-detail-trigger', function(e) {
             $('#cart-detail-table').DataTable().clear();
             $('#cart-detail-table').DataTable().destroy();
-            detailedCartId = $(this).parent().prev().find('.cart-id').val();
+            let detailedCartId = $(this).parent().prev().find('.cart-id').val();
             let product;
             let cart = JSON.parse(localStorage.getItem('cart'));
-            let detailedCartItem = cart.filter(x => x.cartId === detailedCartId)[0];
+            detailedCartItem = cart.filter(x => x.cartId === detailedCartId)[0];
             detailedCartItem.products.forEach(function(item, index){
                 let imageSrc = '/attach/resizeImgView.do?idAttach=' + item.idMainImg + '&resizeWidth=200';
                 product =
@@ -835,12 +914,13 @@
                     '<td>'+ item.nmSize +'</td>' +
                     '<td><div>' +
                     '<a><i class="material-icons waves-effect btn-amount-less">remove</i></a>' +
-                    '<input type="number" value="'+ item.amount +'"/>' +
+                    '<input type="number" value="'+ item.amount +'" data-seq-size="'+ item.seqSize +'"/>' +
                     '<a><i class="material-icons waves-effect btn-amount-more">add</i></a>' +
-                    '<a><i class="material-icons waves-effect btn-remove">cancel</i></a>' +
+                    // '<a><i class="material-icons waves-effect btn-remove">cancel</i></a>' +
                     '</div></td>' +
                     '</tr>';
                 $('#cart-detail-table-body').append(product);
+                $('#cart-detail-table-body').data('detailed-cart-id', detailedCartId);
             });
             $('#cart-detail-table').DataTable({
                 responsive: true,
@@ -850,7 +930,22 @@
                 ordering: false,
                 info: false
             });
+        });
 
+        // 수량감소
+        $(document).on('click', '.btn-amount-less', function(e) {
+            let amount = Number($(this).parent().next().val());
+            if(amount > 1) {
+                amount--;
+                $(this).parent().next().val(amount);
+            }
+        });
+
+        // 수량추가
+        $(document).on('click', '.btn-amount-more', function(e) {
+            let amount = Number($(this).parent().prev().val());
+            amount++;
+            $(this).parent().prev().val(amount);
         });
 
         function descendingOrder(a,b) {
@@ -860,6 +955,8 @@
         function showCartList(){
             let cart; // 카트목록
             if(localStorage.getItem('cart') != null) {
+                $('#cart-table').DataTable().clear();
+                $('#cart-table').DataTable().destroy();
                 let cartItem;
                 cart = JSON.parse(localStorage.getItem('cart'));
                 cart.forEach(function(item, index){
@@ -887,6 +984,8 @@
                 });
             }
         }
+
+
     </script>
 </th:block>
 </html>
