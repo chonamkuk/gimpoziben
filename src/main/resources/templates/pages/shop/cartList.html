@@ -817,6 +817,13 @@
 
             // 카트 주문
             $('#cart-item-order-btn').on('click', function(){
+                if($('#cart-table-body input[type=checkbox]:checked').length < 1) {
+                    $('#alertModal').find('h4').text('알림');
+                    $('#alertModal').find('p').text('선택한 상품이 없습니다.');
+                    $('#alertModal').modal('open');
+                    return false;
+                }
+
                 $('#confirmModal').find('h4').text('알림');
                 $('#confirmModal').find('p').text('선택한 상품을 주문하시겠습니까?');
                 $('#confirmModal').modal('open');
@@ -859,6 +866,13 @@
 
             // 카트항목 삭제
             $('#cart-item-remove-btn').on('click', function(){
+                if($('#cart-table-body input[type=checkbox]:checked').length < 1) {
+                    $('#alertModal').find('h4').text('알림');
+                    $('#alertModal').find('p').text('선택한 상품이 없습니다.');
+                    $('#alertModal').modal('open');
+                    return false;
+                }
+
                 $('#confirmModal').find('h4').text('알림');
                 $('#confirmModal').find('p').text('선택한 상품을 카트에서 삭제하시겠습니까?');
                 $('#confirmModal').modal('open');
@@ -984,8 +998,6 @@
                 });
             }
         }
-
-
     </script>
 </th:block>
 </html>
