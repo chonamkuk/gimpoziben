@@ -49,7 +49,7 @@ public class AdminWorkController {
     @PostMapping("/jasuWrite.do")
     public String jasuWrite(@ModelAttribute ProductWorkDto productWorkDto) throws Exception {
         productWorkDto.setRegister("admin");
-        productWorkDto.setTypeWorkProduct("W");
+        productWorkDto.setTypeWorkProduct("J");
         workProductService.save(productWorkDto);
         return "redirect:/admin/work/jasuList.do";
     }
@@ -149,7 +149,7 @@ public class AdminWorkController {
 
         HashMap result =  workProductService.findWorkList("W");
         model.addAttribute("workList", result.get("workList"));
-        return "admin/work/wanjanglist";
+        return "admin/work/wanjangList";
     }
 
 }
