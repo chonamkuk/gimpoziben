@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
-@Service
+    @AllArgsConstructor
+    @Service
 //@org.springframework.transaction.annotation.Transactional
 public class ProductService {
     @Autowired

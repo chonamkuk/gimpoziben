@@ -400,12 +400,13 @@
                 cartItem.products = new Array(); // 제품목록
                 addToCartBtn.siblings('.selected-collection').children().each(function(index, item){
                     cartItem.products[index] = {
+                        cartId: cartItem.cartId,
                         seqProduct: seqProduct,
                         nmProduct: nmProduct,
                         idMainImg: idMainImg,
                         seqSize: $(item).data('seq-size'),
                         nmSize: $(item).find('.nmSize').text(),
-                        amount: $(item).find('input[type="number"]').val()
+                        amountOrder: $(item).find('input[type="number"]').val()
                     };
                 });
 

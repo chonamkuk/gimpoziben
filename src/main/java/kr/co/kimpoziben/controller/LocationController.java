@@ -78,7 +78,7 @@ public class LocationController {
                "  </div>\n" +
                "</div>";
 
-        emailUtil.sendEmail("gmb5000@naver.com", "DMOIM 회의 일정", body);
+        emailUtil.sendEmail("unasd@daum.net", "paralysist@naver.com" ,"DMOIM 회의 일정", body);
 
         return "redirect:/";
     }

@@ -22,6 +22,10 @@ public class PropertyConfig {
     @Getter
     String aesutilIv;
 
+    @Value("${excel.path}")
+    @Getter
+    String excelPath;
+
     @Getter
     String osName;
 

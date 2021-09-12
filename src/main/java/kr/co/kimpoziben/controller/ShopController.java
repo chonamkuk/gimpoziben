@@ -59,6 +59,13 @@ public class ShopController {
         return resultMap;
     }
 
+    @GetMapping("/detail2.do")
+    public @ResponseBody Object detail2(@RequestParam("seqProduct") Long seqProduct) throws  Exception {
+        HashMap resultMap = new HashMap();
+        resultMap.put("productDetail", productService.getProductDetail(seqProduct));
+        return resultMap;
+    }
+
     @GetMapping("/cartList.do")
     public String cartList() throws Exception {
         return "shop/cartList";

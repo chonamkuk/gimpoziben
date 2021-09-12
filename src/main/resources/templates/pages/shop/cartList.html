@@ -381,7 +381,8 @@
         }
 
         #cart-detail-table-body > tr.child > td > ul > li > span.dtr-data > div > input[type=number],
-        #cart-detail-table-body > tr > td > div > input[type=number] {
+        #cart-detail-table-body > tr > td > div > input[type=number],
+        #invoice-table-body > tr > td > div > input[type=number] {
             width: 4rem;
             height: 2rem;
             text-align: center;
@@ -391,6 +392,10 @@
         input::-webkit-inner-spin-button {
             -webkit-appearance: none;
             margin: 0;
+        }
+
+        #invoice-modal {
+            width: 70%;
         }
     </style>
 </th:block>
@@ -653,8 +658,8 @@
                                 <div class="card">
                                     <div class="card-content">
                                         <div class="col s12 display-flex justify-content-end mt-1">
-                                            <button type="submit" class="btn indigo" id="cart-item-order-btn" style="margin-right: 1rem;">주문하기</button>
-                                            <button type="submit" class="btn materialize-red" id="cart-item-remove-btn" style="margin-right: 1rem;">삭제하기</button>
+                                            <button type="button" class="btn indigo" id="order-view-btn" style="margin-right: 1rem;">주문서보기</button>
+                                            <button type="button" class="btn materialize-red" id="cart-item-remove-btn" style="margin-right: 1rem;">삭제하기</button>
                                         </div>
                                         <div class="row">
                                             <div class="col s12 mt-4">
@@ -694,6 +699,8 @@
                                     <th>상품명</th>
                                     <th>사이즈</th>
                                     <th>수량</th>
+                                    <th>단가</th>
+                                    <th>금액</th>
                                 </tr>
                                 </thead>
                                 <tbody id="cart-detail-table-body">
@@ -742,9 +749,6 @@
                         </div>
 
                     </aside>
-                    <form name="listForm">
-                        <input type="hidden" name="seqWorkProduct" value=""/>
-                    </form>
                     <!-- END RIGHT SIDEBAR NAV -->
                     <div style="bottom: 50px; right: 19px;" class="fixed-action-btn direction-top"><a class="btn-floating btn-large gradient-45deg-light-blue-cyan gradient-shadow"><i class="material-icons">add</i></a>
                         <ul>
@@ -759,6 +763,117 @@
             </div>
         </div>
     </div>
+
+    <!-- 견적서 modal -->
+    <div id="invoice-modal" class="modal invoice-modal">
+        <div class="col xl9 m8 s12">
+            <div class="card">
+                <div class="card-content invoice-print-area">
+                    <!-- header section -->
+                    <div class="row invoice-date-number">
+<!--                        <div class="col xl4 s12">-->
+<!--                            <span class="invoice-number mr-1">견적서</span>-->
+<!--                            <span>000756</span>-->
+<!--                        </div>-->
+                        <div class="col xl8 s12">
+                            <div class="invoice-date display-flex align-items-center flex-wrap">
+                                <div class="mr-3">
+                                    <small>주문일:</small>
+                                    <span id="invoice-data-text">08/10/2019</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- logo and title -->
+                    <div class="row mt-3 invoice-logo-title">
+                        <div class="col m6 s12 display-flex invoice-logo mt-1 push-m6">
+                            <a style="font-size: 20px; color: #0d47a1" class="navigation-header-text">GPSafety </a>
+                        </div>
+                        <div class="col m6 s12 pull-m6">
+                            <h4 class="indigo-text">주문서</h4>
+                        </div>
+                    </div>
+                    <div class="divider mb-3 mt-3"></div>
+                    <!-- invoice address and contact -->
+                    <div class="row invoice-info">
+                        <div class="col m6 s12">
+                            <h6 class="invoice-from">발신인</h6>
+                            <div class="invoice-address">
+                                <span>지승호</span>
+                            </div>
+                            <div class="invoice-address">
+                                <span>전화 : 031-123-4567</span>
+                            </div>
+                            <div class="invoice-address">
+                                <span>이메일 : customer@hanmail.net</span>
+                            </div>
+                            <div class="invoice-address">
+                                <span>인천 강화군 강화읍 1111</span>
+                            </div>
+                        </div>
+                        <div class="col m6 s12">
+                            <div class="divider show-on-small hide-on-med-and-up mb-3"></div>
+                            <h6 class="invoice-to">수신인</h6>
+                            <div class="invoice-address">
+                                <span>김포피복 지벤 (대표 심종보)</span>
+                            </div>
+                            <div class="invoice-address">
+                                <span>사업자번호 : 123-111-2222</span>
+                            </div>
+                            <div class="invoice-address">
+                                <span>전화 : 031-123-4567</span>
+                            </div>
+                            <div class="invoice-address">
+                                <span>팩스 : 031- 111-2222</span>
+                            </div>
+                            <div class="invoice-address">
+                                <span>경기도 김포시 하성면 하성로 389</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divider mb-3 mt-3"></div>
+                    <!-- product details table-->
+                    <div class="invoice-product-details">
+                        <table class="striped responsive-table" id="invoice-table">
+                            <thead>
+                            <tr>
+                                <th>상품사진</th>
+                                <th>상품명</th>
+                                <th>규격</th>
+                                <th>수량</th>
+                                <th>단가</th>
+                                <th class="right-align">금액</th>
+                            </tr>
+                            </thead>
+                            <tbody id="invoice-table-body">
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- invoice subtotal -->
+                    <div class="divider mt-3 mb-3"></div>
+                    <div class="invoice-subtotal">
+                        <div class="row">
+                            <div class="col m5 s12">
+                                <a class="btn indigo waves-effect waves-light display-flex align-items-center justify-content-center" id="order-send-btn">
+                                    <i class="material-icons mr-4">check</i>
+                                    <span class="text-nowrap">주문하기</span>
+                                </a>
+                            </div>
+                            <div class="col xl4 m7 s12 offset-xl3">
+                                <ul>
+                                    <li class="display-flex justify-content-between">
+                                        <span class="invoice-subtotal-title">합계</span>
+                                        <h6 class="invoice-subtotal-value">0원</h6>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- END: Page Main-->
 
     <!-- BEGIN: Footer-->
@@ -797,15 +912,16 @@
         $(document).ready(function () {
             // 데이터 테이블 새로고침
             showCartList();
+            let invoiceModal = M.Modal.getInstance($('#invoice-modal'));
 
-            // 카트수량 수정
+            // 카트수량 적용
             $('#cart-detail-modal').find('.update').unbind('click').on('click', function(){
                 let cart = JSON.parse(localStorage.getItem('cart')); // 카트목록
                 let detailedCartId = $('#cart-detail-table-body').data('detailed-cart-id'); // 상세조회 카트항목 아이디
                 let detailedCartItem = cart.find(x => x.cartId == detailedCartId); // 조회중인 카트항목
                 // 카트수량 수정내용 적용
                 $('#cart-detail-table-body').find('input[type=number]').each(function(index, item){
-                    detailedCartItem.products.find(x => x.seqSize == $(item).data('seq-size')).amount = $(item).val();
+                    detailedCartItem.products.find(x => x.seqSize == $(item).data('seq-size')).amountOrder = $(item).val();
                 });
                 // 로컬 스토리지 저장
                 localStorage.setItem('cart', JSON.stringify(cart));
@@ -815,50 +931,172 @@
                 showCartList();
             });
 
-            // 카트 주문
-            $('#cart-item-order-btn').on('click', function(){
+            // 주문서보기 버튼
+            $('#order-view-btn').on('click', function(){
                 if($('#cart-table-body input[type=checkbox]:checked').length < 1) {
                     $('#alertModal').find('h4').text('알림');
                     $('#alertModal').find('p').text('선택한 상품이 없습니다.');
                     $('#alertModal').modal('open');
                     return false;
                 }
+                comn.preLoading();
+                $('#invoice-table-body').empty();
+                let orderItemId = new Array(); // 주문목록 아이디
+                $('#cart-table-body input[type=checkbox]:checked').each(function(index, item){
+                    orderItemId.push($(item).val());
+                });
+                let cart = JSON.parse(localStorage.getItem('cart')); // 카트목록
+                let orderItems = cart.filter(x => orderItemId.includes(x.cartId)); // 서버에 전달할 주문목록
+                // 주문일
+                $('#invoice-data-text').text((new Date()).format('yyyy-MM-dd'));
+                // 주문목록 테이블 그리기
+                orderItems.forEach(function(cartItem, cartIndex){
+                    // console.log(cartItem);
+                    let productStr;
+                    let productDetail;
+                    cartItem.products.forEach(function(productItem, productIndex){
+                        if(productIndex == 0) {
+                            productDetail = getProductDetail(productItem.seqProduct).productDetail;
+                        }
 
+                        let imageSrc = '/attach/resizeImgView.do?idAttach=' + productItem.idMainImg + '&resizeWidth=200';
+                        productStr =
+                            '<tr data-cart-id="'+ productItem.cartId +'" data-seq-product="'+ productItem.seqProduct +
+                            '" data-seq-size="'+ productItem.seqSize +'" data-sell-price="'+ productDetail.sellPrice +
+                            '" data-id-main-img="'+ productItem.idMainImg +'">' +
+                            '<td><div><img class="responsive-img" src="'+ imageSrc +'"></div></td>' +
+                            '<td>'+ productItem.nmProduct +'</a></td>' +
+                            '<td>'+ productItem.nmSize +'</td>' +
+                            '<td><div>' +
+                            '<a><i class="material-icons waves-effect btn-amount-less">remove</i></a>' +
+                            '<input type="number" value="'+ productItem.amountOrder +'" data-seq-size="'+ productItem.seqSize +'"/>' +
+                            '<a><i class="material-icons waves-effect btn-amount-more">add</i></a>' +
+                            '<td data-sell-price="'+ productDetail.sellPrice +'">'+ productDetail.sellPrice.toLocaleString('ko-KR') +'</td>' +
+                            '<td class="product-total-price indigo-text right-align">'+ (productItem.amountOrder * productDetail.sellPrice).toLocaleString('ko-KR') +'</td>' +
+                            '</div></td>' +
+                            '</tr>';
+                        $('#invoice-table-body').append(productStr);
+                    });
+                });
+                calculateTotalPrice();
+                invoiceModal.open();
+                comn.afterLoading();
+            });
+
+            // 주문하기 버튼
+            // $('#order-send-btn').on('click', function(){
+            //     $('#confirmModal').find('h4').text('알림');
+            //     $('#confirmModal').find('p').text('주문서를 발송하시겠습니까?');
+            //     $('#confirmModal').modal('open');
+            //     $('#confirmModal').find('.confirm').unbind('click').on('click', function(){
+            //         comn.preLoading();
+            //         let orderItemId = new Array(); // 주문목록 아이디
+            //         $('#cart-table-body input[type=checkbox]:checked').each(function(index, item){
+            //             orderItemId.push($(item).val());
+            //         });
+            //         let cart = JSON.parse(localStorage.getItem('cart')); // 카트목록
+            //         let orderItems = cart.filter(x => orderItemId.includes(x.cartId)); // 서버에 전달할 주문목록
+            //         // 주문목록에 있는 cartId, seqSize 를 검색해서 반영
+            //         orderItems.forEach(function(cartItem, cartIndex){
+            //             cartItem.products.forEach(function(productItem, productIndex){
+            //
+            //             });
+            //         });
+            //
+            //         // 주문할 orderItems 뽑기
+            //         // 주문 후 카트에 남아있을 목록 뽑기
+            //
+            //         let restItems = cart.filter(x => !orderItemId.includes(x.cartId)); // 서버 호출 후 카트에 반영할 목록
+            //
+            //         // 주문 서버기능 ajax 호출
+            //         $.ajax({
+            //             url: '/order/add.do',
+            //             type: 'POST',
+            //             contentType: 'application/json',
+            //             dataType: 'json',
+            //             data: JSON.stringify(orderItems),
+            //             success: function(data) {
+            //                 console.log('data :: ' + JSON.stringify(data));
+            //                 if(data.result == 0) {
+            //                     // 서버기능 호출 성공시 주문한 상품 filter 하여 cart에 반영
+            //                     // localStorage.setItem('cart', JSON.stringify(restItems));
+            //                     // 데이터 테이블 새로고침
+            //                     showCartList();
+            //                 } else {
+            //
+            //                 }
+            //             },
+            //             error: function(request, status, error) {
+            //                 console.log('code : ' + request.status);
+            //                 console.log('message : ' + request.responseText);
+            //                 console.log('error : ' + error);
+            //             },
+            //             complete: function(data) {
+            //                 comn.afterLoading();
+            //             }
+            //         });
+            //     });
+            // });
+            // 주문하기 버튼
+            $('#order-send-btn').on('click', function(){
                 $('#confirmModal').find('h4').text('알림');
-                $('#confirmModal').find('p').text('선택한 상품을 주문하시겠습니까?');
+                $('#confirmModal').find('p').text('주문서를 발송하시겠습니까?');
                 $('#confirmModal').modal('open');
                 $('#confirmModal').find('.confirm').unbind('click').on('click', function(){
                     comn.preLoading();
+                    // 주문할 orderItems 뽑기
+                    let order = new Object();
+                    let totalPriceOrder = 0;
+                    order.products = new Array();
+                    $('#invoice-table-body > tr').each(function(index, item){
+                        order.products[index] = {
+                            cartId: $(item).data('cart-id'),
+                            seqProduct: $(item).data('seq-product'),
+                            seqSize: $(item).data('seq-size'),
+                            idMainImg: $(item).data('id-main-img'),
+                            amountOrder: $(item).find('input[type="number"]').val(),
+                            priceOrder: $(item).data('sell-price')
+                        };
+                        totalPriceOrder += $(item).find('input[type="number"]').val() * Number($(item).data('sell-price'));
+                    });
+                    order.totalPriceOrder = totalPriceOrder;
+                    console.log(order);
+
+                    // 주문 후 카트에 남아있을 목록 뽑기
                     let orderItemId = new Array(); // 주문목록 아이디
                     $('#cart-table-body input[type=checkbox]:checked').each(function(index, item){
                         orderItemId.push($(item).val());
                     });
                     let cart = JSON.parse(localStorage.getItem('cart')); // 카트목록
-                    let orderItems = cart.filter(x => orderItemId.includes(x.cartId)); // 서버에 전달할 주문목록
                     let restItems = cart.filter(x => !orderItemId.includes(x.cartId)); // 서버 호출 후 카트에 반영할 목록
+                    console.log(restItems);
+
                     // 주문 서버기능 ajax 호출
                     $.ajax({
                         url: '/order/add.do',
                         type: 'POST',
                         contentType: 'application/json',
                         dataType: 'json',
-                        data: JSON.stringify(orderItems),
+                        data: JSON.stringify(order),
                         success: function(data) {
                             console.log('data :: ' + JSON.stringify(data));
                             if(data.result == 0) {
                                 // 서버기능 호출 성공시 주문한 상품 filter 하여 cart에 반영
-                                localStorage.setItem('cart', JSON.stringify(restItems));
+                                // localStorage.setItem('cart', JSON.stringify(restItems));
                                 // 데이터 테이블 새로고침
                                 showCartList();
                             } else {
 
                             }
-                            comn.afterLoading();
                         },
                         error: function(request, status, error) {
                             console.log('code : ' + request.status);
                             console.log('message : ' + request.responseText);
                             console.log('error : ' + error);
+                        },
+                        complete: function(data) {
+                            comn.afterLoading();
+                            invoiceModal.close();
                         }
                     });
                 });
@@ -913,13 +1151,20 @@
         // 카트 상세보기
         let detailedCartItem;
         $(document).on('click', '.cart-detail-trigger', function(e) {
+            comn.preLoading();
             $('#cart-detail-table').DataTable().clear();
             $('#cart-detail-table').DataTable().destroy();
             let detailedCartId = $(this).parent().prev().find('.cart-id').val();
             let product;
             let cart = JSON.parse(localStorage.getItem('cart'));
+            let productDetail;
+
             detailedCartItem = cart.filter(x => x.cartId === detailedCartId)[0];
             detailedCartItem.products.forEach(function(item, index){
+                if(index == 0) {
+                    productDetail = getProductDetail(item.seqProduct);
+                }
+
                 let imageSrc = '/attach/resizeImgView.do?idAttach=' + item.idMainImg + '&resizeWidth=200';
                 product =
                     '<tr>' +
@@ -928,9 +1173,11 @@
                     '<td>'+ item.nmSize +'</td>' +
                     '<td><div>' +
                     '<a><i class="material-icons waves-effect btn-amount-less">remove</i></a>' +
-                    '<input type="number" value="'+ item.amount +'" data-seq-size="'+ item.seqSize +'"/>' +
+                    '<input type="number" value="'+ item.amountOrder +'" data-seq-size="'+ item.seqSize +'"/>' +
                     '<a><i class="material-icons waves-effect btn-amount-more">add</i></a>' +
                     // '<a><i class="material-icons waves-effect btn-remove">cancel</i></a>' +
+                    '<td>'+ '20,000' +'</td>' +
+                    '<td>'+ '120,000' +'</td>' +
                     '</div></td>' +
                     '</tr>';
                 $('#cart-detail-table-body').append(product);
@@ -944,6 +1191,7 @@
                 ordering: false,
                 info: false
             });
+            comn.afterLoading();
         });
 
         // 수량감소
@@ -952,6 +1200,9 @@
             if(amount > 1) {
                 amount--;
                 $(this).parent().next().val(amount);
+                let sellPrice = $(this).parent().parent().parent().next().data('sell-price');
+                $(this).parent().parent().parent().next().next().text((amount * sellPrice).toLocaleString('ko-KR'));
+                calculateTotalPrice();
             }
         });
 
@@ -960,7 +1211,26 @@
             let amount = Number($(this).parent().prev().val());
             amount++;
             $(this).parent().prev().val(amount);
+            let sellPrice = $(this).parent().parent().parent().next().data('sell-price');
+            $(this).parent().parent().parent().next().next().text((amount * sellPrice).toLocaleString('ko-KR'));
+            calculateTotalPrice();
         });
+
+        // 수량 수동입력
+        $(document).on('change', '#invoice-table-body input[type="number"]', function(e) {
+            let sellPrice = $(this).parent().parent().next().data('sell-price');
+            $(this).parent().parent().next().next().text(($(this).val() * sellPrice).toLocaleString('ko-KR'));
+            calculateTotalPrice();
+        });
+
+        // 주문서 합계값 반영
+        function calculateTotalPrice(){
+            let totalPrice = 0;
+            $('.product-total-price').each(function(index,item){
+                totalPrice = totalPrice + Number($(item).text().replaceAll(',',''));
+            });
+            $('.invoice-subtotal-value').text(totalPrice.toLocaleString('ko-KR') + '원');
+        }
 
         function descendingOrder(a,b) {
             return b > a;
@@ -980,7 +1250,7 @@
                         '<td><div><label><input type="checkbox" class="cart-id" name="cart-id" value="'+ cart[index].cartId +'"/><span></span></label><img class="responsive-img" src="'+ imageSrc +'"></div></td>' +
                         '<td><a class="modal-trigger cart-detail-trigger" href="#cart-detail-modal">'+ cart[index].products[0].nmProduct +'</a></td>' +
                         '<td>'+ cart[index].products[0].nmSize +'</td>' +
-                        '<td>'+ cart[index].products[0].amount +'</td>' +
+                        '<td>'+ cart[index].products[0].amountOrder +'</td>' +
                         '<td>'+ cart[index].date +'</td>' +
                         '</tr>';
                     $('#cart-table-body').append(cartItem);
@@ -997,6 +1267,26 @@
                     }]
                 });
             }
+        }
+
+        function getProductDetail(seqProduct){
+            let resultData;
+            $.ajax({
+                url: '/shop/detail2.do?seqProduct=' + seqProduct,
+                type: 'GET',
+                dataType: 'json',
+                async: false,
+                success: function(data) {
+                   // console.log(data);
+                    resultData = data;
+                },
+                error: function(request, status, error){
+                    console.log('code : ' + request.status);
+                    console.log('message : ' + request.responseText);
+                    console.log('error : ' + error);
+                }
+            });
+            return resultData;
         }
     </script>
 </th:block>
