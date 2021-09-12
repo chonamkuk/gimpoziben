@@ -70,4 +70,9 @@ public class ShopController {
     public String cartList() throws Exception {
         return "shop/cartList";
     }
+
+    @GetMapping("/mailTest.do")
+    public String mailTest() throws Exception {
+        return "shop/mail";
+    }
 }

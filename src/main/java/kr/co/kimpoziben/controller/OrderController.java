@@ -22,10 +22,7 @@ public class OrderController {
     public @ResponseBody Object add(@RequestBody OrderDto orderDto) throws Exception {
         HashMap resultMap = new HashMap();
         resultMap.put("result", 0);
-        System.out.println("orderDto :: " + orderDto);
-        OrderDto newOrderDto = orderService.save(orderDto);
-        resultMap.put("orderDto", newOrderDto);
-        orderService.makeExcel(newOrderDto);
+        resultMap.put("orderDto", orderService.save(orderDto));
         return resultMap;
     }
 
