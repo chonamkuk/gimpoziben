@@ -1,8 +1,7 @@
 package kr.co.kimpoziben.controller;
 
-import kr.co.kimpoziben.dto.AttachDto;
-import kr.co.kimpoziben.dto.ProductDto;
-import kr.co.kimpoziben.dto.SearchDto;
+import kr.co.kimpoziben.domain.entity.OrderProduct;
+import kr.co.kimpoziben.dto.*;
 import kr.co.kimpoziben.service.AttachService;
 import kr.co.kimpoziben.service.ProductService;
 import kr.co.kimpoziben.service.SizeService;
@@ -10,6 +9,7 @@ import kr.co.kimpoziben.test.domain.code.AsStat;
 import kr.co.kimpoziben.test.dto.AsDto;
 import kr.co.kimpoziben.util.PageRequest;
 import lombok.AllArgsConstructor;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -72,7 +73,26 @@ public class ShopController {
     }
 
     @GetMapping("/mailTest.do")
-    public String mailTest() throws Exception {
+    public String mailTest(Model model) throws Exception {
+        OrderDto orderDto = new OrderDto();
+        orderDto.setSeqOrder(28L);
+        orderDto.setTotalPriceOrder(404000L);
+        orderDto.setDtOrder(LocalDateTime.now());
+        orderDto.setIdCustomer("test");
+
+        List<OrderProductDto> orderProducts = new ArrayList<>();
+        OrderProductDto orderProductDto = new OrderProductDto();
+        orderProductDto.setNmProduct("ZB-123123");
+        orderProducts.add(orderProductDto);
+
+        OrderProductDto orderProductDto1 = new OrderProductDto();
+        orderProductDto1.setNmProduct("ZB-010101");
+        orderProducts.add(orderProductDto1);
+
+        orderDto.setProducts(orderProducts);
+
+        model.addAttribute("orderDto", orderDto);
+
         return "shop/mail";
     }
 }

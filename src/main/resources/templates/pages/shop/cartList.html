@@ -1082,7 +1082,7 @@
                             console.log('data :: ' + JSON.stringify(data));
                             if(data.result == 0) {
                                 // 서버기능 호출 성공시 주문한 상품 filter 하여 cart에 반영
-                                // localStorage.setItem('cart', JSON.stringify(restItems));
+                                localStorage.setItem('cart', JSON.stringify(restItems));
                                 // 데이터 테이블 새로고침
                                 showCartList();
                             } else {
@@ -1090,6 +1090,9 @@
                             }
                         },
                         error: function(request, status, error) {
+                            $('#alertModal').find('h4').text('알림');
+                            $('#alertModal').find('p').text('오류가 발생했습니다. 관리자에게 문의하세요.');
+                            $('#alertModal').modal('open');
                             console.log('code : ' + request.status);
                             console.log('message : ' + request.responseText);
                             console.log('error : ' + error);

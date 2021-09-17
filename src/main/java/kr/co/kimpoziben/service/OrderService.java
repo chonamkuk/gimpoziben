@@ -87,8 +87,12 @@ public class OrderService {
         for(OrderProductDto orderProductDto : orderDto.getProducts()) {
             orderProductDto.setSeqOrder(orderDto.getSeqOrder());
             OrderProduct orderProduct = orderProductRepository.save(modelMapper.map(orderProductDto, OrderProduct.class));
-            orderProductDto.setSeqProductOrder(orderProduct.getSeqProductOrder());
         }
+
+        // 주문상품 재조회: 상품명, 사이즈명 포함하여 조회
+        HashMap<String,Object> searchMap = new HashMap<String,Object> ();
+        searchMap.put("seqOrder", orderDto.getSeqOrder());
+        orderDto.setProducts(orderProductRepository.findOrderProductByOrderId(searchMap));
         
         // 엑셀데이터 생성
         // 엑셀저장 디렉토리 생성 => path return
@@ -106,20 +110,20 @@ public class OrderService {
         // 주문번호
         // 상호
         // 주문이 접수되었습니다.
-        emailUtil.sendEmail("paralysist@naver.com", "system@kimpo.ziben","주문이 접수되었습니다.", "냉무", orderDto.getPathFileExcel(), excelFileName);
+        emailUtil.sendEmail("paralysist@naver.com", "paralysist@naver.com","주문이 접수되었습니다.", "냉무", orderDto.getPathFileExcel(), excelFileName);
 
         // 주문일시
         // 주문번호
         // 상호
         // 주문이 완료되었습니다.
-        emailUtil.sendEmail("unasd@daum.net", "system@kimpo.ziben","주문이 완료되었습니다.", "냉무", orderDto.getPathFileExcel(), excelFileName);
+        emailUtil.sendEmail("unasd@daum.net", "paralysist@naver.com","주문이 완료되었습니다.", "냉무", orderDto.getPathFileExcel(), excelFileName);
 
         return orderDto;
     }
 
     public List<OrderDto> getList(Pageable pageble, HashMap<String,Object> searchMap) throws Exception {
 //        HashMap result = new HashMap();
-        // todo: 페이징 구현, 고객아이디 셋팅
+        // todo: 고객아이디 셋팅
         List<Order> orderList = orderRepository.findAllByIdCustomerAndStatOrderNotOrderBySeqOrderDesc("test", OrderStat.B);
 
         List<OrderDto> orderDtoList = new ArrayList();
