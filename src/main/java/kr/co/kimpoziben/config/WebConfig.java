@@ -21,11 +21,11 @@ public class WebConfig implements WebMvcConfigurer {
         resolvers.add(loginUserAragumentResolver);
     }
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loggerInterceptor())
-            .addPathPatterns("*/*.do");
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(loggerInterceptor())
+//            .addPathPatterns("/**");
+//    }
 
     @Bean
     public LoggerInterceptor loggerInterceptor() { return new LoggerInterceptor(); }

@@ -85,8 +85,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         return new SpringSecurityDialect();
     }
 
-    @Bean
-    public ReadableRequestWrapperFilter readableRequestWrapperFilter() {
-        return new ReadableRequestWrapperFilter();
-    }
+//    @Bean
+//    public ReadableRequestWrapperFilter readableRequestWrapperFilter() {
+//        return new ReadableRequestWrapperFilter();
+//    }
 }

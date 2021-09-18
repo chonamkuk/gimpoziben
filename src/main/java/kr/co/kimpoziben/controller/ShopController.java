@@ -1,5 +1,7 @@
 package kr.co.kimpoziben.controller;
 
+import kr.co.kimpoziben.config.auth.LoginUser;
+import kr.co.kimpoziben.config.auth.SessionUser;
 import kr.co.kimpoziben.domain.entity.OrderProduct;
 import kr.co.kimpoziben.dto.*;
 import kr.co.kimpoziben.service.AttachService;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +32,7 @@ public class ShopController {
 
     @GetMapping("/list.do")
     public String list(Model model, final PageRequest pageable, HashMap<String,Object> searchMap
+                       , HttpServletRequest request
             , @RequestParam(value = "seqCategory", required = false) Long seqCategory
             , @RequestParam(value = "seqUpperCategory", required = false) Long seqUpperCategory) throws Exception {
         pageable.setListSize(9);
@@ -38,6 +42,12 @@ public class ShopController {
         searchMap.put("seqCategory", seqCategory);
         searchMap.put("seqUpper", seqUpperCategory);
         HashMap result = productService.getList(pageable.of(), searchMap);
+
+        SessionUser user = (SessionUser) request.getSession().getAttribute("user");
+
+        if(user != null) {
+            System.out.println("LoginUser ===> " + user.getName());
+        }
 
         model.addAttribute("resultList", result.get("resultList"));
         model.addAttribute("pagingResult", pageable.pagination((Page) result.get("pagingResult")));
