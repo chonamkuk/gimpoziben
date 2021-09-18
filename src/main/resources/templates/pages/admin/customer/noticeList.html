@@ -497,9 +497,9 @@
                         </ul>
                     </li>
                     <li>
-                        <a class="dropdown-menu" href="#" data-target="formsTables5">
+                        <a class="dropdown-menu" href="/customer/qnaList.do" data-target="formsTables5">
                             <i class="material-icons">question_answer</i>
-                            <span><span class="dropdown-title" data-i18n="Menu levels">Q&A</span></span>
+                            <span><a href="/customer/qnaList.do"><span class="dropdown-title" data-i18n="Menu levels">Q&A</span></a></span>
                         </a>
                         <ul class="dropdown-content dropdown-horizontal-list" id="formsTables5">
                         </ul>
@@ -566,13 +566,13 @@
                 </div>
             </li>
             <li class="bold">
-                <a class="waves-effect waves-cyan " href="#"><i class="material-icons">announcement</i><span class="menu-title">공지사항</span></a>
+                <a class="waves-effect waves-cyan " href="/customer/noticeList.do"><i class="material-icons">announcement</i><span class="menu-title">공지사항</span></a>
             </li>
             <li class="bold">
                 <a class="waves-effect waves-cyan " href="/customer/faqList.do"><i class="material-icons">help_outline</i><span class="menu-title">FAQ</span></a>
             </li>
             <li class="bold">
-                <a class="waves-effect waves-cyan " href="#"><i class="material-icons">question_answer</i><span class="menu-title">Q&A</span></a>
+                <a class="waves-effect waves-cyan " href="/customer/qnaList.do"><i class="material-icons">question_answer</i><span class="menu-title">Q&A</span></a>
             </li>
             <li class="bold">
                 <a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">build</i><span class="menu-title" data-i18n="Menu levels">작업일보</span></a>
@@ -658,11 +658,12 @@
                             <ol class="breadcrumbs mb-0">
                                 <li class="breadcrumb-item"><a href="index.html">Home</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="#">공지사항</a>
+                                <li class="breadcrumb-item"><a href="/customer/noticeList.do">공지사항</a>
                                 </li>
                             </ol>
                         </div>
                     </div>
+
                 </div>
             </div>
             <div class="col s12">
@@ -683,8 +684,10 @@
                                                             <th>공지사항</th>
                                                             <th>제목</th>
                                                             <th>게시기간</th>
+                                                            <th>게시여부</th>
                                                             <th>등록자</th>
                                                             <th>등록일</th>
+                                                            <th>삭제여부</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -702,42 +705,13 @@
                                                             </td>
                                                             <td><a th:onclick="'javascript:goUpdate('+ ${noticeDto.seqNotice} +');'"><span th:text="${noticeDto.titleNotice}"></span></a></td>
                                                             <td><span th:text="${noticeDto.dayNoticeStart}"></span>~<span th:text="${noticeDto.dayNoticeEnd}"></span></td>
+                                                            <td><span th:text="${noticeDto.ynNoticeMain}"></span></td>
                                                             <td><span th:text="${noticeDto.register}"></span></td>
                                                             <td><span th:text="${#temporals.format(noticeDto.regDt, 'yyyy-MM-dd HH:mm')}"></span></td>
+                                                            <td><span th:text="${noticeDto.ynDel}"></span></td>
                                                         </tr>
 
-                                                        <tr>
-                                                            <td>Lael Greer</td>
-                                                            <td>Systems Administrator</td>
-                                                            <td>London</td>
-                                                            <td>London</td>
-                                                            <td>21</td>
 
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Jonas Alexander</td>
-                                                            <td>Developer</td>
-                                                            <td>San Francisco</td>
-                                                            <td>London</td>
-                                                            <td>30</td>
-
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Shad Decker</td>
-                                                            <td>Regional Director</td>
-                                                            <td>Edinburgh</td>
-                                                            <td>London</td>
-                                                            <td>51</td>
-
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Michael Bruce</td>
-                                                            <td>Javascript Developer</td>
-                                                            <td>Singapore</td>
-                                                            <td>London</td>
-                                                            <td>29</td>
-
-                                                        </tr>
 
                                                     </tbody>
                                                     <tfoot>
@@ -745,8 +719,10 @@
                                                             <th>공지사항</th>
                                                             <th>제목</th>
                                                             <th>게시기간</th>
+                                                            <th>게시여부</th>
                                                             <th>등록자</th>
                                                             <th>등록일</th>
+                                                            <th>삭제여부</th>
                                                         </tr>
                                                     </tfoot>
                                                 </table>
@@ -796,7 +772,7 @@
 
                     </aside>
                     <form name="listForm">
-                        <input type="hidden" name="seqWorkProduct" value=""/>
+                        <input type="hidden" name="seqNotice" value=""/>
                     </form>
                     <!-- END RIGHT SIDEBAR NAV -->
                     <div style="bottom: 50px; right: 19px;" class="fixed-action-btn direction-top"><a class="btn-floating btn-large gradient-45deg-light-blue-cyan gradient-shadow"><i class="material-icons">add</i></a>

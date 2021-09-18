@@ -20,6 +20,7 @@ public class NoticeDto {
     private String dayNoticeStart;
     private String dayNoticeEnd;
     private String ynNoticeMain;
+    private String ynDel;
     private String descNotice;
     private String idMainImg;
     private String register;

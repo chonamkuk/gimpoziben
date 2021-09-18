@@ -95,8 +95,15 @@
                             $('#saveForm').append('<input type="hidden" name="imageList['+ index +'].imageName" value="'+ $(item).siblings('.dropify-infos').find('.dropify-filename-inner').text() +'" />'); // 이미지명
                         }
                     });
-                    /**게시여부, 품절여부**/
-                    if($('#ynNotice').is(':checked')) $('#saveForm').append('<input type="hidden" id="ynNoticeMain" name="ynNoticeMain" value="Y"/>');
+                    /**게시여부, 삭제여부*/
+                    if($('#ynNoticeChk').is(':checked')){$('#saveForm').append('<input type="hidden" id="ynNoticeMain" name="ynNoticeMain" value="Y"/>') ;
+                    }else{
+                        $('#saveForm').append('<input type="hidden" id="ynNoticeMain" name="ynNoticeMain" value="N"/>');
+                    }
+                    if($('#ynDelChk').is(':checked')) {$('#saveForm').append('<input type="hidden" id="ynDel" name="ynDel" value="Y"/>');
+                    }else{
+                        $('#saveForm').append('<input type="hidden" id="ynDel" name="ynDel" value="N"/>');
+                    }
 
                     processed = true;
                     $('#saveForm').submit();
@@ -242,10 +249,21 @@
                                                 </div>
                                                 <div class="col s12 input-field">
                                                     <div class="m-0">
-                                                        <span>공지사항 개시 여부</span>
+                                                        <span>삭제 여부</span>
                                                         <div class="switch right">
                                                             <label>
-                                                                <input type="checkbox" id="ynNotice">
+                                                                <input type="checkbox" id="ynDelChk">
+                                                                <span class="lever"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 input-field">
+                                                    <div class="m-0">
+                                                        <span>공지사항 개시여부</span>
+                                                        <div class="switch right">
+                                                            <label>
+                                                                <input type="checkbox" id="ynNoticeChk">
                                                                 <span class="lever"></span>
                                                             </label>
                                                         </div>

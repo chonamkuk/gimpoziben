@@ -23,7 +23,7 @@ public class Notice {
     @Column(name = "notice_title", length = 100, nullable = false)
     private String titleNotice;
 
-    @Column(name = "notice_url", length = 100, nullable = false)
+    @Column(name = "notice_url", length = 300, nullable = false)
     private String urlNotice;
 
     @Column(name = "notice_start_day", length = 20, nullable = false)
@@ -34,6 +34,9 @@ public class Notice {
 
     @Column(name = "notice_main_yn", length = 1)
     private String ynNoticeMain;
+
+    @Column(name = "del_yn", length = 1)
+    private String ynDel;
 
     @Column(columnDefinition = "TEXT", name = "notice_desc")
     private String descNotice;
@@ -52,6 +55,7 @@ public class Notice {
 
     @Column(name = "moddt")
     private LocalDateTime modDt;
+
 
 
 

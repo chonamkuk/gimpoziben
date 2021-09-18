@@ -62,7 +62,6 @@ public class NoticeService {
 
 
 
-
     public HashMap findNoticeList() throws Exception {
         List<NoticeDto> noticeList = new ArrayList<>();
         HashMap result = new HashMap();
@@ -75,9 +74,62 @@ public class NoticeService {
             noticeDto.setDayNoticeStart(notice.getDayNoticeStart());
             noticeDto.setDayNoticeEnd(notice.getDayNoticeEnd());
             noticeDto.setIdMainImg(notice.getIdMainImg());
+            noticeDto.setYnDel(notice.getYnDel());
+            noticeDto.setYnNoticeMain(notice.getYnNoticeMain());
+
             noticeList.add(noticeDto);
         }
         result.put("noticeList", noticeList);
+
+        return result;
+    }
+
+    public HashMap findNoticeMainList() throws Exception {
+        List<NoticeDto> noticeList = new ArrayList<>();
+        List<Notice> popupinfoEntities =  noticeRepository.findBydelYnAndYnNoticeMain("N","Y");
+
+        HashMap result = new HashMap();
+        for(Notice notice : popupinfoEntities) {
+            NoticeDto noticeDto = new NoticeDto();
+            noticeDto.setTitleNotice(notice.getTitleNotice());
+            noticeDto.setSeqNotice(notice.getSeqNotice());
+            noticeDto.setRegister(notice.getRegister());
+            noticeDto.setRegDt(notice.getRegDt());
+            noticeDto.setDayNoticeStart(notice.getDayNoticeStart());
+            noticeDto.setDayNoticeEnd(notice.getDayNoticeEnd());
+            noticeDto.setIdMainImg(notice.getIdMainImg());
+            noticeDto.setYnDel(notice.getYnDel());
+            noticeDto.setYnNoticeMain(notice.getYnNoticeMain());
+            noticeDto.setUrlNotice(notice.getUrlNotice());
+
+            noticeList.add(noticeDto);
+        }
+        result.put("noticeList", noticeList);
+
+        return result;
+    }
+
+    public HashMap findNoticeMainSmallList() throws Exception {
+        List<NoticeDto> noticeList = new ArrayList<>();
+        List<Notice> popupinfoEntities =  noticeRepository.getSmallNoistList();
+
+        HashMap result = new HashMap();
+        for(Notice notice : popupinfoEntities) {
+            NoticeDto noticeDto = new NoticeDto();
+            noticeDto.setTitleNotice(notice.getTitleNotice());
+            noticeDto.setSeqNotice(notice.getSeqNotice());
+            noticeDto.setRegister(notice.getRegister());
+            noticeDto.setRegDt(notice.getRegDt());
+            noticeDto.setDayNoticeStart(notice.getDayNoticeStart());
+            noticeDto.setDayNoticeEnd(notice.getDayNoticeEnd());
+            noticeDto.setIdMainImg(notice.getIdMainImg());
+            noticeDto.setYnDel(notice.getYnDel());
+            noticeDto.setYnNoticeMain(notice.getYnNoticeMain());
+            noticeDto.setUrlNotice(notice.getUrlNotice());
+
+            noticeList.add(noticeDto);
+        }
+        result.put("smallNoticeList", noticeList);
 
         return result;
     }
@@ -91,40 +143,34 @@ public class NoticeService {
             }
         }
 
-        /** todo: 비어있는 값들이 null로 입력되는 경우 수정해야 함
-         *         into
-         *             gps_product
-         *             (price_buy, product_color, product_desc, main_img_id, moddt, modifier, product_nm, regdt, register, price_sell, product_title, vendor_seq, display_yn, soldout_yn)
-         *         values
-         *             (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-         */
+        noticeDto.setYnDel("N");
         noticeDto.setRegDt(LocalDateTime.now());
         Notice notice = noticeRepository.save(modelMapper.map(noticeDto, Notice.class));
         return notice.getSeqNotice();
     }
 
-    public ProductWorkDto getProductDetail(Long seqWorkProduct) throws  Exception {
-        ProductWork productWork = productWorkRepository.findById(seqWorkProduct).orElse(null);
-        if(productWork != null) {
-            ProductWorkDto productWorkDto = modelMapper.map(productWork, ProductWorkDto.class);
-            return productWorkDto;
+    public NoticeDto getNoticeDetail(Long seqNotice) throws  Exception {
+        Notice notice = noticeRepository.findById(seqNotice).orElse(null);
+        if(notice != null) {
+            NoticeDto noticeDto = modelMapper.map(notice, NoticeDto.class);
+            return noticeDto;
         }
 
         return null;
     }
 
     @Transactional
-    public Long update(ProductWorkDto productWorkDto) {
-        if(productWorkDto.getImageList().size() > 0) {
-            List<AttachEntity> attachEntities = attachService.saveImage(productWorkDto.getImageList(), "product", productWorkDto.getIdMainImg());
+    public Long update(NoticeDto noticeDto) {
+        if(noticeDto.getImageList().size() > 0) {
+            List<AttachEntity> attachEntities = attachService.saveImage(noticeDto.getImageList(), "product", noticeDto.getIdMainImg());
             if (attachEntities != null) {
-                productWorkDto.setIdMainImg(attachEntities.get(0).getIdAttach()); //첨부파일 아이디 셋팅
+                noticeDto.setIdMainImg(attachEntities.get(0).getIdAttach()); //첨부파일 아이디 셋팅
             }
         }
 
-        ProductWork newProduct = productWorkRepository.save(modelMapper.map(productWorkDto, ProductWork.class));
+        Notice newProduct = noticeRepository.save(modelMapper.map(noticeDto, Notice.class));
 
 
-        return newProduct.getSeqWorkProduct();
+        return newProduct.getSeqNotice();
     }
 }

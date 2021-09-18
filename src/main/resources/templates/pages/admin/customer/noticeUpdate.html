@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="../layout/default">
+
+<!-- page CSS -->
+<th:block layout:fragment="css">
+    <style>
+        i {
+            vertical-align: middle;
+        }
+
+        .carousel {
+            height: 587px;
+            border: 1px solid #ECEFF1;
+        }
+
+        .carousel .carousel-item > img {
+            top: 50%;
+            -webkit-transform: translate(0,-50%);
+            transform: translate(0,-50%);
+            position: relative;
+            width: auto;
+            max-height: 100%;
+            -webkit-transition: border-color .15s linear;
+            transition: border-color .15s linear;
+        }
+
+        .carousel .indicators .indicator-item {
+            border: 1px solid #bababa;
+            width: 15px;
+            height: 15px;
+        }
+
+        .dropify-wrapper {
+            padding: 0px;
+        }
+        div.dropify-preview > div > div > p {
+            top: 15px;
+        }
+
+        .img-field {
+            padding: 0 0.75rem;
+        }
+
+        #sizeModal > div > div > table {
+            white-space: nowrap;
+        }
+
+        @media only screen and (max-width: 600px) {
+            #sizeModal > div > div > table > tbody > tr > td {
+                padding: 5px 5px;
+            }
+
+            #saveForm > div > div > div > div > div > div.dropify-preview > span {
+                height: 70px;
+            }
+
+            .dropify-wrapper.touch-fallback .dropify-preview .dropify-render img {
+                top: 75%;
+                transform: translate(0,-50%);
+            }
+        }
+    </style>
+</th:block>
+
+<!-- page 스크립트 -->
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+        $(document).ready(function(){
+            CKEDITOR.replace('descNotice');
+
+            let processed = false;
+            $('#saveForm').submit(function(e){
+                if(!processed) {
+                    if(e.preventDefault) {
+                        e.preventDefault();
+                    }
+                } else {
+                    e.returnValue = false;
+                }
+
+                $('#confirmModal').find('h4').text('알림');
+                $('#confirmModal').find('p').text('수정 하시겠습니까?');
+                $('#confirmModal').modal('open');
+                $('#confirmModal').find('.confirm').unbind('click').on('click', function(){
+                    comn.preLoading();
+                    /**상품 이미지**/
+                    $('.dropify-render').each(function(index, item){
+                        let $renderImg = $(item).find('img');
+                        let newImageCount = 0;
+                        if($renderImg.length > 0 && $renderImg.attr('src').startsWith('data:image')) {
+                            let ImageObj = new Image();
+                            ImageObj.src = $renderImg.attr('src');
+                            let dataURL = imgComn.resizeImage(ImageObj);
+                            $('#saveForm').append('<input type="hidden" name="imageList['+ newImageCount +'].image" value="'+ dataURL.split(',')[1] +'" />'); // 이미지 데이터
+                            $('#saveForm').append('<input type="hidden" name="imageList['+ newImageCount +'].imageSize" value="'+ imgComn.stringToBytesFaster(dataURL.split(',')[1]).length +'" />'); // 이미지 크기
+                            $('#saveForm').append('<input type="hidden" name="imageList['+ newImageCount +'].imageName" value="'+ $(item).siblings('.dropify-infos').find('.dropify-filename-inner').text() +'" />'); // 이미지명
+                            $('#saveForm').append('<input type="hidden" name="imageList['+ newImageCount +'].ordrAttach" value="'+ index +'" />'); // 이미지 순서
+                            newImageCount++;
+                        }
+                    });
+                    /**게시여부, 삭제여부*/
+                    if($('#ynNoticeChk').is(':checked')){
+                        $('#saveForm').append('<input type="hidden" id="ynNoticeMain" name="ynNoticeMain" value="Y"/>')
+                    } else {
+                        $('#saveForm').append('<input type="hidden" id="ynNoticeMain" name="ynNoticeMain" value="N"/>')
+                    };
+                    if($('#ynDelChk').is(':checked')){ $('#saveForm').append('<input type="hidden" id="ynDel" name="ynDel" value="Y"/>')
+                    }else{
+                        $('#saveForm').append('<input type="hidden" id="ynDel" name="ynDel" value="N"/>')
+                    };
+
+                    processed = true;
+                    console.log($('#saveForm'));
+                    $('#saveForm').submit();
+                });
+            }); // form submit 끝
+
+            $('.carousel.carousel-slider').carousel({
+                fullWidth: true,
+                indicators: true
+            });
+
+
+
+            getDetail();
+        }); // document ready 끝
+
+        /*<![CDATA[*/
+        let resultDto = /*[[${resultDto}]]*/ 'default';
+        /*]]>*/
+        /*<![CDATA[*/
+        let productCategoryList = /*[[${productCategoryList}]]*/ 'default';
+        /*]]>*/
+
+
+
+        // 첨부파일 모듈 초기화
+        function init_dropify(index, imageSrc, attachInfo) {
+            let carousel = M.Carousel.getInstance($('.carousel.carousel-slider'));
+            let drEvent = $('.dropify').eq(index).dropify({
+                messages: {
+                    'default': '상품사진',
+                    'replace': '',
+                    'remove': '삭제',
+                    'error': 'error'
+                },
+                tpl: {
+                    wrap: '<div class="dropify-wrapper"></div>',
+                    loader: '<div class="dropify-loader"></div>',
+                    message: '<div class="dropify-message"><p>{{ default }}</p></div>',
+                    preview: '<div class="dropify-preview"><span class="dropify-render"></span><div class="dropify-infos"><div class="dropify-infos-inner"></div></div></div>',
+                    filename: '<p class="dropify-filename"><span class="file-icon"></span><span class="dropify-filename-inner"></span></p>',
+                    clearButton: '<button type="button" class="dropify-clear">{{ remove }}</button>',
+                    errorLine: '<p class="dropify-error">{{ error }}</p>',
+                    errorsContainer: ''
+                },
+                defaultFile: imageSrc,
+                defaultFileName: attachInfo.nmOrgFileAttach
+            });
+
+            if(attachInfo) {
+                $('.dropify').eq(index).attr('title', '삭제 후 이미지교체 가능');
+                $('.dropify').eq(index).css('cursor', 'not-allowed');
+                $('.dropify').eq(index).attr('disabled', 'disabled');
+            }
+
+            // 파일확장자 에러메세지
+            drEvent.on('dropify.error.fileExtension', function (event, element) {
+                // alert('이미지 파일만 업로드 가능합니다. (' + event.currentTarget.dataset.allowedFileExtensions + ')');
+                $('#alertModal').find('h4').text('');
+                $('#alertModal').find('p').text('이미지 파일만 업로드 가능합니다. (' + event.currentTarget.dataset.allowedFileExtensions + ')');
+                $('#alertModal').modal('open');
+            });
+            // 첨부파일 삭제 전 동작
+            drEvent.on('dropify.beforeClear', function (event, element) {
+                let targetIndex = $(event.target).data('index');
+                $('#confirmModal').find('h4').text('알림');
+                $('#confirmModal').find('p').text((targetIndex+1) + ' 번째 파일을 삭제하시겠습니까?');
+                $('#confirmModal').modal('open');
+                $('#confirmModal').find('.confirm').unbind('click').on('click', function (object) {
+                    // 첨부파일 데이터 삭제가 필요한 경우
+                    if(attachInfo) {
+                        let flag = deleteAttach(attachInfo);
+                        console.log(flag);
+                        if(!flag) {
+                            $('#alertModal').find('h4').text('');
+                            $('#alertModal').find('p').text('오류가 발생했습니다.');
+                            $('#alertModal').modal('open');
+                            return false;
+                        } else {
+                            $('#alertModal').find('h4').text('');
+                            $('#alertModal').find('p').text('삭제되었습니다.');
+                            $('.dropify').eq(targetIndex).removeAttr('title', '');
+                            $('.dropify').eq(targetIndex).removeAttr('disabled');
+                            $('.dropify').eq(targetIndex).css('cursor', '');
+                            $('#alertModal').modal('open');
+                        }
+                    }
+
+                    $('.carousel-item img').eq(targetIndex).attr('src', ''); // 카루셀 이미지 삭제
+                    let temp = $(drEvent).data('dropify'); // 파일업로드 영역
+                    temp.clearElement(); // 파일업로드 영역 초기화
+                    temp.resetPreview(); // 파일정보 초기화
+                    $(drEvent[targetIndex]).val(''); // 파일정보 초기화
+                });
+                return false;
+            });
+
+            // 첨부파일 로딩 후 동작
+            drEvent.on('dropify.fileReady', function (event, element) {
+                setTimeout(function () {
+                    let targetIndex = $(event.target).data('index');
+                    let imageSrc = $('.dropify-render').eq(targetIndex).find('img').attr('src')
+                    $('.carousel-item img').eq(targetIndex).attr('src', imageSrc); // 카루셀에 이미지 적용
+                    carousel.set(targetIndex);
+                }, 200); // 이미지소스 생성시간
+            });
+        }
+
+        function getDetail(){
+            comn.preLoading();
+            console.log('데이터 로딩');
+            $.ajax({
+                url: '/customer/detail.do?seqNotice=' + resultDto.seqNotice + '&idMainImg=' + resultDto.idMainImg,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    /**상품 이미지 시작**/
+                    if(data.attachDtoList.length > 0) {
+                        data.attachDtoList.forEach(function(item, index){
+                            let imageSrc = '/attach/resizeImgView.do?idAttach=' + item.idAttach + '&snFileAttach=' + item.snFileAttach;
+                            $('.carousel-item img').eq(index).attr('src', imageSrc); // 카루셀에 이미지 적용
+                            init_dropify(index, imageSrc, item);
+                        });
+                    }
+                    // 나머지 첨부파일 영역
+                    let restImageCount = 4 - data.attachDtoList.length;
+                    for (let i = 0; i < restImageCount; i++) {
+                        init_dropify(data.attachDtoList.length+i, '', '');
+                    }
+                    /**상품 이미지 끝**/
+
+                    // 카테고리 정보
+                    $('#parentCategory').trigger('change');
+
+                    comn.afterLoading();
+
+                    // 사이즈정보
+                    data.sizeList.forEach(function(item, index){
+                        $('[name^="sizeList"]:input[value="'+ item.seqSize +'"]').trigger('click');
+                    });
+                },
+                error: function(request, status, error){
+                    console.log('code : ' + request.status);
+                    console.log('message : ' + request.responseText);
+                    console.log('error : ' + error);
+                }
+            });
+        }
+
+        function deleteAttach(attachInfo) {
+            let flag = false
+            $.ajax({
+                url: '/attach/delete.do',
+                type: 'DELETE',
+                dataType: 'json',
+                async: false,
+                data: {
+                    idAttach: attachInfo.idAttach,
+                    snFileAttach: attachInfo.snFileAttach
+                },
+                success: function(data) {
+                    console.log(data);
+                    if(data.result == 'success') {
+                        flag = true;
+                    }
+                },
+                error: function(request, status, error){
+                    console.log('code : ' + request.status);
+                    console.log('message : ' + request.responseText);
+                    console.log('error : ' + error);
+                }
+            });
+
+            return flag;
+        }
+
+        function goList(){
+            $('[name="listForm"]').attr('method', 'get');
+            $('[name="listForm"]').attr('action', '/customer/noticeList.do');
+            $('[name="listForm"]').submit();
+        }
+    </script>
+</th:block>
+
+<div layout:fragment="content" >
+    <div class="col s12">
+        <div class="container">
+            <!-- section start -->
+            <div class="section">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col s12">
+                                <!-- form start -->
+                                <form id="saveForm" action="/customer/noticeUpdate.do" method="post" >
+                                    <input type="hidden" name="seqNotice" th:value="${resultDto.seqNotice}"/>
+                                    <input type="hidden" name="idMainImg" th:value="${resultDto.idMainImg}"/>
+                                    <div class="row">
+                                        <!-- 이미지 슬라이더 -->
+                                        <div class="col s12 m6">
+                                            <div class="row">
+                                                <div class="carousel carousel-slider center" data-indicators="true">
+                                                    <div class="carousel-item white-text">
+                                                        <img src="" class="responsive-img" alt="">
+                                                    </div>
+                                                    <div class="carousel-item white-text">
+                                                        <img src="" class="responsive-img" alt="">
+                                                    </div>
+                                                    <div class="carousel-item white-text">
+                                                        <img src="" class="responsive-img" alt="">
+                                                    </div>
+                                                    <div class="carousel-item white-text">
+                                                        <img src="" class="responsive-img" alt="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- input 영역 -->
+                                        <div class="col s12 m6">
+                                            <div class="row">
+                                                <div class="col s12 input-field">
+                                                    <input id="titleNotice" name="titleNotice" type="text" class="validate" th:value="${resultDto.titleNotice}">
+                                                    <label for="titleNotice">공지사항 제목</label>
+                                                    <small class="errorTxt5"></small>
+                                                </div>
+
+                                                <div class="col s12 input-field">
+                                                    <input id="urlNotice" name="urlNotice" type="text" class="validate" th:value="${resultDto.urlNotice}">
+                                                    <label for="urlNotice">공지사항 URL</label>
+                                                    <small class="errorTxt5"></small>
+                                                </div>
+                                                <div class="col s12 input-field">
+                                                    <div class="m-0">
+                                                        <span>삭제 여부</span>
+                                                        <div class="switch right">
+                                                            <label>
+                                                                <input type="checkbox" id="ynDelChk" th:checked="${resultDto.ynDel == 'Y'}">
+                                                                <span class="lever"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col s12 input-field">
+                                                    <div class="m-0">
+                                                        <span>공지사항 개시여부</span>
+                                                        <div class="switch right">
+                                                            <label>
+                                                                <input type="checkbox" id="ynNoticeChk" th:checked="${resultDto.ynNoticeMain == 'Y'}">
+                                                                <span class="lever"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col s12 input-field">
+                                                    <input id="dayNoticeStart" name="dayNoticeStart" type="date" class="validate" th:value="${resultDto.dayNoticeStart}">
+                                                    <label for="dayNoticeStart">공지 개시 시작일</label>
+                                                    <small class="errorTxt5"></small>
+                                                </div>
+                                                <div class="col s12 input-field">
+                                                    <input id="dayNoticeEnd" name="dayNoticeEnd" type="date" class="validate" th:value="${resultDto.dayNoticeEnd}">
+                                                    <label for="dayNoticeEnd">공지 개시 종료일</label>
+                                                    <small class="errorTxt5"></small>
+                                                </div>
+
+
+
+                                                <div class="col s3 m3 l3 input-field img-field">
+                                                    <input type="file" id="input-file-now1" class="dropify" data-height="100" data-allowed-file-extensions="png jpg jpeg gif bmp" data-index="0" data-max-file-size-preview="10M"/>
+                                                </div>
+                                                <div class="col s3 m3 l3 input-field img-field">
+                                                    <input type="file" id="input-file-now2" class="dropify" data-height="100" data-allowed-file-extensions="png jpg jpeg gif bmp" data-index="1" data-max-file-size-preview="10M"/>
+                                                </div>
+                                                <div class="col s3 m3 l3 input-field img-field">
+                                                    <input type="file" id="input-file-now3" class="dropify" data-height="100" data-allowed-file-extensions="png jpg jpeg gif bmp" data-index="2" data-max-file-size-preview="10M"/>
+                                                </div>
+                                                <div class="col s3 m3 l3 input-field img-field">
+                                                    <input type="file" id="input-file-now4" class="dropify" data-height="100" data-allowed-file-extensions="png jpg jpeg gif bmp" data-index="3" data-max-file-size-preview="10M"/>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- 에디터 영역 -->
+                                        <div class="col s12">
+                                            <div class="input-field">
+                                                <textarea name="descNotice"><th:block th:utext="${resultDto.descNotice}"></th:block></textarea>
+                                            </div>
+                                        </div>
+
+                                        <!-- 버튼 영역 -->
+                                        <div class="col s12 display-flex justify-content-end mt-1">
+                                            <button type="submit" class="btn indigo" style="margin-right: 1rem;">수정</button>
+                                            <button type="button" class="btn btn-light" onclick="javascript:goList();">목록</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- form ends -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- section edit ends -->
+        </div>
+    </div>
+
+    <form name="listForm" method="get">
+
+
+    </form>
+</div>
+</html>

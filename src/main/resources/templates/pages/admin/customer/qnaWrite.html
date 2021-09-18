@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="../layout/default">
+
+<!-- page CSS -->
+<th:block layout:fragment="css">
+    <style>
+        i {
+            vertical-align: middle;
+        }
+
+        .carousel {
+            height: 587px;
+            border: 1px solid #ECEFF1;
+        }
+
+        .carousel .carousel-item > img {
+            top: 50%;
+            -webkit-transform: translate(0,-50%);
+            transform: translate(0,-50%);
+            position: relative;
+            width: auto;
+            max-height: 100%;
+            -webkit-transition: border-color .15s linear;
+            transition: border-color .15s linear;
+        }
+
+        .carousel .indicators .indicator-item {
+            border: 1px solid #bababa;
+            width: 15px;
+            height: 15px;
+        }
+
+        .dropify-wrapper {
+            padding: 0px;
+        }
+        div.dropify-preview > div > div > p {
+            top: 15px;
+        }
+
+        .img-field {
+            padding: 0 0.75rem;
+        }
+
+        #sizeModal > div > div > table {
+            white-space: nowrap;
+        }
+
+        @media only screen and (max-width: 600px) {
+            #sizeModal > div > div > table > tbody > tr > td {
+                padding: 5px 5px;
+            }
+
+            #saveForm > div > div > div > div > div > div.dropify-preview > span {
+                height: 70px;
+            }
+
+            .dropify-wrapper.touch-fallback .dropify-preview .dropify-render img {
+                top: 75%;
+                transform: translate(0,-50%);
+            }
+        }
+    </style>
+</th:block>
+
+<!-- page 스크립트 -->
+<th:block layout:fragment="script">
+    <script>
+        $(document).ready(function(){
+            CKEDITOR.replace('descQna');
+
+            let processed = false;
+            $('#saveForm').submit(function(e){
+                if(!processed) {
+                    if(e.preventDefault) {
+                        e.preventDefault();
+                    }
+                } else {
+                    e.returnValue = false;
+                }
+
+                $('#confirmModal').find('h4').text('알림');
+                $('#confirmModal').find('p').text('등록 하시겠습니까?');
+                $('#confirmModal').modal('open');
+                $('#confirmModal').find('.confirm').unbind('click').on('click', function(){
+                    comn.preLoading();
+                    /**상품 이미지**/
+                    $('.dropify-render').each(function(index, item){
+                        let $renderImg = $(item).find('img');
+                        if($renderImg.length > 0) {
+                            let ImageObj = new Image();
+                            ImageObj.src = $renderImg.attr('src');
+                            let dataURL = imgComn.resizeImage(ImageObj);
+                            $('#saveForm').append('<input type="hidden" name="imageList['+ index +'].image" value="'+ dataURL.split(',')[1] +'" />'); // 이미지 데이터
+                            $('#saveForm').append('<input type="hidden" name="imageList['+ index +'].imageSize" value="'+ imgComn.stringToBytesFaster(dataURL.split(',')[1]).length +'" />'); // 이미지 크기
+                            $('#saveForm').append('<input type="hidden" name="imageList['+ index +'].imageName" value="'+ $(item).siblings('.dropify-infos').find('.dropify-filename-inner').text() +'" />'); // 이미지명
+                        }
+                    });
+                    /**게시여부, 삭제여부*/
+                    if($('#ynQnaChk').is(':checked')) $('#saveForm').append('<input type="hidden" id="ynQnaOpen" name="ynQnaOpen" value="Y"/>');
+                    if($('#ynDelChk').is(':checked')) $('#saveForm').append('<input type="hidden" id="ynDel" name="ynDel" value="Y"/>');
+
+                    processed = true;
+                    $('#saveForm').submit();
+                });
+            }); // form submit 끝
+
+            $('.carousel.carousel-slider').carousel({
+                fullWidth: true,
+                indicators: true
+            });
+
+            let carousel = M.Carousel.getInstance($('.carousel.carousel-slider'));
+
+            // 첨부파일 모듈 초기화
+            let drEvent = $('.dropify').dropify({
+                messages: {
+                    'default': '팝업이미지',
+                    'replace': '',
+                    'remove':  '삭제',
+                    'error':   'error'
+                },
+                tpl: {
+                    wrap:            '<div class="dropify-wrapper"></div>',
+                    loader:          '<div class="dropify-loader"></div>',
+                    message:         '<div class="dropify-message"><p>{{ default }}</p></div>',
+                    preview:         '<div class="dropify-preview"><span class="dropify-render"></span><div class="dropify-infos"><div class="dropify-infos-inner"></div></div></div>',
+                    filename:        '<p class="dropify-filename"><span class="file-icon"></span><span class="dropify-filename-inner"></span></p>',
+                    clearButton:     '<button type="button" class="dropify-clear">{{ remove }}</button>',
+                    errorLine:       '<p class="dropify-error">{{ error }}</p>',
+                    errorsContainer: ''
+                }
+            });
+
+            // 파일확장자 에러메세지
+            drEvent.on('dropify.error.fileExtension', function(event, element){
+                alert('이미지 파일만 업로드 가능합니다. (' + event.currentTarget.dataset.allowedFileExtensions + ')');
+            });
+            // 첨부파일 삭제 전 동작
+            drEvent.on('dropify.beforeClear', function(event, element){
+                let targetIndex = $(event.target).data('index');
+                $('#confirmModal').find('h4').text('알림');
+                $('#confirmModal').find('p').text('\'' + element.file.name + '\' 파일을 제거하시겠습니까?');
+                $('#confirmModal').modal('open');
+                $('#confirmModal').find('.confirm').unbind('click').on('click', function(object){;
+                    $('.carousel-item img').eq(targetIndex).attr('src', ''); // 카루셀 이미지 삭제
+                    let temp = $(drEvent[targetIndex]).data('dropify'); // 파일업로드 영역
+                    temp.clearElement(); // 파일업로드 영역 초기화
+                    temp.resetPreview(); // 파일정보 초기화
+                    $(drEvent[targetIndex]).val(''); // 파일정보 초기화
+                });
+                return false;
+            });
+            // 첨부파일 로딩 후 동작
+            drEvent.on('dropify.fileReady', function(event, element){
+                setTimeout(function(){
+                    let targetIndex = $(event.target).data('index');
+                    let imageSrc = $('.dropify-render').eq(targetIndex).find('img').attr('src')
+                    $('.carousel-item img').eq(targetIndex).attr('src', imageSrc); // 카루셀에 이미지 적용
+                    carousel.set(targetIndex);
+                }, 200); // 이미지소스 생성시간
+            });
+
+            $('[name="upper-size"]').on('click', function(e){ // 사이즈 타입 라디오버튼
+                $('[name^="sizeList"]').attr('disabled', true);
+                $('[name^="sizeList"]').each(function(index, item){
+                    $(item).prop('checked', false);
+                });
+
+                $(this).parents('td').siblings('td').find('[name^="sizeList"]').attr('disabled', false);
+                $(this).parents('td').siblings('td').find('[name^="sizeList"]').each(function(index, item){
+                    $(item).prop('checked', true);
+                });
+            });
+
+            $('[name^="sizeList"]').on('click', function(e){ // 사이즈 타입 체크박스
+                if($(this).is(':checked')) {
+                    $(this).parents('td').siblings('td').find('[name="upper-size"]').prop('checked', true);
+                    $(this).parents('tr').siblings('tr').find('[name^="sizeList"]').attr('disabled', true);
+                } else {
+                    if($(this).parents('td').siblings('td').find('[name^="sizeList"]:checked').length ==0) {
+                        $(this).parents('td').siblings('td').find('[name="upper-size"]').prop('checked', false);
+                        $(this).parents('tr').siblings('tr').find('[name^="sizeList"]').attr('disabled', false);
+                    }
+                }
+            });
+
+
+
+        }); // document ready 끝
+
+
+        function qnalist() {
+            location.href =".qnaListdo";
+        }
+    </script>
+</th:block>
+
+<div layout:fragment="content" >
+    <div class="col s12">
+        <div class="container">
+            <!-- section start -->
+            <div class="section">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col s12">
+                                <!-- form start -->
+                                <form id="saveForm" action="/customer/qnaWrite.do" method="post" >
+                                    <div class="row">
+                                        <!-- 이미지 슬라이더 -->
+
+                                        <!-- input 영역 -->
+
+
+                                        <div class="col s12">
+                                            <div class="row">
+                                               <div class="col s12 input-field">
+                                                    <input id="titleQna" name="titleQna" type="text" class="validate">
+                                                    <label for="titleQna">제목</label>
+                                                    <small class="errorTxt5"></small>
+                                                </div>
+                                                <div class="col s12 input-field">
+                                                    <div class="m-0">
+                                                        <span>비공개 여부</span>
+                                                        <div class="switch right">
+                                                            <label>
+                                                                <input type="checkbox" id="ynQnaChk">
+                                                                <span class="lever"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+
+                                            </div>
+                                        </div>
+                                        <!-- 에디터 영역 -->
+                                        <div class="col s12">
+                                            <div class="input-field">
+                                                <textarea name="descQna"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <!-- 버튼 영역 -->
+                                        <div class="col s12 display-flex justify-content-end mt-1">
+                                            <button type="submit" class="btn indigo" style="margin-right: 1rem;">등록</button>
+                                            <button type="button" class="btn btn-light" onclick="javascript:qnalist()">취소</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- form ends -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- section edit ends -->
+        </div>
+    </div>
+
+
+</div>
+</html>

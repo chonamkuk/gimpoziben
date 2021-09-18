@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="../layout/default">
+
+
+<div layout:fragment="content" >
+
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="background">
+
+        </div>
+
+        <th:block layout:fragment="css">
+            <style>
+              /*  .collapsible-header {
+                    -webkit-text-fill-color: transparent;
+                    -webkit-text-stroke-width: 1px;
+                    -webkit-text-stroke-color: #fff;
+                    line-height: 0.3;
+                    font-family: fantasy;
+                    font-weight: 900;
+                }*/
+
+                .h2-import{
+                    font-family: Arial;
+                    font-weight: 900;
+                    text-align: left;
+                    color: #fff;
+                    display: inline-block;
+                    font-size: 40px;
+                    letter-spacing: 0.01rem;
+                    text-align: left;
+                    line-height: 0.3;
+                    -webkit-text-fill-color: transparent;
+                    -webkit-text-stroke-width: 2px;
+                    padding-bottom: 3px;
+
+                }
+
+            </style>
+        </th:block>
+
+
+        <script>
+            $(document).ready(function(){$('.bxslider').bxSlider({
+                auto: true,speed: 500,
+                pause: 4000,
+                responsive: true,
+                mode:'fade',
+                autoControls: false,
+                controls:true,
+                captions: true, //캡션사용
+                touchEnabled : (navigator.maxTouchPoints > 0),
+                pager:true,});
+            });
+
+
+            function goUrl(url,windowYn) {
+
+                if(windowYn =="Y"){
+                    var openNewWindow = window.open("about:blank");
+                    openNewWindow.location.href = url;
+
+                }else{
+                    location.href = url;
+                }
+            }
+
+            // 수정화면 이동
+            function goUpdate(seqNotice){
+
+                location.href = '/customer/noticeUpdate.do?seqNotice='+seqNotice;
+            }
+
+        </script>
+
+      <div class="container full-wrapper" align="center">
+            <div >
+                <ul class="bxslider"  >
+                    <li th:each="popupList : ${popupList}">
+
+                        <img  th:src="@{/attach/resizeImgView.do?idAttach=} + ${popupList.idMainImg} "  th:dataCatId="${popupList.urlNotice}" th:onclick="|javascript:goUrl(this.getAttribute('dataCatId'),'N');|"/>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="container full">
+            <ul>
+                <li>
+                    <div align="center">
+                        <h2 class="h2-import"style="-webkit-text-stroke-color: #d4e157" >NEW ITEM</h2>
+                        <p class="light">새로운 상품이 입고되었습니다 </p>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col s12 m6 l3">
+
+                            <div class="card">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img class="activator" src="../../../static/image/gallery/17.png" />
+                                </div>
+                                <div class="card-content">
+                                        <span class="card-title activator grey-text text-darken-4">Card Title <i class="material-icons right">more_vert</i>
+                                        </span>
+                                    <p><a href="#!">This is a link</a></p>
+                                </div>
+                                <div class="card-reveal">
+                                        <span class="card-title grey-text text-darken-4">Card Title <i class="material-icons right">close</i>
+                                        </span>
+                                    <p>Here is some more information about this product that is only revealed once clicked
+                                        on.</p>
+                                </div>
+                                <div class="card-action"><a href="#">This is a link</a> <a href="#">This is a link</a></div>
+                            </div>
+                        </div>
+                        <div class="col s12 m6 l3">
+
+                            <div class="card">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img class="activator" src="../../../static/image/gallery/19.png" />
+                                </div>
+                                <div class="card-content">
+                                        <span class="card-title activator grey-text text-darken-4">Card Title <i class="material-icons right">more_vert</i>
+                                        </span>
+                                    <p><a href="#!">This is a link</a></p>
+                                </div>
+                                <div class="card-reveal">
+                                        <span class="card-title grey-text text-darken-4">Card Title <i class="material-icons right">close</i>
+                                        </span>
+                                    <p>Here is some more information about this product that is only revealed once clicked
+                                        on.</p>
+                                </div>
+                                <div class="card-action"><a href="#">This is a link</a> <a href="#">This is a link</a></div>
+                            </div>
+                        </div>
+                        <div class="col s12 m6 l3">
+                            <div class="card">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img class="activator" src="../../../static/image/gallery/20.png" />
+                                </div>
+                                <div class="card-content">
+                                        <span class="card-title activator grey-text text-darken-4">Card Title <i class="material-icons right">more_vert</i>
+                                        </span>
+                                    <p><a href="#!">This is a link</a></p>
+                                </div>
+                                <div class="card-reveal">
+                                        <span class="card-title grey-text text-darken-4">Card Title <i class="material-icons right">close</i>
+                                        </span>
+                                    <p>Here is some more information about this product that is only revealed once clicked
+                                        on.</p>
+                                </div>
+                                <div class="card-action"><a href="#">This is a link</a> <a href="#">This is a link</a></div>
+                            </div>
+                        </div>
+                        <div class="col s12 m6 l3">
+                            <div class="card sticky-action">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img class="activator" src="../../../static/image/gallery/21.png" />
+                                </div>
+                                <div class="card-content">
+                                        <span class="card-title activator grey-text text-darken-4">Card Title <i class="material-icons right">more_vert</i>
+                                        </span>
+                                    <p><a href="#!">This is a link</a></p>
+                                </div>
+                                <div class="card-action"><a href="#">This is a link</a> <a href="#">This is a link</a></div>
+                                <div class="card-reveal">
+                                        <span class="card-title grey-text text-darken-4">Card Title <i class="material-icons right">close</i>
+                                        </span>
+                                    <p>Here is some more information about this product that is only revealed once clicked
+                                        on.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="container full">
+            <ul>
+                <li>
+                    <div align="center">
+                        <h2 class="h2-import"style="-webkit-text-stroke-color: #b9151b" >HOT ITEM</h2>
+                        <p class="light">가장 많이 주문하는 인기 제품입니다. </p>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col s12 m6 l3">
+
+                            <div class="card">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img class="activator" src="../../../static/image/gallery/10.png" />
+                                </div>
+                                <div class="card-content">
+                                        <span class="card-title activator grey-text text-darken-4">Card Title <i class="material-icons right">more_vert</i>
+                                        </span>
+                                    <p><a href="#!">This is a link</a></p>
+                                </div>
+                                <div class="card-reveal">
+                                        <span class="card-title grey-text text-darken-4">Card Title <i class="material-icons right">close</i>
+                                        </span>
+                                    <p>Here is some more information about this product that is only revealed once clicked
+                                        on.</p>
+                                </div>
+                                <div class="card-action"><a href="#">This is a link</a> <a href="#">This is a link</a></div>
+                            </div>
+                        </div>
+                        <div class="col s12 m6 l3">
+
+                            <div class="card">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img class="activator" src="../../../static/image/gallery/12.png" />
+                                </div>
+                                <div class="card-content">
+                                        <span class="card-title activator grey-text text-darken-4">Card Title <i class="material-icons right">more_vert</i>
+                                        </span>
+                                    <p><a href="#!">This is a link</a></p>
+                                </div>
+                                <div class="card-reveal">
+                                        <span class="card-title grey-text text-darken-4">Card Title <i class="material-icons right">close</i>
+                                        </span>
+                                    <p>Here is some more information about this product that is only revealed once clicked
+                                        on.</p>
+                                </div>
+                                <div class="card-action"><a href="#">This is a link</a> <a href="#">This is a link</a></div>
+                            </div>
+                        </div>
+                        <div class="col s12 m6 l3">
+                            <div class="card">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img class="activator" src="../../../static/image/gallery/13.png" />
+                                </div>
+                                <div class="card-content">
+                                        <span class="card-title activator grey-text text-darken-4">Card Title <i class="material-icons right">more_vert</i>
+                                        </span>
+                                    <p><a href="#!">This is a link</a></p>
+                                </div>
+                                <div class="card-reveal">
+                                        <span class="card-title grey-text text-darken-4">Card Title <i class="material-icons right">close</i>
+                                        </span>
+                                    <p>Here is some more information about this product that is only revealed once clicked
+                                        on.</p>
+                                </div>
+                                <div class="card-action"><a href="#">This is a link</a> <a href="#">This is a link</a></div>
+                            </div>
+                        </div>
+                        <div class="col s12 m6 l3">
+                            <div class="card sticky-action">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img class="activator" src="../../../static/image/gallery/14.png" />
+                                </div>
+                                <div class="card-content">
+                                        <span class="card-title activator grey-text text-darken-4">Card Title <i class="material-icons right">more_vert</i>
+                                        </span>
+                                    <p><a href="#!">This is a link</a></p>
+                                </div>
+                                <div class="card-action"><a href="#">This is a link</a> <a href="#">This is a link</a></div>
+                                <div class="card-reveal">
+                                        <span class="card-title grey-text text-darken-4">Card Title <i class="material-icons right">close</i>
+                                        </span>
+                                    <p>Here is some more information about this product that is only revealed once clicked
+                                        on.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+
+    <div class="container">
+        <div class="section">
+
+            <!--   Icon Section   -->
+            <div class="row">
+
+
+                <div class="col s12 m6">
+                    <div class="icon-block">
+                        <a href="/customer/noticeList.do" >
+                            <h2 class="center light-blue-text"><i class="material-icons medium">notifications_active</i></h2>
+                            <h5 class="center">공지사항</h5>
+                        </a>
+                        <p class="light">불편사항 접수 및 문의사항을 남겨주시면 관리자가 빠른 시일내에 답변드리겠습니다. </p>
+                    </div>
+
+
+
+                        <div class="card-content">
+                            <div class="row">
+                                <div class="col s12">
+                                    <table >
+                                        <thead>
+                                        <tr>
+                                            <th>제목</th>
+                                            <th>등록자</th>
+                                            <th>등록일</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="noticeDto,listStatus : ${smallNoticeList}">
+
+                                            <td><a th:dataCatId="${noticeDto.seqNotice}" th:onclick="|javascript:goUpdate(this.getAttribute('dataCatId'));|"><span th:text="${noticeDto.titleNotice}"></span></a></td>
+                                            <td><span th:text="${noticeDto.register}"></span></td>
+                                            <td><span th:text="${#temporals.format(noticeDto.regDt, 'yyyy-MM-dd')}"></span></td>
+                                        </tr>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                <div class="col s12 m6">
+                    <div class="icon-block">
+                        <a href="/customer/qnaList.do" >
+                            <h2 class="center light-blue-text"><i class="material-icons medium">question_answer</i></h2>
+                            <h5 class="center">Q&A</h5>
+                        </a>
+                        <p class="light">필요한 파츠 구매가 필요하신 확인 부탁 드리며, 필요한 파츠가 없을경우 고객센터 혹은 관리자에게 연락 부탁 드립니다. </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <br><br>
+    </div>
+</div>
+</html>
