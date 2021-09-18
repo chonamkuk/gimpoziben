@@ -16,9 +16,8 @@
 
             <tr><td width="21"></td><td>
                 <table cellpadding="0" cellspacing="0" style="width:100%;margin:0;padding:0">
-                    <tbody><tr><td style="font-size:28px;font-family:'나눔고딕',NanumGothic,'맑은고딕',Malgun Gothic,'돋움',Dotum,Helvetica,'Apple SD Gothic Neo',Sans-serif;color:#424240;line-height:34px;vertical-align:top">
-                        김포지벤에서 주문하신 내역</span>입니다.
-                    </td></tr>
+                    <tbody>
+                    <tr><td style="font-size:28px;font-family:'나눔고딕',NanumGothic,'맑은고딕',Malgun Gothic,'돋움',Dotum,Helvetica,'Apple SD Gothic Neo',Sans-serif;color:#424240;line-height:34px;vertical-align:top" th:text="${mailHeader}"></td></tr>
                     <tr><td height="13"></td></tr>
                     <tr><td height="22"></td></tr>
                     </tbody></table>
@@ -37,7 +36,7 @@
                     <tr>
                         <td width="70" style="padding-bottom:9px;font-size:14px;font-family:'나눔고딕',NanumGothic,'맑은고딕',Malgun Gothic,'돋움',Dotum,Helvetica,'Apple SD Gothic Neo',Sans-serif;color:#696969;vertical-align:top">주문번호</td>
                         <td style="padding-bottom:7px;font-size:17px;font-family:Helvetica;font-weight:bold">
-                            <a style="color:#1ec800;text-decoration:none" rel="noreferrer noopener" th:text="${orderDto.seqOrder}"></a>
+                            <a style="color:#0288d1;text-decoration:none" rel="noreferrer noopener" th:text="${orderDto.seqOrder}"></a>
                         </td>
                     </tr>
                     <tr>
@@ -65,15 +64,15 @@
                         <table cellpadding="0" cellspacing="0" style="width:100%;margin:0;padding:0">
                             <tbody><tr><td width="72">
                                 <a>
-                                    <img src="https://order.pay.naver.com/proxy/phinf/shop1/20210509_150/1620568129110QXRO5_JPEG/21703912820796456_7043928.jpg?type=m60"
+                                    <img th:src="${scheme + '://' + serverName + ':' + serverPort
+                                    + '/attach/resizeImgView.do?idAttach=' + orderDto.products[0].idMainImg + '&resizeWidth=200'}"
                                          alt="상품이미지" width="58" height="64" style="border:0" loading="lazy">
                                 </a>
                             </td><td>
                                 <table cellpadding="0" cellspacing="0" style="width:100%;margin:0;padding:0">
                                     <tbody>
 
-                                    <tr><td style="font-size:14px;font-family:'나눔고딕',NanumGothic,'맑은고딕',Malgun Gothic,'돋움',Dotum,Helvetica,'Apple SD Gothic Neo',Sans-serif;color:#000;line-height:21px" th:text="${orderDto.products[0].nmProduct + ' 외 ' + (#lists.size(orderDto.products)-1) + '건'}">
-                                        피버스 4L x 2+공병(3개) 코로나바이러스 시험성적서 보유 살균소독제 범백 파보
+                                    <tr><td style="font-size:14px;font-family:'나눔고딕',NanumGothic,'맑은고딕',Malgun Gothic,'돋움',Dotum,Helvetica,'Apple SD Gothic Neo',Sans-serif;color:#000;line-height:21px" th:text="${orderDto.products[0].nmProduct + ' (' + orderDto.products[0].nmSize + ') 외 ' + (#lists.size(orderDto.products)-1) + '건'}">
                                     </td></tr>
 <!--                                    <tr><td style="font-size:14px;font-family:'나눔고딕',NanumGothic,'맑은고딕',Malgun Gothic,'돋움',Dotum,Helvetica,'Apple SD Gothic Neo',Sans-serif;color:#000;line-height:21px">-->
 <!--                                        옵션 : 옵션1: 4LX2개 + 사은품 100ml 3개-->
@@ -96,7 +95,7 @@
                     <tr><td colspan="2" height="17" style="border-top: 1px dotted #e6e6e6;"></td></tr><tr><td width="45%" style="font-size:16px;font-family:'나눔고딕',NanumGothic,'맑은고딕',Malgun Gothic,'돋움',Dotum,Helvetica,'Apple SD Gothic Neo',Sans-serif;font-weight:bold;color:#333;line-height:22px">
                         주문금액
                     </td><td style="font-size:16px;font-family:'나눔고딕',NanumGothic,'맑은고딕',Malgun Gothic,'돋움',Dotum,Helvetica,'Apple SD Gothic Neo',Sans-serif;font-weight:bold;color:#333;text-align:right;line-height:30px">
-                        <span style="font-size:30px;font-family:HelveticaNeue;color:#0288d1;vertical-align:top" th:text="${#numbers.formatCurrency(orderDto.totalPriceOrder)}">124,080</span>
+                        <span style="font-size:30px;font-family:HelveticaNeue;color:#0288d1;vertical-align:top" th:text="${#numbers.formatInteger(orderDto.totalPriceOrder, 0, 'COMMA') + '원'}"></span>
                     </td></tr><tr><td colspan="2" height="17"></td></tr><tr><td colspan="2" height="1" style="background:#424240"></td></tr><tr><td colspan="2" height="29"></td></tr></tbody>
                 </table>
             </td><td width="21"></td></tr>

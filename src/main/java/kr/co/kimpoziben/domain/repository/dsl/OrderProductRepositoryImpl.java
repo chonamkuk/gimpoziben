@@ -41,7 +41,7 @@ public class OrderProductRepositoryImpl implements OrderProductRepositoryCustom 
                             ExpressionUtils.as(JPAExpressions.select(product.nmProduct).from(product).where(product.seqProduct.eq(orderProduct.seqProduct)),"nmProduct"),
                             orderProduct.seqSize,
                             ExpressionUtils.as(JPAExpressions.select(size.nmSize).from(size).where(size.seqSize.eq(orderProduct.seqSize)), "nmSize"),
-                            orderProduct.idMainImg,
+                            ExpressionUtils.as(JPAExpressions.select(product.idMainImg).from(product).where(product.seqProduct.eq(orderProduct.seqProduct)),"idMainImg"),
                             orderProduct.amountOrder,
                             orderProduct.priceOrder
                         )

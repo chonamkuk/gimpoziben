@@ -17,8 +17,12 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
+import org.thymeleaf.TemplateEngine;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,6 +49,9 @@ public class OrderService {
 
     @Autowired
     private PropertyConfig propertyConfig;
+
+    @Autowired
+    private TemplateEngine htmlTemplateEngine;
 
     private ModelMapper modelMapper = null;
 
@@ -95,28 +102,30 @@ public class OrderService {
         orderDto.setProducts(orderProductRepository.findOrderProductByOrderId(searchMap));
         
         // 엑셀데이터 생성
-        // 엑셀저장 디렉토리 생성 => path return
-        // 엑셀저장 => fullPath 저장
         String excelPath = this.makeExcelPath("invoice");
         String excelFileName = "invoice" + "_" + orderDto.getSeqOrder().toString() +".xlsx";
         order.setPathFileExcel(excelPath + propertyConfig.getFilePathSeperator() + excelFileName);
         orderDto.setPathFileExcel(excelPath + propertyConfig.getFilePathSeperator() + excelFileName);
         this.makeExcel(orderDto);
-        // 오류 => 롤백 todo: 롤백테스트
 
-        // 메일발송
-        // 관리자에게 전송
-        // 주문일시
-        // 주문번호
-        // 상호
-        // 주문이 접수되었습니다.
-        emailUtil.sendEmail("paralysist@naver.com", "paralysist@naver.com","주문이 접수되었습니다.", "냉무", orderDto.getPathFileExcel(), excelFileName);
+        // 관리자에게 메일발송
+        org.thymeleaf.context.Context context = new org.thymeleaf.context.Context();
+        context.setVariable("orderDto", orderDto);
+        HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        context.setVariable("scheme", req.getScheme());
+        context.setVariable("serverName", req.getServerName());
+        context.setVariable("serverPort", req.getServerPort());
 
-        // 주문일시
-        // 주문번호
-        // 상호
-        // 주문이 완료되었습니다.
-        emailUtil.sendEmail("unasd@daum.net", "paralysist@naver.com","주문이 완료되었습니다.", "냉무", orderDto.getPathFileExcel(), excelFileName);
+        context.setVariable("mailHeader", "아래와 같이 주문이 접수되었습니다.");
+        String htmlTemplate = htmlTemplateEngine.process("order/mail-invoice", context);
+        emailUtil.sendEmail("paralysist@naver.com", "paralysist@naver.com","김포지벤 - 주문접수",
+                            orderDto.getPathFileExcel(), excelFileName, htmlTemplate);
+
+        // 고객에게 메일발송
+        context.setVariable("mailHeader", "아래와 같이 주문이 완료되었습니다.");
+        htmlTemplate = htmlTemplateEngine.process("order/mail-invoice", context);
+        emailUtil.sendEmail("unasd@daum.net", "paralysist@naver.com","김포지벤 - 주문접수",
+                            orderDto.getPathFileExcel(), excelFileName, htmlTemplate);
 
         return orderDto;
     }
@@ -160,7 +169,7 @@ public class OrderService {
         OutputStream os = null;
 
         try {
-            io = new ClassPathResource("excel-template/template_invoice.xlsx").getInputStream();
+            io = new ClassPathResource("templates-excel/excel-invoice.xlsx").getInputStream();
             os = new FileOutputStream(orderDto.getPathFileExcel());
             Context context = new Context();
             // todo: session 데이터

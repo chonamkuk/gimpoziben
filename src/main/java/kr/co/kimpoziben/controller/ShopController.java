@@ -83,16 +83,20 @@ public class ShopController {
         List<OrderProductDto> orderProducts = new ArrayList<>();
         OrderProductDto orderProductDto = new OrderProductDto();
         orderProductDto.setNmProduct("ZB-123123");
+        orderProductDto.setNmSize("M");
+        orderProductDto.setIdMainImg("20210627150744-product-50685");
         orderProducts.add(orderProductDto);
 
         OrderProductDto orderProductDto1 = new OrderProductDto();
         orderProductDto1.setNmProduct("ZB-010101");
+        orderProductDto.setNmSize("M");
         orderProducts.add(orderProductDto1);
 
         orderDto.setProducts(orderProducts);
 
         model.addAttribute("orderDto", orderDto);
+        model.addAttribute("mailHeader", "아래와 같이 주문이 완료되었습니다.");
 
-        return "shop/mail";
+        return "order/mail-invoice";
     }
 }

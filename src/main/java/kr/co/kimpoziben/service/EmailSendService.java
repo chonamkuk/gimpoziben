@@ -36,16 +36,19 @@ public class EmailSendService implements EmailUtil {
     }
 
     @Override
-    public void sendEmail(String addrReceive, String addrSend, String subject, String body, String filePath, String fileName) {
+    public void sendEmail(String addrReceive, String addrSend, String subject, String filePath, String fileName, String htmlTemplate) {
         MimeMessage message = sender.createMimeMessage();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
             helper.setTo(addrReceive);
-            helper.setSubject(subject);
             helper.setFrom(addrSend);
-            helper.setText(body,true);
+            helper.setSubject(subject);
 
+            // 메일 본문
+            helper.setText(htmlTemplate, true);
+
+            // 첨부파일
             FileDataSource fds = new FileDataSource(filePath);
             helper.addAttachment(MimeUtility.encodeText(fileName, "UTF-8", "B"), fds);
         } catch (MessagingException e) {
