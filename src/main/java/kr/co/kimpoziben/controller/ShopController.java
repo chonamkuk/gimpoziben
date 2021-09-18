@@ -5,8 +5,6 @@ import kr.co.kimpoziben.dto.*;
 import kr.co.kimpoziben.service.AttachService;
 import kr.co.kimpoziben.service.ProductService;
 import kr.co.kimpoziben.service.SizeService;
-import kr.co.kimpoziben.test.domain.code.AsStat;
-import kr.co.kimpoziben.test.dto.AsDto;
 import kr.co.kimpoziben.util.PageRequest;
 import lombok.AllArgsConstructor;
 import org.aspectj.weaver.ast.Or;

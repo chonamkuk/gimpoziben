@@ -1,11 +1,9 @@
 package kr.co.kimpoziben.service;
 
-import kr.co.kimpoziben.PropertyConfig;
+import kr.co.kimpoziben.config.PropertyConfig;
 import kr.co.kimpoziben.domain.entity.AttachEntity;
 import kr.co.kimpoziben.domain.repository.AttachRepository;
 import kr.co.kimpoziben.dto.ImageUploadDto;
-import kr.co.kimpoziben.test.dto.AsDto;
-import kr.co.kimpoziben.test.dto.IjDto;
 import kr.co.kimpoziben.dto.AttachDto;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -177,25 +175,6 @@ public class AttachService {
         String time = localDateTime.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmSS"));
         String randomValue = String.valueOf(10000 + new Random().nextInt(90000));
         return time + "-" + type + "-"  + randomValue;
-    }
-
-
-    @Transactional
-    public void updateDelYn(AsDto asDto) {
-        AttachDto attachDto = this.getAttachInfo(asDto.getIdAttach(), asDto.getSnFileAttach());
-        attachDto.setYnDel("Y");
-        attachDto.setModifierAttach(asDto.getWriterAs());
-        attachDto.setModdtAttach(LocalDateTime.now());
-        this.saveAttachInfo(attachDto);
-    }
-
-    @Transactional
-    public void updateDelYn(IjDto ijDto) {
-        AttachDto attachDto = this.getAttachInfo(ijDto.getIdAttach(), ijDto.getSnFileAttach());
-        attachDto.setYnDel("Y");
-        attachDto.setModifierAttach(ijDto.getWriterAs());
-        attachDto.setModdtAttach(LocalDateTime.now());
-        this.saveAttachInfo(attachDto);
     }
 
     @Transactional

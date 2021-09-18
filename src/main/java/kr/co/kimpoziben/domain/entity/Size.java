@@ -1,7 +1,5 @@
 package kr.co.kimpoziben.domain.entity;
 
-import kr.co.kimpoziben.dto.SizeDto;
-import kr.co.kimpoziben.test.domain.entity.MeetMemberEntity;
 import lombok.*;
 
 import javax.persistence.*;

@@ -23,6 +23,7 @@ public class Order {
     @Column(name = "order_seq")
     private Long seqOrder;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "order_stat")
     private OrderStat statOrder;
 

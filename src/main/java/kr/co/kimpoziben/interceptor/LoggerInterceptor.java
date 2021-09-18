@@ -1,9 +1,10 @@
 package kr.co.kimpoziben.interceptor;
 
-import kr.co.kimpoziben.dto.HistoryDto;
+import kr.co.kimpoziben.config.auth.LoginUser;
+import kr.co.kimpoziben.config.auth.SessionUser;
 import kr.co.kimpoziben.service.HistoryService;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,31 +16,27 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.time.LocalDateTime;
 
-public class LoggerInterceptor extends HandlerInterceptorAdapter {
+public class LoggerInterceptor implements HandlerInterceptor {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Resource
     public HistoryService historyService;
 
-    @Override
     //컨트롤러의 메서드에 매핑된 특정 URI를 호출했을 때 컨트롤러에 접근하기 전에 실행되는 메서드입니다.
     //우리는 사용자가 화면에서 어떠한 기능을 수행했을 때 해당 기능과 매핑된 URI의 정보를 쉽게 파악할 수 있도록
     //콘솔에 로그를 출력하도록 처리합니다.
+    @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        //logger.info("==================== BEGIN ====================");
-        //logger.info("Request URI ===> " + request.getRequestURI());
-
-/*        String param = null;
-        for (String name : Collections.<String>list(request.getParameterNames())) {
-            String value = request.getParameter(name);
-            param += name + "=" + value + "&";
+        logger.info("==================== BEGIN ====================");
+        logger.info("Request URI ===> " + request.getRequestURI());
+        SessionUser user = (SessionUser) request.getSession().getAttribute("user");
+        if(user != null) {
+            logger.info("user ===> " + user.getName() + " / " + user.getEmail());
         }
-        System.out.println("pram = "+param);*/
 
-        return super.preHandle(request, response, handler);
+        return true;
     }
 
     @Override
@@ -47,11 +44,6 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         //logger.info("==================== END ======================");
         //logger.info("===============================================");
-        //System.out.println(modelAndView.getModel().get());
-        // System.out.println(modelAndView.getModel().get("idFile"));
-        //System.out.println(response.getHeaderNames().getClass());
-
-        super.postHandle(request, response, handler, modelAndView);
     }
 
     @Override
@@ -59,29 +51,15 @@ public class LoggerInterceptor extends HandlerInterceptorAdapter {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object object, Exception arg3) throws Exception {
         //logger.info("Interceptor > afterCompletion" );
         //System.out.println("123123123");
-
-        HistoryDto historyDto = new HistoryDto();
-        //URL
-        //System.out.println("getRequestURL = "+ request.getRequestURL());
-        //System.out.println("getRemoteAddr = "+ getClientIp(request));
-        //String url = request.getRequestURL().toString();
-        //System.out.println("url = "+url);
-        historyDto.setRegHist(LocalDateTime.now());
-        historyDto.setUserHist("testuser");
-        historyDto.setUrlHist(request.getRequestURL().toString());
-        historyDto.setIpHist(getClientIp(request));
-
-        //System.out.println(historyDto);
-        //historyService.save(historyDto);
     }
 
-    @Override
-    //비동기 작업 수행 시
-    public void afterConcurrentHandlingStarted(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        //logger.info("Interceptor > afterConcurrent" );
-        //System.out.println(response.getBufferSize());
-        //super.afterConcurrentHandlingStarted(request, response, handler);
-    }
+//    @Override
+//    //비동기 작업 수행 시
+//    public void afterConcurrentHandlingStarted(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+//        //logger.info("Interceptor > afterConcurrent" );
+//        //System.out.println(response.getBufferSize());
+//        //super.afterConcurrentHandlingStarted(request, response, handler);
+//    }
 
     public static String getClientIp(HttpServletRequest req) {
         String ip = req.getHeader("X-Forwarded-For");

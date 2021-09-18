@@ -1,6 +1,6 @@
 package kr.co.kimpoziben.service;
 
-import kr.co.kimpoziben.PropertyConfig;
+import kr.co.kimpoziben.config.PropertyConfig;
 import kr.co.kimpoziben.domain.code.OrderStat;
 import kr.co.kimpoziben.domain.entity.Order;
 import kr.co.kimpoziben.domain.entity.OrderProduct;
@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.servlet.support.RequestContextUtils;
 import org.thymeleaf.TemplateEngine;
 
 import javax.servlet.http.HttpServletRequest;
