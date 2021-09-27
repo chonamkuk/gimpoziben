@@ -7,6 +7,7 @@ import kr.co.kimpoziben.domain.entity.Product;
 import kr.co.kimpoziben.domain.repository.QnaRepository;
 import kr.co.kimpoziben.domain.repository.ProductRepository;
 import kr.co.kimpoziben.domain.repository.ProductWorkRepository;
+import kr.co.kimpoziben.dto.NoticeDto;
 import kr.co.kimpoziben.dto.QnaDto;
 import kr.co.kimpoziben.dto.ProductDto;
 import lombok.AllArgsConstructor;
@@ -62,6 +63,30 @@ public class QnaService {
         List<QnaDto> qnaList = new ArrayList<>();
         HashMap result = new HashMap();
         for(Qna qna : qnaRepository.findAll()) {
+            QnaDto qnaDto = new QnaDto();
+            qnaDto.setTitleQna(qna.getTitleQna());
+            qnaDto.setSeqQna(qna.getSeqQna());
+            qnaDto.setRegister(qna.getRegister());
+            qnaDto.setRegDt(qna.getRegDt());
+            qnaDto.setYnDel(qna.getYnDel());
+            qnaDto.setYnQnaOpen(qna.getYnQnaOpen());
+            qnaDto.setYnReply(qna.getYnReply());
+            qnaDto.setTextReply(qna.getYnReply());
+            qnaList.add(qnaDto);
+        }
+        result.put("qnaList", qnaList);
+
+        return result;
+    }
+
+
+
+    public HashMap findQnaMainSmallList() throws Exception {
+
+        List<QnaDto> qnaList = new ArrayList<>();
+        List<Qna> popupinfoEntities =  qnaRepository.getSmallQnaList();
+        HashMap result = new HashMap();
+        for(Qna qna : popupinfoEntities) {
             QnaDto qnaDto = new QnaDto();
             qnaDto.setTitleQna(qna.getTitleQna());
             qnaDto.setSeqQna(qna.getSeqQna());

@@ -47,6 +47,10 @@ public class MainController {
         model.addAttribute("smallNoticeList", result2.get("smallNoticeList"));
 
 
+        HashMap result3 =  qnaService.findQnaMainSmallList();
+        model.addAttribute("qnaList", result3.get("qnaList"));
+
+
 
             return "main/main";
      }

@@ -298,7 +298,7 @@
 
 
         $(document).ready(function () {
-
+            $("#foot").load("foot.html");
             // ck이미지 스타일 조정
             $('.modal-content > div > div > div > div > p > img').css('height', '100%');
             $('.modal-content > div > div > div > div > p > img').css('width', '100%');
@@ -327,50 +327,7 @@
 
         // 상세 데이터 로딩
         function getDetail(e){
-            // data-loaded 값 없으면 데이터 불러오기
-           /* if(!$(e).data('loaded')) {
-                comn.preLoading();
-                console.log('데이터 없음');
-                let seqProduct = $(e).data('seq-product');
-                let idMainImg = $(e).data('id-main-img');
-                $.ajax({
-                    url: '/shop/detail.do?seqProduct=' + seqProduct + '&idMainImg=' + idMainImg,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(data) {
-                        console.log(data);
-                        /!**상품 이미지 시작**!/
-                        if(data.attachDtoList.length > 0) {
-                            data.attachDtoList.forEach(function(item, index){
-                                let imageSrc = '/attach/resizeImgView.do?idAttach=' + item.idAttach + '&snFileAttach=' + item.snFileAttach;
-                                let $carouselItem = $('<div class="carousel-item white-text"><img src="'+ imageSrc +'" class="responsive-img"></div>');
-                                $(e).find('.carousel.carousel-slider').append($carouselItem);
-                            });
-                            $(e).find('.carousel.carousel-slider').carousel({
-                                fullWidth: true,
-                                indicators: true
-                            });
-                        }/!**상품 이미지 끝**!/
 
-                        // 사이즈정보
-                        $(e).find('.size-filter  > ul').empty();
-                        data.sizeList.forEach(function(item, index){
-                            $(e).find('.size-filter  > ul').append('<li style="margin-right: 3px;" data-seqSize="'+ item.seqSize +'"><a>'+ item.nmSize +'</a></li>');
-                        });
-
-                        // 데이터 로딩 완료 후 data-loaded 값 바꾸기
-                        $(e).data('loaded', true);
-                        comn.afterLoading();
-                    },
-                    error: function(request, status, error){
-                        console.log('code : ' + request.status);
-                        console.log('message : ' + request.responseText);
-                        console.log('error : ' + error);
-                    }
-                });
-            } else {
-                console.log('데이터 있음');
-            }*/
         }
 
         // 수정화면 이동
@@ -380,6 +337,12 @@
             $('[name="listForm"]').attr('action', '/customer/qnaDetail.do');
             $('[name="listForm"]').submit();
         }
+
+
+
+
+
+
     </script>
 </th:block>
 
@@ -681,28 +644,32 @@
                                                     <thead>
                                                         <tr>
                                                             <th>제목</th>
-                                                            <th>등록자</th>
-                                                            <th>등록일</th>
-                                                            <th>공개여부</th>
-                                                            <th>문의현황</th>
+                                                            <th style="text-align: center">등록자</th>
+                                                            <th style="text-align: center">등록일</th>
+                                                            <th style="text-align: center">공개여부</th>
+                                                            <th style="text-align: center">문의현황</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <tr th:each="qnaDto,listStatus : ${qnaList}">
                                                             <td><a th:onclick="'javascript:goDetail('+ ${qnaDto.seqQna} +');'"><span th:text="${qnaDto.titleQna}"></span></a></td>
-                                                            <td><span th:text="${qnaDto.register}"></span></td>
-                                                            <td><span th:text="${#temporals.format(qnaDto.regDt, 'yyyy-MM-dd HH:mm')}"></span></td>
-                                                            <td><span th:text="${qnaDto.ynQnaOpen}"></span></td>
-                                                            <td><span th:text="${qnaDto.ynReply}"></span></td>
+                                                            <td style="text-align: center"><span th:text="${qnaDto.register}"></span></td>
+                                                            <td style="text-align: center"><span th:text="${#temporals.format(qnaDto.regDt, 'yyyy-MM-dd HH:mm')}"></span></td>
+                                                            <td style="text-align: center"><span th:if="${qnaDto.ynQnaOpen == 'Y'}" >공개</span>
+                                                                <span th:if="${qnaDto.ynQnaOpen == 'N'}" >비공개</span>
+                                                            </td>
+                                                            <td style="text-align: center"><span th:if="${qnaDto.ynReply == 'Y'}" >등록</span>
+                                                                <span th:if="${qnaDto.ynReply == 'N'}" >미등록</span>
+                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
                                                             <th>제목</th>
-                                                            <th>등록자</th>
-                                                            <th>등록일</th>
-                                                            <th>공개여부</th>
-                                                            <th>문의현황</th>
+                                                            <th style="text-align: center">등록자</th>
+                                                            <th style="text-align: center">등록일</th>
+                                                            <th style="text-align: center">공개여부</th>
+                                                            <th style="text-align: center">문의현황</th>
                                                         </tr>
                                                     </tfoot>
                                                 </table>
@@ -770,17 +737,51 @@
     </div>
     <!-- END: Page Main-->
 
-    <!-- BEGIN: Footer-->
+<!-- BEGIN: Footer-->
 
-    <footer class="page-footer footer footer-static footer-dark gradient-45deg-light-blue-cyan gradient-shadow navbar-border navbar-shadow">
-        <div class="footer-copyright">
-            <div class="container"><span>&copy; 2021 <a href="http://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank">N&J</a> All rights reserved.</span></div>
+
+<footer  class="page-footer footer footer-static footer-dark gradient-45deg-light-blue-cyan gradient-shadow navbar-border navbar-shadow">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s6">
+                <h5 class="white-text">Company GPSafety</h5>
+                <p class="grey-text text-lighten-4">김포시 하성면 하성로 389 TEL 031-983-4336 <br/> Open/Close - Am 9:00 ~ Pm 20:00</p>
+
+
+            </div>
+            <div class="col l s6">
+                <h5 class="white-text">Partners</h5>
+
+
+                <a class="white-text" target="_blank" href="https://zibengimpo.com/" style="padding-right: 2px;">
+                    <img src="../../static/image/kimpo-logo.PNG" width="120px;"></a>
+                <a class="white-text" target="_blank" href="http://xn--4k0by2zsxcnc793jvyb.nasoft.kr/" style="padding-right: 2px;">
+                    <img src="../../static/image/kimpo-logo2.PNG" width="131px;"></a>
+                <a class="white-text" target="_blank" href="https://open.kakao.com/o/s7XAhrBd" style="padding-right: 2px;">
+                    <img src="../../static/image/kakao-logo3.jpg" width="41px;"></a>
+            </div>
         </div>
-    </footer>
+    </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <span>&copy; 2021 <a href="#1">N&S</a> All rights reserved.</span>
+            <!--            <span class="right hide-on-small-only">Design and Developed by <a href="#1">N&J</a></span>-->
+        </div>
+    </div>
+</footer>
+
+
+<!-- <footer class="page-footer footer footer-static footer-dark gradient-45deg-light-blue-cyan gradient-shadow navbar-border navbar-shadow">
+     <div class="footer-copyright">
+         <div class="container"><span>&copy; 2021 N&S All rights reserved.</span></div>
+     </div>
+ </footer>-->
 
     <!-- END: Footer-->
     <!-- BEGIN VENDOR JS-->
     <script src="/static/js/vendors.min.js"></script>
+
     <!-- BEGIN VENDOR JS-->
     <!-- BEGIN PAGE VENDOR JS-->
     <script src="/static/vendors/data-tables/js/jquery.dataTables.min.js"></script>
@@ -795,6 +796,9 @@
     <!-- BEGIN PAGE LEVEL JS-->
     <script src="/static/js/scripts/data-tables.js"></script>
     <!-- END PAGE LEVEL JS-->
+
 </body>
+
+
 
 </html>
