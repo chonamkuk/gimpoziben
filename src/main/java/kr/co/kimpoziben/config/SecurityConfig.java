@@ -40,7 +40,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                     .frameOptions().disable()
             .and()
                 .authorizeRequests()
-                .antMatchers("/api/v1/**").hasAnyRole(UserRole.USER.name(), UserRole.USER.ADMIN.name(), UserRole.USER.SUPERADMIN.name())
                 .antMatchers("/order/**").hasAnyRole(UserRole.USER.name(), UserRole.USER.ADMIN.name(), UserRole.USER.SUPERADMIN.name())
                 .antMatchers("/admin/**").hasAnyRole(UserRole.USER.ADMIN.name(), UserRole.USER.SUPERADMIN.name())
                 .anyRequest().permitAll() // 기본적으로 permitAll

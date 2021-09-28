@@ -1,6 +1,5 @@
 package kr.co.kimpoziben.interceptor;
 
-import kr.co.kimpoziben.config.auth.LoginUser;
 import kr.co.kimpoziben.config.auth.SessionUser;
 import kr.co.kimpoziben.service.HistoryService;
 import org.springframework.web.servlet.HandlerInterceptor;

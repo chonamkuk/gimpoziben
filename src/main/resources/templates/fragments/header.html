@@ -4,9 +4,14 @@
 
 <header th:fragment="headerFragment" class="page-topbar" id="header">
     <script type="text/javascript">
-
+        function naverLogout(){
+            let win = window.open('https://nid.naver.com/nidlogin.logout', 'width=400,height=400', '_blank');
+            setTimeout(function(){
+                win.close();
+                location.href = '/logout';
+            },300);
+        }
     </script>
-
     <div class="navbar navbar-fixed">
         <nav class="navbar-main navbar-color nav-collapsible sideNav-lock navbar-dark gradient-45deg-light-blue-cyan">
             <div class="nav-wrapper">
@@ -30,7 +35,7 @@
                             <i class="material-icons">account_circle</i>
                         </a>
                         <a class="waves-effect waves-block waves-light profile-button" href="/oauth2/authorization/naver" sec:authorize="!isAuthenticated()">
-                            <i class="material-icons">publish</i>
+                            <i class="material-icons-outlined">login</i>
                         </a>
                     </li>
                 </ul>
@@ -50,8 +55,7 @@
                     <li><a class="grey-text text-darken-1" href="/order/list.do"><i class="material-icons">receipt</i> 주문내역</a></li>
                     <li><a class="grey-text text-darken-1" href="#"><i class="material-icons">live_help</i> Help</a></li>
                     <li class="divider"></li>
-                    <li><a class="grey-text text-darken-1" href="#"><i class="material-icons">lock_outline</i> Lock</a></li>
-                    <li><a class="grey-text text-darken-1" href="/logout"><i class="material-icons">keyboard_tab</i> Logout</a></li>
+                    <li><a class="grey-text text-darken-1" onclick="naverLogout();"><i class="material-icons-outlined">logout</i> Logout</a></li>
                 </ul>
             </div>
         </nav>

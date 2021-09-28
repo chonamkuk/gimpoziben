@@ -1,15 +1,12 @@
 package kr.co.kimpoziben.controller;
 
-import kr.co.kimpoziben.config.auth.LoginUser;
 import kr.co.kimpoziben.config.auth.SessionUser;
-import kr.co.kimpoziben.domain.entity.OrderProduct;
 import kr.co.kimpoziben.dto.*;
 import kr.co.kimpoziben.service.AttachService;
 import kr.co.kimpoziben.service.ProductService;
 import kr.co.kimpoziben.service.SizeService;
 import kr.co.kimpoziben.util.PageRequest;
 import lombok.AllArgsConstructor;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -17,8 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -78,33 +73,5 @@ public class ShopController {
     @GetMapping("/cartList.do")
     public String cartList() throws Exception {
         return "shop/cartList";
-    }
-
-    @GetMapping("/mailTest.do")
-    public String mailTest(Model model) throws Exception {
-        OrderDto orderDto = new OrderDto();
-        orderDto.setSeqOrder(28L);
-        orderDto.setTotalPriceOrder(404000L);
-        orderDto.setDtOrder(LocalDateTime.now());
-        orderDto.setIdCustomer("test");
-
-        List<OrderProductDto> orderProducts = new ArrayList<>();
-        OrderProductDto orderProductDto = new OrderProductDto();
-        orderProductDto.setNmProduct("ZB-123123");
-        orderProductDto.setNmSize("M");
-        orderProductDto.setIdMainImg("20210627150744-product-50685");
-        orderProducts.add(orderProductDto);
-
-        OrderProductDto orderProductDto1 = new OrderProductDto();
-        orderProductDto1.setNmProduct("ZB-010101");
-        orderProductDto.setNmSize("M");
-        orderProducts.add(orderProductDto1);
-
-        orderDto.setProducts(orderProducts);
-
-        model.addAttribute("orderDto", orderDto);
-        model.addAttribute("mailHeader", "아래와 같이 주문이 완료되었습니다.");
-
-        return "order/mail-invoice";
     }
 }
