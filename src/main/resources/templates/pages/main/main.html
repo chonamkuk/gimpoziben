@@ -115,27 +115,31 @@
                 </li>
                 <li>
                     <div class="row">
-                        <div class="col s12 m6 l3">
-
+                        <div class="col s12 m6 l3" th:each="newProductDto, listStatus: ${newProductList}">
                             <div class="card">
                                 <div class="card-image waves-effect waves-block waves-light">
-                                    <img class="activator" src="../../../static/image/gallery/17.png" />
+                                    <img class="activator" th:src="${'/attach/resizeImgView.do?idAttach=' + newProductDto.idMainImg + '&resizeWidth=318'}"
+                                         onerror="this.src='/static/image/broken_image_48dp.png';this.style='object-fit:none';"/>
                                 </div>
                                 <div class="card-content">
-                                        <span class="card-title activator grey-text text-darken-4">Card Title <i class="material-icons right">more_vert</i>
+                                        <span class="card-title activator grey-text text-darken-4">
+                                            [[${newProductDto.nmProduct}]]
+                                            <i class="material-icons right">more_vert</i>
                                         </span>
                                     <p><a href="#!">This is a link</a></p>
                                 </div>
                                 <div class="card-reveal">
-                                        <span class="card-title grey-text text-darken-4">Card Title <i class="material-icons right">close</i>
+                                        <span class="card-title grey-text text-darken-4" th:text="${newProductDto.nmProduct}"><i class="material-icons right">close</i>
                                         </span>
-                                    <p>Here is some more information about this product that is only revealed once clicked
-                                        on.</p>
+                                        <p th:text="${newProductDto.titleProduct}"></p>
                                 </div>
-                                <div class="card-action"><a href="#">This is a link</a> <a href="#">This is a link</a></div>
+                                <div class="card-action">
+                                    <a href="#">This is a link</a>
+                                    <a href="#">This is a link</a>
+                                </div>
                             </div>
                         </div>
-                        <div class="col s12 m6 l3">
+<!--                        <div class="col s12 m6 l3">
 
                             <div class="card">
                                 <div class="card-image waves-effect waves-block waves-light">
@@ -193,7 +197,7 @@
                                 </div>
                             </div>
 
-                        </div>
+                        </div>-->
                     </div>
 
 
@@ -212,28 +216,30 @@
                 </li>
                 <li>
                     <div class="row">
-                        <div class="col s12 m6 l3">
+                        <div class="col s12 m6 l3" th:each="hotProductDto, listStatus: ${hotProductList}">
 
                             <div class="card">
                                 <div class="card-image waves-effect waves-block waves-light">
-                                    <img class="activator" src="../../../static/image/gallery/10.png" />
+                                    <img class="activator" th:src="${'/attach/resizeImgView.do?idAttach=' + hotProductDto.idMainImg + '&resizeWidth=318'}"
+                                         onerror="this.src='/static/image/broken_image_48dp.png';this.style='object-fit:none';"/>
                                 </div>
                                 <div class="card-content">
-                                        <span class="card-title activator grey-text text-darken-4">Card Title <i class="material-icons right">more_vert</i>
+                                        <span class="card-title activator grey-text text-darken-4">
+                                            [[${hotProductDto.nmProduct}]]
+                                            <i class="material-icons right">more_vert</i>
                                         </span>
                                     <p><a href="#!">This is a link</a></p>
                                 </div>
                                 <div class="card-reveal">
-                                        <span class="card-title grey-text text-darken-4">Card Title <i class="material-icons right">close</i>
+                                        <span class="card-title grey-text text-darken-4" th:text="${hotProductDto.nmProduct}"><i class="material-icons right">close</i>
                                         </span>
-                                    <p>Here is some more information about this product that is only revealed once clicked
-                                        on.</p>
+                                        <p th:text="${hotProductDto.titleProduct}"></p>
                                 </div>
                                 <div class="card-action"><a href="#">This is a link</a> <a href="#">This is a link</a></div>
                             </div>
                         </div>
-                        <div class="col s12 m6 l3">
 
+                        <!--<div class="col s12 m6 l3">
                             <div class="card">
                                 <div class="card-image waves-effect waves-block waves-light">
                                     <img class="activator" src="../../../static/image/gallery/12.png" />
@@ -290,7 +296,7 @@
                                 </div>
                             </div>
 
-                        </div>
+                        </div>-->
                     </div>
                 </li>
             </ul>

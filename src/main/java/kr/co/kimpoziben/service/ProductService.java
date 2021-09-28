@@ -154,4 +154,25 @@ public class ProductService {
 
         return null;
     }
+
+        public List<ProductDto> findByOrderCnt() throws Exception {
+            List<Product> productList = productRepository.findByOrderCnt();
+            List<ProductDto> productDtoList = new ArrayList<>();
+
+            for(Product product : productList) {
+                ProductDto productDto = new ProductDto();
+                productDto.setSeqProduct(product.getSeqProduct());
+                productDto.setNmProduct(product.getNmProduct());
+                productDto.setTitleProduct(product.getTitleProduct());
+                productDto.setSellPrice(product.getSellPrice());
+                productDto.setYnSoldOut(product.getYnSoldOut());
+                productDto.setYnDisplay(product.getYnDisplay());
+                productDto.setIdMainImg(product.getIdMainImg());
+                productDto.setDescProduct(product.getDescProduct());
+
+                productDtoList.add(productDto);
+            }
+
+            return productDtoList;
+        }
 }

@@ -28,6 +28,7 @@ public class ProductDto {
     private LocalDateTime regDt;
     private String modifier;
     private LocalDateTime modDt;
+    private Long orderCnt;
 
     private VendorDto vendor;
     private List<ProdCateDto> cateList = new ArrayList<ProdCateDto>();

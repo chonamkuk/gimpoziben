@@ -3,11 +3,13 @@ package kr.co.kimpoziben.domain.repository.dsl;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.PathBuilder;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import kr.co.kimpoziben.domain.entity.*;
+import kr.co.kimpoziben.dto.ProductDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +25,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
     private QProdCate prodCate = QProdCate.prodCate;
     private QCategory category = QCategory.category;
     private QVendor vendor = QVendor.vendor;
+    private QOrderProduct orderProduct = QOrderProduct.orderProduct;
 
     public ProductRepositoryImpl(JPAQueryFactory queryFactory) {
         this.queryFactory = queryFactory;
@@ -45,6 +48,39 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
 
         return new PageImpl<>(result.getResults(), pageable, result.getTotal());
     }
+
+//    @Override
+//    public List<ProductDto> findByOrderCnt(HashMap<String,Object> searchMap, Pageable pageable) {
+//        QueryResults<ProductDto> result = queryFactory
+//                .select(
+//                        Projections.fields(ProductDto.class,
+//                                product.seqProduct,
+//                                product.titleProduct,
+//                                product.nmProduct,
+//                                product.descProduct,
+//                                product.colorProduct,
+//                                product.buyPrice,
+//                                product.sellPrice,
+//                                product.ynDisplay,
+//                                product.ynSoldOut,
+//                                product.idMainImg
+//                        )
+//                )
+//                .from(product)
+//                .join(
+//
+//                )
+//                .where(
+//                        ynDisplayEq(searchMap)
+//                )
+//                .offset(pageable.getOffset())
+//                .limit(pageable.getPageSize())
+//                .orderBy(getOrderSpecifier(pageable.getSort()).stream().toArray(OrderSpecifier[]::new))
+//                .fetchResults();
+//
+//
+//        return result.getResults();
+//    }
 
     private BooleanExpression seqCategoryIn(HashMap<String,Object> searchMap) {
         if(searchMap.getOrDefault("seqCategory",null) == null) {
