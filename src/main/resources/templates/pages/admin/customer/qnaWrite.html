@@ -96,13 +96,15 @@
                         }
                     });
                     /**게시여부, 삭제여부*/
-                    if($('#ynQnaChk').is(':checked')){$('#saveForm').append('<input type="hidden" id="ynQnaOpen" name="ynQnaOpen" value="Y"/>')
-                    }else {
+                    if($('#ynQnaOpenChk').is(':checked')){
+                        $('#saveForm').append('<input type="hidden" id="ynQnaOpen" name="ynQnaOpen" value="Y"/>')
+                    } else {
                         $('#saveForm').append('<input type="hidden" id="ynQnaOpen" name="ynQnaOpen" value="N"/>')
                     };
-                    if($('#ynDelChk').is(':checked')){ $('#saveForm').append('<input type="hidden" id="ynDel" name="ynDel" value="Y"/>')
+                    if($('#ynReplyChk').is(':checked')){ $('#saveForm').append('<input type="hidden" id="ynReply" name="ynReply" value="Y"/>')
                     }else{
-                    ('#saveForm').append('<input type="hidden" id="ynDel" name="ynDel" value="N"/>')};
+                        $('#saveForm').append('<input type="hidden" id="ynReply" name="ynReply" value="N"/>')
+                    };
 
                     processed = true;
                     $('#saveForm').submit();

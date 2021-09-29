@@ -142,6 +142,7 @@ public class QnaService {
             }
         }
 */
+        if (qnaDto.getYnDel()==null){qnaDto.setYnDel("N");}
         Qna newProduct = qnaRepository.save(modelMapper.map(qnaDto, Qna.class));
 
 

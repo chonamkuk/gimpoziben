@@ -106,8 +106,11 @@
                     };
                     if($('#ynReplyChk').is(':checked')){ $('#saveForm').append('<input type="hidden" id="ynReply" name="ynReply" value="Y"/>')
                     }else{
-                        $('#saveForm').append('<input type="hidden" id="ynDel" name="ynReply" value="N"/>')
+                        $('#saveForm').append('<input type="hidden" id="ynReply" name="ynReply" value="N"/>')
                     };
+
+
+
 
                     processed = true;
                     console.log($('#saveForm'));
