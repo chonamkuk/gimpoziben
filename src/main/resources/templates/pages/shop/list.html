@@ -219,11 +219,6 @@
         }
 
         /************** 상품상세 모달 **************/
-        /*.carousel {*/
-        /*    height: 587px;*/
-        /*    border: 1px solid #ECEFF1;*/
-        /*}*/
-
         .carousel .carousel-item > img {
             top: 50%;
             -webkit-transform: translate(0,-50%);
@@ -349,7 +344,7 @@
                 selectedItem += '</li>';
                 $(this).parent().parent().parent().siblings('.selected-collection').append(selectedItem);
             } else {
-                $('#seqSize'+seqSize).trigger('mousedown'); //todo: 중복선택 표현
+                $('#seqSize'+seqSize).trigger('mousedown');
             }
             $(this).parent().parent().parent().siblings('.selected-collection').show();
         });
