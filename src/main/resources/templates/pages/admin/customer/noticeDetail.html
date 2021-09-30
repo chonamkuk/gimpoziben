@@ -255,7 +255,7 @@
 
         function noticelist(){
 
-            location.href = '/customer/noticelist.do';
+            location.href = '/customer/noticeList.do';
         }
 
     </script>
@@ -302,8 +302,8 @@
 
                                         <!-- 버튼 영역 -->
                                         <div class="col s12 display-flex justify-content-end mt-1">
-                                            <button type="button" class="btn indigo" onclick="javascript:goUpdate()" >수정</button>
-                                            <button type="button" class="btn btn-light" onclick="javascript:noticelist()">목록</button>
+                                            <button th:if="${session.user?.userRole == 'SUPERADMIN'}" type="button" class="btn indigo" onclick="javascript:goUpdate()" >수정</button>
+                                            <button  type="button" class="btn btn-light" onclick="javascript:noticelist()">목록</button>
                                         </div>
                                     </div>
                                 </form>

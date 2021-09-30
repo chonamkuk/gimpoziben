@@ -294,7 +294,7 @@
                                                         <textarea name="descQna"><th:block th:utext="${resultDto.descQna}"></th:block></textarea>
                                                     </div>
                                                 </div>
-                                                <div class="col s12 input-field">
+                                                <div th:if="${session.user?.userRole == 'SUPERADMIN'}" class="col s12 input-field">
                                                     <div class="m-0">
                                                         <span>관리자 답변여부</span>
                                                         <div class="switch right">
