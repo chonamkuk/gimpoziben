@@ -9,10 +9,12 @@ public class SessionUser implements Serializable {
     private String name;
     private String email;
     private String mobile;
+    private String userRole;
 
     public SessionUser(User user) {
         this.name = user.getName();
         this.email = user.getEmail();
         this.mobile = user.getMobile();
+        this.userRole = user.getUserRole().name();
     }
 }
