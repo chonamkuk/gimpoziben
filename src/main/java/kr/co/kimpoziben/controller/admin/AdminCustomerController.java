@@ -69,7 +69,19 @@ public class AdminCustomerController {
         resultMap.put("attachDtoList", attachDtoList);
         return resultMap;
     }
+    @GetMapping("/noticeDetail.do")
+    public String noticeDetail(Model model, @RequestParam("seqNotice") Long seqNotice,
+                            HashMap<String,Object> searchMap, final PageRequest pageable) throws Exception {
+        NoticeDto noticeDto = noticeService.getNoticeDetail(seqNotice);
+        if(noticeDto != null) {
+            model.addAttribute("resultDto", noticeDto);
 
+            model.addAttribute("searchDto", searchMap);
+            model.addAttribute("pagingResult", pageable);
+        }
+
+        return "admin/customer/noticeDetail";
+    }
 
     /*
     * 1.noticeSeq를 갖고 뿌린다.
@@ -98,7 +110,7 @@ public class AdminCustomerController {
 
         noticeService.update(noticeDto);
         redirectAttr.addAttribute("seqNotice", noticeDto.getSeqNotice());
-        return "redirect:/customer/noticeUpdate.do";
+        return "redirect:/customer/noticeDetail.do";
     }
 
     @GetMapping("/qnaWrite.do")

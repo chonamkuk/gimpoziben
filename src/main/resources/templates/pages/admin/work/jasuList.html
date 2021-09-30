@@ -419,7 +419,7 @@
                         <a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="profile-dropdown" sec:authorize="isAuthenticated()">
                             <i class="material-icons">account_circle</i>
                         </a>
-                        <a class="waves-effect waves-block waves-light profile-button" href="/oauth2/authorization/naver" sec:authorize="!isAuthenticated()">
+                        <a class="waves-effect waves-block waves-light" href="/oauth2/authorization/naver" sec:authorize="!isAuthenticated()">
                             <i class="material-icons-outlined">login</i>
                         </a>
                     </li>
@@ -435,8 +435,8 @@
                     </li>
                 </ul>
                 <!-- profile-dropdown-->
-                <ul class="dropdown-content" id="profile-dropdown">
-                    <li><a class="grey-text text-darken-1" href="#"><i class="material-icons">face</i> Profile</a></li>
+                <ul class="dropdown-content" id="profile-dropdown" sec:authorize="isAuthenticated()">
+                    <li><a class="grey-text text-darken-1" href="#"><i class="material-icons">face</i>[[${session.user.name}]] 님</a></li>
                     <li><a class="grey-text text-darken-1" href="/order/list.do"><i class="material-icons">receipt</i> 주문내역</a></li>
                     <li><a class="grey-text text-darken-1" href="#"><i class="material-icons">live_help</i> Help</a></li>
                     <li class="divider"></li>
@@ -511,7 +511,7 @@
                         </ul>
                     </li>
 
-                    <li>
+                    <li th:if="${session.user?.userRole == 'SUPERADMIN'}">
                         <a class="dropdown-menu" href="#" data-target="formsTables6">
                             <i class="material-icons">build</i>
                             <span><span class="dropdown-title" data-i18n="Menu levels">작업일보</span><i class="material-icons right">keyboard_arrow_down</i></span>
@@ -580,7 +580,7 @@
             <li class="bold">
                 <a class="waves-effect waves-cyan " href="#"><i class="material-icons">question_answer</i><span class="menu-title">Q&A</span></a>
             </li>
-            <li class="bold">
+            <li class="bold" th:if="${session.user?.userRole == 'SUPERADMIN'}">
                 <a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">build</i><span class="menu-title" data-i18n="Menu levels">작업일보</span></a>
                 <div class="collapsible-body">
                     <ul class="collapsible collapsible-sub" data-collapsible="accordion">
