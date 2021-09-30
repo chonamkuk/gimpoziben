@@ -11,29 +11,29 @@
 
         <th:block layout:fragment="css">
             <style>
-              /*  .collapsible-header {
-                    -webkit-text-fill-color: transparent;
-                    -webkit-text-stroke-width: 1px;
-                    -webkit-text-stroke-color: #fff;
-                    line-height: 0.3;
-                    font-family: fantasy;
+                /*  .collapsible-header {
+                      -webkit-text-fill-color: transparent;
+                      -webkit-text-stroke-width: 1px;
+                      -webkit-text-stroke-color: #fff;
+                      line-height: 0.3;
+                      font-family: fantasy;
+                      font-weight: 900;
+                  }*/
+
+                .h5-import{
+                    font-family: Arial;
                     font-weight: 900;
-                }*/
+                    text-align: center;
+                    color: #fff;
+                    display: inline-block;
+                    font-size: 35px;
+                    letter-spacing: 0.01rem;
+                    line-height: 0.3;
+                    -webkit-text-fill-color: transparent;
+                    -webkit-text-stroke-width: 2px;
+                    padding-bottom: 3px;
 
-              .h5-import{
-                  font-family: Arial;
-                  font-weight: 900;
-                  text-align: center;
-                  color: #fff;
-                  display: inline-block;
-                  font-size: 35px;
-                  letter-spacing: 0.01rem;
-                  line-height: 0.3;
-                  -webkit-text-fill-color: transparent;
-                  -webkit-text-stroke-width: 2px;
-                  padding-bottom: 3px;
-
-              }
+                }
 
                 .h2-import{
                     font-family: Arial;
@@ -51,21 +51,216 @@
 
                 }
 
+                /*********************************************** 신규/인기 상품 *************************************************/
+                @media only screen and (min-width: 600px) and (max-width: 800px){
+                    #index-banner > div > ul > li > div > div > div > div.card-image {
+                        height: 110px;
+                    }
+                }
+
+                @media only screen and (min-width: 801px) {
+                    #index-banner > div > ul > li > div > div > div > div.card-image {
+                        height: 230px;
+                    }
+
+                    #index-banner > div > ul > li > div > div > div > div.card-image > img {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -40%);
+                    }
+                }
+
+                #index-banner .card {
+                    overflow: hidden;
+                }
+
+                #index-banner .modal .modal-content i.material-icons         {
+                    cursor: pointer;
+                    vertical-align: middle;
+                }
+
+                #index-banner .modal-content hr {
+                    opacity: .3;
+                }
+
+                #index-banner .modal-content .list-bullet {
+                    padding-left: 1.65rem;
+                    list-style-type: disc;
+                }
+
+                #index-banner .modal-content .list-bullet .list-item-bullet {
+                    padding: .2rem 0;
+                    list-style-type: disc;
+                }
+
+                #index-banner .size-filter ul {
+                    margin: 0;
+                }
+
+                #index-banner .size-filter ul .active a {
+                    color: #fff;
+                    background: #7e57c2;
+                }
+
+                #index-banner .size-filter ul li {
+                    display: inline-block;
+                    margin: .1rem 0;
+                }
+
+                #index-banner .size-filter ul li a {
+                    font-weight: 700;
+                    line-height: 34px;
+                    display: block;
+                    width: 34px;
+                    height: 34px;
+                    text-align: center;
+                    border-radius: 3px;
+                    background: #ede7f6;
+                }
+
+                #index-banner > div.col > div > div.card.animate > div > div {
+                    text-align: center;
+                }
+
+                #index-banner > div.col > div > div.card.animate > div > div > img {
+                    object-fit: contain;
+                    object-position: center;
+                }
+
+                .product-detail-modal {
+                    width: 90%;
+                    max-height: 90%;
+                }
+
+                .card .card-content .card-title {
+                    min-height: 32px;
+                    font-size: 12px;
+                }
+
+                #index-banner > div.col.s12.m12.l12.pr-0 > div > div.card.animate > div > p {
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+
+                .responsive-img {
+                    min-height: 55px;
+                }
+
+                /************** 상품상세 모달 **************/
+                .carousel .carousel-item > img {
+                    top: 50%;
+                    -webkit-transform: translate(0,-50%);
+                    transform: translate(0,-50%);
+                    position: relative;
+                    width: auto;
+                    max-height: 100%;
+                    -webkit-transition: border-color .15s linear;
+                    transition: border-color .15s linear;
+                }
+
+                .carousel .indicators .indicator-item {
+                    border: 1px solid #bababa;
+                    width: 15px;
+                    height: 15px;
+                }
+
+                /************* 사이즈, 수량 선택 *************/
+                .collection .collection-item {
+                    padding: 5px 20px;
+                }
+
+                .selected-collection li > div {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .selected-collection .row a.nmSize {
+                    font-weight: 700;
+                    line-height: 34px;
+                    display: block;
+                    width: 34px;
+                    height: 34px;
+                    text-align: center;
+                    border-radius: 3px;
+                    background: #ede7f6;
+                }
+
+                .selected-collection li div,
+                .selected-collection li div a {
+                    flex: 1;
+                    text-align: -webkit-center;
+                }
+
+                .selected-collection li div a i {
+                    line-height: 34px;
+                    display: block;
+                    width: 34px;
+                    height: 34px;
+                    text-align: center;
+                    cursor: pointer;
+                }
+
+                .selected-collection > li > div > div {
+                    text-align: -webkit-left;
+                }
+
+                .selected-collection > li > div > a.btn-remove {
+                    text-align: -webkit-right;
+                }
+
+                .selected-collection li div input[type=number] {
+                    width: 20%;
+                    height: 2rem;
+                    text-align: center;
+                }
+
+                input::-webkit-outer-spin-button,
+                input::-webkit-inner-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                }
+
             </style>
         </th:block>
 
 
         <script>
-            $(document).ready(function(){$('.bxslider').bxSlider({
-                auto: true,speed: 500,
-                pause: 4000,
-                responsive: true,
-                mode:'fade',
-                autoControls: false,
-                controls:true,
-                captions: true, //캡션사용
-                touchEnabled : (navigator.maxTouchPoints > 0),
-                pager:true,});
+            $(document).ready(function(){
+                $('.bxslider').bxSlider({
+                    auto: true,speed: 500,
+                    pause: 4000,
+                    responsive: true,
+                    mode:'fade',
+                    autoControls: false,
+                    controls:true,
+                    captions: true, //캡션사용
+                    touchEnabled : (navigator.maxTouchPoints > 0),
+                    pager:true,});
+
+                // ck이미지 스타일 조정
+                $('.modal-content > div > div > div > div > p > img').css('height', '100%');
+                $('.modal-content > div > div > div > div > p > img').css('width', '100%');
+                $('.modal-content > div > div > div > div > p > img').css('object-fit', 'contain');
+                $('.modal-content > div > div > div > div > p > img').css('object-position', 'top');
+
+                setTimeout(function(){
+                    $('.product-detail-modal').each(function(index, item){
+                        M.Modal.getInstance($(item)).options.onOpenStart = function(e){
+                            getDetail(e); // 상세데이터 로딩 바인딩
+                        };
+                        M.Modal.getInstance($(item)).options.onCloseStart = function(e){
+                            $(item).find('.size-filter > ul > li').removeClass('active');
+                            $(item).find('.selected-collection').hide();
+                            $(item).find('.collection-item').remove();
+                            $(item).scrollTop(0);
+                            if (location.href.split('#').pop() == $(this).attr('id')) {
+                                window.history.back();
+                            }
+                        };
+                    });
+                },200);
             });
 
 
@@ -91,9 +286,164 @@
                 location.href = '/customer/qnaDetail.do?seqQna='+seqQna;
             }
 
+            /*********************************************** 신규/인기 상품 *************************************************/
+            // 사이즈선택
+            $(document).on('click', '.size-filter > ul > li > a', function(e) {
+                $(this).parent().siblings().removeClass('active');
+                $(this).parent().addClass('active');
+
+                let nmSize = $(this).text();
+                let seqSize = $(this).parent().data('seq-size');
+
+                if($('#seqSize'+seqSize).length <= 0) {
+                    let selectedItem = '';
+                    selectedItem += '<li class="collection-item" id="seqSize'+ seqSize +'" data-seq-size="'+ seqSize +'">';
+                    selectedItem += '<div class="row">';
+                    selectedItem += '<div><a class="nmSize waves-effect">'+ nmSize +'</a></div>';
+                    selectedItem += '<a><i class="material-icons waves-effect btn-amount-less">remove</i></a>';
+                    selectedItem += '<input type="number" value="1"/>';
+                    selectedItem += '<a><i class="material-icons waves-effect btn-amount-more">add</i></a>';
+                    selectedItem += '<a><i class="material-icons waves-effect btn-remove">cancel</i></a>';
+                    selectedItem += '</div>';
+                    selectedItem += '</li>';
+                    $(this).parent().parent().parent().siblings('.selected-collection').append(selectedItem);
+                } else {
+                    $('#seqSize'+seqSize).trigger('mousedown');
+                }
+                $(this).parent().parent().parent().siblings('.selected-collection').show();
+            });
+
+            // 선택사이즈 삭제
+            $(document).on('click', '.btn-remove', function(e) {
+                if($(this).parent().parent().parent().siblings().length <= 0) {
+                    $(this).parent().parent().parent().parent().hide();
+                }
+                $(this).parent().parent().parent().remove();
+            });
+
+            // 수량감소
+            $(document).on('click', '.btn-amount-less', function(e) {
+                let amount = Number($(this).parent().next().val());
+                if(amount > 1) {
+                    amount--;
+                    $(this).parent().next().val(amount);
+                }
+            });
+
+            // 수량추가
+            $(document).on('click', '.btn-amount-more', function(e) {
+                let amount = Number($(this).parent().prev().val());
+                amount++;
+                $(this).parent().prev().val(amount);
+            });
+
+            // 카트에 담기
+            $(document).on('click', '.add-to-cart', function(e) {
+                let addToCartBtn = $(this);
+
+                if(addToCartBtn.siblings('.selected-collection').children().length > 0) {
+                    let cart; // 카트목록
+                    if(localStorage.getItem('cart') == null) {
+                        cart = new Array();
+                    } else {
+                        cart = JSON.parse(localStorage.getItem('cart'));
+                    }
+
+                    let cartItem = new Object(); // 카트에 추가될 항목
+                    let seqProduct = addToCartBtn.parents('.product-detail-modal').data('seq-product');
+                    let nmProduct = addToCartBtn.siblings('.detail-product-nm').text();
+                    let idMainImg = addToCartBtn.siblings('.detail-product-nm').data('idmainimg');
+                    let addedDate = new Date();
+                    cartItem.date = addedDate.format('yyyy-MM-dd HH:mm:ss'); // 카트추가 일시
+                    cartItem.cartId = seqProduct + '_' + addedDate.format('yyyyMMddHHmmss'); // 카트항목 아이디
+                    cartItem.products = new Array(); // 제품목록
+                    addToCartBtn.siblings('.selected-collection').children().each(function(index, item){
+                        cartItem.products[index] = {
+                            cartId: cartItem.cartId,
+                            seqProduct: seqProduct,
+                            nmProduct: nmProduct,
+                            idMainImg: idMainImg,
+                            seqSize: $(item).data('seq-size'),
+                            nmSize: $(item).find('.nmSize').text(),
+                            amountOrder: $(item).find('input[type="number"]').val()
+                        };
+                    });
+
+                    cart[cart.length] = cartItem;
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    comn.displayCartCount();
+
+                    $('#confirmModal').find('h4').text('알림');
+                    $('#confirmModal').find('p').text('카트에 추가되었습니다. 확인하시겠습니까?');
+                    $('#confirmModal').modal('open');
+                    $('#confirmModal').find('.confirm').unbind('click').on('click', function(){
+                        // 예 => 장바구니로 이동
+                        comn.preLoading();
+                        location.href.replace(/(#modal\d)/,'');
+                        window.history.back();
+                        window.location.href = '/shop/cartList.do';
+                        return false;
+                    });
+                    $('#confirmModal').find('.cancel').unbind('click').on('click', function(){
+                        // 아니요 => 초기화
+                        addToCartBtn.parents('.product-detail-modal').modal('close');
+                        location.href.replace(/(#modal\d)/,'');
+                        window.history.back();
+                        comn.afterLoading();
+                    });
+                }
+            });
+
+            // 상세 데이터 로딩
+            function getDetail(e){
+                // data-loaded 값 없으면 데이터 불러오기
+                if(!$(e).data('loaded')) {
+                    comn.preLoading();
+                    console.log('데이터 로딩');
+                    let seqProduct = $(e).data('seq-product');
+                    let idMainImg = $(e).data('id-main-img');
+                    $.ajax({
+                        url: '/shop/detail.do?seqProduct=' + seqProduct + '&idMainImg=' + idMainImg,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data) {
+                            /**상품 이미지 시작**/
+                            if(data.attachDtoList.length > 0) {
+                                data.attachDtoList.forEach(function(item, index){
+                                    let imageSrc = '/attach/resizeImgView.do?idAttach=' + item.idAttach + '&snFileAttach=' + item.snFileAttach;
+                                    let $carouselItem = $('<div class="carousel-item white-text"><img src="'+ imageSrc +'" class="responsive-img"></div>');
+                                    $(e).find('.carousel.carousel-slider').append($carouselItem);
+                                });
+                                $(e).find('.carousel.carousel-slider').carousel({
+                                    fullWidth: true,
+                                    indicators: true
+                                });
+                            }/**상품 이미지 끝**/
+
+                            // 사이즈정보
+                            $(e).find('.size-filter  > ul').empty();
+                            data.sizeList.forEach(function(item, index){
+                                $(e).find('.size-filter  > ul').append('<li style="margin-right: 3px;cursor: pointer;" data-seq-size="'+ item.seqSize +'"><a>'+ item.nmSize +'</a></li>');
+                            });
+
+                            // 데이터 로딩 완료 후 data-loaded 값 바꾸기
+                            $(e).data('loaded', true);
+                            comn.afterLoading();
+                        },
+                        error: function(request, status, error){
+                            console.log('code : ' + request.status);
+                            console.log('message : ' + request.responseText);
+                            console.log('error : ' + error);
+                        }
+                    });
+                } else {
+                    console.log('데이터 있음');
+                }
+            }
+
         </script>
 
-      <div class="container full-wrapper" align="center">
+        <div class="container full-wrapper" align="center">
             <div >
                 <ul class="bxslider"  >
                     <li th:each="popupList : ${popupList}">
@@ -122,86 +472,72 @@
                                          onerror="this.src='/static/image/broken_image_48dp.png';this.style='object-fit:none';"/>
                                 </div>
                                 <div class="card-content">
-                                        <span class="card-title activator grey-text text-darken-4">
-                                            [[${newProductDto.nmProduct}]]
-                                            <i class="material-icons right">more_vert</i>
-                                        </span>
-                                    <p><a href="#!">This is a link</a></p>
+                                    <span class="card-title activator grey-text text-darken-4">
+                                        [[${newProductDto.nmProduct}]]
+                                    </span>
+                                    <p th:text="${#numbers.formatDecimal(newProductDto.sellPrice, 0, 'COMMA', 0, 'POINT')} + '원'"></p>
                                 </div>
-                                <div class="card-reveal">
+                                <!--<div class="card-reveal">
                                         <span class="card-title grey-text text-darken-4" th:text="${newProductDto.nmProduct}"><i class="material-icons right">close</i>
                                         </span>
                                         <p th:text="${newProductDto.titleProduct}"></p>
-                                </div>
+                                </div>-->
                                 <div class="card-action">
-                                    <a href="#">This is a link</a>
-                                    <a href="#">This is a link</a>
+                                    <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" th:href="${'#new-item-modal' + listStatus.index}">View</a>
+                                </div>
+                            </div>
+                            <div th:id="${'new-item-modal' + listStatus.index}" class="modal product-detail-modal" data-loaded="false" th:data-seq-product="${newProductDto.seqProduct}" th:data-id-main-img="${newProductDto.idMainImg}">
+                                <div class="modal-content pt-2">
+                                    <div class="row" th:id="${'product' + listStatus.index}">
+                                        <div class="col s12">
+                                            <a class="modal-close right"><i class="material-icons">close</i></a>
+                                        </div>
+                                        <div class="col s12">
+                                            <div class="card" style="padding-bottom: 2%;">
+                                                <div class="card-content">
+                                                    <!-- 이미지 슬라이더 -->
+                                                    <div class="col m6 s12">
+                                                        <div class="row">
+                                                            <div class="carousel carousel-slider center" data-indicators="true">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- 상품 정보 영역 -->
+                                                    <div class="col s12 m6">
+                                                        <h5 class="detail-product-nm" th:text="${newProductDto.nmProduct}" th:data-idmainimg="${newProductDto.idMainImg}">품번</h5>
+                                                        <p class="detail-product-title" th:text="${newProductDto.titleProduct}">상품 타이틀</p>
+                                                        <hr class="mb-5">
+                                                        <p class="col s6">단가</p>
+                                                        <p class="col s6 detail-product-price" th:text="${#numbers.formatDecimal(newProductDto.sellPrice, 0, 'COMMA', 0, 'POINT')} + '원'">판매가격</p>
+                                                        <p class="col s6 detail-product-size" style="margin-top: 2.5rem;">사이즈 선택</p>
+                                                        <div class="col s6 size-filter" style="margin-bottom: 1rem; margin-top: 2rem;min-height: 37px;">
+                                                            <ul>
+                                                                <li style="margin-right: 3px;"><a>1</a></li>
+                                                                <li style="margin-right: 3px;"><a>2</a></li>
+                                                                <li style="margin-right: 3px;"><a>3</a></li>
+                                                                <li style="margin-right: 3px;"><a>4</a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <ul th:id="${'selected-collection' + listStatus.index}" class="collection z-depth-1 selected-collection" style="display: none;">
+                                                        </ul>
+                                                        <a class="col s12 m12 l5 waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2 add-to-cart">카트에 담기</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- 상품 상세설명 영역 -->
+                                        <div class="col s12">
+                                            <div class="card">
+                                                <div class="card-content">
+                                                    <th:block th:utext="${newProductDto.descProduct}"></th:block>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-<!--                        <div class="col s12 m6 l3">
-
-                            <div class="card">
-                                <div class="card-image waves-effect waves-block waves-light">
-                                    <img class="activator" src="../../../static/image/gallery/19.png" />
-                                </div>
-                                <div class="card-content">
-                                        <span class="card-title activator grey-text text-darken-4">Card Title <i class="material-icons right">more_vert</i>
-                                        </span>
-                                    <p><a href="#!">This is a link</a></p>
-                                </div>
-                                <div class="card-reveal">
-                                        <span class="card-title grey-text text-darken-4">Card Title <i class="material-icons right">close</i>
-                                        </span>
-                                    <p>Here is some more information about this product that is only revealed once clicked
-                                        on.</p>
-                                </div>
-                                <div class="card-action"><a href="#">This is a link</a> <a href="#">This is a link</a></div>
-                            </div>
-                        </div>
-                        <div class="col s12 m6 l3">
-                            <div class="card">
-                                <div class="card-image waves-effect waves-block waves-light">
-                                    <img class="activator" src="../../../static/image/gallery/20.png" />
-                                </div>
-                                <div class="card-content">
-                                        <span class="card-title activator grey-text text-darken-4">Card Title <i class="material-icons right">more_vert</i>
-                                        </span>
-                                    <p><a href="#!">This is a link</a></p>
-                                </div>
-                                <div class="card-reveal">
-                                        <span class="card-title grey-text text-darken-4">Card Title <i class="material-icons right">close</i>
-                                        </span>
-                                    <p>Here is some more information about this product that is only revealed once clicked
-                                        on.</p>
-                                </div>
-                                <div class="card-action"><a href="#">This is a link</a> <a href="#">This is a link</a></div>
-                            </div>
-                        </div>
-                        <div class="col s12 m6 l3">
-                            <div class="card sticky-action">
-                                <div class="card-image waves-effect waves-block waves-light">
-                                    <img class="activator" src="../../../static/image/gallery/21.png" />
-                                </div>
-                                <div class="card-content">
-                                        <span class="card-title activator grey-text text-darken-4">Card Title <i class="material-icons right">more_vert</i>
-                                        </span>
-                                    <p><a href="#!">This is a link</a></p>
-                                </div>
-                                <div class="card-action"><a href="#">This is a link</a> <a href="#">This is a link</a></div>
-                                <div class="card-reveal">
-                                        <span class="card-title grey-text text-darken-4">Card Title <i class="material-icons right">close</i>
-                                        </span>
-                                    <p>Here is some more information about this product that is only revealed once clicked
-                                        on.</p>
-                                </div>
-                            </div>
-
-                        </div>-->
                     </div>
-
-
-
                 </li>
             </ul>
         </div>
@@ -217,87 +553,79 @@
                 <li>
                     <div class="row">
                         <div class="col s12 m6 l3" th:each="hotProductDto, listStatus: ${hotProductList}">
-
                             <div class="card">
                                 <div class="card-image waves-effect waves-block waves-light">
                                     <img class="activator" th:src="${'/attach/resizeImgView.do?idAttach=' + hotProductDto.idMainImg + '&resizeWidth=318'}"
                                          onerror="this.src='/static/image/broken_image_48dp.png';this.style='object-fit:none';"/>
                                 </div>
                                 <div class="card-content">
-                                        <span class="card-title activator grey-text text-darken-4">
-                                            [[${hotProductDto.nmProduct}]]
-                                            <i class="material-icons right">more_vert</i>
-                                        </span>
-                                    <p><a href="#!">This is a link</a></p>
+                                    <span class="card-title activator grey-text text-darken-4">
+                                        [[${hotProductDto.nmProduct}]]
+                                        <!--                                        <i class="material-icons right">more_vert</i>-->
+                                    </span>
+                                    <p th:text="${#numbers.formatDecimal(hotProductDto.sellPrice, 0, 'COMMA', 0, 'POINT')} + '원'"></p>
                                 </div>
                                 <!--테스트-->
-                                <div class="card-reveal">
+                                <!--<div class="card-reveal">
                                         <span class="card-title grey-text text-darken-4" th:text="${hotProductDto.nmProduct}"><i class="material-icons right">close</i>
                                         </span>
                                         <p th:text="${hotProductDto.titleProduct}"></p>
+                                </div>-->
+                                <div class="card-action">
+                                    <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" th:href="${'#hot-item-modal' + listStatus.index}">View</a>
                                 </div>
-                                <div class="card-action"><a href="#">This is a link</a> <a href="#">This is a link</a></div>
+                            </div>
+                            <div th:id="${'hot-item-modal' + listStatus.index}" class="modal product-detail-modal" data-loaded="false" th:data-seq-product="${hotProductDto.seqProduct}" th:data-id-main-img="${hotProductDto.idMainImg}">
+                                <div class="modal-content pt-2">
+                                    <div class="row" th:id="${'product' + listStatus.index}">
+                                        <div class="col s12">
+                                            <a class="modal-close right"><i class="material-icons">close</i></a>
+                                        </div>
+                                        <div class="col s12">
+                                            <div class="card" style="padding-bottom: 2%;">
+                                                <div class="card-content">
+                                                    <!-- 이미지 슬라이더 -->
+                                                    <div class="col m6 s12">
+                                                        <div class="row">
+                                                            <div class="carousel carousel-slider center" data-indicators="true">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- 상품 정보 영역 -->
+                                                    <div class="col s12 m6">
+                                                        <h5 class="detail-product-nm" th:text="${hotProductDto.nmProduct}" th:data-idmainimg="${hotProductDto.idMainImg}">품번</h5>
+                                                        <p class="detail-product-title" th:text="${hotProductDto.titleProduct}">상품 타이틀</p>
+                                                        <hr class="mb-5">
+                                                        <p class="col s6">단가</p>
+                                                        <p class="col s6 detail-product-price" th:text="${#numbers.formatDecimal(hotProductDto.sellPrice, 0, 'COMMA', 0, 'POINT')} + '원'">판매가격</p>
+                                                        <p class="col s6 detail-product-size" style="margin-top: 2.5rem;">사이즈 선택</p>
+                                                        <div class="col s6 size-filter" style="margin-bottom: 1rem; margin-top: 2rem;min-height: 37px;">
+                                                            <ul>
+                                                                <li style="margin-right: 3px;"><a>1</a></li>
+                                                                <li style="margin-right: 3px;"><a>2</a></li>
+                                                                <li style="margin-right: 3px;"><a>3</a></li>
+                                                                <li style="margin-right: 3px;"><a>4</a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <ul th:id="${'selected-collection' + listStatus.index}" class="collection z-depth-1 selected-collection" style="display: none;">
+                                                        </ul>
+                                                        <a class="col s12 m12 l5 waves-effect waves-light btn gradient-45deg-purple-deep-orange mt-2 add-to-cart">카트에 담기</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- 상품 상세설명 영역 -->
+                                        <div class="col s12">
+                                            <div class="card">
+                                                <div class="card-content">
+                                                    <th:block th:utext="${hotProductDto.descProduct}"></th:block>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <!--<div class="col s12 m6 l3">
-                            <div class="card">
-                                <div class="card-image waves-effect waves-block waves-light">
-                                    <img class="activator" src="../../../static/image/gallery/12.png" />
-                                </div>
-                                <div class="card-content">
-                                        <span class="card-title activator grey-text text-darken-4">Card Title <i class="material-icons right">more_vert</i>
-                                        </span>
-                                    <p><a href="#!">This is a link</a></p>
-                                </div>
-                                <div class="card-reveal">
-                                        <span class="card-title grey-text text-darken-4">Card Title <i class="material-icons right">close</i>
-                                        </span>
-                                    <p>Here is some more information about this product that is only revealed once clicked
-                                        on.</p>
-                                </div>
-                                <div class="card-action"><a href="#">This is a link</a> <a href="#">This is a link</a></div>
-                            </div>
-                        </div>
-                        <div class="col s12 m6 l3">
-                            <div class="card">
-                                <div class="card-image waves-effect waves-block waves-light">
-                                    <img class="activator" src="../../../static/image/gallery/13.png" />
-                                </div>
-                                <div class="card-content">
-                                        <span class="card-title activator grey-text text-darken-4">Card Title <i class="material-icons right">more_vert</i>
-                                        </span>
-                                    <p><a href="#!">This is a link</a></p>
-                                </div>
-                                <div class="card-reveal">
-                                        <span class="card-title grey-text text-darken-4">Card Title <i class="material-icons right">close</i>
-                                        </span>
-                                    <p>Here is some more information about this product that is only revealed once clicked
-                                        on.</p>
-                                </div>
-                                <div class="card-action"><a href="#">This is a link</a> <a href="#">This is a link</a></div>
-                            </div>
-                        </div>
-                        <div class="col s12 m6 l3">
-                            <div class="card sticky-action">
-                                <div class="card-image waves-effect waves-block waves-light">
-                                    <img class="activator" src="../../../static/image/gallery/14.png" />
-                                </div>
-                                <div class="card-content">
-                                        <span class="card-title activator grey-text text-darken-4">Card Title <i class="material-icons right">more_vert</i>
-                                        </span>
-                                    <p><a href="#!">This is a link</a></p>
-                                </div>
-                                <div class="card-action"><a href="#">This is a link</a> <a href="#">This is a link</a></div>
-                                <div class="card-reveal">
-                                        <span class="card-title grey-text text-darken-4">Card Title <i class="material-icons right">close</i>
-                                        </span>
-                                    <p>Here is some more information about this product that is only revealed once clicked
-                                        on.</p>
-                                </div>
-                            </div>
-
-                        </div>-->
                     </div>
                 </li>
             </ul>
@@ -324,30 +652,30 @@
                     </div>
 
                     <div class="card-content">
-                            <div class="row">
-                                <div class="col s12">
-                                    <table >
-                                        <thead>
-                                        <tr >
-                                            <th >제목</th>
-                                            <th style="text-align: center">등록자</th>
-                                            <th style="text-align: center">등록일</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr th:each="noticeDto,listStatus : ${smallNoticeList}">
+                        <div class="row">
+                            <div class="col s12">
+                                <table >
+                                    <thead>
+                                    <tr >
+                                        <th >제목</th>
+                                        <th style="text-align: center">등록자</th>
+                                        <th style="text-align: center">등록일</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="noticeDto,listStatus : ${smallNoticeList}">
 
-                                            <td><a th:dataCatId="${noticeDto.seqNotice}" th:onclick="|javascript:goNotice(this.getAttribute('dataCatId'));|"><span th:text="${noticeDto.titleNotice}"></span></a></td>
-                                            <td style="text-align: center"><span th:text="${noticeDto.register}"></span></td>
-                                            <td style="text-align: center"><span th:text="${#temporals.format(noticeDto.regDt, 'yyyy-MM-dd')}"></span></td>
-                                        </tr>
-                                        </tbody>
+                                        <td><a th:dataCatId="${noticeDto.seqNotice}" th:onclick="|javascript:goNotice(this.getAttribute('dataCatId'));|"><span th:text="${noticeDto.titleNotice}"></span></a></td>
+                                        <td style="text-align: center"><span th:text="${noticeDto.register}"></span></td>
+                                        <td style="text-align: center"><span th:text="${#temporals.format(noticeDto.regDt, 'yyyy-MM-dd')}"></span></td>
+                                    </tr>
+                                    </tbody>
 
-                                    </table>
-                                </div>
+                                </table>
                             </div>
                         </div>
                     </div>
+                </div>
 
 
                 <div class="col s12 m6">
