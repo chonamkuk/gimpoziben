@@ -40,7 +40,6 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
                         seqUpperIn(searchMap),
                         ynDisplayEq(searchMap)
                 )
-//                .join(product.vendor, vendor)
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .orderBy(getOrderSpecifier(pageable.getSort()).stream().toArray(OrderSpecifier[]::new))
@@ -86,14 +85,14 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
         if(searchMap.getOrDefault("seqCategory",null) == null) {
             return null;
         }
-        return product.seqProduct.eq(JPAExpressions.select(prodCate.seqProduct).from(prodCate).where(prodCate.seqCategory.eq((Long) searchMap.get("seqCategory"))));
+        return product.seqProduct.in(JPAExpressions.select(prodCate.seqProduct).from(prodCate).where(prodCate.seqCategory.eq((Long) searchMap.get("seqCategory"))));
     }
 
     private BooleanExpression seqUpperIn(HashMap<String,Object> searchMap) {
         if(searchMap.getOrDefault("seqUpper",null) == null) {
             return null;
         }
-        return product.seqProduct.eq(
+        return product.seqProduct.in(
                 JPAExpressions
                         .select(prodCate.seqProduct)
                         .from(prodCate)

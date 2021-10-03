@@ -20,7 +20,7 @@
     <link rel="stylesheet" type="text/css" href="/static/vendors/data-tables/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="/static/vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="/static/vendors/data-tables/css/select.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="/static/css-rtl/layouts/style-horizontal.css">
+<!--    <link rel="stylesheet" type="text/css" href="/static/css-rtl/layouts/style-horizontal.css">-->
     <link rel="stylesheet" type="text/css" href="/static/lib/materialize/css/materialize.css">
     <link rel="stylesheet" type="text/css" href="/static/lib/designTemplate/css/style.css">
     <link rel="stylesheet" type="text/css" href="/static/lib/designTemplate/css/style-horizontal.css">
@@ -469,24 +469,59 @@
                         </ul>
                     </li>
                     <li class="">
-                        <a class="dropdown-menu" href="#" data-target="formsTables2">
+                        <a class="dropdown-menu" href="Javascript:void(0)" data-target="formsTables2">
                             <i class="material-icons">store</i>
-                            <span><span class="dropdown-title" data-i18n="Menu levels">제품소개</span><i class="material-icons right">keyboard_arrow_down</i></span>
+                            <span><span class="dropdown-title" data-i18n="제품소개">제품소개</span><i class="material-icons right">keyboard_arrow_down</i></span>
                         </a>
                         <ul class="dropdown-content dropdown-horizontal-list" id="formsTables2">
+                            <li data-menu=""><a href="/shop/list.do"><span data-i18n="전체">전체</span></a></li>
                             <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu">
-                                <a class="dropdownSub-menu" href="#" data-target="thirdDropdown">
-                                    <span data-i18n="Second level 3">제품리스트</span><i class="material-icons right">chevron_right</i>
-                                </a>
-                                <ul class="dropdown-content dropdown-horizontal-list" id="thirdDropdown">
-                                    <li data-menu=""><a href="/shop/list.do"><span data-i18n="Child 1">전체</span></a>
-                                    </li>
-                                    <li data-menu=""><a href="#"><span data-i18n="Child 2">상의</span></a>
-                                    </li>
-                                    <li data-menu=""><a href="#"><span data-i18n="Child 3">하의</span></a>
-                                    </li>
+                                <a class="dropdownSub-menu" href="Javascript:void(0)" data-target="upperCategory-1"><span data-i18n="춘하복">춘하복</span><i class="material-icons right">chevron_right</i></a>
+                                <ul class="dropdown-content dropdown-horizontal-list" id="upperCategory-1">
+                                    <li data-menu=""><a href="/shop/list.do?seqUpperCategory=1"><span data-i18n="전체">전체</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=6"><span data-i18n="점퍼">점퍼</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=7"><span data-i18n="바지">바지</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=8"><span data-i18n="상하세트">상하세트</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=9"><span data-i18n="제전복">제전복</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=10"><span data-i18n="조끼">조끼</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=11"><span data-i18n="티셔츠">티셔츠</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=12"><span data-i18n="셔츠">셔츠</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=13"><span data-i18n="경비복">경비복</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=14"><span data-i18n="정비복">정비복</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=15"><span data-i18n="악세사리">악세사리</span></a></li>
                                 </ul>
                             </li>
+                            <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu">
+                                <a class="dropdownSub-menu" href="Javascript:void(0)" data-target="upperCategory-2"><span data-i18n="추동복">추동복</span><i class="material-icons right">chevron_right</i></a>
+                                <ul class="dropdown-content dropdown-horizontal-list" id="upperCategory-2">
+                                    <li data-menu=""><a href="/shop/list.do?seqUpperCategory=2"><span data-i18n="전체">전체</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=16"><span data-i18n="점퍼">점퍼</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=17"><span data-i18n="바지">바지</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=18"><span data-i18n="상하세트">상하세트</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=19"><span data-i18n="파카">파카</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=20"><span data-i18n="조끼">조끼</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=21"><span data-i18n="티셔츠">티셔츠</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=22"><span data-i18n="셔츠">셔츠</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=23"><span data-i18n="경비복">경비복</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=24"><span data-i18n="정비복">정비복</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=25"><span data-i18n="악세사리">악세사리</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu">
+                                <a class="dropdownSub-menu" href="Javascript:void(0)" data-target="upperCategory-3"><span data-i18n="안전화">안전화</span><i class="material-icons right">chevron_right</i></a>
+                                <ul class="dropdown-content dropdown-horizontal-list" id="upperCategory-3">
+                                    <li data-menu=""><a href="/shop/list.do?seqUpperCategory=3"><span data-i18n="전체">전체</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=26"><span data-i18n="4인치 고급형">4인치 고급형</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=27"><span data-i18n="4인치 일반형">4인치 일반형</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=28"><span data-i18n="5인치 고급형">5인치 고급형</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=29"><span data-i18n="6인치 고급형">6인치 고급형</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=30"><span data-i18n="6인치 일반형">6인치 일반형</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=31"><span data-i18n="8인치 일반형">8인치 일반형</span></a></li>
+                                    <li data-menu=""><a href="/shop/list.do?seqCategory=32"><span data-i18n="방한화">방한화</span></a></li>
+                                </ul>
+                            </li>
+                            <li data-menu=""><a href="/shop/list.do?seqUpperCategory=4"><span data-i18n="건강화">건강화</span></a></li>
+                            <li data-menu=""><a href="/shop/list.do?seqUpperCategory=5"><span data-i18n="일반용품">일반용품</span></a></li>
                         </ul>
                     </li>
                     <li>
@@ -528,10 +563,20 @@
                         </ul>
                     </li>
 
+                    <li th:if="${session.user?.userRole == 'SUPERADMIN'}">
+                        <a class="dropdown-menu" href="#" data-target="formsTables7">
+                            <i class="material-icons">settings</i>
+                            <span><span class="dropdown-title" data-i18n="Menu levels">제품관리</span><i class="material-icons right">keyboard_arrow_down</i></span>
+                        </a>
+                        <ul class="dropdown-content dropdown-horizontal-list" id="formsTables7">
+                            <li data-menu=""><a href="/admin/shop/list.do"><span data-i18n="Second level 1">제품관리</span></a>
+                            </li>
+                            <li data-menu=""><a href="/admin/order/list.do"><span data-i18n="Second level 2">주문관리</span></a>
+                            </li>
+                        </ul>
+                    </li>
+
                 </ul>
-                <!-- END: Horizontal nav start-->
-            </div>
-        </nav>
     </div>
 
     <!-- BEGIN: SideNav-->
@@ -558,20 +603,60 @@
                 <a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">store</i><span class="menu-title" data-i18n="Menu levels">제품소개</span></a>
                 <div class="collapsible-body">
                     <ul class="collapsible collapsible-sub" data-collapsible="accordion">
-                        <li><a class="collapsible-header waves-effect waves-cyan" href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level child">제품리스트</span></a>
+                        <li><a href="/shop/list.do"><i class="material-icons">radio_button_unchecked</i><span data-i18n="전체">전체</span></a></li>
+                        <li>
+                            <a class="collapsible-header waves-effect waves-cyan" href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="춘하복">춘하복</span></a>
                             <div class="collapsible-body">
                                 <ul class="collapsible" data-collapsible="accordion">
-                                    <li><a href="/shop/list.do"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Third level">전체</span></a>
-                                    </li>
-                                    <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Third level">상의</span></a>
-                                    </li>
-                                    <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Third level">하의</span></a>
-                                    </li>
+                                    <li><a href="/shop/list.do?seqUpperCategory=1"><i class="material-icons"></i><span data-i18n="전체">전체</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=6"><i class="material-icons"></i><span data-i18n="점퍼점퍼">점퍼</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=7"><i class="material-icons"></i><span data-i18n="바지">바지</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=8"><i class="material-icons"></i><span data-i18n="상하세트">상하세트</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=9"><i class="material-icons"></i><span data-i18n="제전복">제전복</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=10"><i class="material-icons"></i><span data-i18n="조끼">조끼</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=11"><i class="material-icons"></i><span data-i18n="티셔츠">티셔츠</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=12"><i class="material-icons"></i><span data-i18n="셔츠">셔츠</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=13"><i class="material-icons"></i><span data-i18n="경비복">경비복</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=14"><i class="material-icons"></i><span data-i18n="정비복">정비복</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=15"><i class="material-icons"></i><span data-i18n="악세사리">악세사리</span></a></li>
                                 </ul>
                             </div>
                         </li>
-                        <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level">주문현황</span></a>
+                        <li>
+                            <a class="collapsible-header waves-effect waves-cyan" href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="추동복">추동복</span></a>
+                            <div class="collapsible-body">
+                                <ul class="collapsible" data-collapsible="accordion">
+                                    <li><a href="/shop/list.do?seqUpperCategory=2"><i class="material-icons"></i><span data-i18n="전체">전체</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=16"><i class="material-icons"></i><span data-i18n="점퍼점퍼">점퍼</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=17"><i class="material-icons"></i><span data-i18n="바지">바지</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=18"><i class="material-icons"></i><span data-i18n="상하세트">상하세트</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=19"><i class="material-icons"></i><span data-i18n="제전복">파카</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=20"><i class="material-icons"></i><span data-i18n="조끼">조끼</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=21"><i class="material-icons"></i><span data-i18n="티셔츠">티셔츠</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=22"><i class="material-icons"></i><span data-i18n="셔츠">셔츠</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=23"><i class="material-icons"></i><span data-i18n="경비복">경비복</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=24"><i class="material-icons"></i><span data-i18n="정비복">정비복</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=25"><i class="material-icons"></i><span data-i18n="악세사리">악세사리</span></a></li>
+                                </ul>
+                            </div>
                         </li>
+                        <li>
+                            <a class="collapsible-header waves-effect waves-cyan" href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="안전화">안전화</span></a>
+                            <div class="collapsible-body">
+                                <ul class="collapsible" data-collapsible="accordion">
+                                    <li><a href="/shop/list.do?seqUpperCategory=3"><i class="material-icons"></i><span data-i18n="전체">전체</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=26"><i class="material-icons"></i><span data-i18n="4인치 고급형">4인치 고급형</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=27"><i class="material-icons"></i><span data-i18n="4인치 일반형">4인치 일반형</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=28"><i class="material-icons"></i><span data-i18n="5인치 고급형">5인치 고급형</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=29"><i class="material-icons"></i><span data-i18n="6인치 고급형">6인치 고급형</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=30"><i class="material-icons"></i><span data-i18n="6인치 일반형">6인치 일반형</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=31"><i class="material-icons"></i><span data-i18n="8인치 일반형">8인치 일반형</span></a></li>
+                                    <li><a href="/shop/list.do?seqCategory=32"><i class="material-icons"></i><span data-i18n="방한화">방한화</span></a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><a href="/shop/list.do?seqUpperCategory=4"><i class="material-icons">radio_button_unchecked</i><span data-i18n="건강화">건강화</span></a></li>
+                        <li><a href="/shop/list.do?seqUpperCategory=5"><i class="material-icons">radio_button_unchecked</i><span data-i18n="일반용품">일반용품</span></a></li>
                     </ul>
                 </div>
             </li>
@@ -585,13 +670,20 @@
                 <a class="waves-effect waves-cyan " href="#"><i class="material-icons">question_answer</i><span class="menu-title">Q&A</span></a>
             </li>
             <li class="bold" th:if="${session.user?.userRole == 'SUPERADMIN'}">
-                <a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">build</i><span class="menu-title" data-i18n="Menu levels">작업일보</span></a>
+                <a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">build</i><span class="menu-title" data-i18n="작업일보">작업일보</span></a>
                 <div class="collapsible-body">
                     <ul class="collapsible collapsible-sub" data-collapsible="accordion">
-                        <li data-menu=""><a href="/admin/work/jasuList.do"><span data-i18n="Second level 1">자수작업</span></a>
-                        </li>
-                        <li data-menu=""><a href="/admin/work/wanjangList.do"><span data-i18n="Second level 2">완장작업</span></a>
-                        </li>
+                        <li data-menu=""><a href="/admin/work/jasuList.do"><i class="material-icons">radio_button_unchecked</i><span data-i18n="자수작업">자수작업</span></a></li>
+                        <li data-menu=""><a href="/admin/work/wanjangList.do"><i class="material-icons">radio_button_unchecked</i><span data-i18n="완장작업">완장작업</span></a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="bold" th:if="${session.user?.userRole == 'SUPERADMIN'}">
+                <a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">settings</i><span class="menu-title" data-i18n="제품관리">제품관리</span></a>
+                <div class="collapsible-body">
+                    <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                        <li data-menu=""><a href="/admin/shop/list.do"><i class="material-icons">radio_button_unchecked</i><span data-i18n="제품관리">제품관리</span></a></li>
+                        <li data-menu=""><a href="/admin/order/list.do"><i class="material-icons">radio_button_unchecked</i><span data-i18n="주문관리">주문관리</span></a></li>
                     </ul>
                 </div>
             </li>
@@ -948,7 +1040,7 @@
 
             // 카트수량 적용
             $('#cart-detail-modal').find('.update').unbind('click').on('click', function(){
-                let cart = JSON.parse(localStorage.getItem('cart')); // 카트목록
+                let cart = JSON.parse(sessionStorage.getItem('cart')); // 카트목록
                 let detailedCartId = $('#cart-detail-table-body').data('detailed-cart-id'); // 상세조회 카트항목 아이디
                 let detailedCartItem = cart.find(x => x.cartId == detailedCartId); // 조회중인 카트항목
                 // 카트수량 수정내용 적용
@@ -956,7 +1048,7 @@
                     detailedCartItem.products.find(x => x.seqSize == $(item).data('seq-size')).amountOrder = $(item).val();
                 });
                 // 로컬 스토리지 저장
-                localStorage.setItem('cart', JSON.stringify(cart));
+                sessionStorage.setItem('cart', JSON.stringify(cart));
                 // 카트 상세조회 모달 닫기
                 $('#cart-detail-modal').modal('close');
                 // 데이터 테이블 새로고침
@@ -977,7 +1069,7 @@
                 $('#cart-table-body input[type=checkbox]:checked').each(function(index, item){
                     orderItemId.push($(item).val());
                 });
-                let cart = JSON.parse(localStorage.getItem('cart')); // 카트목록
+                let cart = JSON.parse(sessionStorage.getItem('cart')); // 카트목록
                 let orderItems = cart.filter(x => orderItemId.includes(x.cartId)); // 서버에 전달할 주문목록
                 // 주문일
                 $('#invoice-data-text').text((new Date()).format('yyyy-MM-dd'));
@@ -1026,7 +1118,7 @@
             //         $('#cart-table-body input[type=checkbox]:checked').each(function(index, item){
             //             orderItemId.push($(item).val());
             //         });
-            //         let cart = JSON.parse(localStorage.getItem('cart')); // 카트목록
+            //         let cart = JSON.parse(sessionStorage.getItem('cart')); // 카트목록
             //         let orderItems = cart.filter(x => orderItemId.includes(x.cartId)); // 서버에 전달할 주문목록
             //         // 주문목록에 있는 cartId, seqSize 를 검색해서 반영
             //         orderItems.forEach(function(cartItem, cartIndex){
@@ -1051,7 +1143,7 @@
             //                 console.log('data :: ' + JSON.stringify(data));
             //                 if(data.result == 0) {
             //                     // 서버기능 호출 성공시 주문한 상품 filter 하여 cart에 반영
-            //                     // localStorage.setItem('cart', JSON.stringify(restItems));
+            //                     // sessionStorage.setItem('cart', JSON.stringify(restItems));
             //                     // 데이터 테이블 새로고침
             //                     showCartList();
             //                 } else {
@@ -1099,7 +1191,7 @@
                     $('#cart-table-body input[type=checkbox]:checked').each(function(index, item){
                         orderItemId.push($(item).val());
                     });
-                    let cart = JSON.parse(localStorage.getItem('cart')); // 카트목록
+                    let cart = JSON.parse(sessionStorage.getItem('cart')); // 카트목록
                     let restItems = cart.filter(x => !orderItemId.includes(x.cartId)); // 서버 호출 후 카트에 반영할 목록
                     console.log(restItems);
 
