@@ -1040,7 +1040,7 @@
 
             // 카트수량 적용
             $('#cart-detail-modal').find('.update').unbind('click').on('click', function(){
-                let cart = JSON.parse(sessionStorage.getItem('cart')); // 카트목록
+                let cart = JSON.parse(localStorage.getItem('cart')); // 카트목록
                 let detailedCartId = $('#cart-detail-table-body').data('detailed-cart-id'); // 상세조회 카트항목 아이디
                 let detailedCartItem = cart.find(x => x.cartId == detailedCartId); // 조회중인 카트항목
                 // 카트수량 수정내용 적용
@@ -1048,7 +1048,7 @@
                     detailedCartItem.products.find(x => x.seqSize == $(item).data('seq-size')).amountOrder = $(item).val();
                 });
                 // 로컬 스토리지 저장
-                sessionStorage.setItem('cart', JSON.stringify(cart));
+                localStorage.setItem('cart', JSON.stringify(cart));
                 // 카트 상세조회 모달 닫기
                 $('#cart-detail-modal').modal('close');
                 // 데이터 테이블 새로고침
@@ -1069,7 +1069,7 @@
                 $('#cart-table-body input[type=checkbox]:checked').each(function(index, item){
                     orderItemId.push($(item).val());
                 });
-                let cart = JSON.parse(sessionStorage.getItem('cart')); // 카트목록
+                let cart = JSON.parse(localStorage.getItem('cart')); // 카트목록
                 let orderItems = cart.filter(x => orderItemId.includes(x.cartId)); // 서버에 전달할 주문목록
                 // 주문일
                 $('#invoice-data-text').text((new Date()).format('yyyy-MM-dd'));
@@ -1118,7 +1118,7 @@
             //         $('#cart-table-body input[type=checkbox]:checked').each(function(index, item){
             //             orderItemId.push($(item).val());
             //         });
-            //         let cart = JSON.parse(sessionStorage.getItem('cart')); // 카트목록
+            //         let cart = JSON.parse(localStorage.getItem('cart')); // 카트목록
             //         let orderItems = cart.filter(x => orderItemId.includes(x.cartId)); // 서버에 전달할 주문목록
             //         // 주문목록에 있는 cartId, seqSize 를 검색해서 반영
             //         orderItems.forEach(function(cartItem, cartIndex){
@@ -1143,7 +1143,7 @@
             //                 console.log('data :: ' + JSON.stringify(data));
             //                 if(data.result == 0) {
             //                     // 서버기능 호출 성공시 주문한 상품 filter 하여 cart에 반영
-            //                     // sessionStorage.setItem('cart', JSON.stringify(restItems));
+            //                     // localStorage.setItem('cart', JSON.stringify(restItems));
             //                     // 데이터 테이블 새로고침
             //                     showCartList();
             //                 } else {
@@ -1191,7 +1191,7 @@
                     $('#cart-table-body input[type=checkbox]:checked').each(function(index, item){
                         orderItemId.push($(item).val());
                     });
-                    let cart = JSON.parse(sessionStorage.getItem('cart')); // 카트목록
+                    let cart = JSON.parse(localStorage.getItem('cart')); // 카트목록
                     let restItems = cart.filter(x => !orderItemId.includes(x.cartId)); // 서버 호출 후 카트에 반영할 목록
                     console.log(restItems);
 
@@ -1206,7 +1206,7 @@
                             console.log('data :: ' + JSON.stringify(data));
                             if(data.result == 0) {
                                 // 서버기능 호출 성공시 주문한 상품 filter 하여 cart에 반영
-                                sessionStorage.setItem('cart', JSON.stringify(restItems));
+                                localStorage.setItem('cart', JSON.stringify(restItems));
                                 // 데이터 테이블 새로고침
                                 showCartList();
                             } else {
@@ -1242,13 +1242,13 @@
                 $('#confirmModal').find('p').text('선택한 상품을 카트에서 삭제하시겠습니까?');
                 $('#confirmModal').modal('open');
                 $('#confirmModal').find('.confirm').unbind('click').on('click', function(){
-                    let cart = JSON.parse(sessionStorage.getItem('cart')); // 카트목록
+                    let cart = JSON.parse(localStorage.getItem('cart')); // 카트목록
                     $('#cart-table-body input[type=checkbox]:checked').each(function(index, item){
                         let removeCartId = $(item).val(); // 삭제할 카트항목 아이디
                         cart = cart.filter(x => x.cartId != removeCartId);
                     });
                     // 로컬 스토리지 저장
-                    sessionStorage.setItem('cart', JSON.stringify(cart));
+                    localStorage.setItem('cart', JSON.stringify(cart));
                     // 데이터 테이블 새로고침
                     showCartList();
                 });
@@ -1283,7 +1283,7 @@
             $('#cart-detail-table').DataTable().destroy();
             let detailedCartId = $(this).parent().prev().find('.cart-id').val();
             let product;
-            let cart = JSON.parse(sessionStorage.getItem('cart'));
+            let cart = JSON.parse(localStorage.getItem('cart'));
             let productDetail;
 
             detailedCartItem = cart.filter(x => x.cartId === detailedCartId)[0];
@@ -1365,11 +1365,11 @@
 
         function showCartList(){
             let cart; // 카트목록
-            if(sessionStorage.getItem('cart') != null) {
+            if(localStorage.getItem('cart') != null) {
                 $('#cart-table').DataTable().clear();
                 $('#cart-table').DataTable().destroy();
                 let cartItem;
-                cart = JSON.parse(sessionStorage.getItem('cart'));
+                cart = JSON.parse(localStorage.getItem('cart'));
                 cart.forEach(function(item, index){
                     let imageSrc = '/attach/resizeImgView.do?idAttach=' + cart[index].products[0].idMainImg + '&resizeWidth=200';
                     cartItem =
