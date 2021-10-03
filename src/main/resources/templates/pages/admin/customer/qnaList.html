@@ -13,7 +13,7 @@
     <title>GPSafty </title>
     <link rel="apple-touch-icon" href="/static/images/favicon/apple-touch-icon-152x152.png">
     <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon/favicon-32x32.png">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
     <!-- BEGIN: VENDOR CSS-->
     <link rel="stylesheet" type="text/css" href="/static/vendors/vendors.min.css">
     <link rel="stylesheet" type="text/css" href="/static/vendors/flag-icon/css/flag-icon.min.css">
@@ -615,7 +615,7 @@
                 <a class="waves-effect waves-cyan " href="/customer/faqList.do"><i class="material-icons">help_outline</i><span class="menu-title">FAQ</span></a>
             </li>
             <li class="bold">
-                <a class="waves-effect waves-cyan " href="#"><i class="material-icons">question_answer</i><span class="menu-title">Q&A</span></a>
+                <a class="waves-effect waves-cyan " href="/customer/qnaList.do"><i class="material-icons">question_answer</i><span class="menu-title">Q&A</span></a>
             </li>
             <li class="bold" th:if="${session.user?.userRole == 'SUPERADMIN'}">
                 <a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">build</i><span class="menu-title" data-i18n="작업일보">작업일보</span></a>
