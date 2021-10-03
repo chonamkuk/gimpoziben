@@ -32,7 +32,7 @@
     </script>
 </th:block>
 
-<div layout:fragment="content"  id="main">
+<div layout:fragment="content"  id="main" class="container">
     <div class="section section-data-tables">
         <!-- Page Length Options -->
         <div class="row">
@@ -57,7 +57,7 @@
                                             <td th:text="${orderDto.getSeqOrder()}"></td>
                                             <td th:text="${#temporals.format(orderDto.getDtOrder(), 'yyyy-MM-dd HH:mm:ss')}"></td>
                                             <td th:text="${orderDto.getTotalPriceOrder()}"></td>
-                                            <td th:text="${orderDto.getStatOrder().name()}"></td>
+                                            <td th:text="${orderDto.getStatOrder().getStatName()}"></td>
                                             <td>2011/01/25</td>
                                         </tr>
                                     </tbody>
