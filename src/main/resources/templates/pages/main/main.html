@@ -446,7 +446,7 @@
 
         <div class="container full-wrapper" align="center">
             <div >
-                <ul class="bxslider"  >
+                <ul class="bxslider" style="cursor: pointer" >
                     <li th:each="popupList : ${popupList}">
 
                         <img  th:src="@{/attach/resizeImgView.do?idAttach=} + ${popupList.idMainImg} "  th:dataCatId="${popupList.urlNotice}" th:onclick="|javascript:goUrl(this.getAttribute('dataCatId'),'N');|"/>
