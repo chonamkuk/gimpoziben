@@ -1,6 +1,7 @@
 package kr.co.kimpoziben.service;
 
 import kr.co.kimpoziben.config.PropertyConfig;
+import kr.co.kimpoziben.config.auth.SessionUser;
 import kr.co.kimpoziben.domain.code.OrderStat;
 import kr.co.kimpoziben.domain.entity.Order;
 import kr.co.kimpoziben.domain.entity.OrderProduct;
@@ -58,32 +59,11 @@ public class OrderService {
         modelMapper = new ModelMapper();
     }
 
-    @Transactional
-    public List<OrderDto> save(List<OrderDto> cartDtoList) {
-        // 주문 데이터 생성
-        OrderDto newOrderDto = new OrderDto();
-        newOrderDto.setIdCustomer("test"); // todo: 고객아이디 셋팅
-        newOrderDto.setStatOrder(OrderStat.A);
-        newOrderDto.setDtOrder(LocalDateTime.now());
-        Order order = orderRepository.save(modelMapper.map(newOrderDto, Order.class));
-
-        // OrderAddList 의 상품 데이터 생성
-        for(OrderDto orderDto : cartDtoList) {
-            orderDto.setSeqOrder(order.getSeqOrder());
-            for(OrderProductDto orderProductDto : orderDto.getProducts()) {
-                orderProductDto.setSeqOrder(orderDto.getSeqOrder());
-                OrderProduct orderProduct = orderProductRepository.save(modelMapper.map(orderProductDto, OrderProduct.class));
-                orderProductDto.setSeqProductOrder(orderProduct.getSeqProductOrder());
-            }
-        }
-
-        return cartDtoList;
-    }
 
     @Transactional
-    public OrderDto save(OrderDto orderDto) throws Exception {
+    public OrderDto save(OrderDto orderDto, SessionUser user) throws Exception {
         // 주문 데이터 생성
-        orderDto.setIdCustomer("test"); // todo: 고객아이디 셋팅
+        orderDto.setIdCustomer(user.getId());
         orderDto.setStatOrder(OrderStat.A);
         orderDto.setDtOrder(LocalDateTime.now());
         Order order = orderRepository.save(modelMapper.map(orderDto, Order.class));
@@ -105,7 +85,7 @@ public class OrderService {
         String excelFileName = "invoice" + "_" + orderDto.getSeqOrder().toString() +".xlsx";
         order.setPathFileExcel(excelPath + propertyConfig.getFilePathSeperator() + excelFileName);
         orderDto.setPathFileExcel(excelPath + propertyConfig.getFilePathSeperator() + excelFileName);
-        this.makeExcel(orderDto);
+        this.makeExcel(orderDto, user);
 
         // 관리자에게 메일발송
         org.thymeleaf.context.Context context = new org.thymeleaf.context.Context();
@@ -123,16 +103,14 @@ public class OrderService {
         // 고객에게 메일발송
         context.setVariable("mailHeader", "아래와 같이 주문이 완료되었습니다.");
         htmlTemplate = htmlTemplateEngine.process("order/mail-invoice", context);
-        emailUtil.sendEmail("unasd@daum.net", "paralysist@naver.com","김포지벤 - 주문접수",
+        emailUtil.sendEmail(user.getEmail(), "paralysist@naver.com","김포지벤 - 주문접수",
                             orderDto.getPathFileExcel(), excelFileName, htmlTemplate);
 
         return orderDto;
     }
 
     public List<OrderDto> getList(Pageable pageble, HashMap<String,Object> searchMap) throws Exception {
-//        HashMap result = new HashMap();
-        // todo: 고객아이디 셋팅
-        List<Order> orderList = orderRepository.findAllByIdCustomerAndStatOrderNotOrderBySeqOrderDesc("test", OrderStat.B);
+        List<Order> orderList = orderRepository.findAllByIdCustomerAndStatOrderNotOrderBySeqOrderDesc((Long)searchMap.get("idCustomer"), OrderStat.B);
 
         List<OrderDto> orderDtoList = new ArrayList();
         for(Order order : orderList) {
@@ -163,7 +141,7 @@ public class OrderService {
         return excelPath.toString();
     }
 
-    public void makeExcel(OrderDto orderDto) throws Exception {
+    public void makeExcel(OrderDto orderDto, SessionUser user) throws Exception {
         InputStream io = null;
         OutputStream os = null;
 
@@ -171,12 +149,11 @@ public class OrderService {
             io = new ClassPathResource("templates-excel/excel-invoice.xlsx").getInputStream();
             os = new FileOutputStream(orderDto.getPathFileExcel());
             Context context = new Context();
-            // todo: session 데이터
-            context.putVar("invoiceTel", "invoiceTel");
-            context.putVar("invoiceMail", "invoiceMail");
-            context.putVar("invoiceAddr", "invoiceAddr");
-            context.putVar("invoiceCompany", "invoiceCompany");
-            context.putVar("invoiceName", "invoiceName");
+            context.putVar("invoiceTel", user.getMobile());
+            context.putVar("invoiceMail", user.getEmail());
+            context.putVar("invoiceAddr", user.getAddrCompany());
+            context.putVar("invoiceCompany", user.getNmCompany());
+            context.putVar("invoiceName", user.getName());
 
             context.putVar("excelDataList", orderDto.getProducts());
             context.putVar("invoiceDate", orderDto.getDtOrder());

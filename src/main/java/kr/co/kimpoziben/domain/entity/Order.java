@@ -27,8 +27,8 @@ public class Order {
     @Column(name = "order_stat")
     private OrderStat statOrder;
 
-    @Column(name = "customer_id", length = 20, updatable = false)
-    private String idCustomer;
+    @Column(name = "customer_id", updatable = false)
+    private Long idCustomer;
 
     @Column(name = "order_dt", updatable = false)
     private LocalDateTime dtOrder;

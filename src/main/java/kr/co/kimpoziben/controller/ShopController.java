@@ -40,10 +40,6 @@ public class ShopController {
 
         SessionUser user = (SessionUser) request.getSession().getAttribute("user");
 
-        if(user != null) {
-            System.out.println("LoginUser ===> " + user.getName());
-        }
-
         model.addAttribute("resultList", result.get("resultList"));
         model.addAttribute("pagingResult", pageable.pagination((Page) result.get("pagingResult")));
         model.addAttribute("searchMap", searchMap);

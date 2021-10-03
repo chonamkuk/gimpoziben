@@ -1,5 +1,6 @@
 package kr.co.kimpoziben.config;
 
+import kr.co.kimpoziben.config.auth.AjaxAwareAuthenticationEntryPoint;
 import kr.co.kimpoziben.config.auth.UserRole;
 import kr.co.kimpoziben.interceptor.LoggerInterceptor;
 import kr.co.kimpoziben.interceptor.ReadableRequestWrapperFilter;
@@ -43,31 +44,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 .antMatchers("/order/**").hasAnyRole(UserRole.USER.name(), UserRole.USER.ADMIN.name(), UserRole.USER.SUPERADMIN.name())
                 .antMatchers("/admin/**").hasAnyRole(UserRole.USER.ADMIN.name(), UserRole.USER.SUPERADMIN.name())
                 .anyRequest().permitAll() // 기본적으로 permitAll
+                .and()
+                    .exceptionHandling()
+                    .authenticationEntryPoint(ajaxAwareAuthenticationEntryPoint("/oauth2/authorization/naver"))
+             .and()
+                 .formLogin()
+                    .loginPage("/oauth2/authorization/naver")
             .and()
                 .logout()
                     .logoutSuccessUrl("/")
             .and()
                 .oauth2Login()
                     .userInfoEndpoint()
-                        .userService(customOAuth2UserService);
+                        .userService(customOAuth2UserService)
+        ;
     }
 
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser("manager")
-//                .password(passwordEncoder().encode("1111"))
-//                .roles("ADMIN");
-//    }
-
-    //@Override
-    //public void addInterceptors(InterceptorRegistry registry) {
-        //registry.addInterceptor(loggerInterceptor())
-        //    .addPathPatterns("/**/delete.do");
-        //        .addPathPatterns("/**/detail.do");
-        //.excludePathPatterns("/test/**/")
-        //.excludePathPatterns("/users/login"); //로그인 쪽은 예외처리를 한다.
-    //}
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -88,4 +80,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 //    public ReadableRequestWrapperFilter readableRequestWrapperFilter() {
 //        return new ReadableRequestWrapperFilter();
 //    }
+
+    /**인증되지 않은 요청중 AJAX요청일 경우 403으로 응답, AJAX요청이 아닐 경우 login으로 리다이렉트
+     * @param url
+     * @return
+     */
+    private AjaxAwareAuthenticationEntryPoint ajaxAwareAuthenticationEntryPoint(String url) {
+        return new AjaxAwareAuthenticationEntryPoint(url);
+    }
 }

@@ -17,7 +17,7 @@ import java.util.List;
 public class OrderDto {
     private Long seqOrder;
     private OrderStat statOrder;
-    private String idCustomer;
+    private Long idCustomer;
     private LocalDateTime dtOrder;
     private Long totalPriceOrder;
     private String pathFileExcel;

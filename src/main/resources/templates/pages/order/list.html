@@ -1,10 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="../layout/default">
 
-</body>
+<!-- page CSS -->
+<th:block layout:fragment="css">
+    <link rel="stylesheet" type="text/css" href="/static/vendors/data-tables/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/vendors/data-tables/css/select.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/pages/data-tables.css">
+    <style>
+    </style>
+</th:block>
+
+<!-- page 스크립트 -->
+<th:block layout:fragment="script">
+    <script src="/static/vendors/data-tables/js/jquery.dataTables.min.js"></script>
+    <script src="/static/vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/static/vendors/data-tables/js/dataTables.select.min.js"></script>
+    <!-- BEGIN PAGE LEVEL JS-->
+    <script th:inline="javascript">
+
+        $(document).ready(function(e){
+            $('#page-length-option').DataTable({
+                "responsive": true,
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ]
+            });
+        });
+
+    </script>
+</th:block>
+
+<div layout:fragment="content"  id="main">
+    <div class="section section-data-tables">
+        <!-- Page Length Options -->
+        <div class="row">
+            <div class="col s12">
+                <div class="card">
+                    <div class="card-content">
+                        <h4 class="card-title">Page Length Options</h4>
+                        <div class="row">
+                            <div class="col s12">
+                                <table id="page-length-option" class="display">
+                                    <thead>
+                                        <tr>
+                                            <th>주문번호</th>
+                                            <th>주문일시</th>
+                                            <th>주문총액</th>
+                                            <th>주문상태</th>
+                                            <th>주문서 보기</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="orderDto,listStatus : ${resultList}">
+                                            <td th:text="${orderDto.getSeqOrder()}"></td>
+                                            <td th:text="${#temporals.format(orderDto.getDtOrder(), 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                            <td th:text="${orderDto.getTotalPriceOrder()}"></td>
+                                            <td th:text="${orderDto.getStatOrder().name()}"></td>
+                                            <td>2011/01/25</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>주문번호</th>
+                                            <th>주문일시</th>
+                                            <th>주문총액</th>
+                                            <th>주문상태</th>
+                                            <th>주문서 보기</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </html>

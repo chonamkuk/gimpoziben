@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order, Long>, JpaSpecificationExecutor<Order> {
-    List<Order> findAllByIdCustomerAndStatOrderNotOrderBySeqOrderDesc(String idCustomer, OrderStat orderStat);
+    List<Order> findAllByIdCustomerAndStatOrderNotOrderBySeqOrderDesc(Long idCustomer, OrderStat orderStat);
 }
