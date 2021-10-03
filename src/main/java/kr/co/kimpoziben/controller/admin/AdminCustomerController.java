@@ -1,5 +1,6 @@
 package kr.co.kimpoziben.controller.admin;
 
+import kr.co.kimpoziben.config.auth.SessionUser;
 import kr.co.kimpoziben.dto.AttachDto;
 import kr.co.kimpoziben.dto.QnaDto;
 import kr.co.kimpoziben.dto.NoticeDto;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +28,8 @@ public class AdminCustomerController {
     private WorkProductService workProductService;
 
     private AttachService attachService;
+
+
 
     @GetMapping("/faqList.do")
     public String write(Model model) throws Exception {
@@ -50,11 +54,17 @@ public class AdminCustomerController {
     }
 
     @GetMapping("/noticeList.do")
-    public String list2(Model model, final PageRequest pageable, HashMap<String,Object> searchMap
+    public String list2(Model model, final PageRequest pageable, HashMap<String,Object> searchMap, HttpServletRequest request
             ) throws Exception {
+        SessionUser user = (SessionUser) request.getSession().getAttribute("user");
+        if( user != null && user.getUserRole() =="SUPERADMIN"){
+            HashMap result =  noticeService.findNoticeList();
+            model.addAttribute("noticeList", result.get("noticeList"));
+        }else{
+            HashMap result =  noticeService.findNoticeMainSmallList();
+            model.addAttribute("noticeList", result.get("smallNoticeList"));
+        }
 
-        HashMap result =  noticeService.findNoticeList();
-        model.addAttribute("noticeList", result.get("noticeList"));
         return "admin/customer/noticeList";
     }
 
