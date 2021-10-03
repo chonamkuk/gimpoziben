@@ -1114,7 +1114,7 @@
                             console.log('data :: ' + JSON.stringify(data));
                             if(data.result == 0) {
                                 // 서버기능 호출 성공시 주문한 상품 filter 하여 cart에 반영
-                                localStorage.setItem('cart', JSON.stringify(restItems));
+                                sessionStorage.setItem('cart', JSON.stringify(restItems));
                                 // 데이터 테이블 새로고침
                                 showCartList();
                             } else {
@@ -1150,13 +1150,13 @@
                 $('#confirmModal').find('p').text('선택한 상품을 카트에서 삭제하시겠습니까?');
                 $('#confirmModal').modal('open');
                 $('#confirmModal').find('.confirm').unbind('click').on('click', function(){
-                    let cart = JSON.parse(localStorage.getItem('cart')); // 카트목록
+                    let cart = JSON.parse(sessionStorage.getItem('cart')); // 카트목록
                     $('#cart-table-body input[type=checkbox]:checked').each(function(index, item){
                         let removeCartId = $(item).val(); // 삭제할 카트항목 아이디
                         cart = cart.filter(x => x.cartId != removeCartId);
                     });
                     // 로컬 스토리지 저장
-                    localStorage.setItem('cart', JSON.stringify(cart));
+                    sessionStorage.setItem('cart', JSON.stringify(cart));
                     // 데이터 테이블 새로고침
                     showCartList();
                 });
@@ -1191,7 +1191,7 @@
             $('#cart-detail-table').DataTable().destroy();
             let detailedCartId = $(this).parent().prev().find('.cart-id').val();
             let product;
-            let cart = JSON.parse(localStorage.getItem('cart'));
+            let cart = JSON.parse(sessionStorage.getItem('cart'));
             let productDetail;
 
             detailedCartItem = cart.filter(x => x.cartId === detailedCartId)[0];
@@ -1273,11 +1273,11 @@
 
         function showCartList(){
             let cart; // 카트목록
-            if(localStorage.getItem('cart') != null) {
+            if(sessionStorage.getItem('cart') != null) {
                 $('#cart-table').DataTable().clear();
                 $('#cart-table').DataTable().destroy();
                 let cartItem;
-                cart = JSON.parse(localStorage.getItem('cart'));
+                cart = JSON.parse(sessionStorage.getItem('cart'));
                 cart.forEach(function(item, index){
                     let imageSrc = '/attach/resizeImgView.do?idAttach=' + cart[index].products[0].idMainImg + '&resizeWidth=200';
                     cartItem =

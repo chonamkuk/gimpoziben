@@ -368,8 +368,8 @@ function common() {
     }
 
     this.displayCartCount = function() {
-        if(localStorage.getItem('cart') != null) {
-            let cart = JSON.parse(localStorage.getItem('cart'));
+        if(sessionStorage.getItem('cart') != null) {
+            let cart = JSON.parse(sessionStorage.getItem('cart'));
             if(cart.length > 0) {
                 $('#cartCount').text(cart.length);
                 $('#cartCount').show();

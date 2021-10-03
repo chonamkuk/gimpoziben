@@ -343,10 +343,10 @@
 
                 if(addToCartBtn.siblings('.selected-collection').children().length > 0) {
                     let cart; // 카트목록
-                    if(localStorage.getItem('cart') == null) {
+                    if(sessionStorage.getItem('cart') == null) {
                         cart = new Array();
                     } else {
-                        cart = JSON.parse(localStorage.getItem('cart'));
+                        cart = JSON.parse(sessionStorage.getItem('cart'));
                     }
 
                     let cartItem = new Object(); // 카트에 추가될 항목
@@ -370,7 +370,7 @@
                     });
 
                     cart[cart.length] = cartItem;
-                    localStorage.setItem('cart', JSON.stringify(cart));
+                    sessionStorage.setItem('cart', JSON.stringify(cart));
                     comn.displayCartCount();
 
                     $('#confirmModal').find('h4').text('알림');
