@@ -8969,6 +8969,12 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 
 @media only screen and (max-width: 600px)
 {
+
+    .navbar .navbar-main
+    {
+        padding: 6px 8px 0 0;
+    }
+
     .navbar .nav-wrapper .dropdown-content
     {
         left: 25px !important;
@@ -9009,7 +9015,7 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
     }
 }
 
-@media (max-width: 992px)
+@media (min-width: 601px) and (max-width: 992px)
 {
     .navbar .navbar-main
     {
@@ -9024,8 +9030,8 @@ nav.display-none.search-sm .nav-wrapper form .input-field i
 {
     position: fixed;
     z-index: 999;
-    top: 0;
-
+    top: 0.5rem;
+    left:0.5rem;
     width: 250px;
     height: 100%;
 
