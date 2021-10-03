@@ -10,7 +10,7 @@
     <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google.">
     <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template, eCommerce dashboard, analytic dashboard">
     <meta name="author" content="ThemeSelect">
-    <title>DataTable | Materialize - Material Design Admin Template</title>
+    <title>GPSafty </title>
     <link rel="apple-touch-icon" href="/static/images/favicon/apple-touch-icon-152x152.png">
     <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon/favicon-32x32.png">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -643,9 +643,9 @@
                 <!-- Search for small screen-->
                 <div class="container">
                     <div class="row">
-                        <div class="col s12 m6 l6">
+                        <div  class="col s12 m6 l6">
                             <h5 class="breadcrumbs-title"><span>공지사항</span></h5>
-                            <a class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="/customer/noticeWrite.do">등록</a>
+                            <a th:if="${session.user?.userRole == 'SUPERADMIN'}"  class="mt-2 waves-effect waves-light gradient-45deg-deep-purple-blue btn btn-block modal-trigger z-depth-4" href="/customer/noticeWrite.do">등록</a>
                         </div>
 
                         <div class="col s12 m6 l6 right-align-md">
@@ -680,11 +680,11 @@
                                                             <th style="text-align: center">게시기간</th>
                                                             <th style="text-align: center">등록자</th>
                                                             <th style="text-align: center">등록일</th>
-                                                            <th style="text-align: center">게시여부</th>
-                                                            <th style="text-align: center">삭제여부</th>
+                                                            <th th:if="${session.user?.userRole == 'SUPERADMIN'}" style="text-align: center">게시여부</th>
+                                                            <th th:if="${session.user?.userRole == 'SUPERADMIN'}" style="text-align: center">삭제여부</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
+                                                    <tbody style="cursor: pointer">
                                                         <tr th:each="noticeDto,listStatus : ${noticeList}">
                                                             <td>
                                                                 <div >
@@ -701,8 +701,8 @@
                                                             <td style="text-align: center"><span th:text="${noticeDto.dayNoticeStart}"></span>~<span th:text="${noticeDto.dayNoticeEnd}"></span></td>
                                                             <td style="text-align: center"><span th:text="${noticeDto.register}"></span></td>
                                                             <td style="text-align: center"><span th:text="${#temporals.format(noticeDto.regDt, 'yyyy-MM-dd HH:mm')}"></span></td>
-                                                            <td style="text-align: center"><span th:text="${noticeDto.ynNoticeMain}"></span></td>
-                                                            <td style="text-align: center"><span th:text="${noticeDto.ynDel}"></span></td>
+                                                            <td th:if="${session.user?.userRole == 'SUPERADMIN'}" style="text-align: center"><span th:text="${noticeDto.ynNoticeMain}"></span></td>
+                                                            <td th:if="${session.user?.userRole == 'SUPERADMIN'}" style="text-align: center"><span th:text="${noticeDto.ynDel}"></span></td>
                                                         </tr>
 
 
@@ -715,8 +715,8 @@
                                                             <th style="text-align: center">게시기간</th>
                                                             <th style="text-align: center">등록자</th>
                                                             <th style="text-align: center">등록일</th>
-                                                            <th style="text-align: center">게시여부</th>
-                                                            <th style="text-align: center">삭제여부</th>
+                                                            <th th:if="${session.user?.userRole == 'SUPERADMIN'}" style="text-align: center">게시여부</th>
+                                                            <th th:if="${session.user?.userRole == 'SUPERADMIN'}" style="text-align: center">삭제여부</th>
                                                         </tr>
                                                     </tfoot>
                                                 </table>

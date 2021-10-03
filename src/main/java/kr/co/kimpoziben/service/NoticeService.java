@@ -84,6 +84,9 @@ public class NoticeService {
         return result;
     }
 
+
+
+
     public HashMap findNoticeMainList() throws Exception {
         List<NoticeDto> noticeList = new ArrayList<>();
         List<Notice> popupinfoEntities =  noticeRepository.findBydelYnAndYnNoticeMain("N","Y");

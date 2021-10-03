@@ -46,6 +46,7 @@ public class MainController {
             model.addAttribute("popupList", result.get("noticeList"));
 
         HashMap result2 =  noticeService.findNoticeMainSmallList();
+
         model.addAttribute("smallNoticeList", result2.get("smallNoticeList"));
 
 
