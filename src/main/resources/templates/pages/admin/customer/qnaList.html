@@ -374,7 +374,7 @@
                 </ul>
                 <ul class="navbar-list right">
                     <li>
-                        <a class="waves-effect waves-block waves-light notification-button" href="javascript:void(0);" data-target="notifications-dropdown">
+                        <a class="waves-effect waves-block waves-light" href="/shop/cartList.do">
                             <i class="material-icons">shopping_cart<small class="notification-badge orange accent-3" style="display: none;" id="cartCount">0</small></i>
                         </a>
                     </li>
@@ -385,16 +385,6 @@
                         <a class="waves-effect waves-block waves-light" href="/oauth2/authorization/naver" sec:authorize="!isAuthenticated()">
                             <i class="material-icons-outlined">login</i>
                         </a>
-                    </li>
-                </ul>
-                <!-- notifications-dropdown-->
-                <ul class="dropdown-content" id="notifications-dropdown">
-                    <li>
-                        <h6>NOTIFICATIONS<span class="new badge">5</span></h6>
-                    </li>
-                    <li class="divider"></li>
-                    <li><a class="black-text" href="/shop/cartList.do"><span class="material-icons icon-bg-circle cyan small">add_shopping_cart</span> A new order has been placed!</a>
-                        <time class="media-meta grey-text text-darken-2" datetime="2015-06-12T20:50:48+08:00">2 hours ago</time>
                     </li>
                 </ul>
                 <!-- profile-dropdown-->
@@ -443,8 +433,6 @@
                                     <li data-menu=""><a href="#"><span data-i18n="Child 3">하의</span></a>
                                     </li>
                                 </ul>
-                            </li>
-                            <li data-menu=""><a href="#"><span data-i18n="Second level 2">주문현황</span></a>
                             </li>
                         </ul>
                     </li>
