@@ -404,17 +404,25 @@
                     <li>
                         <a class="dropdown-menu" href="#" data-target="formsTables">
                             <i class="material-icons">business</i>
-                            <span><span class="dropdown-title" data-i18n="Menu levels">회사소개</span><i class="material-icons right">keyboard_arrow_down</i></span>
+                            <span><a href="/contents/location.do"><span class="dropdown-title" data-i18n="Menu levels">GPSafety</span></a></span>
                         </a>
                         <ul class="dropdown-content dropdown-horizontal-list" id="formsTables">
-                            <li data-menu=""><a href="#"><span data-i18n="Second level 1">매장소개</span></a>
-                            </li>
-                            <li data-menu=""><a href="#"><span data-i18n="Second level 2">연혁</span></a>
-                            </li>
-                            <li data-menu=""><a href="/contents/location.do"><span data-i18n="Second level 4">회사위치</span></a>
-                            </li>
                         </ul>
                     </li>
+                    <!-- <li>
+                         <a class="dropdown-menu" href="/contents/location.do" data-target="formsTables">
+                             <i class="material-icons">business</i>
+                             <span><span class="dropdown-title" data-i18n="Menu levels">회사소개</span><i class="material-icons right">keyboard_arrow_down</i></span>
+                         </a>
+                         <ul class="dropdown-content dropdown-horizontal-list" id="formsTables">
+                             <li data-menu=""><a href="#"><span data-i18n="Second level 1">매장소개</span></a>
+                             </li>
+                             <li data-menu=""><a href="#"><span data-i18n="Second level 2">연혁</span></a>
+                             </li>
+                             <li data-menu=""><a href="/contents/location.do"><span data-i18n="Second level 4">회사위치</span></a>
+                             </li>
+                         </ul>
+                     </li>-->
                     <li class="">
                         <a class="dropdown-menu" href="Javascript:void(0)" data-target="formsTables2">
                             <i class="material-icons">store</i>
@@ -513,13 +521,12 @@
                     <li th:if="${session.user?.userRole == 'SUPERADMIN'}">
                         <a class="dropdown-menu" href="#" data-target="formsTables7">
                             <i class="material-icons">settings</i>
-                            <span><span class="dropdown-title" data-i18n="Menu levels">제품관리</span><i class="material-icons right">keyboard_arrow_down</i></span>
+                            <span><span class="dropdown-title" data-i18n="제품관리">제품관리</span><i class="material-icons right">keyboard_arrow_down</i></span>
                         </a>
                         <ul class="dropdown-content dropdown-horizontal-list" id="formsTables7">
-                            <li data-menu=""><a href="/admin/shop/list.do"><span data-i18n="Second level 1">제품관리</span></a>
-                            </li>
-                            <li data-menu=""><a href="/admin/order/list.do"><span data-i18n="Second level 2">주문관리</span></a>
-                            </li>
+                            <li data-menu=""><a href="/admin/shop/write.do"><span data-i18n="제품등록">제품등록</span></a></li>
+                            <li data-menu=""><a href="/admin/shop/list.do"><span data-i18n="제품목록">제품목록</span></a></li>
+                            <li data-menu=""><a href="/admin/order/list.do"><span data-i18n="주문관리">주문관리</span></a></li>
                         </ul>
                     </li>
 
@@ -537,17 +544,8 @@
 
             </li>
             <li class="bold" style="color: #fff3e0">
-                <a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">business</i><span class="menu-title" data-i18n="Menu levels">회사소개</span></a>
-                <div class="collapsible-body">
-                    <ul class="collapsible collapsible-sub" data-collapsible="accordion">
-                        <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level">매장소개</span></a>
-                        </li>
-                        <li><a href="#"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level">연혁</span></a>
-                        </li>
-                        <li><a href="/contents/location.do"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Second level">회사위치</span></a>
-                        </li>
-                    </ul>
-                </div>
+                <a class="waves-effect waves-cyan " href="/contents/location.do"><i class="material-icons">business</i><span class="menu-title" data-i18n="Menu levels">GPSafety</span></a>
+
             </li>
             <li class="bold">
                 <a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">store</i><span class="menu-title" data-i18n="Menu levels">제품소개</span></a>
@@ -632,7 +630,8 @@
                 <a class="collapsible-header waves-effect waves-cyan " href="#"><i class="material-icons">settings</i><span class="menu-title" data-i18n="제품관리">제품관리</span></a>
                 <div class="collapsible-body">
                     <ul class="collapsible collapsible-sub" data-collapsible="accordion">
-                        <li data-menu=""><a href="/admin/shop/list.do"><i class="material-icons">radio_button_unchecked</i><span data-i18n="제품관리">제품관리</span></a></li>
+                        <li data-menu=""><a href="/admin/shop/write.do"><i class="material-icons">radio_button_unchecked</i><span data-i18n="제품등록">제품등록</span></a></li>
+                        <li data-menu=""><a href="/admin/shop/list.do"><i class="material-icons">radio_button_unchecked</i><span data-i18n="제품목록">제품목록</span></a></li>
                         <li data-menu=""><a href="/admin/order/list.do"><i class="material-icons">radio_button_unchecked</i><span data-i18n="주문관리">주문관리</span></a></li>
                     </ul>
                 </div>
