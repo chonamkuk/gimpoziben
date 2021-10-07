@@ -26,6 +26,14 @@ public class PropertyConfig {
     @Getter
     String excelPath;
 
+    @Value("${order.mail.url.sender}")
+    @Getter
+    String orderMailUrlSender;
+
+    @Value("${order.mail.url.admin}")
+    @Getter
+    String orderMailUrlAdmin;
+
     @Getter
     String osName;
 

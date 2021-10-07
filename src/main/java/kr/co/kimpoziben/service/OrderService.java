@@ -90,20 +90,23 @@ public class OrderService {
         // 관리자에게 메일발송
         org.thymeleaf.context.Context context = new org.thymeleaf.context.Context();
         context.setVariable("orderDto", orderDto);
+        context.setVariable("nmUser", user.getName());
+        context.setVariable("nmCompany", user.getNmCompany());
         HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         context.setVariable("scheme", req.getScheme());
         context.setVariable("serverName", req.getServerName());
         context.setVariable("serverPort", req.getServerPort());
 
+        // 관리자에게 메일발송
         context.setVariable("mailHeader", "아래와 같이 주문이 접수되었습니다.");
         String htmlTemplate = htmlTemplateEngine.process("order/mail-invoice", context);
-        emailUtil.sendEmail("paralysist@naver.com", "paralysist@naver.com","김포지벤 - 주문접수",
+        emailUtil.sendEmail(propertyConfig.getOrderMailUrlAdmin(), propertyConfig.getOrderMailUrlSender(),"김포지벤 - 주문접수",
                             orderDto.getPathFileExcel(), excelFileName, htmlTemplate);
 
         // 고객에게 메일발송
         context.setVariable("mailHeader", "아래와 같이 주문이 완료되었습니다.");
         htmlTemplate = htmlTemplateEngine.process("order/mail-invoice", context);
-        emailUtil.sendEmail(user.getEmail(), "paralysist@naver.com","김포지벤 - 주문접수",
+        emailUtil.sendEmail(user.getEmail(), propertyConfig.getOrderMailUrlSender(),"김포지벤 - 주문접수",
                             orderDto.getPathFileExcel(), excelFileName, htmlTemplate);
 
         return orderDto;
