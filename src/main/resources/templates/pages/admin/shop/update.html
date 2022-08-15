@@ -84,9 +84,9 @@
                 $('#confirmModal').find('.confirm').unbind('click').on('click', function(){
                     comn.preLoading();
                     /**상품 이미지**/
+                    let newImageCount = 0;
                     $('.dropify-render').each(function(index, item){
                         let $renderImg = $(item).find('img');
-                        let newImageCount = 0;
                         if($renderImg.length > 0 && $renderImg.attr('src').startsWith('data:image')) {
                             let ImageObj = new Image();
                             ImageObj.src = $renderImg.attr('src');
@@ -99,8 +99,16 @@
                         }
                     });
                     /**게시여부, 품절여부**/
-                    if($('#ynDisplayChk').is(':checked')) $('#saveForm').append('<input type="hidden" id="ynDisplay" name="ynDisplay" value="Y"/>');
-                    if($('#ynSoldOutChk').is(':checked')) $('#saveForm').append('<input type="hidden" id="ynSoldOut" name="ynSoldOut" value="Y"/>');
+                    if($('#ynDisplayChk').is(':checked')) {
+                        $('#saveForm').append('<input type="hidden" id="ynDisplay" name="ynDisplay" value="Y"/>');
+                    } else {
+                        $('#saveForm').append('<input type="hidden" id="ynDisplay" name="ynDisplay" value="N"/>');
+                    }
+                    if($('#ynSoldOutChk').is(':checked')) {
+                        $('#saveForm').append('<input type="hidden" id="ynSoldOut" name="ynSoldOut" value="Y"/>');
+                    } else {
+                        $('#saveForm').append('<input type="hidden" id="ynSoldOut" name="ynSoldOut" value="N"/>');
+                    }
 
                     processed = true;
                     console.log($('#saveForm'));
